@@ -13,7 +13,7 @@ import {
 } from "@/data/portfolio";
 import { ImageCarousel } from "@/components/projects/ImageCarousel";
 import { Breadcrumb } from "@/components/navigation/Breadcrumb";
-import { AnimatedCard, AnimatedBadge, AnimatedButton } from "@/components/animation/AnimatedComponents";
+import { AnimatedCard } from "@/components/animation/AnimatedComponents";
 import { DURATIONS, EASINGS } from "@/components/animation/AnimatedElements";
 
 export function PageIntro({
