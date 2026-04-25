@@ -45,7 +45,9 @@ export function TechStackSection() {
                         className="shrink-0 object-contain"
                         style={{ width: 18, height: 18 }}
                       />
-                      <span className="text-[13px] font-medium">{tech.name}</span>
+                      <span className="text-[13px] font-medium">
+                        {tech.name}
+                      </span>
                     </div>
                   ))}
                 </div>

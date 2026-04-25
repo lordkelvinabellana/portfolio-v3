@@ -12,6 +12,7 @@ import {
   type ProjectCaseStudy,
 } from "@/data/portfolio";
 import { ImageCarousel } from "@/components/projects/ImageCarousel";
+import { Breadcrumb } from "@/components/navigation/Breadcrumb";
 
 export function PageIntro({
   eyebrow,
@@ -158,7 +159,9 @@ export function CredentialCard({ credential }: { credential: Credential }) {
       </p>
       <p className="quiet-text mt-3 text-sm leading-6">{credential.context}</p>
       {credential.credentialId && (
-        <p className="muted-text mt-3 text-xs">Credential ID: {credential.credentialId}</p>
+        <p className="muted-text mt-3 text-xs">
+          Credential ID: {credential.credentialId}
+        </p>
       )}
       {credential.verificationUrl && (
         <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">
@@ -231,7 +234,11 @@ export function PortfolioHub() {
           </div>
           <div className="grid gap-5 md:grid-cols-2">
             {featured.map((project) => (
-              <ProjectCaseStudyCard key={project.slug} project={project} compact />
+              <ProjectCaseStudyCard
+                key={project.slug}
+                project={project}
+                compact
+              />
             ))}
           </div>
         </section>
@@ -259,6 +266,12 @@ export function ExperienceIndex() {
   return (
     <section className="site-page">
       <div className="site-container space-y-12">
+        <Breadcrumb
+          items={[
+            { label: "Portfolio", href: "/portfolio" },
+            { label: "Experience", href: "/portfolio/experience" },
+          ]}
+        />
         <PageIntro
           eyebrow="Experience"
           title="A journey through engineering, SaaS, startups, freelance, and automation."
@@ -280,7 +293,18 @@ export function ExperienceDetail({ phase }: { phase: ExperiencePhase }) {
   return (
     <section className="site-page">
       <div className="site-container space-y-14">
-        <PageIntro eyebrow="Experience" title={phase.title} summary={phase.summary} />
+        <Breadcrumb
+          items={[
+            { label: "Portfolio", href: "/portfolio" },
+            { label: "Experience", href: "/portfolio/experience" },
+            { label: phase.title, href: `/portfolio/experience/${phase.slug}` },
+          ]}
+        />
+        <PageIntro
+          eyebrow="Experience"
+          title={phase.title}
+          summary={phase.summary}
+        />
 
         <div className="grid gap-5 lg:grid-cols-3">
           <InfoPanel title="Responsibilities" items={phase.responsibilities} />
@@ -313,7 +337,11 @@ export function ExperienceDetail({ phase }: { phase: ExperiencePhase }) {
             </div>
             <div className="grid gap-5 md:grid-cols-2">
               {related.slice(0, 4).map((project) => (
-                <ProjectCaseStudyCard key={project.slug} project={project} compact />
+                <ProjectCaseStudyCard
+                  key={project.slug}
+                  project={project}
+                  compact
+                />
               ))}
             </div>
           </section>
@@ -324,11 +352,19 @@ export function ExperienceDetail({ phase }: { phase: ExperiencePhase }) {
 }
 
 export function ProjectsIndex() {
-  const categories = Array.from(new Set(projectCaseStudies.map((project) => project.category)));
+  const categories = Array.from(
+    new Set(projectCaseStudies.map((project) => project.category)),
+  );
 
   return (
     <section className="site-page">
       <div className="site-container space-y-14">
+        <Breadcrumb
+          items={[
+            { label: "Portfolio", href: "/portfolio" },
+            { label: "Projects", href: "/portfolio/projects" },
+          ]}
+        />
         <PageIntro
           eyebrow="Projects"
           title="Case studies organized by business context."
@@ -356,7 +392,18 @@ export function ProjectDetail({ project }: { project: ProjectCaseStudy }) {
   return (
     <section className="site-page">
       <div className="site-container space-y-14">
-        <PageIntro eyebrow={project.category} title={project.title} summary={project.overview} />
+        <Breadcrumb
+          items={[
+            { label: "Portfolio", href: "/portfolio" },
+            { label: "Projects", href: "/portfolio/projects" },
+            { label: project.title, href: `/portfolio/projects/${project.slug}` },
+          ]}
+        />
+        <PageIntro
+          eyebrow={project.category}
+          title={project.title}
+          summary={project.overview}
+        />
 
         {project.screenshots.length > 0 && (
           <div className="panel overflow-hidden rounded-xl">
@@ -366,10 +413,19 @@ export function ProjectDetail({ project }: { project: ProjectCaseStudy }) {
 
         <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_20rem]">
           <div className="space-y-5">
-            <ContentSection title="Business problem" body={project.businessProblem} />
-            <ContentList title="My contributions" items={project.contributions} />
+            <ContentSection
+              title="Business problem"
+              body={project.businessProblem}
+            />
+            <ContentList
+              title="My contributions"
+              items={project.contributions}
+            />
             <ContentList title="Challenges" items={project.challenges} />
-            <ContentList title="Solutions implemented" items={project.solutions} />
+            <ContentList
+              title="Solutions implemented"
+              items={project.solutions}
+            />
             <ContentList title="Results / outcomes" items={project.outcomes} />
           </div>
 
@@ -427,6 +483,12 @@ export function CredentialsPageView() {
   return (
     <section className="site-page">
       <div className="site-container space-y-12">
+        <Breadcrumb
+          items={[
+            { label: "Portfolio", href: "/portfolio" },
+            { label: "Credentials", href: "/portfolio/credentials" },
+          ]}
+        />
         <PageIntro
           eyebrow="Credentials"
           title="Certifications, badges, training, and recognitions."
