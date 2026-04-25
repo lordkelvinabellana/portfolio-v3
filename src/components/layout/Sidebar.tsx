@@ -195,8 +195,13 @@ export function Sidebar({ onNavClick }: { onNavClick?: () => void }) {
               </div>
 
               {hasSubItems && isExpanded && (
-                <div className="ml-2 mt-1 space-y-px border-l border-sidebar-border/50 pl-2">
-                  {subItems.map((subItem) => {
+                <div
+                  className="ml-2 mt-1 space-y-px border-l border-sidebar-border/50 pl-2 overflow-hidden"
+                  style={{
+                    animation: "slide-down 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                  }}
+                >
+                  {subItems.map((subItem, idx) => {
                     const isSubActive = isSubItemActive(subItem.href);
                     return (
                       <Link
@@ -209,6 +214,9 @@ export function Sidebar({ onNavClick }: { onNavClick?: () => void }) {
                             ? "bg-sidebar-accent/60 text-sidebar-accent-foreground font-medium"
                             : "text-muted-foreground hover:bg-sidebar-accent/40 hover:text-sidebar-accent-foreground",
                         )}
+                        style={{
+                          animation: `slide-left 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) ${idx * 30}ms both`,
+                        }}
                         aria-current={isSubActive ? "page" : undefined}
                       >
                         {subItem.label}

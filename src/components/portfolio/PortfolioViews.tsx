@@ -13,6 +13,8 @@ import {
 } from "@/data/portfolio";
 import { ImageCarousel } from "@/components/projects/ImageCarousel";
 import { Breadcrumb } from "@/components/navigation/Breadcrumb";
+import { AnimatedCard, AnimatedBadge, AnimatedButton } from "@/components/animation/AnimatedComponents";
+import { DURATIONS, EASINGS } from "@/components/animation/AnimatedElements";
 
 export function PageIntro({
   eyebrow,
@@ -53,87 +55,102 @@ export function TextLink({
 export function ProjectCaseStudyCard({
   project,
   compact = false,
+  index = 0,
 }: {
   project: ProjectCaseStudy;
   compact?: boolean;
+  index?: number;
 }) {
   return (
-    <article className="panel panel-hover flex h-full flex-col overflow-hidden rounded-xl">
-      {project.screenshots.length > 0 ? (
-        <ImageCarousel images={project.screenshots} title={project.title} />
-      ) : (
-        <div className="flex aspect-video w-full items-center justify-center bg-secondary">
-          <span className="muted-text text-[11px] font-semibold uppercase tracking-[0.08em]">
-            Case study
-          </span>
-        </div>
-      )}
+    <AnimatedCard delay={index * 50}>
+      <article className="panel panel-hover flex h-full flex-col overflow-hidden rounded-xl">
+        {project.screenshots.length > 0 ? (
+          <ImageCarousel images={project.screenshots} title={project.title} />
+        ) : (
+          <div className="flex aspect-video w-full items-center justify-center bg-secondary">
+            <span className="muted-text text-[11px] font-semibold uppercase tracking-[0.08em]">
+              Case study
+            </span>
+          </div>
+        )}
 
-      <div className="flex flex-1 flex-col gap-4 p-5">
-        <div>
-          <p className="eyebrow mb-2">{project.category}</p>
-          <h2 className="text-lg font-bold leading-6">{project.title}</h2>
-          <p className="muted-text mt-1 text-sm font-medium">{project.role}</p>
+        <div className="flex flex-1 flex-col gap-4 p-5">
+          <div>
+            <p className="eyebrow mb-2">{project.category}</p>
+            <h2 className="text-lg font-bold leading-6">{project.title}</h2>
+            <p className="muted-text mt-1 text-sm font-medium">{project.role}</p>
+          </div>
+          <p className="quiet-text text-sm leading-6">
+            {compact ? project.overview : project.businessProblem}
+          </p>
+          <div className="mt-auto flex flex-wrap gap-1.5">
+            {project.stack.slice(0, compact ? 4 : 6).map((tech, idx) => (
+              <span
+                key={tech}
+                className="rounded-full bg-secondary px-2 py-1 text-xs font-semibold text-secondary-foreground"
+                style={{
+                  animation: `fade-in ${DURATIONS.fast}ms ${EASINGS.smooth} ${index * 50 + idx * 30}ms both`,
+                }}
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+          <Link
+            href={`/portfolio/projects/${project.slug}`}
+            className="focusable inline-flex min-h-10 w-fit items-center gap-2 rounded-md border border-transparent text-sm font-semibold text-primary transition-colors hover:text-foreground"
+          >
+            Read case study <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
-        <p className="quiet-text text-sm leading-6">
-          {compact ? project.overview : project.businessProblem}
-        </p>
-        <div className="mt-auto flex flex-wrap gap-1.5">
-          {project.stack.slice(0, compact ? 4 : 6).map((tech) => (
+      </article>
+    </AnimatedCard>
+  );
+}
+
+export function ExperiencePhaseCard({ phase, index }: { phase: ExperiencePhase; index?: number }) {
+  const related = getRelatedProjects(phase.relatedProjectSlugs);
+
+  return (
+    <AnimatedCard delay={index ? index * 50 : 0}>
+      <article className="panel panel-hover rounded-xl p-5 h-full">
+        <p className="muted-text text-sm font-medium">{phase.period}</p>
+        <h2 className="mt-2 text-xl font-bold leading-7">{phase.title}</h2>
+        <p className="quiet-text mt-3 text-sm leading-6">{phase.summary}</p>
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {phase.technologies.slice(0, 6).map((tech, idx) => (
             <span
               key={tech}
-              className="rounded-full bg-accent px-2 py-1 text-xs font-semibold text-accent-foreground"
+              className="rounded-full bg-secondary px-2 py-1 text-xs font-semibold text-secondary-foreground"
+              style={{
+                animation: `fade-in ${DURATIONS.fast}ms ${EASINGS.smooth} ${(index ? index * 50 : 0) + idx * 30}ms both`,
+              }}
             >
               {tech}
             </span>
           ))}
         </div>
-        <Link
-          href={`/portfolio/projects/${project.slug}`}
-          className="focusable inline-flex min-h-10 w-fit items-center gap-2 rounded-md border border-transparent text-sm font-semibold text-primary transition-colors hover:text-foreground"
-        >
-          Read case study <ArrowRight className="h-4 w-4" />
-        </Link>
-      </div>
-    </article>
-  );
-}
-
-export function ExperiencePhaseCard({ phase }: { phase: ExperiencePhase }) {
-  const related = getRelatedProjects(phase.relatedProjectSlugs);
-
-  return (
-    <article className="panel panel-hover rounded-xl p-5">
-      <p className="muted-text text-sm font-medium">{phase.period}</p>
-      <h2 className="mt-2 text-xl font-bold leading-7">{phase.title}</h2>
-      <p className="quiet-text mt-3 text-sm leading-6">{phase.summary}</p>
-      <div className="mt-4 flex flex-wrap gap-1.5">
-        {phase.technologies.slice(0, 6).map((tech) => (
-          <span
-            key={tech}
-            className="rounded-full bg-secondary px-2 py-1 text-xs font-semibold text-secondary-foreground"
-          >
-            {tech}
-          </span>
-        ))}
-      </div>
-      <div className="mt-5 flex flex-wrap gap-3">
-        <Link
-          href={`/portfolio/experience/${phase.slug}`}
-          className="focusable inline-flex min-h-10 items-center gap-2 rounded-md border border-transparent text-sm font-semibold text-primary transition-colors hover:text-foreground"
-        >
-          Explore phase <ArrowRight className="h-4 w-4" />
-        </Link>
-        {related[0] && (
+        <div className="mt-5 flex flex-wrap gap-3">
           <Link
-            href={`/portfolio/projects/${related[0].slug}`}
-            className="focusable inline-flex min-h-10 items-center gap-2 rounded-md border border-transparent text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            href={`/portfolio/experience/${phase.slug}`}
+            className="focusable inline-flex min-h-10 items-center gap-2 rounded-md border border-transparent text-sm font-semibold text-primary transition-colors hover:text-foreground"
+            style={{
+              transition: `color ${DURATIONS.micro}ms ${EASINGS.snappy}`,
+            }}
           >
-            Related project
+            Explore phase <ArrowRight className="h-4 w-4" />
           </Link>
-        )}
-      </div>
-    </article>
+          {related[0] && (
+            <Link
+              href={`/portfolio/projects/${related[0].slug}`}
+              className="focusable inline-flex min-h-10 items-center gap-2 rounded-md border border-transparent text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Related project
+            </Link>
+          )}
+        </div>
+      </article>
+    </AnimatedCard>
   );
 }
 
@@ -278,8 +295,8 @@ export function ExperienceIndex() {
           summary="Each phase shows what I was responsible for, what I learned, and which projects came from that period."
         />
         <div className="grid gap-4 md:grid-cols-2">
-          {experiencePhases.map((phase) => (
-            <ExperiencePhaseCard key={phase.slug} phase={phase} />
+          {experiencePhases.map((phase, index) => (
+            <ExperiencePhaseCard key={phase.slug} phase={phase} index={index} />
           ))}
         </div>
       </div>

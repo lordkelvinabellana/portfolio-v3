@@ -78,7 +78,7 @@
   --text-tertiary: oklch(0.56 0.016 258);
   --status: oklch(0.62 0.16 150);
   --shadow-soft: 0 12px 35px oklch(0.12 0.02 258 / 8%);
-  --shadow-subtle: 0 1px 0 oklch(0.20 0.02 258 / 7%);
+  --shadow-subtle: 0 1px 0 oklch(0.2 0.02 258 / 7%);
   --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-balanced: cubic-bezier(0.65, 0, 0.35, 1);
 }
@@ -134,6 +134,122 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "kern" 1;
+  }
+}
+
+/* Emil Design Eng - Purposeful animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bounce-subtle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes underline-expand {
+  from {
+    width: 0;
+    left: 50%;
+  }
+  to {
+    width: 100%;
+    left: 0;
   }
 }
 
@@ -218,6 +334,64 @@
     border-radius: 999px;
     background: var(--status);
     box-shadow: 0 0 0 3px color-mix(in oklch, var(--status), transparent 84%);
+  }
+
+  /* Animation utility classes */
+  .animate-fade-in {
+    animation: fade-in 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-slide-up {
+    animation: slide-up 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-slide-down {
+    animation: slide-down 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-slide-left {
+    animation: slide-left 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .animate-slide-right {
+    animation: slide-right 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .animate-scale-in {
+    animation: scale-in 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-zoom-in {
+    animation: zoom-in 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-pulse-gentle {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-bounce-subtle {
+    animation: bounce-subtle 2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+  }
+
+  /* Delay utilities for staggered animations */
+  .animate-delay-50 {
+    animation-delay: 50ms;
+  }
+
+  .animate-delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .animate-delay-150 {
+    animation-delay: 150ms;
+  }
+
+  .animate-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animate-delay-300 {
+    animation-delay: 300ms;
   }
 }
 
