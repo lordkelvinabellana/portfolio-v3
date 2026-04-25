@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ExperienceIndex } from "@/components/portfolio/PortfolioViews";
+import { ExperienceIndexSection } from "@/components/experience/ExperienceIndexSection";
 
 export const metadata: Metadata = {
   title: "Experience",
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function PortfolioExperiencePage() {
-  return <ExperienceIndex />;
+  return <ExperienceIndexSection />;
 }

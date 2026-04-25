@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ProjectsIndex } from "@/components/portfolio/PortfolioViews";
+import { WorkSection } from "@/components/projects/WorkSection";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function PortfolioProjectsPage() {
-  return <ProjectsIndex />;
+  return <WorkSection />;
 }

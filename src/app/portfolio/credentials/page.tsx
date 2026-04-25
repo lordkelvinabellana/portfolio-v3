@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CredentialsPageView } from "@/components/portfolio/PortfolioViews";
+import { CredentialsSection } from "@/components/credentials/CredentialsSection";
 
 export const metadata: Metadata = {
   title: "Credentials",
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function PortfolioCredentialsPage() {
-  return <CredentialsPageView />;
+  return <CredentialsSection />;
 }

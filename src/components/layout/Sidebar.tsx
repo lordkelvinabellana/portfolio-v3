@@ -80,9 +80,13 @@ const socialLinks = [
 
 export function Sidebar({ onNavClick }: { onNavClick?: () => void }) {
   const pathname = usePathname();
-  const [expandedItems, setExpandedItems] = useState<Set<string>>(
-    new Set(["/portfolio"]),
-  );
+  const [expandedItems, setExpandedItems] = useState<Set<string>>(() => {
+    const init = new Set<string>();
+    navItems.forEach(({ href, subItems }) => {
+      if (subItems && pathname.startsWith(href)) init.add(href);
+    });
+    return init;
+  });
 
   const toggleExpand = (href: string) => {
     const newExpanded = new Set(expandedItems);
@@ -94,7 +98,8 @@ export function Sidebar({ onNavClick }: { onNavClick?: () => void }) {
     setExpandedItems(newExpanded);
   };
 
-  const isSubItemActive = (href: string) => pathname === href;
+  const isSubItemActive = (href: string) =>
+    pathname === href || (href !== "/" && pathname.startsWith(href + "/"));
 
   return (
     <div className="flex h-full flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground">
@@ -145,31 +150,44 @@ export function Sidebar({ onNavClick }: { onNavClick?: () => void }) {
                 className={cn("flex items-center", hasSubItems && "relative")}
               >
                 {hasSubItems ? (
-                  <button
-                    onClick={() => toggleExpand(href)}
-                    className={cn(
-                      "focusable flex min-h-11 flex-1 items-center gap-2.5 rounded-md border border-transparent px-3 py-2 text-sm transition-colors",
-                      isActive
-                        ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                        : "text-muted-foreground hover:bg-sidebar-accent/70 hover:text-sidebar-accent-foreground",
-                    )}
-                    style={{
-                      fontWeight: isActive ? 600 : 500,
-                    }}
-                  >
-                    <Icon
-                      className="h-3.5 w-3.5 shrink-0"
-                      strokeWidth={isActive ? 2 : 1.5}
-                    />
-                    {label}
-                    <ChevronRight
+                  <>
+                    <Link
+                      href={href}
+                      onClick={onNavClick}
                       className={cn(
-                        "h-3.5 w-3.5 shrink-0 ml-auto transition-transform duration-200",
-                        isExpanded && "rotate-90",
+                        "focusable flex min-h-11 flex-1 items-center gap-2.5 rounded-md border border-transparent px-3 py-2 text-sm transition-colors",
+                        isActive
+                          ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                          : "text-muted-foreground hover:bg-sidebar-accent/70 hover:text-sidebar-accent-foreground",
                       )}
-                      strokeWidth={1.5}
-                    />
-                  </button>
+                      style={{ fontWeight: isActive ? 600 : 500 }}
+                      aria-current={pathname === href ? "page" : undefined}
+                    >
+                      <Icon
+                        className="h-3.5 w-3.5 shrink-0"
+                        strokeWidth={isActive ? 2 : 1.5}
+                      />
+                      {label}
+                    </Link>
+                    <button
+                      onClick={() => toggleExpand(href)}
+                      className={cn(
+                        "focusable ml-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-transparent transition-colors",
+                        isActive
+                          ? "text-sidebar-accent-foreground hover:bg-sidebar-accent"
+                          : "text-muted-foreground hover:bg-sidebar-accent/70 hover:text-sidebar-accent-foreground",
+                      )}
+                      aria-label={isExpanded ? `Collapse ${label}` : `Expand ${label}`}
+                    >
+                      <ChevronRight
+                        className={cn(
+                          "h-3.5 w-3.5 transition-transform duration-200",
+                          isExpanded && "rotate-90",
+                        )}
+                        strokeWidth={1.5}
+                      />
+                    </button>
+                  </>
                 ) : (
                   <Link
                     href={href}

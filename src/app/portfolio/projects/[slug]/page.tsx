@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ProjectDetail } from "@/components/portfolio/PortfolioViews";
+import { ProjectDetailSection } from "@/components/projects/ProjectDetailSection";
 import { getProjectCaseStudy, projectCaseStudies } from "@/data/portfolio";
 
 export function generateStaticParams() {
@@ -33,5 +33,5 @@ export default function ProjectCaseStudyPage({
 
   if (!project) notFound();
 
-  return <ProjectDetail project={project} />;
+  return <ProjectDetailSection project={project} />;
 }

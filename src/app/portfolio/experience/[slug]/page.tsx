@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ExperienceDetail } from "@/components/portfolio/PortfolioViews";
+import { ExperienceDetailSection } from "@/components/experience/ExperienceDetailSection";
 import { experiencePhases, getExperiencePhase } from "@/data/portfolio";
 
 export function generateStaticParams() {
@@ -33,5 +33,5 @@ export default function ExperiencePhasePage({
 
   if (!phase) notFound();
 
-  return <ExperienceDetail phase={phase} />;
+  return <ExperienceDetailSection phase={phase} />;
 }

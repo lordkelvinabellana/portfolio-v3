@@ -123,10 +123,10 @@ Credentials   — certs, badges, recognition (promoted from buried-in-projects)
 
 ## Build Order (Step by Step)
 
-- [ ] Step 1: Homepage redesign
-- [ ] Step 2: About Me page
-- [ ] Step 3: Credentials page (promote from Projects)
-- [ ] Step 4: Work/Projects page restructure + filterable cards
-- [ ] Step 5: 3–4 project detail pages (case studies)
-- [ ] Step 6: Experience page enhancements + case study links
-- [ ] Step 7: Navigation update (add Work + Credentials, wire up routing)
+- [x] Step 1: Homepage redesign
+- [x] Step 2: About Me page
+- [x] Step 3: Credentials page (promote from Projects)
+- [x] Step 4: Work/Projects page restructure + filterable cards
+- [x] Step 5: 3–4 project detail pages (case studies)
+- [x] Step 6: Experience page enhancements + case study links
+- [x] Step 7: Navigation update (add Work + Credentials, wire up routing)
