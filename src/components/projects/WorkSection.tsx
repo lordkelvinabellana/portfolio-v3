@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { projectCaseStudies, type ProjectCaseStudy } from "@/data/portfolio";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { ImageCarousel } from "./ImageCarousel";
+import { Breadcrumb } from "@/components/navigation/Breadcrumb";
 import { cn } from "@/lib/utils";
 
 /* ── Data ── */
@@ -119,6 +120,13 @@ export function WorkSection() {
   return (
     <section className="site-page">
       <div className="site-container space-y-12">
+
+        <Breadcrumb
+          items={[
+            { label: "Portfolio", href: "/portfolio" },
+            { label: "Projects", href: "/portfolio/projects" },
+          ]}
+        />
 
         {/* Header */}
         <FadeIn>

@@ -118,7 +118,7 @@ export function HeroSection() {
             {featuredProjects.map((project, i) => (
               <FadeIn key={project.slug} delay={i * 60} spring>
                 <Link
-                  href="/projects"
+                  href={`/portfolio/projects/${project.slug}`}
                   className="panel panel-hover focusable flex h-full flex-col gap-3 rounded-xl p-5 no-underline"
                 >
                   <p className="muted-text text-[11px] font-bold uppercase tracking-widest">
@@ -157,7 +157,7 @@ export function HeroSection() {
               {experiencePhases.slice(0, 4).map((phase, i) => (
                 <FadeIn key={phase.slug} delay={i * 50} spring>
                   <Link
-                    href="/experience"
+                    href={`/portfolio/experience/${phase.slug}`}
                     className="panel panel-hover focusable flex items-center justify-between gap-4 rounded-xl px-5 py-4 no-underline"
                   >
                     <div>

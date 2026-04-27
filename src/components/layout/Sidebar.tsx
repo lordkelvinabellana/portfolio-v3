@@ -11,7 +11,7 @@ import {
   MessageCircle,
   ChevronRight,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 import { cn } from "@/lib/utils";
 
@@ -88,6 +88,16 @@ export function Sidebar({ onNavClick }: { onNavClick?: () => void }) {
     return init;
   });
 
+  useEffect(() => {
+    setExpandedItems((prev) => {
+      const next = new Set(prev);
+      navItems.forEach(({ href, subItems }) => {
+        if (subItems && pathname.startsWith(href)) next.add(href);
+      });
+      return next;
+    });
+  }, [pathname]);
+
   const toggleExpand = (href: string) => {
     const newExpanded = new Set(expandedItems);
     if (newExpanded.has(href)) {
@@ -137,7 +147,7 @@ export function Sidebar({ onNavClick }: { onNavClick?: () => void }) {
 
       <div className="mx-3 h-px bg-sidebar-border" />
 
-      <nav className="flex-1 px-2 py-2 space-y-px overflow-y-auto">
+      <nav aria-label="Site navigation" className="flex-1 px-2 py-2 space-y-px overflow-y-auto">
         {navItems.map(({ href, label, icon: Icon, subItems }) => {
           const isActive =
             pathname === href || (href !== "/" && pathname.startsWith(href));

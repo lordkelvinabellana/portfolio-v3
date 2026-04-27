@@ -279,132 +279,6 @@ export function PortfolioHub() {
   );
 }
 
-export function ExperienceIndex() {
-  return (
-    <section className="site-page">
-      <div className="site-container space-y-12">
-        <Breadcrumb
-          items={[
-            { label: "Portfolio", href: "/portfolio" },
-            { label: "Experience", href: "/portfolio/experience" },
-          ]}
-        />
-        <PageIntro
-          eyebrow="Experience"
-          title="A journey through engineering, SaaS, startups, freelance, and automation."
-          summary="Each phase shows what I was responsible for, what I learned, and which projects came from that period."
-        />
-        <div className="grid gap-4 md:grid-cols-2">
-          {experiencePhases.map((phase, index) => (
-            <ExperiencePhaseCard key={phase.slug} phase={phase} index={index} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function ExperienceDetail({ phase }: { phase: ExperiencePhase }) {
-  const related = getRelatedProjects(phase.relatedProjectSlugs);
-
-  return (
-    <section className="site-page">
-      <div className="site-container space-y-14">
-        <Breadcrumb
-          items={[
-            { label: "Portfolio", href: "/portfolio" },
-            { label: "Experience", href: "/portfolio/experience" },
-            { label: phase.title, href: `/portfolio/experience/${phase.slug}` },
-          ]}
-        />
-        <PageIntro
-          eyebrow="Experience"
-          title={phase.title}
-          summary={phase.summary}
-        />
-
-        <div className="grid gap-5 lg:grid-cols-3">
-          <InfoPanel title="Responsibilities" items={phase.responsibilities} />
-          <InfoPanel title="Achievements" items={phase.achievements} />
-          <InfoPanel title="Key learnings" items={phase.learnings} />
-        </div>
-
-        <section>
-          <p className="eyebrow mb-4">Technologies used</p>
-          <div className="flex flex-wrap gap-2">
-            {phase.technologies.map((tech) => (
-              <span
-                key={tech}
-                className="rounded-full bg-accent px-3 py-1.5 text-sm font-semibold text-accent-foreground"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </section>
-
-        {related.length > 0 && (
-          <section>
-            <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <p className="eyebrow mb-2">Connected proof</p>
-                <h2 className="text-2xl font-bold">Related projects</h2>
-              </div>
-              <TextLink href="/portfolio/projects">View all projects</TextLink>
-            </div>
-            <div className="grid gap-5 md:grid-cols-2">
-              {related.slice(0, 4).map((project) => (
-                <ProjectCaseStudyCard
-                  key={project.slug}
-                  project={project}
-                  compact
-                />
-              ))}
-            </div>
-          </section>
-        )}
-      </div>
-    </section>
-  );
-}
-
-export function ProjectsIndex() {
-  const categories = Array.from(
-    new Set(projectCaseStudies.map((project) => project.category)),
-  );
-
-  return (
-    <section className="site-page">
-      <div className="site-container space-y-14">
-        <Breadcrumb
-          items={[
-            { label: "Portfolio", href: "/portfolio" },
-            { label: "Projects", href: "/portfolio/projects" },
-          ]}
-        />
-        <PageIntro
-          eyebrow="Projects"
-          title="Case studies organized by business context."
-          summary="Dedicated pages make the work easier to scan, share, and revisit. Start with a category or jump into a featured case study."
-        />
-
-        {categories.map((category) => (
-          <section key={category}>
-            <p className="eyebrow mb-4">{category}</p>
-            <div className="grid gap-5 md:grid-cols-2">
-              {projectCaseStudies
-                .filter((project) => project.category === category)
-                .map((project) => (
-                  <ProjectCaseStudyCard key={project.slug} project={project} />
-                ))}
-            </div>
-          </section>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 export function ProjectDetail({ project }: { project: ProjectCaseStudy }) {
   return (
     <section className="site-page">
@@ -496,31 +370,6 @@ export function ProjectDetail({ project }: { project: ProjectCaseStudy }) {
   );
 }
 
-export function CredentialsPageView() {
-  return (
-    <section className="site-page">
-      <div className="site-container space-y-12">
-        <Breadcrumb
-          items={[
-            { label: "Portfolio", href: "/portfolio" },
-            { label: "Credentials", href: "/portfolio/credentials" },
-          ]}
-        />
-        <PageIntro
-          eyebrow="Credentials"
-          title="Certifications, badges, training, and recognitions."
-          summary="A compact record of the credentials and milestones that support my frontend, SaaS, cloud cost, and startup work."
-        />
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {credentials.map((credential) => (
-            <CredentialCard key={credential.slug} credential={credential} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export function ContactPageView() {
   return (
     <section className="site-page">
@@ -548,19 +397,6 @@ export function ContactPageView() {
           </div>
         </div>
       </div>
-    </section>
-  );
-}
-
-function InfoPanel({ title, items }: { title: string; items: string[] }) {
-  return (
-    <section className="panel rounded-xl p-5">
-      <h2 className="text-lg font-bold">{title}</h2>
-      <ul className="quiet-text mt-4 space-y-3 text-sm leading-6">
-        {items.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
     </section>
   );
 }

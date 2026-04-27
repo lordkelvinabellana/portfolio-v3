@@ -18,8 +18,15 @@ export function FadeIn({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const reducedMotion =
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   useEffect(() => {
+    if (reducedMotion) {
+      setVisible(true);
+      return;
+    }
     const el = ref.current;
     if (!el) return;
     const observer = new IntersectionObserver(
@@ -33,7 +40,7 @@ export function FadeIn({
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [reducedMotion]);
 
   const duration = spring ? "420ms" : "520ms";
 
@@ -41,15 +48,19 @@ export function FadeIn({
     <div
       ref={ref}
       className={cn(className)}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible
-          ? "translateY(0) scale(1)"
-          : spring
-          ? "translateY(14px) scale(0.98)"
-          : "translateY(12px)",
-        transition: `opacity ${duration} ${EASE_OUT} ${delay}ms, transform ${duration} ${EASE_OUT} ${delay}ms`,
-      }}
+      style={
+        reducedMotion
+          ? undefined
+          : {
+              opacity: visible ? 1 : 0,
+              transform: visible
+                ? "translateY(0) scale(1)"
+                : spring
+                ? "translateY(14px) scale(0.98)"
+                : "translateY(12px)",
+              transition: `opacity ${duration} ${EASE_OUT} ${delay}ms, transform ${duration} ${EASE_OUT} ${delay}ms`,
+            }
+      }
     >
       {children}
     </div>

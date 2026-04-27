@@ -6,6 +6,7 @@ import {
   type ExperiencePhase,
 } from "@/data/portfolio";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { Breadcrumb } from "@/components/navigation/Breadcrumb";
 
 /* ── Adjacent phase navigation ── */
 
@@ -69,16 +70,13 @@ export function ExperienceDetailSection({ phase }: { phase: ExperiencePhase }) {
     <article className="site-page">
       <div className="site-container space-y-12">
 
-        {/* Back */}
-        <FadeIn>
-          <Link
-            href="/portfolio/experience"
-            className="focusable inline-flex min-h-10 items-center gap-1.5 rounded-md border border-transparent px-2 py-1.5 text-sm font-semibold text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to experience
-          </Link>
-        </FadeIn>
+        <Breadcrumb
+          items={[
+            { label: "Portfolio", href: "/portfolio" },
+            { label: "Experience", href: "/portfolio/experience" },
+            { label: phase.title, href: `/portfolio/experience/${phase.slug}` },
+          ]}
+        />
 
         {/* Header */}
         <FadeIn delay={40}>

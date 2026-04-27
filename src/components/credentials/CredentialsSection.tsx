@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 import { credentials, type Credential } from "@/data/portfolio";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { Breadcrumb } from "@/components/navigation/Breadcrumb";
 
 /* ── helpers ── */
 
@@ -16,7 +17,7 @@ const recognition = byType("Recognition");
 
 function FeaturedCredential({ credential }: { credential: Credential }) {
   const inner = (
-    <div className="panel rounded-2xl p-6 md:p-8">
+    <div className={`panel rounded-2xl p-6 md:p-8${credential.verificationUrl ? " panel-hover" : ""}`}>
       <p className="eyebrow mb-6">Industry certification</p>
       <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
         {credential.image && (
@@ -51,7 +52,7 @@ function FeaturedCredential({ credential }: { credential: Credential }) {
       href={credential.verificationUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="focusable block rounded-2xl no-underline transition-opacity hover:opacity-90"
+      className="focusable block rounded-2xl no-underline"
     >
       {inner}
     </a>
@@ -116,6 +117,13 @@ export function CredentialsSection() {
   return (
     <section className="site-page">
       <div className="site-container space-y-16">
+
+        <Breadcrumb
+          items={[
+            { label: "Portfolio", href: "/portfolio" },
+            { label: "Credentials", href: "/portfolio/credentials" },
+          ]}
+        />
 
         {/* Header */}
         <FadeIn>

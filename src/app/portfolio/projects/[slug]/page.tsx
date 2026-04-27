@@ -7,12 +7,13 @@ export function generateStaticParams() {
   return projectCaseStudies.map((project) => ({ slug: project.slug }));
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
-}): Metadata {
-  const project = getProjectCaseStudy(params.slug);
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const project = getProjectCaseStudy(slug);
 
   if (!project) {
     return { title: "Project" };
@@ -24,12 +25,13 @@ export function generateMetadata({
   };
 }
 
-export default function ProjectCaseStudyPage({
+export default async function ProjectCaseStudyPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const project = getProjectCaseStudy(params.slug);
+  const { slug } = await params;
+  const project = getProjectCaseStudy(slug);
 
   if (!project) notFound();
 

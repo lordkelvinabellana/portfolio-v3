@@ -2,11 +2,19 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { experiencePhases } from "@/data/portfolio";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { Breadcrumb } from "@/components/navigation/Breadcrumb";
 
 export function ExperienceIndexSection() {
   return (
     <section className="site-page">
       <div className="site-container space-y-12">
+
+        <Breadcrumb
+          items={[
+            { label: "Portfolio", href: "/portfolio" },
+            { label: "Experience", href: "/portfolio/experience" },
+          ]}
+        />
 
         {/* Header */}
         <FadeIn>
@@ -30,8 +38,8 @@ export function ExperienceIndexSection() {
 
           <ol className="space-y-0">
             {experiencePhases.map((phase, i) => (
-              <FadeIn key={phase.slug} delay={i * 60}>
-                <li className="relative pl-10">
+              <li key={phase.slug} className="relative pl-10">
+                <FadeIn delay={i * 60}>
                   {/* Timeline dot */}
                   <span
                     className="absolute left-0 top-[22px] flex h-[15px] w-[15px] items-center justify-center"
@@ -74,8 +82,8 @@ export function ExperienceIndexSection() {
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                     </div>
                   </Link>
-                </li>
-              </FadeIn>
+                </FadeIn>
+              </li>
             ))}
           </ol>
         </div>

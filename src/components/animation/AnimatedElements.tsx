@@ -11,8 +11,6 @@ const EASINGS = {
   snappy: "cubic-bezier(0.34, 1.56, 0.64, 1)",
   // Gentle ease out - for large content reveals
   gentle: "cubic-bezier(0.16, 1, 0.3, 1)",
-  // Elastic spring-like - for delightful moments
-  bounce: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
 };
 
 // Duration tiers: intentional, not arbitrary
