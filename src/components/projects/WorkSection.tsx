@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { projectCaseStudies, type ProjectCaseStudy } from "@/data/portfolio";
 import { FadeIn } from "@/components/ui/FadeIn";
-import { ImageCarousel } from "./ImageCarousel";
+import { ImageGallery } from "./ImageGallery";
 import { Breadcrumb } from "@/components/navigation/Breadcrumb";
 import { cn } from "@/lib/utils";
 
@@ -25,9 +25,12 @@ const countByCategory = (cat: string) =>
 
 /* ── Cards ── */
 
-function FeaturedProjectCard({ project }: { project: ProjectCaseStudy }) {
+function FeaturedProjectCard({ project, basePath }: { project: ProjectCaseStudy; basePath: string }) {
   return (
-    <article className="panel flex h-full flex-col overflow-hidden rounded-xl">
+    <Link
+      href={`${basePath}/${project.slug}`}
+      className="panel panel-hover focusable flex h-full flex-col overflow-hidden rounded-xl no-underline"
+    >
       {project.screenshots.length > 0 ? (
         <ImageCarousel images={project.screenshots} title={project.title} />
       ) : (
@@ -61,21 +64,18 @@ function FeaturedProjectCard({ project }: { project: ProjectCaseStudy }) {
             </span>
           )}
         </div>
-        <Link
-          href={`/portfolio/projects/${project.slug}`}
-          className="focusable inline-flex min-h-10 w-fit items-center gap-1.5 rounded-md border border-transparent text-sm font-semibold text-primary transition-colors hover:text-foreground"
-        >
+        <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
           Read case study <ArrowRight className="h-3.5 w-3.5" />
-        </Link>
+        </span>
       </div>
-    </article>
+    </Link>
   );
 }
 
-function CompactProjectCard({ project }: { project: ProjectCaseStudy }) {
+function CompactProjectCard({ project, basePath }: { project: ProjectCaseStudy; basePath: string }) {
   return (
     <Link
-      href={`/portfolio/projects/${project.slug}`}
+      href={`${basePath}/${project.slug}`}
       className="panel panel-hover focusable flex h-full flex-col gap-4 rounded-xl p-5 no-underline"
     >
       <div>
@@ -100,13 +100,21 @@ function CompactProjectCard({ project }: { project: ProjectCaseStudy }) {
           </span>
         )}
       </div>
+      <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary/70">
+        Read case study <ArrowRight className="h-3 w-3" />
+      </span>
     </Link>
   );
 }
 
 /* ── Page ── */
 
-export function WorkSection() {
+interface WorkSectionProps {
+  basePath?: string;
+  showBreadcrumb?: boolean;
+}
+
+export function WorkSection({ basePath = "/work", showBreadcrumb = true }: WorkSectionProps) {
   const [activeFilter, setActiveFilter] = useState<string>("All");
 
   const filtered =
@@ -121,12 +129,13 @@ export function WorkSection() {
     <section className="site-page">
       <div className="site-container space-y-12">
 
-        <Breadcrumb
-          items={[
-            { label: "Portfolio", href: "/portfolio" },
-            { label: "Projects", href: "/portfolio/projects" },
-          ]}
-        />
+        {showBreadcrumb && (
+          <Breadcrumb
+            items={[
+              { label: "Work", href: "/work" },
+            ]}
+          />
+        )}
 
         {/* Header */}
         <FadeIn>
@@ -134,8 +143,7 @@ export function WorkSection() {
             <p className="eyebrow mb-3">Work</p>
             <h1 className="section-heading">Projects &amp; case studies.</h1>
             <p className="quiet-text mt-5 text-lg leading-8">
-              Work organized by context. Each project has a dedicated case study with
-              the business problem, my contributions, and concrete outcomes.
+              SaaS products, automation systems, and startup MVPs. Each case study shows the problem, the decisions behind it, and what changed.
             </p>
           </header>
         </FadeIn>
@@ -174,12 +182,12 @@ export function WorkSection() {
         {featured.length > 0 && (
           <section aria-label="Featured projects">
             <FadeIn>
-              <p className="eyebrow mb-5">Featured</p>
+              <p className="eyebrow mb-5">Case studies</p>
             </FadeIn>
             <div className="grid gap-5 md:grid-cols-2">
               {featured.map((project, i) => (
                 <FadeIn key={project.slug} delay={i * 60} spring>
-                  <FeaturedProjectCard project={project} />
+                  <FeaturedProjectCard project={project} basePath={basePath} />
                 </FadeIn>
               ))}
             </div>
@@ -197,7 +205,7 @@ export function WorkSection() {
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {rest.map((project, i) => (
                 <FadeIn key={project.slug} delay={i * 40}>
-                  <CompactProjectCard project={project} />
+                  <CompactProjectCard project={project} basePath={basePath} />
                 </FadeIn>
               ))}
             </div>

@@ -11,8 +11,7 @@ export function ExperienceIndexSection() {
 
         <Breadcrumb
           items={[
-            { label: "Portfolio", href: "/portfolio" },
-            { label: "Experience", href: "/portfolio/experience" },
+            { label: "Experience", href: "/experience" },
           ]}
         />
 
@@ -49,7 +48,7 @@ export function ExperienceIndexSection() {
                   </span>
 
                   <Link
-                    href={`/portfolio/experience/${phase.slug}`}
+                    href={`/experience/${phase.slug}`}
                     className="panel panel-hover focusable group mb-4 flex flex-col gap-4 rounded-xl p-5 no-underline sm:flex-row sm:items-start sm:justify-between"
                   >
                     <div className="flex-1 space-y-2 min-w-0">

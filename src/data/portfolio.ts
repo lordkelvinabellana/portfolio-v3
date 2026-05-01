@@ -38,76 +38,68 @@ export type Badge = {
 };
 
 export const typingWords = [
-  "Web Developer",
+  "Product Engineer",
+  "Frontend Architect",
   "Automation Builder",
-  "Workflow Creator",
-  "Slack Bot Maker",
-  "Tool Integrator",
-  "Tech Assistant",
-  "No-Code Tinkerer",
-  "Script Helper",
-  "Problem Solver",
-  "Product Owner",
+  "System Builder",
 ];
 
 export const experiences: Experience[] = [
   {
-    position: "Product Owner",
-    company: "Ripple & Flow by Alphaus",
-    duration: "Present",
+    position: "Web Designer & Developer",
+    company: "Flexiwork",
+    duration: "Mar 2026 – Present",
     color: "violet",
     description:
-      "Promoted to Product Owner for Ripple and Flow, two core modules in our cloud cost management SaaS. Responsible for planning roadmap, refining backlogs, writing specs, and aligning design, dev, and marketing teams to deliver value faster.",
+      "Agency web work across WordPress, Wix, Elementor, and HTML/Tailwind builds. Delivered client websites with fast turnaround across healthcare, travel, and service industries. Recognized for consistently delivering ahead of deadline — including a full site build in under an hour against a same-day brief.",
+    cta: null,
+  },
+  {
+    position: "Lead Frontend Developer",
+    company: "Ardexa.ai",
+    duration: "Oct 2025 – Apr 2026",
+    color: "purple",
+    description:
+      "Built three startup MVPs from scratch as the primary frontend and full-stack developer alongside two founders. Worked across architecture, product decisions, and implementation using Next.js, Supabase, and TypeScript — shipping RentWise, LexaDraft, and TicketDesk.",
+    cta: null,
+  },
+  {
+    position: "Product Owner",
+    company: "Alphaus — Ripple, Flow, Wave & Wave Pro",
+    duration: "Aug – Dec 2025",
+    color: "blue",
+    description:
+      "Promoted to Product Owner across five connected cloud billing products. Led sprint planning, backlog refinement, and feature specs. Stepped into Figma UI/UX design ownership when delivery was blocked. Supported Ripple V2 migration (monolith → microfrontend) and led product alignment for the Alphaus–Archera strategic partnership.",
     cta: "Learn About Ripple",
     link: "https://www.alphaus.cloud/en/ripple",
   },
   {
-    position: "Frontend Developer / Co-Founder",
-    company: "RentHive (Startup)",
-    duration: "2024",
-    color: "purple",
+    position: "Lead Frontend Developer",
+    company: "Alphaus — Octo",
+    duration: "Oct 2024 – Aug 2025",
+    color: "sky",
     description:
-      "Helped design and build RentHive, a peer-to-peer rental platform. Developed UI components including login, product listings, checkout, and cart using Tailwind CSS and JavaScript. Focused on clean design, UX flow, and mobile responsiveness.",
-    cta: "View Code",
-    link: "https://github.com/lordkelvinabellana/RentHiveFinal",
-  },
-  {
-    position: "Frontend Developer",
-    company: "Octo by Alphaus",
-    duration: "2022 – 2024",
-    color: "blue",
-    description:
-      "Built internal UI tools using Vue, Vuetify, Tailwind CSS, and TypeScript. Developed dashboards and reusable components, integrated APIs, and worked closely with product to deliver scalable cloud cost visibility features.",
+      "Led frontend ownership for Octo — cloud cost dashboards, recommendation systems, budget management, and weekly production releases. Built Slack-to-ClickUp bug automation adopted company-wide. Introduced PR templates that improved review consistency. Mentored junior developers and backend engineers on Vue and frontend architecture.",
     cta: "Learn About Octo",
     link: "https://www.alphaus.cloud/en/octo",
   },
   {
-    position: "Web Developer / Virtual Assistant",
-    company: "Freelance / Contract",
-    duration: "2023 – Present",
-    color: "sky",
-    description:
-      "Developed websites and landing pages for clients using Wix, WordPress, HTML/CSS, and JavaScript. Managed VA tasks, client comms, and provided automation support when needed.",
-    cta: "View Portfolio",
-    link: "#",
-  },
-  {
-    position: "Automation Specialist",
-    company: "Various Projects",
-    duration: "2022 – Present",
+    position: "Junior Frontend Developer",
+    company: "Alphaus — Octo",
+    duration: "Jul 2023 – Oct 2024",
     color: "green",
     description:
-      "Built automation workflows with Make, Zapier, and n8n — integrating platforms like Slack, Notion, Tally, and Google Sheets to reduce manual work and boost productivity.",
-    cta: "View Portfolio",
-    link: "#",
+      "Built SaaS interfaces for Octo using Vue, Vuetify, TypeScript, and ECharts. Developed dashboards, cost reports, alert systems, and onboarding flows while integrating REST APIs, Mixpanel analytics, and i18n localization across the cloud cost management platform.",
+    cta: "Learn About Octo",
+    link: "https://www.alphaus.cloud/en/octo",
   },
   {
-    position: "Tech Intern / Thesis Developer",
-    company: "Academic Projects",
-    duration: "2022 – 2023",
+    position: "Freelance Frontend Developer & Automation Builder",
+    company: "Self-employed",
+    duration: "2023 – Present",
     color: "slate",
     description:
-      "Developed an IoT-based emergency serial messenger using NodeMCU ESP8266 and LoRa. Also worked on embedded systems and mobile apps using Flutter and Dart during Computer Engineering studies.",
+      "Built automation systems and client websites independently — AI job-matching pipelines, coaching delivery systems with approval workflows, Slack reporting automations, and WhatsApp bots. Handled 20+ web builds across WordPress, Wix, and HTML/Tailwind for clients in healthcare, travel, and services.",
     cta: null,
   },
 ];
@@ -449,6 +441,111 @@ export type Credential = {
 
 export const projectCaseStudies: ProjectCaseStudy[] = [
   {
+    slug: "octo",
+    title: "Octo — Cloud Cost Management Platform",
+    category: "SaaS/Product",
+    overview:
+      "Octo's product was strong. The delivery system around it wasn't. PR reviews were inconsistent, bug reporting required switching tools, and weekly releases meant every friction point had a real cost. I owned frontend delivery — and the surrounding systems that kept the team moving.",
+    businessProblem:
+      "Octo's product was strong, but delivery friction was quietly compounding. PR reviews were inconsistent, onboarding had unnecessary steps, and bug reporting required switching between multiple tools. Weekly releases meant these problems had real cost — not from lack of effort, but because the system around the work was creating drag. Fixing the product meant fixing how the team moved.",
+    role: "Lead Frontend Developer — Octo by Alphaus",
+    contributions: [
+      "Built and maintained cloud cost dashboards, recommendation views, budget management, and reporting systems using Vue, Vuetify, and ECharts.",
+      "Introduced PR templates with structured sections (problem, scope, screenshots, release notes) — standardized reviews and made weekly deployments more predictable.",
+      "Built a Slack-to-ClickUp bug reporting automation in Make, then rebuilt it in n8n for stronger parsing — became the company-wide standard, recognized by leadership and noticed by the CEO.",
+      "Simplified the user onboarding flow, removing friction points that slowed early product adoption.",
+      "Integrated Mixpanel analytics and i18n localization across core product modules.",
+      "Mentored junior developers and backend engineers on frontend architecture, codebase structure, and frontend-to-API workflows.",
+    ],
+    challenges: [
+      "Operational improvements — PR templates, workflow standards, automation — rarely feel urgent next to feature work, even when they protect long-term delivery speed.",
+      "Financial data dashboards need to feel trustworthy, not just functional. Users make real spending decisions from these views.",
+      "A new internal reporting tool only creates value if people adopt it. Building it inside the tool teams already used was the only way to make that work.",
+    ],
+    solutions: [
+      "Treated system improvements as delivery investments, not optional cleanup — PR templates and Git workflow standards reduced review friction and protected future velocity.",
+      "Focused dashboard and report design on data clarity and consistent formatting, not visual complexity.",
+      "Built the bug workflow inside Slack itself, reducing adoption friction to near zero — the tool was already open.",
+    ],
+    outcomes: [
+      "Bug reporting automation adopted company-wide — eliminated manual ticket triage and was recognized directly by the CEO.",
+      "Faster, more consistent PR reviews and weekly releases across the product team.",
+      "Improved frontend onboarding time for new developers and reduced dependency bottlenecks across the team.",
+    ],
+    stack: ["Vue", "TypeScript", "Vuetify", "ECharts", "GridStack", "Pinia", "Mixpanel", "i18n", "Make", "n8n", "Cypress"],
+    screenshots: ["/assets/octo/db1.png", "/assets/octo/db2.png", "/assets/octo/rec1.png", "/assets/octo/alert1.png"],
+    demoUrl: "https://www.alphaus.cloud/en/octo",
+    relatedExperienceSlug: "alphaus",
+    featured: true,
+  },
+  {
+    slug: "rentwise-qualification-platform",
+    title: "RentWise — Rental Qualification Platform",
+    category: "SaaS/Product",
+    overview:
+      "Most rental platforms solve discovery.\nThey don't solve approval confidence.\n\nRenters apply to places they won't qualify for.\nLandlords review applicants who were never a good fit.",
+    businessProblem:
+      "Most rental platforms solve visibility, not decision quality. Renters apply to properties they won't qualify for. Landlords receive applications that were never a good fit. Both sides waste time and energy on bad matches. The core problem wasn't finding listings — it was knowing which ones were actually worth pursuing. Qualification logic needed to come before the application, not after rejection.",
+    role: "Full Stack Developer — RentWise",
+    contributions: [
+      "Built the detailed renter onboarding flow capturing income, household size, guarantors, pets, vehicles, and rental history — mirroring what landlords actually evaluate.",
+      "Implemented hard-requirement filtering that removes clearly mismatched listings before a renter considers applying.",
+      "Developed a multi-factor scoring layer that ranks listings by fit strength, not just availability.",
+      "Integrated third-party background check APIs for credit, criminal, and screening data.",
+      "Designed the match-focused dashboard showing strongest property opportunities with qualification visibility.",
+      "Collaborated directly with founders on qualification logic, scoring weights, and product flow validation.",
+    ],
+    challenges: [
+      "Qualification filtering that's too aggressive breaks trust; too lenient removes the product's core value — the right calibration required real business judgment, not just technical rules.",
+      "Handling sensitive personal data (SSN, background check inputs) responsibly without building internal screening infrastructure.",
+    ],
+    solutions: [
+      "Modeled qualification rules after real landlord criteria so filtering felt accurate and fair — users saw it as helpful, not restrictive.",
+      "Delegated screening data to third-party background check APIs, keeping sensitive information outside internal storage and reducing compliance exposure.",
+    ],
+    outcomes: [
+      "Transformed the product from a listing marketplace into a qualification engine — a genuine competitive differentiator that neither Zillow nor Apartments.com offered.",
+      "Reduced wasted application effort for renters and improved applicant lead quality for landlords on both sides of the match.",
+    ],
+    stack: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS"],
+    screenshots: [],
+    relatedExperienceSlug: "ardexa",
+    featured: true,
+  },
+  {
+    slug: "lexadraft-contract-builder",
+    title: "LexaDraft — Contract Template & Workflow System",
+    category: "SaaS/Product",
+    overview:
+      "The same contract, rewritten from scratch every time.\n\nIn one construction business, hours were spent rewriting documents that were structurally identical — only names, dates, and amounts changed.",
+    businessProblem:
+      "A founder's construction company was manually rewriting contracts for every new job. The structure was nearly identical — company info, clauses, dates, signatures — but each contract still required manual editing, review, and rework. Operational friction like this is expensive because it accumulates quietly. Hundreds of manual contract cycles per year was the real cost, not any single contract.",
+    role: "Product Builder + Frontend Lead — LexaDraft (Ardexa)",
+    contributions: [
+      "Built the template builder where contracts are written once with named variable fields — company, owner, dates, payment terms, signatures — making templates reusable assets rather than one-time files.",
+      "Developed the document builder flow: select template → fill variable values → generate final contract, eliminating manual reformatting entirely.",
+      "Implemented PDF export, Word export, and email delivery so the workflow completed through delivery, not just drafting.",
+      "Architected the approval and signing workflow for future expansion toward full contract lifecycle management.",
+      "Worked directly with founders to map real operational use cases and validate the product flow against actual business needs.",
+    ],
+    challenges: [
+      "Templates too rigid push users back to manual editing. Templates too flexible lose the speed advantage. Finding that calibration required understanding the actual contract workflow, not just building an editor.",
+      "The visible product was a form interface. The real value was the workflow behind it — that required operational thinking more than frontend skill.",
+    ],
+    solutions: [
+      "Made variables first-class template elements so the reuse story was clear from day one — users saw templates as assets, not just saved drafts.",
+      "Kept the document builder deliberately minimal (select, fill, generate) so the time savings were immediately obvious and the adoption case was self-evident.",
+    ],
+    outcomes: [
+      "Eliminated repetitive manual contract editing — preparation time dropped significantly, and formatting inconsistency was removed by design.",
+      "Transformed contract creation from isolated document work into a repeatable operational workflow: build once, reuse many times.",
+    ],
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "Shadcn UI"],
+    screenshots: [],
+    relatedExperienceSlug: "ardexa",
+    featured: true,
+  },
+  {
     slug: "octo-dashboard-cost-report-builder",
     title: "Dashboard & Cost Report Builder",
     category: "SaaS/Product",
@@ -471,7 +568,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Aligned report views with user fiscal settings and cost formatting rules.",
     ],
     outcomes: [
-      "Improved self-serve reporting for cloud cost users.",
+      "Let cloud cost teams build and export their own reports without needing engineering support.",
       "Reduced friction around cost report creation and dashboard customization.",
     ],
     stack: ["Vue", "Vuetify", "ECharts", "GridStack", "TypeScript", "i18n", "Pinia", "REST API"],
@@ -502,7 +599,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Used charts and summaries to make savings history easier to evaluate.",
     ],
     outcomes: [
-      "Helped users evaluate optimization opportunities faster.",
+      "Gave cloud cost users clear visibility into which optimizations mattered, their impact, and whether they were actually executed.",
       "Improved visibility into implemented recommendations and their impact.",
     ],
     stack: ["Vue", "Vuetify", "ECharts", "TypeScript", "Pinia", "Day.js", "i18n", "REST API"],
@@ -533,7 +630,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Kept alert configuration close to delivery-channel context.",
     ],
     outcomes: [
-      "Made notification setup more approachable for cloud cost teams.",
+      "Removed the friction between setting cost thresholds and actually getting notified — no engineering handoff needed.",
       "Supported proactive budget and cost monitoring workflows.",
     ],
     stack: ["Vue", "Vuetify", "Pinia", "TypeScript", "REST API", "Day.js", "i18n"],
@@ -563,7 +660,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Used simple responsive components to keep implementation fast and consistent.",
     ],
     outcomes: [
-      "Helped the team win 2nd place at Startup Weekend Bohol.",
+      "Placed 2nd at Startup Weekend Bohol — built and validated a working product under tight time constraints.",
       "Produced a working MVP story for marketplace validation.",
     ],
     stack: ["HTML", "Tailwind CSS", "JavaScript"],
@@ -655,7 +752,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Created confirmation paths so reporters can see task creation results.",
     ],
     outcomes: [
-      "Reduced manual bug triage work.",
+      "Adopted across the company — removed the need to switch tools just to report bugs and became the default reporting workflow.",
       "Improved QA handoff consistency from Slack to ClickUp.",
     ],
     stack: ["Make", "n8n", "Slack API", "ClickUp API", "JavaScript", "Webhooks"],
@@ -723,93 +820,249 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
     screenshots: ["/assets/arnis/arnis1.png", "/assets/arnis/arnis2.png", "/assets/arnis/arnis3.png"],
     relatedExperienceSlug: "college",
   },
+  {
+    slug: "olj-job-matching-automation",
+    title: "AI Job Matching Workflow",
+    category: "Automation",
+    overview:
+      "Job boards don't have a discovery problem. They have a filtering problem. Every manual search session is mostly noise. This pipeline replaces that process with a decision engine: scraping, keyword filtering, AI scoring, and delivering only high-match opportunities as structured notifications.",
+    businessProblem:
+      "Manual job searching is a volume problem disguised as a visibility problem. Refreshing boards, scanning duplicates, and trying to evaluate fit manually creates decision fatigue without improving decision quality. The real problem was filtering — separating strong opportunities from noise before spending attention on them. Without a system, quantity overwhelms quality and the best roles get buried.",
+    role: "Full System Owner — Architecture, Automation, AI Integration",
+    contributions: [
+      "Designed a 6-stage pipeline: scraping → deduplication → keyword filtering → AI scoring → threshold filtering → HTML email delivery.",
+      "Built a cron-driven scraper polling every 5 minutes with Google Sheets-backed deduplication to prevent repeated alerts.",
+      "Created a two-pass keyword filter (strong-match and avoid-keywords) to remove obvious mismatches before reaching the AI layer — logic first, AI second.",
+      "Integrated OpenAI scoring that evaluates each listing against skills, salary, workload preferences, and stack fit — returning a match score, pros, cons, and a shouldApply recommendation.",
+      "Set a strict threshold: only listings where score ≥ 75 and shouldApply = true continue to notification, protecting alert signal quality.",
+      "Generated structured HTML emails with full AI analysis, application reasoning, and a direct job link — turning a notification into an immediate action.",
+    ],
+    challenges: [
+      "Routing everything through AI would make the pipeline slow, expensive, and unreliable — filtering logic had to come before AI, not after.",
+      "Notification trust is fragile: one week of noise trains a user to ignore alerts entirely, breaking the system's core value.",
+    ],
+    solutions: [
+      "Built keyword filtering as a pre-AI gate — strong candidates are pre-qualified by logic before LLM evaluation, which cuts token cost and improves response quality.",
+      "Enforced a strict match threshold so the system says no far more often than yes — signal quality beats volume.",
+    ],
+    outcomes: [
+      "Replaced manual job board browsing entirely — only genuinely strong opportunities trigger action.",
+      "Reduced job search time and decision fatigue while improving application quality by concentrating effort on pre-qualified matches.",
+    ],
+    stack: ["n8n (self-hosted)", "OpenAI API", "Google Sheets", "Oracle Cloud VM", "JavaScript", "Cron"],
+    screenshots: [],
+    relatedExperienceSlug: "automation",
+    featured: true,
+  },
+  {
+    slug: "autofit-ai-coaching",
+    title: "AutoFit AI Coaching System",
+    category: "Automation",
+    overview:
+      "The problem wasn't sending messages.\nIt was the time spent preparing them.",
+    businessProblem:
+      "A fitness coaching business had a preparation problem, not a messaging problem. Every week, the coach manually reviewed each client's progress, compared it with prior weeks, and wrote personalized updates from scratch. As the client roster grew, this became the primary bottleneck. The coach's real value is judgment and relationships — not repetitive analysis that a system could handle. The goal was to remove the prep work without removing the human quality.",
+    role: "Workflow Architect + Automation Builder",
+    contributions: [
+      "Designed an immutable weekly snapshot system — each client's progress is preserved as a discrete record rather than overwritten, creating a reliable coaching history.",
+      "Built the AI analysis layer that compares previous and current progress data, then generates a draft coaching message with observations, recommendations, and motivational framing.",
+      "Implemented the coach approval gate — every generated message requires review before delivery, making human judgment the final authority.",
+      "Created a regeneration loop: if the coach requests edits, the system refines the draft using their feedback rather than starting from scratch.",
+      "Engineered prompts for tone consistency — messages needed to sound like the coach, not like an AI summary.",
+    ],
+    challenges: [
+      "Trust-sensitive content fails at both extremes — messages that feel robotic destroy the coach-client relationship even if technically accurate.",
+      "Overwriting client progress state between weeks would break the AI's ability to reason about behavioral trends over time.",
+    ],
+    solutions: [
+      "Designed the approval gate as the core of the system architecture, not an optional add-on — automation becomes leverage only when the human remains in control.",
+      "Used immutable weekly snapshots so the AI always reasons from preserved observation history, not a destructively updated state.",
+    ],
+    outcomes: [
+      "Coach no longer starts every weekly message from zero — AI handles progress analysis and drafting, coach focuses on judgment, tone, and the final call.",
+      "Improved message consistency across the client roster and reduced weekly preparation time without reducing personalization quality.",
+    ],
+    stack: ["n8n", "OpenAI API", "JavaScript"],
+    screenshots: [],
+    relatedExperienceSlug: "automation",
+    featured: true,
+  },
+  {
+    slug: "ripple-product-ownership-archera",
+    title: "Ripple — Product Ownership & Strategic Alignment",
+    category: "SaaS/Product",
+    overview:
+      "Owned product delivery across multiple SaaS tools and helped validate a strategic partnership that improved cloud cost decisions, not just reporting.",
+    businessProblem:
+      "Ripple delivered cloud invoicing and financial visibility — but visibility alone doesn't prevent overspending. Customers still struggled with Reserved Instance and Savings Plan decisions that directly affected profitability. The question was whether a partnership with Archera could create a stronger combined product story (visibility + optimization) rather than building another internal feature from scratch.",
+    role: "Product Owner — Ripple, Flow, Wave & Wave Pro · Alphaus",
+    contributions: [
+      "Led sprint planning, backlog refinement, and feature specs across five connected cloud billing products.",
+      "Stepped into Figma UI/UX design ownership when design bandwidth was unavailable, unblocking engineering delivery.",
+      "Supported the Ripple V2 migration from monolith to microfrontend architecture.",
+      "Tasked by the CEO to evaluate the Alphaus–Archera strategic partnership — studied Archera's commitment optimization product, mapped integration opportunities, and supported internal stakeholder alignment.",
+      "Assessed architectural compatibility between Archera's reservation lifecycle tooling and Ripple's invoicing and cost visibility workflows.",
+    ],
+    challenges: [
+      "Separating interesting technology from actual strategic fit — many integrations look good on paper but few improve customer outcomes meaningfully.",
+      "Evaluating a partner system without direct implementation ownership required stronger product judgment than coding.",
+      "Balancing product ownership across five connected products while simultaneously leading strategic evaluation work.",
+    ],
+    solutions: [
+      "Approached the partnership as a product fit problem: 'Can these systems create stronger outcomes together?' rather than 'Can we connect them?'",
+      "Mapped customer workflows where commitment optimization would complement existing visibility — identifying leverage points rather than feature overlap.",
+      "Worked with leadership and product teams to align on what the partnership solved, where ownership boundaries existed, and what long-term product value looked like.",
+    ],
+    outcomes: [
+      "Partnership established as an active strategic initiative — strengthening product positioning from cost visibility alone to visibility plus optimization.",
+      "Unblocked engineering delivery by owning UI/UX design when design bandwidth was unavailable.",
+      "Improved sprint consistency and release coordination across five connected cloud billing products.",
+    ],
+    stack: ["Figma", "FinOps", "Cloud Cost Management", "Product Strategy"],
+    screenshots: [],
+    demoUrl: "https://www.alphaus.cloud/en/ripple",
+    relatedExperienceSlug: "alphaus",
+    featured: false,
+  },
 ];
 
 export const experiencePhases: ExperiencePhase[] = [
   {
-    slug: "college",
-    title: "College & Engineering Foundation",
-    period: "2022 - 2023",
+    slug: "flexiwork",
+    title: "Flexiwork — Agency Web Development",
+    period: "Mar 2026 – Present",
     summary:
-      "Computer Engineering work shaped a systems-first foundation across embedded hardware, C/C++, mobile development, and thesis prototyping.",
+      "Agency web work across WordPress, Wix, Elementor, and custom HTML/Tailwind builds — delivering client websites with fast turnaround and direct client communication.",
     responsibilities: [
-      "Built academic and thesis projects across hardware and software contexts.",
-      "Worked with embedded systems, microcontrollers, Flutter, Dart, C, and C++.",
-      "Developed an IoT emergency messaging thesis using NodeMCU ESP8266 and LoRa.",
+      "Build websites from design to production using WordPress, Wix, Elementor, and HTML/Tailwind.",
+      "Translate Figma designs and client requirements into conversion-focused layouts.",
+      "Handle Stripe integrations, responsive design, and direct client revisions.",
     ],
     achievements: [
-      "Built a practical emergency communication prototype for low-connectivity areas.",
-      "Developed the foundations that later shaped product and automation thinking.",
+      "Delivered a full website build in under an hour against a same-day deadline.",
+      "Recognized by clients for consistent early delivery across 20+ projects.",
     ],
     learnings: [
-      "Systems thinking across hardware, software, and real-world constraints.",
-      "How reliability and clarity matter when tools are used in urgent contexts.",
+      "Fast execution and clear communication matter as much as technical skill in agency work.",
+      "Different industries require different content hierarchy and trust signals.",
     ],
-    technologies: ["C", "C++", "Dart", "Flutter", "NodeMCU ESP8266", "LoRa"],
-    relatedProjectSlugs: ["arnis-scoreboard"],
+    technologies: ["WordPress", "Wix", "Elementor", "HTML", "Tailwind CSS", "Stripe", "Figma"],
+    relatedProjectSlugs: ["pacific-west-diagnostic-imaging", "czechvibes-travel-site"],
+  },
+  {
+    slug: "ardexa",
+    title: "Ardexa.ai — Startup MVP Development",
+    period: "Oct 2025 – Apr 2026",
+    summary:
+      "Led frontend and full-stack development on three startup MVPs alongside two founders — RentWise, LexaDraft, and TicketDesk — working directly on architecture, product decisions, and implementation.",
+    responsibilities: [
+      "Built MVP products using Next.js, TypeScript, Tailwind CSS, Shadcn UI, and Supabase.",
+      "Served as primary frontend and full-stack developer in a 4-person team (2 founders + 1 backend dev).",
+      "Proposed architecture, validated product direction with founders, and made implementation decisions independently.",
+    ],
+    achievements: [
+      "Shipped three production-ready MVP systems across different business domains.",
+      "Built hard-requirement filtering and scoring logic for RentWise — transforming a listing platform into a qualification engine.",
+      "Designed variable-based contract template system for LexaDraft, eliminating repetitive manual contract editing.",
+    ],
+    learnings: [
+      "How to move from problem to decision to build without heavy process support.",
+      "Product viability and founder reliability both matter equally in startup environments.",
+    ],
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Shadcn UI", "DaisyUI", "Supabase", "Vercel"],
+    relatedProjectSlugs: ["rentwise-qualification-platform", "lexadraft-contract-builder"],
   },
   {
     slug: "alphaus",
-    title: "Alphaus SaaS & Product Work",
-    period: "2022 - Present",
+    title: "Alphaus — Junior FE → Lead FE → Product Owner",
+    period: "Jul 2023 – Dec 2025",
     summary:
-      "Frontend and product work across cloud cost management modules, from Octo UI features to current Product Owner responsibilities for Ripple and Flow.",
+      "Progressed from Junior Frontend Developer to Lead to Product Owner in under two years — owning frontend quality, release coordination, UI/UX design, and product delivery across Octo, Ripple, Flow, Wave, and Wave Pro.",
     responsibilities: [
-      "Built SaaS interfaces using Vue, Vuetify, Tailwind CSS, TypeScript, Pinia, REST APIs, and data visualization libraries.",
-      "Developed dashboards, reports, alerting, recommendations, onboarding, localization, analytics, and optimization flows.",
-      "As Product Owner, planned roadmap, refined backlogs, wrote specs, and aligned design, engineering, and marketing teams.",
+      "Built SaaS interfaces using Vue, Vuetify, TypeScript, ECharts, and GridStack across cloud cost management modules.",
+      "Led PR reviews, release coordination, Cypress testing, and frontend architecture as Lead Frontend Developer.",
+      "As Product Owner, ran sprint planning, backlog refinement, feature specs, and Figma UI/UX design for five connected products.",
+      "Built Slack-to-ClickUp bug automation (Make → n8n) adopted company-wide and recognized by the CEO.",
+      "Supported Ripple V2 migration (monolith → microfrontend) and led Alphaus–Archera product partnership alignment.",
     ],
     achievements: [
-      "Shipped multiple cloud cost visibility and optimization features.",
-      "Moved from frontend implementation into broader product ownership.",
+      "Bug reporting automation adopted company-wide — eliminated manual triage, recognized by leadership.",
+      "Stepped into UI/UX design ownership to unblock engineering when design bandwidth was unavailable.",
+      "Introduced PR templates that improved review speed and weekly release consistency.",
+      "FinOps Certified Practitioner — grounding product and UI decisions in cloud financial management concepts.",
     ],
     learnings: [
-      "How to balance technical feasibility, user value, and cross-team delivery.",
-      "How product context improves frontend decisions.",
+      "Leadership often means stepping into the missing role before someone asks.",
+      "Product context makes frontend decisions faster and more defensible.",
     ],
-    technologies: ["Vue", "Vuetify", "TypeScript", "Pinia", "ECharts", "GridStack", "i18n", "REST API"],
+    technologies: ["Vue", "Vuetify", "TypeScript", "Pinia", "ECharts", "GridStack", "i18n", "Mixpanel", "Make", "n8n", "Cypress", "Figma"],
     relatedProjectSlugs: [
+      "octo",
       "octo-dashboard-cost-report-builder",
       "octo-recommendations-history",
       "octo-alert-channel-management",
+      "slack-clickup-bug-automation",
     ],
+  },
+  {
+    slug: "automation",
+    title: "Automation & AI Systems",
+    period: "2023 – Present",
+    summary:
+      "Built automation systems that remove real operational friction — AI job-matching pipelines, coaching delivery with approval flows, Slack-to-ClickUp reporting, and WhatsApp bots.",
+    responsibilities: [
+      "Designed and built multi-stage automation pipelines using n8n, Make, and Zapier.",
+      "Integrated OpenAI, Slack, ClickUp, Google Sheets, Zoom, YouTube, and WhatsApp APIs.",
+      "Built approval systems, AI scoring layers, deduplication logic, and smart notification workflows.",
+    ],
+    achievements: [
+      "OLJ job-matching pipeline: replaced manual job searching with AI scoring and threshold-gated notifications.",
+      "AutoFit coaching system: built approval-first AI workflow that reduced coach prep workload without removing human judgment.",
+      "Slack-to-ClickUp system: adopted company-wide at Alphaus, recognized by leadership.",
+    ],
+    learnings: [
+      "The strongest automation fits existing team habits rather than forcing new ones.",
+      "Technical limitations are often business limitations — knowing when to escalate matters.",
+    ],
+    technologies: ["n8n", "Make", "Zapier", "OpenAI API", "Slack API", "ClickUp API", "Google Sheets API", "Webhooks"],
+    relatedProjectSlugs: ["olj-job-matching-automation", "autofit-ai-coaching", "slack-clickup-bug-automation", "zoom-youtube-upload-pipeline"],
   },
   {
     slug: "freelance",
     title: "Freelance & Client Websites",
-    period: "2023 - Present",
+    period: "2023 – Present",
     summary:
-      "Freelance web work across client websites, landing pages, healthcare content, travel content, and support tasks.",
+      "Client web work across healthcare, travel, and service industries — WordPress, Wix, HTML/Tailwind builds with Stripe integrations and conversion-focused layouts.",
     responsibilities: [
-      "Built client websites and landing pages using Wix, WordPress, HTML, CSS, and Tailwind.",
-      "Handled client communication, content updates, and implementation details.",
-      "Provided automation support where client workflows needed less manual work.",
+      "Built client websites using WordPress, Wix, HTML, CSS, and Tailwind.",
+      "Handled client communication, content structure, and implementation details.",
+      "Integrated Stripe payments and responsive design across different platform constraints.",
     ],
     achievements: [
-      "Delivered client-facing websites across healthcare and travel contexts.",
-      "Balanced design polish with platform constraints.",
+      "Delivered a clean patient-facing healthcare website with Stripe payment support.",
+      "Built multilingual responsive frontend for a European travel brand.",
     ],
     learnings: [
-      "How to communicate technical work to non-technical clients.",
-      "How industry context changes content hierarchy and trust signals.",
+      "How to communicate technical decisions clearly to non-technical clients.",
+      "Industry context shapes content hierarchy and trust signal placement.",
     ],
     technologies: ["Wix", "WordPress", "HTML", "CSS", "Tailwind CSS", "Stripe"],
     relatedProjectSlugs: ["pacific-west-diagnostic-imaging", "czechvibes-travel-site"],
   },
   {
     slug: "renthive",
-    title: "RentHive Startup Build",
+    title: "RentHive — Startup Weekend Bohol",
     period: "2024",
     summary:
-      "Startup Weekend Bohol work on a peer-to-peer rental platform MVP, combining product thinking, UI development, and rapid validation.",
+      "Startup Weekend Bohol — peer-to-peer rental platform MVP built under competition pressure. Helped the team win 2nd place.",
     responsibilities: [
       "Co-designed the MVP user flow and core interface screens.",
-      "Built responsive UI components for listing, login, checkout, and cart flows.",
-      "Helped translate a startup idea into a demo-ready product story.",
+      "Built responsive Tailwind-based UI for listing, login, checkout, and cart flows.",
+      "Helped translate a startup concept into a demo-ready product story.",
     ],
     achievements: [
       "Helped the team win 2nd place at Startup Weekend Bohol.",
-      "Built a credible marketplace MVP under a short timeline.",
+      "Built a credible marketplace MVP under a short competition timeline.",
     ],
     learnings: [
       "How to prioritize the smallest product surface that proves the concept.",
@@ -819,26 +1072,26 @@ export const experiencePhases: ExperiencePhase[] = [
     relatedProjectSlugs: ["renthive-mvp-ui"],
   },
   {
-    slug: "automation",
-    title: "Automation & Internal Tools",
-    period: "2022 - Present",
+    slug: "college",
+    title: "Computer Engineering — Bohol Island State University",
+    period: "2019 – 2023",
     summary:
-      "Workflow automation across Slack, ClickUp, n8n, Make, Zapier, Google Sheets, Zoom, YouTube, and internal task systems.",
+      "Computer Engineering degree — embedded systems, thesis prototyping, and the technical foundation that preceded real-world product work.",
     responsibilities: [
-      "Built automations that move informal requests into structured task and media workflows.",
-      "Integrated Slack, ClickUp, Google Sheets, Zoom, YouTube, Wasabi, and custom APIs.",
-      "Created routing, parsing, metadata mapping, attachment handling, and confirmation logic.",
+      "Built academic and thesis projects across hardware and software contexts.",
+      "Worked with embedded systems, microcontrollers, Flutter, Dart, C, and C++.",
+      "Developed an IoT emergency messaging thesis using NodeMCU ESP8266 and LoRa.",
     ],
     achievements: [
-      "Reduced manual handoff work for bugs, UX requests, task capture, and media uploads.",
-      "Built reusable automation patterns across Make and n8n.",
+      "Built a practical emergency communication prototype for low-connectivity areas.",
+      "Developed the systems foundation that later shaped product and automation thinking.",
     ],
     learnings: [
-      "How operational clarity depends on reliable handoffs and visible confirmations.",
-      "How automation is strongest when it fits the team’s existing habits.",
+      "Systems thinking across hardware, software, and real-world constraints.",
+      "Reliability and clarity matter most when tools are used in urgent, high-stakes contexts.",
     ],
-    technologies: ["n8n", "Make", "Zapier", "Slack API", "ClickUp API", "Google Sheets API", "Webhooks"],
-    relatedProjectSlugs: ["slack-clickup-bug-automation", "zoom-youtube-upload-pipeline"],
+    technologies: ["C", "C++", "Dart", "Flutter", "NodeMCU ESP8266", "LoRa"],
+    relatedProjectSlugs: ["arnis-scoreboard"],
   },
 ];
 

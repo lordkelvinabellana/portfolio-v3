@@ -32,7 +32,7 @@ function RelatedProjectTeaser({
 }) {
   return (
     <Link
-      href={`/portfolio/projects/${slug}`}
+      href={`/work/${slug}`}
       className="panel panel-hover focusable group flex items-start justify-between gap-4 rounded-xl p-4 no-underline"
     >
       <div className="min-w-0">
@@ -72,9 +72,8 @@ export function ExperienceDetailSection({ phase }: { phase: ExperiencePhase }) {
 
         <Breadcrumb
           items={[
-            { label: "Portfolio", href: "/portfolio" },
-            { label: "Experience", href: "/portfolio/experience" },
-            { label: phase.title, href: `/portfolio/experience/${phase.slug}` },
+            { label: "Experience", href: "/experience" },
+            { label: phase.title, href: `/experience/${phase.slug}` },
           ]}
         />
 
@@ -210,7 +209,7 @@ export function ExperienceDetailSection({ phase }: { phase: ExperiencePhase }) {
                       />
                     ))}
                     <Link
-                      href="/portfolio/projects"
+                      href="/work"
                       className="focusable quiet-text inline-flex min-h-10 items-center gap-1.5 text-sm font-semibold transition-colors hover:text-foreground"
                     >
                       See all projects <ArrowRight className="h-3.5 w-3.5" />
@@ -234,7 +233,7 @@ export function ExperienceDetailSection({ phase }: { phase: ExperiencePhase }) {
               <div className="grid gap-3 sm:grid-cols-2">
                 {prev ? (
                   <Link
-                    href={`/portfolio/experience/${prev.slug}`}
+                    href={`/experience/${prev.slug}`}
                     className="panel panel-hover focusable flex items-center gap-4 rounded-xl p-4 no-underline"
                   >
                     <ArrowLeft className="h-4 w-4 shrink-0 text-muted-foreground" />
@@ -248,7 +247,7 @@ export function ExperienceDetailSection({ phase }: { phase: ExperiencePhase }) {
                 )}
                 {next && (
                   <Link
-                    href={`/portfolio/experience/${next.slug}`}
+                    href={`/experience/${next.slug}`}
                     className="panel panel-hover focusable flex items-center justify-end gap-4 rounded-xl p-4 no-underline sm:text-right"
                   >
                     <div className="min-w-0">

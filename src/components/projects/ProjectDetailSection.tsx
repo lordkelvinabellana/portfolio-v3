@@ -13,6 +13,22 @@ function getAdjacentProjects(slug: string) {
   return { prev, next };
 }
 
+/* ── Helpers ── */
+
+function firstSentence(text: string): string {
+  const match = text.match(/^[^.!?]+[.!?]/);
+  return match ? match[0].trim() : text.split(" ").slice(0, 18).join(" ") + "…";
+}
+
+/* Splits "Bold lead — rest of text" into [lead, rest] for visual emphasis */
+function splitOutcome(text: string): [string, string] {
+  const dashIdx = text.indexOf(" — ");
+  if (dashIdx !== -1) return [text.slice(0, dashIdx), text.slice(dashIdx)];
+  const words = text.split(" ");
+  if (words.length > 6) return [words.slice(0, 5).join(" "), " " + words.slice(5).join(" ")];
+  return [text, ""];
+}
+
 /* ── Section primitives ── */
 
 function SectionCard({ children }: { children: React.ReactNode }) {
@@ -21,13 +37,81 @@ function SectionCard({ children }: { children: React.ReactNode }) {
   );
 }
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  return <p className="eyebrow mb-3">{children}</p>;
+function SectionLabel({ children, oneLiner }: { children: React.ReactNode; oneLiner?: string }) {
+  return (
+    <div className="mb-5">
+      <div className="flex items-center gap-3">
+        <p className="shrink-0 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
+          {children}
+        </p>
+        <div className="h-px flex-1 bg-border" />
+      </div>
+      {oneLiner && (
+        <p className="mt-2 text-sm font-medium text-foreground/70 leading-snug">{oneLiner}</p>
+      )}
+    </div>
+  );
+}
+
+function BodyText({ text }: { text: string }) {
+  const sentences = text.match(/[^.!?—]+[.!?—]*["']?\s*/g) ?? [text];
+  const paragraphs: string[] = [];
+  for (let i = 0; i < sentences.length; i += 2) {
+    const chunk = sentences.slice(i, i + 2).join("").trim();
+    if (chunk) paragraphs.push(chunk);
+  }
+  return (
+    <div className="space-y-3">
+      {paragraphs.map((p, i) => (
+        <p key={i} className="quiet-text leading-7">
+          {p}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+/* ── TL;DR summary block ── */
+
+function TLDRBlock({ project }: { project: ProjectCaseStudy }) {
+  const bullets = [
+    { label: "Built", text: project.contributions[0] },
+    { label: "Problem", text: firstSentence(project.businessProblem) },
+    { label: "Impact", text: project.outcomes[0] },
+  ];
+
+  return (
+    <div
+      className="rounded-xl px-6 py-5"
+      style={{
+        background: "color-mix(in oklch, var(--muted), transparent 40%)",
+        border: "1px solid color-mix(in oklch, var(--border), transparent 30%)",
+      }}
+    >
+      <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
+        Summary
+      </p>
+      <ul className="space-y-2">
+        {bullets.map(({ label, text }) => (
+          <li key={label} className="flex gap-2 text-sm leading-6">
+            <span className="shrink-0 font-semibold text-foreground/60 w-14">{label}</span>
+            <span className="quiet-text">{text}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 /* ── Main component ── */
 
-export function ProjectDetailSection({ project }: { project: ProjectCaseStudy }) {
+interface ProjectDetailSectionProps {
+  project: ProjectCaseStudy;
+  backHref?: string;
+  basePath?: string;
+}
+
+export function ProjectDetailSection({ project, backHref = "/work", basePath = "/work" }: ProjectDetailSectionProps) {
   const { prev, next } = getAdjacentProjects(project.slug);
   const hasChallenges = project.challenges.length > 0;
 
@@ -38,7 +122,7 @@ export function ProjectDetailSection({ project }: { project: ProjectCaseStudy })
         {/* Back */}
         <FadeIn>
           <Link
-            href="/portfolio/projects"
+            href={backHref}
             className="focusable inline-flex min-h-10 items-center gap-1.5 rounded-md border border-transparent px-2 py-1.5 text-sm font-semibold text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
           >
             <ArrowLeft className="h-4 w-4" />
@@ -53,6 +137,11 @@ export function ProjectDetailSection({ project }: { project: ProjectCaseStudy })
             <h1 className="section-heading">{project.title}</h1>
             <p className="quiet-text mt-5 text-lg leading-8">{project.overview}</p>
           </header>
+        </FadeIn>
+
+        {/* TL;DR */}
+        <FadeIn delay={60}>
+          <TLDRBlock project={project} />
         </FadeIn>
 
         {/* Screenshots */}
@@ -73,23 +162,23 @@ export function ProjectDetailSection({ project }: { project: ProjectCaseStudy })
             {/* Business problem */}
             <FadeIn>
               <SectionCard>
-                <SectionLabel>The problem</SectionLabel>
-                <p className="quiet-text leading-7">{project.businessProblem}</p>
+                <SectionLabel oneLiner={firstSentence(project.businessProblem)}>Problem</SectionLabel>
+                <BodyText text={project.businessProblem} />
               </SectionCard>
             </FadeIn>
 
             {/* Contributions */}
             <FadeIn delay={40}>
               <SectionCard>
-                <SectionLabel>What I built</SectionLabel>
-                <ul className="space-y-3">
+                <SectionLabel oneLiner={`${project.contributions.length} key contributions that defined the build`}>What I Built</SectionLabel>
+                <ul className="space-y-3.5">
                   {project.contributions.map((item) => (
                     <li
                       key={item}
                       className="quiet-text flex items-start gap-3 text-sm leading-6"
                     >
                       <span
-                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
+                        className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
                         aria-hidden="true"
                       />
                       {item}
@@ -103,28 +192,26 @@ export function ProjectDetailSection({ project }: { project: ProjectCaseStudy })
             {hasChallenges && (
               <FadeIn delay={80}>
                 <SectionCard>
-                  <SectionLabel>Challenges &amp; how I addressed them</SectionLabel>
-                  <div className="space-y-6">
+                  <SectionLabel oneLiner="Tradeoffs and approaches that shaped the final outcome">Key Decisions</SectionLabel>
+                  <div className="space-y-5">
                     {project.challenges.map((challenge, i) => (
                       <div
                         key={i}
-                        className="grid gap-3 border-b border-border pb-6 last:border-0 last:pb-0 sm:grid-cols-2 sm:gap-8"
+                        className="rounded-lg border border-border bg-secondary/30 p-4 last:mb-0"
                       >
-                        <div>
-                          <p className="muted-text mb-2 text-[11px] font-bold uppercase tracking-widest">
-                            Challenge
-                          </p>
-                          <p className="quiet-text text-sm leading-6">{challenge}</p>
-                        </div>
+                        <p className="mb-1.5 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
+                          Challenge
+                        </p>
+                        <p className="quiet-text mb-3 text-sm leading-6">{challenge}</p>
                         {project.solutions[i] && (
-                          <div>
-                            <p className="mb-2 text-[11px] font-bold uppercase tracking-widest text-primary">
-                              Response
+                          <>
+                            <p className="mb-1.5 text-[11px] font-bold uppercase tracking-widest text-primary">
+                              Approach
                             </p>
                             <p className="quiet-text text-sm leading-6">
                               {project.solutions[i]}
                             </p>
-                          </div>
+                          </>
                         )}
                       </div>
                     ))}
@@ -144,25 +231,36 @@ export function ProjectDetailSection({ project }: { project: ProjectCaseStudy })
                     "1px solid color-mix(in oklch, var(--primary), transparent 76%)",
                 }}
               >
-                <p
-                  className="mb-4 text-[11px] font-bold uppercase tracking-widest"
-                  style={{ color: "var(--primary)" }}
-                >
-                  Results &amp; outcomes
-                </p>
+                <div className="mb-5">
+                  <div className="flex items-center gap-3">
+                    <p className="shrink-0 text-[11px] font-bold uppercase tracking-widest" style={{ color: "var(--primary)" }}>
+                      Impact
+                    </p>
+                    <div className="h-px flex-1" style={{ background: "color-mix(in oklch, var(--primary), transparent 70%)" }} />
+                  </div>
+                  <p className="mt-2 text-sm font-medium text-foreground/70 leading-snug">
+                    {firstSentence(project.outcomes[0])}
+                  </p>
+                </div>
                 <ul className="space-y-4">
-                  {project.outcomes.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-3 text-sm leading-6"
-                    >
-                      <ArrowRight
-                        className="mt-0.5 h-4 w-4 shrink-0 text-primary"
-                        aria-hidden="true"
-                      />
-                      <span>{item}</span>
-                    </li>
-                  ))}
+                  {project.outcomes.map((item) => {
+                    const [lead, rest] = splitOutcome(item);
+                    return (
+                      <li
+                        key={item}
+                        className="flex items-start gap-3 text-sm leading-6"
+                      >
+                        <ArrowRight
+                          className="mt-0.5 h-4 w-4 shrink-0 text-primary"
+                          aria-hidden="true"
+                        />
+                        <span>
+                          <strong className="font-semibold text-foreground">{lead}</strong>
+                          {rest && <span className="quiet-text">{rest}</span>}
+                        </span>
+                      </li>
+                    );
+                  })}
                 </ul>
               </section>
             </FadeIn>
@@ -176,7 +274,9 @@ export function ProjectDetailSection({ project }: { project: ProjectCaseStudy })
                   <SectionLabel>Role</SectionLabel>
                   <p className="text-sm font-semibold">{project.role}</p>
 
-                  <p className="eyebrow mb-3 mt-6">Tech stack</p>
+                  <div className="mt-6">
+                    <SectionLabel>Tech Stack</SectionLabel>
+                  </div>
                   <div className="flex flex-wrap gap-1.5">
                     {project.stack.map((tech) => (
                       <span
@@ -190,14 +290,16 @@ export function ProjectDetailSection({ project }: { project: ProjectCaseStudy })
 
                   {(project.demoUrl || project.githubUrl) && (
                     <>
-                      <p className="eyebrow mb-3 mt-6">Links</p>
+                      <div className="mt-6">
+                        <SectionLabel>Links</SectionLabel>
+                      </div>
                       <div className="flex flex-col gap-2">
                         {project.demoUrl && (
                           <a
                             href={project.demoUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="focusable inline-flex min-h-10 items-center gap-2 rounded-md border border-transparent text-sm font-semibold text-primary transition-colors hover:text-foreground"
+                            className="focusable inline-flex min-h-10 items-center gap-2 rounded-md border border-border bg-secondary px-3 py-2 text-sm font-semibold text-primary transition-colors hover:bg-accent hover:text-accent-foreground"
                           >
                             Live preview{" "}
                             <ExternalLink className="h-3.5 w-3.5" />
@@ -208,7 +310,7 @@ export function ProjectDetailSection({ project }: { project: ProjectCaseStudy })
                             href={project.githubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="focusable inline-flex min-h-10 items-center gap-2 rounded-md border border-transparent text-sm font-semibold text-primary transition-colors hover:text-foreground"
+                            className="focusable inline-flex min-h-10 items-center gap-2 rounded-md border border-border bg-secondary px-3 py-2 text-sm font-semibold text-primary transition-colors hover:bg-accent hover:text-accent-foreground"
                           >
                             View on GitHub{" "}
                             <Code2 className="h-3.5 w-3.5" />
@@ -234,7 +336,7 @@ export function ProjectDetailSection({ project }: { project: ProjectCaseStudy })
               <div className="grid gap-3 sm:grid-cols-2">
                 {prev ? (
                   <Link
-                    href={`/portfolio/projects/${prev.slug}`}
+                    href={`${basePath}/${prev.slug}`}
                     className="panel panel-hover focusable flex items-center gap-4 rounded-xl p-4 no-underline"
                   >
                     <ArrowLeft className="h-4 w-4 shrink-0 text-muted-foreground" />
@@ -248,7 +350,7 @@ export function ProjectDetailSection({ project }: { project: ProjectCaseStudy })
                 )}
                 {next && (
                   <Link
-                    href={`/portfolio/projects/${next.slug}`}
+                    href={`${basePath}/${next.slug}`}
                     className="panel panel-hover focusable flex items-center justify-end gap-4 rounded-xl p-4 no-underline sm:text-right"
                   >
                     <div className="min-w-0">

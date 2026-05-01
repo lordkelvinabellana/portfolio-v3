@@ -9,37 +9,21 @@ import {
   BriefcaseBusiness,
   Mail,
   MessageCircle,
-  ChevronRight,
+  History,
 } from "lucide-react";
-import { useState, useEffect } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 import { cn } from "@/lib/utils";
-
-type NavSubItem = {
-  href: string;
-  label: string;
-};
 
 type NavItem = {
   href: string;
   label: string;
   icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
-  subItems?: NavSubItem[];
 };
 
 const navItems: NavItem[] = [
   { href: "/", label: "Home", icon: Home },
-  {
-    href: "/portfolio",
-    label: "Portfolio",
-    icon: BriefcaseBusiness,
-    subItems: [
-      { href: "/portfolio", label: "Overview" },
-      { href: "/portfolio/experience", label: "Experience" },
-      { href: "/portfolio/projects", label: "Projects" },
-      { href: "/portfolio/credentials", label: "Credentials" },
-    ],
-  },
+  { href: "/work", label: "Work", icon: BriefcaseBusiness },
+  { href: "/experience", label: "Experience", icon: History },
   { href: "/about", label: "About", icon: User },
   { href: "/contact", label: "Contact", icon: Mail },
 ];
@@ -72,6 +56,11 @@ const socialLinks = [
     Icon: GitHubIcon,
   },
   {
+    href: "mailto:lordkelvinabellana@gmail.com",
+    label: "Email",
+    Icon: Mail,
+  },
+  {
     href: "https://wa.me/639285583697",
     label: "WhatsApp",
     Icon: MessageCircle,
@@ -80,40 +69,14 @@ const socialLinks = [
 
 export function Sidebar({ onNavClick }: { onNavClick?: () => void }) {
   const pathname = usePathname();
-  const [expandedItems, setExpandedItems] = useState<Set<string>>(() => {
-    const init = new Set<string>();
-    navItems.forEach(({ href, subItems }) => {
-      if (subItems && pathname.startsWith(href)) init.add(href);
-    });
-    return init;
-  });
-
-  useEffect(() => {
-    setExpandedItems((prev) => {
-      const next = new Set(prev);
-      navItems.forEach(({ href, subItems }) => {
-        if (subItems && pathname.startsWith(href)) next.add(href);
-      });
-      return next;
-    });
-  }, [pathname]);
-
-  const toggleExpand = (href: string) => {
-    const newExpanded = new Set(expandedItems);
-    if (newExpanded.has(href)) {
-      newExpanded.delete(href);
-    } else {
-      newExpanded.add(href);
-    }
-    setExpandedItems(newExpanded);
-  };
-
-  const isSubItemActive = (href: string) =>
-    pathname === href || (href !== "/" && pathname.startsWith(href + "/"));
 
   return (
     <div className="flex h-full flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground">
-      <div className="flex items-center gap-3 px-4 py-5">
+      <Link
+        href="/about"
+        onClick={onNavClick}
+        className="focusable flex items-center gap-3 rounded-md px-4 py-5 transition-colors hover:bg-sidebar-accent/50"
+      >
         <div className="relative h-8 w-8 shrink-0">
           <Image
             src="/assets/profile.jpg"
@@ -142,118 +105,41 @@ export function Sidebar({ onNavClick }: { onNavClick?: () => void }) {
           <p className="text-[11px] truncate mt-0.5 text-muted-foreground">
             Frontend Developer
           </p>
+          <p className="text-[10px] truncate mt-0.5 text-muted-foreground/70">
+            Product-focused · Automation builder
+          </p>
         </div>
-      </div>
+      </Link>
 
       <div className="mx-3 h-px bg-sidebar-border" />
 
       <nav aria-label="Site navigation" className="flex-1 px-2 py-2 space-y-px overflow-y-auto">
-        {navItems.map(({ href, label, icon: Icon, subItems }) => {
+        {navItems.map(({ href, label, icon: Icon }) => {
           const isActive =
-            pathname === href || (href !== "/" && pathname.startsWith(href));
-          const isExpanded = expandedItems.has(href);
-          const hasSubItems = subItems && subItems.length > 0;
+            href === "/"
+              ? pathname === "/"
+              : pathname === href || pathname.startsWith(href + "/");
 
           return (
-            <div key={href}>
-              <div
-                className={cn("flex items-center", hasSubItems && "relative")}
-              >
-                {hasSubItems ? (
-                  <>
-                    <Link
-                      href={href}
-                      onClick={onNavClick}
-                      className={cn(
-                        "focusable flex min-h-11 flex-1 items-center gap-2.5 rounded-md border border-transparent px-3 py-2 text-sm transition-colors",
-                        isActive
-                          ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                          : "text-muted-foreground hover:bg-sidebar-accent/70 hover:text-sidebar-accent-foreground",
-                      )}
-                      style={{ fontWeight: isActive ? 600 : 500 }}
-                      aria-current={pathname === href ? "page" : undefined}
-                    >
-                      <Icon
-                        className="h-3.5 w-3.5 shrink-0"
-                        strokeWidth={isActive ? 2 : 1.5}
-                      />
-                      {label}
-                    </Link>
-                    <button
-                      onClick={() => toggleExpand(href)}
-                      className={cn(
-                        "focusable ml-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-transparent transition-colors",
-                        isActive
-                          ? "text-sidebar-accent-foreground hover:bg-sidebar-accent"
-                          : "text-muted-foreground hover:bg-sidebar-accent/70 hover:text-sidebar-accent-foreground",
-                      )}
-                      aria-label={isExpanded ? `Collapse ${label}` : `Expand ${label}`}
-                    >
-                      <ChevronRight
-                        className={cn(
-                          "h-3.5 w-3.5 transition-transform duration-200",
-                          isExpanded && "rotate-90",
-                        )}
-                        strokeWidth={1.5}
-                      />
-                    </button>
-                  </>
-                ) : (
-                  <Link
-                    href={href}
-                    onClick={onNavClick}
-                    className={cn(
-                      "focusable flex min-h-11 flex-1 items-center gap-2.5 rounded-md border border-transparent px-3 py-2 text-sm transition-colors",
-                      isActive
-                        ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                        : "text-muted-foreground hover:bg-sidebar-accent/70 hover:text-sidebar-accent-foreground",
-                    )}
-                    style={{
-                      fontWeight: isActive ? 600 : 500,
-                    }}
-                    aria-current={isActive ? "page" : undefined}
-                  >
-                    <Icon
-                      className="h-3.5 w-3.5 shrink-0"
-                      strokeWidth={isActive ? 2 : 1.5}
-                    />
-                    {label}
-                  </Link>
-                )}
-              </div>
-
-              {hasSubItems && isExpanded && (
-                <div
-                  className="ml-2 mt-1 space-y-px border-l border-sidebar-border/50 pl-2 overflow-hidden"
-                  style={{
-                    animation: "slide-down 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-                  }}
-                >
-                  {subItems.map((subItem, idx) => {
-                    const isSubActive = isSubItemActive(subItem.href);
-                    return (
-                      <Link
-                        key={subItem.href}
-                        href={subItem.href}
-                        onClick={onNavClick}
-                        className={cn(
-                          "focusable flex min-h-10 items-center rounded-md border border-transparent px-3 py-1.5 text-xs transition-colors",
-                          isSubActive
-                            ? "bg-sidebar-accent/60 text-sidebar-accent-foreground font-medium"
-                            : "text-muted-foreground hover:bg-sidebar-accent/40 hover:text-sidebar-accent-foreground",
-                        )}
-                        style={{
-                          animation: `slide-left 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) ${idx * 30}ms both`,
-                        }}
-                        aria-current={isSubActive ? "page" : undefined}
-                      >
-                        {subItem.label}
-                      </Link>
-                    );
-                  })}
-                </div>
+            <Link
+              key={href}
+              href={href}
+              onClick={onNavClick}
+              className={cn(
+                "focusable flex min-h-11 w-full items-center gap-2.5 rounded-md border border-transparent px-3 py-2 text-sm transition-colors",
+                isActive
+                  ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                  : "text-muted-foreground hover:bg-sidebar-accent/70 hover:text-sidebar-accent-foreground",
               )}
-            </div>
+              style={{ fontWeight: isActive ? 600 : 500 }}
+              aria-current={isActive ? "page" : undefined}
+            >
+              <Icon
+                className="h-3.5 w-3.5 shrink-0"
+                strokeWidth={isActive ? 2 : 1.5}
+              />
+              {label}
+            </Link>
           );
         })}
       </nav>

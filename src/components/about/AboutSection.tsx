@@ -5,40 +5,40 @@ import { FadeIn } from "@/components/ui/FadeIn";
 
 const chapters = [
   {
-    period: "2022 – 2023",
-    label: "Engineering roots",
+    period: "Jul 2023 – Dec 2025",
+    label: "From engineer to product owner",
     description:
-      "Computer Engineering gave me a hardware-first foundation: C, C++, embedded systems, and a thesis that required real reliability — not just a polished demo. I built an IoT emergency messenger using NodeMCU ESP8266 and LoRa for areas without internet access. That project taught me to think in systems, not screens.",
+      "At Alphaus I progressed from Junior Frontend Developer to Lead to Product Owner in under two years. As Lead I owned frontend quality, release coordination, and PR standards for Octo. As Product Owner I ran sprint planning, backlog refinement, and UI/UX design for Ripple and four connected products — stepping into design ownership when delivery depended on it.",
   },
   {
-    period: "2022 – Present",
-    label: "SaaS and product work",
+    period: "Oct 2025 – Apr 2026",
+    label: "Startup and full-stack work",
     description:
-      "I moved into frontend development through cloud cost management at Alphaus — building dashboards, reports, alerting, and recommendation UIs with Vue, Vuetify, TypeScript, and ECharts. Over time I moved into product ownership for Ripple and Flow: roadmap planning, backlog refinement, and cross-team delivery. Engineering background helps here — I know what's actually being asked when I write a spec.",
+      "At Ardexa I was the only frontend developer alongside two founders and one backend developer, building MVPs from scratch. I worked across frontend, backend, product decisions, and architecture planning — often in the same week. Products included RentWise (rental qualification with scoring logic), LexaDraft (contract template builder), and TicketDesk (centralized support triage).",
   },
   {
-    period: "2022 – Present",
-    label: "Automation and internal tools",
+    period: "2023 – Present",
+    label: "Automation and systems",
     description:
-      "Alongside SaaS work, I've built automation systems that turn informal team handoffs into structured workflows — Slack to ClickUp task creation, Zoom recording pipelines, media operations, and Slack bots. Automation work sits at the intersection of product thinking and operations: what does the team actually do, and where does the manual work pile up?",
+      "I've built automation systems that remove real manual overhead — a Slack-to-ClickUp bug reporting workflow that became the company standard at Alphaus, an AI-powered weekly coaching delivery system with approval flows, and a job-matching pipeline with LLM scoring and smart email notifications. The goal is always the same: reduce the repetitive work.",
   },
 ];
 
 const values = [
   {
-    label: "Functional over impressive",
+    label: "Systems over features",
     detail:
-      "I'd rather ship something that works well for the team using it than something that photographs well but creates friction.",
+      "Good software improves how something works, not just how it looks. I try to understand the workflow before touching the interface.",
   },
   {
-    label: "Context before solutions",
+    label: "Ownership over handoffs",
     detail:
-      "Frontend decisions are better when you understand the business workflow they're part of. I try to stay connected to why something is being built.",
+      "When delivery was blocked at Alphaus, I stepped into UI/UX design. When bug reporting was frustrating the team, I built the automation. The missing role is worth filling.",
   },
   {
-    label: "Reduce the manual work",
+    label: "Practical over clever",
     detail:
-      "If a team is doing something repetitive and the fix is a small automation, that's worth building. Small improvements compound.",
+      "Maintainable systems built for real workflows are more useful than sophisticated ones that only the original author understands.",
   },
 ];
 
@@ -66,26 +66,28 @@ export function AboutSection() {
             <div>
               <p className="eyebrow mb-3">About</p>
               <h1 className="section-heading mb-8">
-                A practical builder shaped by engineering, SaaS, and automation.
+                I improve systems. Frontend is how I start — ownership is how I finish.
               </h1>
               <div className="quiet-text max-w-[68ch] space-y-5 text-base leading-7">
                 <p>
-                  I&apos;m Lord Kelvin Abellana — a frontend developer and automation
-                  builder with a Computer Engineering foundation and product ownership
-                  experience at Alphaus. I work best where interfaces, operations, and
-                  real business workflows overlap.
+                  I&apos;m Lord Kelvin Abellana — frontend developer, automation builder,
+                  and former product owner. I work best where interfaces meet real
+                  operations: SaaS products with messy workflows, startups where decisions
+                  move fast, and systems where removing manual work creates actual value.
                 </p>
                 <p>
-                  My path started with hardware and embedded systems. I spent my thesis
-                  building an IoT emergency messenger for areas without internet — a
-                  project that needed to actually work, not just pass a demo. That
-                  grounding in systems thinking has stayed with me through SaaS frontend
-                  work, startup MVPs, freelance websites, and workflow automations.
+                  At Alphaus I grew from Junior Frontend Developer to Lead to Product
+                  Owner across cloud cost management products. That progression taught me
+                  to think beyond code — into delivery ownership, product decisions, and
+                  the kind of internal tooling that quietly makes a team faster. The
+                  Slack-to-ClickUp reporting system I built became the company standard.
+                  Stepping into UI/UX design when our designer was blocked kept delivery
+                  moving. These weren&apos;t assigned responsibilities — they were gaps
+                  worth filling.
                 </p>
                 <p>
-                  Today I care about tools that feel considered: clear enough for users,
-                  practical enough for teams, and grounded enough to solve actual work
-                  instead of just looking polished.
+                  I care less about impressive implementations and more about systems that
+                  reduce friction and actually get used.
                 </p>
               </div>
             </div>
@@ -95,7 +97,7 @@ export function AboutSection() {
         {/* ── Three chapters ── */}
         <section>
           <FadeIn>
-            <p className="eyebrow mb-8">Three chapters</p>
+            <p className="eyebrow mb-8">Career in three chapters</p>
           </FadeIn>
           <div className="grid gap-5 md:grid-cols-3">
             {chapters.map((chapter, i) => (
@@ -137,7 +139,7 @@ export function AboutSection() {
               See full experience <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              href="/projects"
+              href="/work"
               className="focusable inline-flex min-h-11 items-center gap-2 rounded-md border border-border bg-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
             >
               View my work <ArrowRight className="h-4 w-4" />

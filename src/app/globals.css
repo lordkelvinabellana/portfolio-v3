@@ -298,16 +298,19 @@
   }
 
   .panel-hover {
+    cursor: pointer;
     transition:
       border-color 180ms var(--ease-standard),
       background-color 180ms var(--ease-standard),
+      box-shadow 180ms var(--ease-standard),
       transform 180ms var(--ease-standard);
   }
 
   .panel-hover:hover {
     background: color-mix(in oklch, var(--surface-elevated), var(--primary) 4%);
     border-color: color-mix(in oklch, var(--border), var(--primary) 34%);
-    transform: translateY(-1px);
+    box-shadow: var(--shadow-soft);
+    transform: translateY(-2px);
   }
 
   .focusable {

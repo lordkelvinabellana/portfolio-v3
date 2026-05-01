@@ -7,26 +7,45 @@ import {
   getProjectCaseStudy,
   experiencePhases,
   techGroups,
-  projectCaseStudies,
 } from "@/data/portfolio";
 import { FadeIn } from "@/components/ui/FadeIn";
 
 /* Three featured slugs — one per category for variety */
 const FEATURED_SLUGS = [
   "octo-dashboard-cost-report-builder",
-  "renthive-mvp-ui",
-  "slack-clickup-bug-automation",
+  "olj-job-matching-automation",
+  "autofit-ai-coaching",
 ];
 
 const featuredProjects = FEATURED_SLUGS
   .map((slug) => getProjectCaseStudy(slug))
   .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
-const CORE_TECH = ["Vue", "React", "TypeScript", "Tailwind CSS", "n8n", "Make", "Pinia", "ECharts"];
+const allTechItems = techGroups.flatMap((g) => g.items);
+const findTech = (name: string) => allTechItems.find((t) => t.name === name);
 
-const coreStack = techGroups
-  .flatMap((g) => g.items)
-  .filter((item) => CORE_TECH.includes(item.name));
+const CONTEXTUAL_GROUPS = [
+  {
+    context: "Production SaaS interfaces",
+    techs: ["Vue", "React", "TypeScript"],
+  },
+  {
+    context: "Scalable UI systems",
+    techs: ["Tailwind CSS", "Vuetify"],
+  },
+  {
+    context: "Workflow automation",
+    techs: ["n8n", "Make", "Zapier"],
+  },
+  {
+    context: "AI-assisted systems",
+    techs: ["OpenAI / ChatGPT"],
+  },
+  {
+    context: "UI/UX design",
+    techs: ["Figma"],
+  },
+];
 
 export function HeroSection() {
   return (
@@ -38,38 +57,38 @@ export function HeroSection() {
           <div className="grid items-center gap-12 md:grid-cols-[minmax(0,1fr)_18rem] lg:grid-cols-[minmax(0,1fr)_22rem]">
             <div className="max-w-3xl">
               <div className="mb-6 flex items-center gap-3">
-                <span className="status-dot" aria-hidden="true" />
+                <span className="status-dot animate-pulse-gentle" aria-hidden="true" />
                 <p className="eyebrow">Open to opportunities · Frontend · Product · Automation</p>
               </div>
 
               <h1 className="display-heading">
-                Building clear SaaS interfaces and automations that reduce manual work.
+                I build SaaS interfaces and automation systems that teams actually use
               </h1>
 
               <p className="quiet-text mt-6 max-w-[60ch] text-lg leading-8">
-                Frontend developer and product owner at Alphaus. I build cloud cost
-                management UIs, automate team workflows, and ship startup MVPs — across
-                SaaS, freelance, and internal tools.
+                I work across frontend, automation, and product systems. Not just building features — improving how teams ship and operate.
               </p>
 
-              <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-sm">
-                <div className="flex items-baseline gap-2">
-                  <dt className="muted-text">Experience</dt>
-                  <dd className="font-semibold">3+ years</dd>
-                </div>
-                <div className="flex items-baseline gap-2">
-                  <dt className="muted-text">Projects shipped</dt>
-                  <dd className="font-semibold">{projectCaseStudies.length}+</dd>
-                </div>
-                <div className="flex items-baseline gap-2">
-                  <dt className="muted-text">Current role</dt>
-                  <dd className="font-semibold">Product Owner · Alphaus</dd>
-                </div>
-              </dl>
+              <p className="muted-text mt-3 max-w-[58ch] text-sm leading-7">
+                Lead Frontend Developer → Product Owner @ Alphaus · Built systems across SaaS, automation, and startup MVPs
+              </p>
+
+              <ul className="mt-8 space-y-2 text-sm">
+                {[
+                  "Owned frontend and product delivery across multiple SaaS products at Alphaus",
+                  "Built internal automation adopted company-wide (Slack → ClickUp → n8n)",
+                  "Shipped startup MVPs end-to-end with founders (Ardexa)",
+                ].map((point) => (
+                  <li key={point} className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" aria-hidden="true" />
+                    <span className="font-medium">{point}</span>
+                  </li>
+                ))}
+              </ul>
 
               <div className="mt-9 flex flex-wrap gap-3">
                 <Link
-                  href="/projects"
+                  href="/work"
                   className="focusable inline-flex min-h-11 items-center gap-2 rounded-md border border-primary bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
                 >
                   View my work <ArrowRight className="h-4 w-4" />
@@ -106,7 +125,7 @@ export function HeroSection() {
             <div className="mb-6 flex items-end justify-between gap-4">
               <p className="eyebrow">Selected work</p>
               <Link
-                href="/projects"
+                href="/work"
                 className="focusable inline-flex items-center gap-1 text-sm font-semibold text-primary transition-colors hover:text-foreground"
               >
                 See all <ArrowRight className="h-3.5 w-3.5" />
@@ -118,7 +137,7 @@ export function HeroSection() {
             {featuredProjects.map((project, i) => (
               <FadeIn key={project.slug} delay={i * 60} spring>
                 <Link
-                  href={`/portfolio/projects/${project.slug}`}
+                  href={`/work/${project.slug}`}
                   className="panel panel-hover focusable flex h-full flex-col gap-3 rounded-xl p-5 no-underline"
                 >
                   <p className="muted-text text-[11px] font-bold uppercase tracking-widest">
@@ -157,7 +176,7 @@ export function HeroSection() {
               {experiencePhases.slice(0, 4).map((phase, i) => (
                 <FadeIn key={phase.slug} delay={i * 50} spring>
                   <Link
-                    href={`/portfolio/experience/${phase.slug}`}
+                    href={`/experience/${phase.slug}`}
                     className="panel panel-hover focusable flex items-center justify-between gap-4 rounded-xl px-5 py-4 no-underline"
                   >
                     <div>
@@ -174,26 +193,36 @@ export function HeroSection() {
           <section>
             <FadeIn>
               <p className="eyebrow mb-5">Core stack</p>
-              <div className="panel rounded-xl p-5">
-                <div className="flex flex-wrap gap-2">
-                  {coreStack.map((tech) => (
-                    <div
-                      key={tech.name}
-                      className="flex items-center gap-1.5 rounded-lg border border-border bg-secondary px-2.5 py-1.5"
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={tech.logo}
-                        alt={tech.name}
-                        width={14}
-                        height={14}
-                        className="shrink-0 object-contain"
-                        style={{ width: 14, height: 14 }}
-                      />
-                      <span className="text-xs font-semibold">{tech.name}</span>
+              <div className="panel rounded-xl p-5 space-y-3">
+                {CONTEXTUAL_GROUPS.map((group) => (
+                  <div key={group.context} className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                    <span className="muted-text w-40 shrink-0 text-xs">{group.context}</span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {group.techs.map((name) => {
+                        const tech = findTech(name);
+                        return (
+                          <div
+                            key={name}
+                            className="flex items-center gap-1.5 rounded-lg border border-border bg-secondary px-2.5 py-1.5"
+                          >
+                            {tech && (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img
+                                src={tech.logo}
+                                alt={name}
+                                width={14}
+                                height={14}
+                                className="shrink-0 object-contain"
+                                style={{ width: 14, height: 14 }}
+                              />
+                            )}
+                            <span className="text-xs font-semibold">{name}</span>
+                          </div>
+                        );
+                      })}
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </FadeIn>
           </section>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Barlow_Condensed, Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { MobileSidebar } from "@/components/layout/MobileSidebar";
 import "./globals.css";
@@ -44,8 +44,15 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${geist.variable} ${barlowCondensed.variable} ${geistMono.variable}`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme')||'system';var r=t==='system'?(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):t;document.documentElement.classList.add(r);document.documentElement.style.colorScheme=r;}catch(e){}})()`,
+          }}
+        />
+      </head>
       <body className="bg-background text-foreground antialiased">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+        <ThemeProvider>
           <div className="flex h-screen overflow-hidden">
             <aside className="hidden md:flex w-60 shrink-0 flex-col fixed inset-y-0 left-0 z-30">
               <Sidebar />
