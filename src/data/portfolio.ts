@@ -517,12 +517,11 @@ export type ProjectCaseStudy = {
   slug: string;
   title: string;
   category:
-    | "SaaS/Product"
-    | "Freelance"
+    | "Product"
     | "Startup"
     | "Automation"
     | "Personal"
-    | "CMS";
+    | "Client Work";
   overview: string;
   businessProblem: string;
   role: string;
@@ -555,7 +554,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
   {
     slug: "octo",
     title: "Octo — Cloud Cost Management Platform",
-    category: "SaaS/Product",
+    category: "Product",
     overview:
       "Octo's product was strong. The delivery system around it wasn't. PR reviews were inconsistent, bug reporting required switching tools, and weekly releases meant every friction point had a real cost. I owned frontend delivery — and the surrounding systems that kept the team moving.",
     businessProblem:
@@ -610,7 +609,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
   {
     slug: "rentwise-qualification-platform",
     title: "RentWise — Rental Qualification Platform",
-    category: "SaaS/Product",
+    category: "Product",
     overview:
       "Most rental platforms solve discovery.\nThey don't solve approval confidence.\n\nRenters apply to places they won't qualify for.\nLandlords review applicants who were never a good fit.",
     businessProblem:
@@ -655,7 +654,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
   {
     slug: "lexadraft-contract-builder",
     title: "LexaDraft — Contract Template & Workflow System",
-    category: "SaaS/Product",
+    category: "Product",
     overview:
       "The same contract, rewritten from scratch every time.\n\nIn one construction business, hours were spent rewriting documents that were structurally identical — only names, dates, and amounts changed.",
     businessProblem:
@@ -696,7 +695,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
   {
     slug: "octo-dashboard-cost-report-builder",
     title: "Dashboard & Cost Report Builder",
-    category: "SaaS/Product",
+    category: "Product",
     overview:
       "A cloud cost dashboard and report-building workflow for Octo, built around configurable widgets, charts, filters, currency support, and editable report states.",
     businessProblem:
@@ -736,12 +735,12 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "/assets/octo/db4.png",
     ],
     relatedExperienceSlug: "alphaus",
-    featured: true,
+    featured: false,
   },
   {
     slug: "octo-recommendations-history",
     title: "Recommendations UI & History",
-    category: "SaaS/Product",
+    category: "Product",
     overview:
       "A recommendation experience for cloud optimization workflows, including lists, details, history timelines, charts, savings summaries, and execution state visibility.",
     businessProblem:
@@ -781,12 +780,12 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "/assets/octo/rec4.png",
     ],
     relatedExperienceSlug: "alphaus",
-    featured: true,
+    featured: false,
   },
   {
     slug: "octo-alert-channel-management",
     title: "Alert & Channel Management",
-    category: "SaaS/Product",
+    category: "Product",
     overview:
       "Alert and channel management interfaces for configuring cost and budget notifications across Slack, Microsoft Teams, and email channels.",
     businessProblem:
@@ -861,12 +860,12 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
     ],
     githubUrl: "https://github.com/lordkelvinabellana/RentHiveFinal",
     relatedExperienceSlug: "renthive",
-    featured: true,
+    featured: false,
   },
   {
     slug: "pacific-west-diagnostic-imaging",
     title: "Pacific West Diagnostic Imaging",
-    category: "Freelance",
+    category: "Client Work",
     overview:
       "A medical website built with Wix and custom CSS, including service pages, payment support, and patient-facing content structure.",
     businessProblem:
@@ -901,7 +900,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
   {
     slug: "czechvibes-travel-site",
     title: "CzechVibes Travel Site",
-    category: "Freelance",
+    category: "Client Work",
     overview:
       "A responsive, multi-language frontend for a European travel and content brand.",
     businessProblem:
@@ -969,7 +968,6 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
     ],
     screenshots: [],
     relatedExperienceSlug: "automation",
-    featured: true,
   },
   {
     slug: "zoom-youtube-upload-pipeline",
@@ -1011,7 +1009,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
   {
     slug: "getemleads-website",
     title: "GetemLeads",
-    category: "CMS",
+    category: "Client Work",
     overview:
       "A lead-generation website focused on clear messaging, fast loading, and conversion.",
     businessProblem:
@@ -1053,7 +1051,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
   {
     slug: "moberly-consulting-website",
     title: "Moberly Consulting",
-    category: "CMS",
+    category: "Client Work",
     overview:
       "A professional consulting website designed for clarity, trust, and easy navigation.",
     businessProblem:
@@ -1090,7 +1088,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
   {
     slug: "pickle-n-par-website",
     title: "Pickle N Par",
-    category: "CMS",
+    category: "Client Work",
     overview:
       "A customer-facing website with a focus on usability, responsiveness, and clear service presentation.",
     businessProblem:
@@ -1129,7 +1127,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
   {
     slug: "strat-e-marketing-website",
     title: "StratE Marketing",
-    category: "CMS",
+    category: "Client Work",
     overview:
       "A marketing website focused on presenting services clearly and supporting lead conversion.",
     businessProblem:
@@ -1261,7 +1259,14 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Coach no longer starts every weekly message from zero — AI handles progress analysis and drafting, coach focuses on judgment, tone, and the final call.",
       "Improved message consistency across the client roster and reduced weekly preparation time without reducing personalization quality.",
     ],
-    stack: ["n8n", "OpenAI API", "JavaScript"],
+    stack: [
+      "n8n",
+      "OpenAI API",
+      "Anthropic API",
+      "JavaScript",
+      "GreenAPI",
+      "Custom API",
+    ],
     screenshots: [
       "/assets/autoFit/autoFit1.png",
       "/assets/autoFit/autoFit2.png",
@@ -1277,7 +1282,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
   {
     slug: "ripple-product-ownership-archera",
     title: "Ripple — Product Ownership & Strategic Alignment",
-    category: "SaaS/Product",
+    category: "Product",
     overview:
       "Owned product delivery across multiple SaaS tools and helped validate a strategic partnership that improved cloud cost decisions, not just reporting.",
     businessProblem:

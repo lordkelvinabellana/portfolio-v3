@@ -11,18 +11,20 @@ import { cn } from "@/lib/utils";
 
 /* ── Data ── */
 
-const CATEGORIES = [
-  "All",
-  "SaaS/Product",
-  "Freelance",
-  "Startup",
-  "Automation",
-  "Personal",
-  "CMS",
+const FILTERS = [
+  { label: "All", value: "All" },
+  { label: "Product", value: "Product" },
+  { label: "Automation", value: "Automation" },
+  { label: "Client Work", value: "Client Work" },
+  { label: "Startup", value: "Startup" },
 ] as const;
 
-const countByCategory = (cat: string) =>
-  projectCaseStudies.filter((p) => p.category === cat).length;
+type FilterValue = (typeof FILTERS)[number]["value"];
+
+const countByFilter = (value: string) =>
+  projectCaseStudies.filter((p) => p.category === value).length;
+
+const GROUP_ORDER = ["Automation", "Product", "Client Work"] as const;
 
 /* ── Cards ── */
 
@@ -148,7 +150,7 @@ interface WorkSectionProps {
 }
 
 export function WorkSection({ basePath = "/work", showBreadcrumb = true }: WorkSectionProps) {
-  const [activeFilter, setActiveFilter] = useState<string>("All");
+  const [activeFilter, setActiveFilter] = useState<FilterValue>("All");
 
   const filtered =
     activeFilter === "All"
@@ -157,6 +159,14 @@ export function WorkSection({ basePath = "/work", showBreadcrumb = true }: WorkS
 
   const featured = activeFilter === "All" ? filtered.filter((p) => p.featured) : [];
   const rest = activeFilter === "All" ? filtered.filter((p) => !p.featured) : filtered;
+
+  const grouped =
+    activeFilter === "All"
+      ? GROUP_ORDER.map((group) => ({
+          label: group === "Product" ? "Product / SaaS" : group,
+          projects: rest.filter((p) => p.category === group),
+        })).filter((g) => g.projects.length > 0)
+      : null;
 
   return (
     <section className="site-page">
@@ -184,26 +194,26 @@ export function WorkSection({ basePath = "/work", showBreadcrumb = true }: WorkS
         {/* Filter */}
         <FadeIn delay={60}>
           <div className="flex flex-wrap gap-2" role="group" aria-label="Filter projects by category">
-            {CATEGORIES.map((cat) => (
+            {FILTERS.map(({ label, value }) => (
               <button
-                key={cat}
-                onClick={() => setActiveFilter(cat)}
+                key={value}
+                onClick={() => setActiveFilter(value)}
                 className={cn(
                   "focusable rounded-full px-3.5 py-1.5 text-sm font-semibold transition-colors",
-                  activeFilter === cat
+                  activeFilter === value
                     ? "bg-primary text-primary-foreground"
                     : "bg-secondary text-secondary-foreground hover:bg-accent hover:text-accent-foreground",
                 )}
               >
-                {cat}
-                {cat !== "All" && (
+                {label}
+                {value !== "All" && (
                   <span
                     className={cn(
                       "ml-1.5 text-xs",
-                      activeFilter === cat ? "opacity-70" : "text-muted-foreground",
+                      activeFilter === value ? "opacity-70" : "text-muted-foreground",
                     )}
                   >
-                    {countByCategory(cat)}
+                    {countByFilter(value)}
                   </span>
                 )}
               </button>
@@ -227,14 +237,36 @@ export function WorkSection({ basePath = "/work", showBreadcrumb = true }: WorkS
           </section>
         )}
 
-        {/* All / filtered */}
-        {rest.length > 0 && (
-          <section aria-label={activeFilter === "All" ? "All projects" : `${activeFilter} projects`}>
-            {featured.length > 0 && (
-              <FadeIn>
-                <p className="eyebrow mb-5">All work</p>
-              </FadeIn>
-            )}
+        {/* All view — grouped */}
+        {grouped && grouped.length > 0 && (
+          <section aria-label="All projects">
+            <FadeIn>
+              <p className="eyebrow mb-5">All work</p>
+            </FadeIn>
+            <div className="space-y-10">
+              {grouped.map((group) => (
+                <div key={group.label}>
+                  <FadeIn>
+                    <p className="mb-4 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                      {group.label}
+                    </p>
+                  </FadeIn>
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {group.projects.map((project, i) => (
+                      <FadeIn key={project.slug} delay={i * 40}>
+                        <CompactProjectCard project={project} basePath={basePath} />
+                      </FadeIn>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Filtered view — flat */}
+        {!grouped && rest.length > 0 && (
+          <section aria-label={`${activeFilter} projects`}>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {rest.map((project, i) => (
                 <FadeIn key={project.slug} delay={i * 40}>
