@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import { projectCaseStudies, type ProjectCaseStudy } from "@/data/portfolio";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { ImageGallery } from "./ImageGallery";
@@ -18,6 +18,7 @@ const CATEGORIES = [
   "Startup",
   "Automation",
   "Personal",
+  "CMS",
 ] as const;
 
 const countByCategory = (cat: string) =>
@@ -64,9 +65,25 @@ function FeaturedProjectCard({ project, basePath }: { project: ProjectCaseStudy;
             </span>
           )}
         </div>
-        <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
-          Read case study <ArrowRight className="h-3.5 w-3.5" />
-        </span>
+        <div className="flex items-center gap-3">
+          <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+            Read case study <ArrowRight className="h-3.5 w-3.5" />
+          </span>
+          {project.demoUrl && project.liveLabel && (
+            <a
+              href={project.demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="focusable inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+            >
+              {project.liveLabel} <ExternalLink className="h-3 w-3" />
+            </a>
+          )}
+        </div>
+        {project.liveLabel === "View MVP" && (
+          <p className="text-[10px] font-medium text-muted-foreground/60">MVP / early-stage build</p>
+        )}
       </div>
     </Link>
   );
@@ -100,9 +117,25 @@ function CompactProjectCard({ project, basePath }: { project: ProjectCaseStudy; 
           </span>
         )}
       </div>
-      <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary/70">
-        Read case study <ArrowRight className="h-3 w-3" />
-      </span>
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary/70">
+          Read case study <ArrowRight className="h-3 w-3" />
+        </span>
+        {project.demoUrl && project.liveLabel && (
+          <a
+            href={project.demoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="focusable inline-flex items-center gap-1 rounded-full border border-border bg-secondary px-2.5 py-0.5 text-[10px] font-semibold text-secondary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+          >
+            {project.liveLabel} <ExternalLink className="h-2.5 w-2.5" />
+          </a>
+        )}
+      </div>
+      {project.liveLabel === "View MVP" && (
+        <p className="text-[10px] font-medium text-muted-foreground/60">MVP / early-stage build</p>
+      )}
     </Link>
   );
 }

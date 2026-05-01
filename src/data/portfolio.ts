@@ -110,24 +110,66 @@ export const octoProjects: Project[] = [
     role: "Frontend Developer – Octo",
     description:
       "Built the drag-and-drop dashboard layout using GridStack, including multiple chart widgets powered by ECharts. Developed cost report creation flow with filtering, currency conversion, export options, and editable reports. Implemented support for deleting, duplicating, and visualizing reports using user fiscal settings.",
-    images: ["/assets/octo/db1.png", "/assets/octo/db2.png", "/assets/octo/db3.png", "/assets/octo/db4.png"],
-    stack: ["Vue", "Vuetify", "ECharts", "GridStack", "TypeScript", "I18n", "DayJs", "Pinia", "REST API"],
+    images: [
+      "/assets/octo/db1.png",
+      "/assets/octo/db2.png",
+      "/assets/octo/db3.png",
+      "/assets/octo/db4.png",
+    ],
+    stack: [
+      "Vue",
+      "Vuetify",
+      "ECharts",
+      "GridStack",
+      "TypeScript",
+      "I18n",
+      "DayJs",
+      "Pinia",
+      "REST API",
+    ],
   },
   {
     title: "Recommendations UI & History",
     role: "Frontend Developer – Octo",
     description:
       "Built a performant UI for cloud optimization recommendations. Implemented filterable lists, detailed recommendation views, and a history timeline with charts and savings summaries. Integrated multiple backend endpoints for cost calculations, filters, optimization statuses, and executed states.",
-    stack: ["Vue", "Vuetify", "ECharts", "TypeScript", "Pinia", "Dayjs", "I18n", "REST API"],
-    images: ["/assets/octo/rec1.png", "/assets/octo/rec2.png", "/assets/octo/rec3.png", "/assets/octo/rec4.png"],
+    stack: [
+      "Vue",
+      "Vuetify",
+      "ECharts",
+      "TypeScript",
+      "Pinia",
+      "Dayjs",
+      "I18n",
+      "REST API",
+    ],
+    images: [
+      "/assets/octo/rec1.png",
+      "/assets/octo/rec2.png",
+      "/assets/octo/rec3.png",
+      "/assets/octo/rec4.png",
+    ],
   },
   {
     title: "Alert & Channel Management",
     role: "Frontend Developer – Octo",
     description:
       "Developed and maintained the Alert Management and Channel Management UIs, allowing users to set up notifications when budgets or costs exceed thresholds. Users can create/edit alerts based on cost or percentage, and route notifications via Slack, MS Teams, or Email.",
-    stack: ["Vue", "Vuetify", "Pinia", "TypeScript", "REST API", "Dayjs", "I18n"],
-    images: ["/assets/octo/alert1.png", "/assets/octo/alert2.png", "/assets/octo/alert3.png", "/assets/octo/alert4.png"],
+    stack: [
+      "Vue",
+      "Vuetify",
+      "Pinia",
+      "TypeScript",
+      "REST API",
+      "Dayjs",
+      "I18n",
+    ],
+    images: [
+      "/assets/octo/alert1.png",
+      "/assets/octo/alert2.png",
+      "/assets/octo/alert3.png",
+      "/assets/octo/alert4.png",
+    ],
   },
   {
     title: "Onboarding & Route Enhancements",
@@ -135,15 +177,34 @@ export const octoProjects: Project[] = [
     description:
       "Led improvements in layout structure and onboarding experience by introducing dynamic headers and enhancing route-level logic. These changes improved visual consistency, guided user flows, and made the app more adaptable to different languages and user contexts.",
     stack: ["Vue", "Vuetify", "Pinia", "TypeScript", "Vue Router", "i18n"],
-    images: ["/assets/octo/on1.png", "/assets/octo/on2.png", "/assets/octo/on3.png", "/assets/octo/on4.png"],
+    images: [
+      "/assets/octo/on1.png",
+      "/assets/octo/on2.png",
+      "/assets/octo/on3.png",
+      "/assets/octo/on4.png",
+    ],
   },
   {
     title: "Budget Management",
     role: "Frontend Developer – Octo",
     description:
       "Implemented a budgeting interface that helps users plan and track their cloud spending. Developed dynamic charts and tables to show actual cost, budget allocations, and forecasts. Users can create, edit, and delete budgets, and configure notifications when thresholds are met.",
-    stack: ["Vue", "Vuetify", "Pinia", "TypeScript", "ECharts", "i18n", "REST API"],
-    images: ["/assets/octo/bud1.png", "/assets/octo/bud2.png", "/assets/octo/bud3.png", "/assets/octo/bud4.png", "/assets/octo/bud5.png"],
+    stack: [
+      "Vue",
+      "Vuetify",
+      "Pinia",
+      "TypeScript",
+      "ECharts",
+      "i18n",
+      "REST API",
+    ],
+    images: [
+      "/assets/octo/bud1.png",
+      "/assets/octo/bud2.png",
+      "/assets/octo/bud3.png",
+      "/assets/octo/bud4.png",
+      "/assets/octo/bud5.png",
+    ],
   },
   {
     title: "Account Registration & Management",
@@ -151,7 +212,12 @@ export const octoProjects: Project[] = [
     description:
       "Enhanced the account registration and management experience by implementing a unified view that aggregates billing and sub-account data. Contributed to better data visibility and more intuitive onboarding flows for users managing cloud billing structures.",
     stack: ["Vue", "Vuetify", "Pinia", "TypeScript", "Vue Router"],
-    images: ["/assets/octo/acc1.png", "/assets/octo/acc2.png", "/assets/octo/acc3.png", "/assets/octo/acc4.png"],
+    images: [
+      "/assets/octo/acc1.png",
+      "/assets/octo/acc2.png",
+      "/assets/octo/acc3.png",
+      "/assets/octo/acc4.png",
+    ],
   },
   {
     title: "Currency Support Integration",
@@ -226,7 +292,12 @@ export const freelanceProjects: Project[] = [
     description:
       "Designed and developed the user interface for RentHive, a rental listing platform created during Startup Weekend Bohol. Focused on building a responsive and intuitive MVP using clean Tailwind-based components. Helped the team win 2nd place among all participants.",
     stack: ["HTML", "Tailwind CSS"],
-    images: ["/assets/renthive/rh1.png", "/assets/renthive/rh2.png", "/assets/renthive/rh3.png", "/assets/renthive/rh4.png"],
+    images: [
+      "/assets/renthive/rh1.png",
+      "/assets/renthive/rh2.png",
+      "/assets/renthive/rh3.png",
+      "/assets/renthive/rh4.png",
+    ],
   },
   {
     title: "Pacific West Diagnostic Imaging",
@@ -234,7 +305,12 @@ export const freelanceProjects: Project[] = [
     description:
       "Developed a full-featured medical website using Wix for Pacific West Diagnostic Imaging. The site includes custom CSS styling, Stripe payment integration, and multiple service pages, offering a seamless experience for both patients and staff.",
     stack: ["Wix", "Custom CSS", "Stripe"],
-    images: ["/assets/pacwest/pw1.png", "/assets/pacwest/pw2.png", "/assets/pacwest/pw3.png", "/assets/pacwest/pw4.png"],
+    images: [
+      "/assets/pacwest/pw1.png",
+      "/assets/pacwest/pw2.png",
+      "/assets/pacwest/pw3.png",
+      "/assets/pacwest/pw4.png",
+    ],
   },
   {
     title: "CzechVibes",
@@ -242,7 +318,12 @@ export const freelanceProjects: Project[] = [
     description:
       "Built a responsive, multi-language frontend for a European travel and content brand. Developed using HTML and Tailwind, the site was optimized for mobile and desktop, focusing on clean layouts and accessibility.",
     stack: ["HTML", "Tailwind CSS"],
-    images: ["/assets/czech/cv1.png", "/assets/czech/cv2.png", "/assets/czech/cv3.png", "/assets/czech/cv4.png"],
+    images: [
+      "/assets/czech/cv1.png",
+      "/assets/czech/cv2.png",
+      "/assets/czech/cv3.png",
+      "/assets/czech/cv4.png",
+    ],
   },
   {
     title: "Arnis Scoreboard",
@@ -250,7 +331,11 @@ export const freelanceProjects: Project[] = [
     description:
       "Built a real-time scoring and timer system used during an Arnis tournament. Designed for simplicity and usability, the app lets users track round durations and update scores with ease. Tailored for live competitions with a responsive layout and clean UI.",
     stack: ["Vue", "Vuetify"],
-    images: ["/assets/arnis/arnis1.png", "/assets/arnis/arnis2.png", "/assets/arnis/arnis3.png"],
+    images: [
+      "/assets/arnis/arnis1.png",
+      "/assets/arnis/arnis2.png",
+      "/assets/arnis/arnis3.png",
+    ],
   },
 ];
 
@@ -292,7 +377,13 @@ export const automationProjects: Project[] = [
     role: "Automation Specialist – Internal Tools",
     description:
       "Built an automation that converts Slack messages into structured tasks in the internal Kanban. Captures title, description, points, assignees via @mentions, tags, and links back to the original Slack thread.",
-    stack: ["n8n", "Slack Events API", "Custom Kanban API", "JavaScript", "Webhooks"],
+    stack: [
+      "n8n",
+      "Slack Events API",
+      "Custom Kanban API",
+      "JavaScript",
+      "Webhooks",
+    ],
     images: [],
   },
   {
@@ -300,7 +391,14 @@ export const automationProjects: Project[] = [
     role: "Automation Specialist – Media Ops",
     description:
       "Automated the end-to-end handling of Zoom cloud recordings: fetches month-by-month, logs metadata to Google Sheets, stores raw files in Wasabi (S3-compatible), and uploads to YouTube within the 15 uploads/day cap.",
-    stack: ["n8n", "Zoom API", "YouTube Data API v3", "Google Sheets API", "Wasabi (S3)", "Cron"],
+    stack: [
+      "n8n",
+      "Zoom API",
+      "YouTube Data API v3",
+      "Google Sheets API",
+      "Wasabi (S3)",
+      "Cron",
+    ],
     images: [],
   },
   {
@@ -308,7 +406,14 @@ export const automationProjects: Project[] = [
     role: "Automation Specialist – Internal Tools",
     description:
       "Created a Slack app that listens for mentions in channels/threads, validates message format, and sends structured payloads to n8n flows for bug reports, UX requests, and general tasks. Posts confirmation replies with direct task links.",
-    stack: ["Slack Bolt API", "Slack Events API", "n8n", "JavaScript", "TypeScript", "Webhooks"],
+    stack: [
+      "Slack Bolt API",
+      "Slack Events API",
+      "n8n",
+      "JavaScript",
+      "TypeScript",
+      "Webhooks",
+    ],
     images: [],
   },
 ];
@@ -411,7 +516,13 @@ export type ExperiencePhase = {
 export type ProjectCaseStudy = {
   slug: string;
   title: string;
-  category: "SaaS/Product" | "Freelance" | "Startup" | "Automation" | "Personal";
+  category:
+    | "SaaS/Product"
+    | "Freelance"
+    | "Startup"
+    | "Automation"
+    | "Personal"
+    | "CMS";
   overview: string;
   businessProblem: string;
   role: string;
@@ -422,6 +533,7 @@ export type ProjectCaseStudy = {
   stack: string[];
   screenshots: string[];
   demoUrl?: string;
+  liveLabel?: string;
   githubUrl?: string;
   relatedExperienceSlug: string;
   featured?: boolean;
@@ -472,8 +584,25 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Faster, more consistent PR reviews and weekly releases across the product team.",
       "Improved frontend onboarding time for new developers and reduced dependency bottlenecks across the team.",
     ],
-    stack: ["Vue", "TypeScript", "Vuetify", "ECharts", "GridStack", "Pinia", "Mixpanel", "i18n", "Make", "n8n", "Cypress"],
-    screenshots: ["/assets/octo/db1.png", "/assets/octo/db2.png", "/assets/octo/rec1.png", "/assets/octo/alert1.png"],
+    stack: [
+      "Vue",
+      "TypeScript",
+      "Vuetify",
+      "ECharts",
+      "GridStack",
+      "Pinia",
+      "Mixpanel",
+      "i18n",
+      "Make",
+      "n8n",
+      "Cypress",
+    ],
+    screenshots: [
+      "/assets/octo/db1.png",
+      "/assets/octo/db2.png",
+      "/assets/octo/rec1.png",
+      "/assets/octo/alert1.png",
+    ],
     demoUrl: "https://www.alphaus.cloud/en/octo",
     relatedExperienceSlug: "alphaus",
     featured: true,
@@ -508,7 +637,18 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Reduced wasted application effort for renters and improved applicant lead quality for landlords on both sides of the match.",
     ],
     stack: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS"],
-    screenshots: [],
+    demoUrl: "https://cocoon-tau.vercel.app/",
+    liveLabel: "View MVP",
+    screenshots: [
+      "/assets/rentWise/rentWise1.png",
+      "/assets/rentWise/rentWise2.png",
+      "/assets/rentWise/rentWise3.png",
+      "/assets/rentWise/rentWise4.png",
+      "/assets/rentWise/rentWise5.png",
+      "/assets/rentWise/rentWise6.png",
+      "/assets/rentWise/rentWise7.png",
+      "/assets/rentWise/rentWise8.png",
+    ],
     relatedExperienceSlug: "ardexa",
     featured: true,
   },
@@ -541,7 +681,15 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Transformed contract creation from isolated document work into a repeatable operational workflow: build once, reuse many times.",
     ],
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "Shadcn UI"],
-    screenshots: [],
+    screenshots: [
+      "/assets/lexadraft/lexa1.png",
+      "/assets/lexadraft/lexa2.png",
+      "/assets/lexadraft/lexa3.png",
+      "/assets/lexadraft/lexa4.jpeg",
+      "/assets/lexadraft/lexa5.jpeg",
+      "/assets/lexadraft/lexa6.jpeg",
+      "/assets/lexadraft/lexa 7.jpeg",
+    ],
     relatedExperienceSlug: "ardexa",
     featured: true,
   },
@@ -571,8 +719,22 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Let cloud cost teams build and export their own reports without needing engineering support.",
       "Reduced friction around cost report creation and dashboard customization.",
     ],
-    stack: ["Vue", "Vuetify", "ECharts", "GridStack", "TypeScript", "i18n", "Pinia", "REST API"],
-    screenshots: ["/assets/octo/db1.png", "/assets/octo/db2.png", "/assets/octo/db3.png", "/assets/octo/db4.png"],
+    stack: [
+      "Vue",
+      "Vuetify",
+      "ECharts",
+      "GridStack",
+      "TypeScript",
+      "i18n",
+      "Pinia",
+      "REST API",
+    ],
+    screenshots: [
+      "/assets/octo/db1.png",
+      "/assets/octo/db2.png",
+      "/assets/octo/db3.png",
+      "/assets/octo/db4.png",
+    ],
     relatedExperienceSlug: "alphaus",
     featured: true,
   },
@@ -602,8 +764,22 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Gave cloud cost users clear visibility into which optimizations mattered, their impact, and whether they were actually executed.",
       "Improved visibility into implemented recommendations and their impact.",
     ],
-    stack: ["Vue", "Vuetify", "ECharts", "TypeScript", "Pinia", "Day.js", "i18n", "REST API"],
-    screenshots: ["/assets/octo/rec1.png", "/assets/octo/rec2.png", "/assets/octo/rec3.png", "/assets/octo/rec4.png"],
+    stack: [
+      "Vue",
+      "Vuetify",
+      "ECharts",
+      "TypeScript",
+      "Pinia",
+      "Day.js",
+      "i18n",
+      "REST API",
+    ],
+    screenshots: [
+      "/assets/octo/rec1.png",
+      "/assets/octo/rec2.png",
+      "/assets/octo/rec3.png",
+      "/assets/octo/rec4.png",
+    ],
     relatedExperienceSlug: "alphaus",
     featured: true,
   },
@@ -633,8 +809,21 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Removed the friction between setting cost thresholds and actually getting notified — no engineering handoff needed.",
       "Supported proactive budget and cost monitoring workflows.",
     ],
-    stack: ["Vue", "Vuetify", "Pinia", "TypeScript", "REST API", "Day.js", "i18n"],
-    screenshots: ["/assets/octo/alert1.png", "/assets/octo/alert2.png", "/assets/octo/alert3.png", "/assets/octo/alert4.png"],
+    stack: [
+      "Vue",
+      "Vuetify",
+      "Pinia",
+      "TypeScript",
+      "REST API",
+      "Day.js",
+      "i18n",
+    ],
+    screenshots: [
+      "/assets/octo/alert1.png",
+      "/assets/octo/alert2.png",
+      "/assets/octo/alert3.png",
+      "/assets/octo/alert4.png",
+    ],
     relatedExperienceSlug: "alphaus",
   },
   {
@@ -664,7 +853,12 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Produced a working MVP story for marketplace validation.",
     ],
     stack: ["HTML", "Tailwind CSS", "JavaScript"],
-    screenshots: ["/assets/renthive/rh1.png", "/assets/renthive/rh2.png", "/assets/renthive/rh3.png", "/assets/renthive/rh4.png"],
+    screenshots: [
+      "/assets/renthive/rh1.png",
+      "/assets/renthive/rh2.png",
+      "/assets/renthive/rh3.png",
+      "/assets/renthive/rh4.png",
+    ],
     githubUrl: "https://github.com/lordkelvinabellana/RentHiveFinal",
     relatedExperienceSlug: "renthive",
     featured: true,
@@ -696,7 +890,12 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Supported online service and payment workflows.",
     ],
     stack: ["Wix", "Custom CSS", "Stripe"],
-    screenshots: ["/assets/pacwest/pw1.png", "/assets/pacwest/pw2.png", "/assets/pacwest/pw3.png", "/assets/pacwest/pw4.png"],
+    screenshots: [
+      "/assets/pacwest/pw1.png",
+      "/assets/pacwest/pw2.png",
+      "/assets/pacwest/pw3.png",
+      "/assets/pacwest/pw4.png",
+    ],
     relatedExperienceSlug: "freelance",
   },
   {
@@ -726,7 +925,12 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Improved cross-device browsing quality.",
     ],
     stack: ["HTML", "Tailwind CSS"],
-    screenshots: ["/assets/czech/cv1.png", "/assets/czech/cv2.png", "/assets/czech/cv3.png", "/assets/czech/cv4.png"],
+    screenshots: [
+      "/assets/czech/cv1.png",
+      "/assets/czech/cv2.png",
+      "/assets/czech/cv3.png",
+      "/assets/czech/cv4.png",
+    ],
     relatedExperienceSlug: "freelance",
   },
   {
@@ -755,7 +959,14 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Adopted across the company — removed the need to switch tools just to report bugs and became the default reporting workflow.",
       "Improved QA handoff consistency from Slack to ClickUp.",
     ],
-    stack: ["Make", "n8n", "Slack API", "ClickUp API", "JavaScript", "Webhooks"],
+    stack: [
+      "Make",
+      "n8n",
+      "Slack API",
+      "ClickUp API",
+      "JavaScript",
+      "Webhooks",
+    ],
     screenshots: [],
     relatedExperienceSlug: "automation",
     featured: true,
@@ -786,9 +997,166 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Reduced repetitive media operations work.",
       "Created a more traceable recording-to-upload workflow.",
     ],
-    stack: ["n8n", "Zoom API", "YouTube Data API v3", "Google Sheets API", "Wasabi", "Cron"],
+    stack: [
+      "n8n",
+      "Zoom API",
+      "YouTube Data API v3",
+      "Google Sheets API",
+      "Wasabi",
+      "Cron",
+    ],
     screenshots: [],
     relatedExperienceSlug: "automation",
+  },
+  {
+    slug: "getemleads-website",
+    title: "GetemLeads",
+    category: "CMS",
+    overview:
+      "A lead-generation website focused on clear messaging, fast loading, and conversion.",
+    businessProblem:
+      "The client needed a website that could communicate their offer clearly and route inbound leads without friction.",
+    role: "WordPress Developer",
+    contributions: [
+      "Built the full site layout and page structure in WordPress.",
+      "Implemented responsive behavior across mobile and desktop.",
+      "Integrated and configured lead capture forms with routing logic.",
+    ],
+    challenges: [
+      "Structuring conversion-focused content to guide visitors toward action.",
+      "Ensuring form integrations reliably captured and routed leads.",
+    ],
+    solutions: [
+      "Kept layout hierarchy focused on the primary call-to-action.",
+      "Tested form submissions and routing across device types.",
+    ],
+    outcomes: [
+      "Delivered a conversion-focused website with functional lead capture and routing.",
+      "Fast-loading, responsive build ready for client use.",
+    ],
+    stack: ["WordPress"],
+    demoUrl: "https://lightcyan-pelican-889360.hostingersite.com/",
+    liveLabel: "View Live Site",
+    screenshots: [
+      "/assets/getemLeads/GL1.jpeg",
+      "/assets/getemLeads/GL2.jpeg",
+      "/assets/getemLeads/GL3.jpeg",
+      "/assets/getemLeads/GL4.jpeg",
+      "/assets/getemLeads/GL5.jpeg",
+      "/assets/getemLeads/GL6.png",
+      "/assets/getemLeads/GL7.png",
+      "/assets/getemLeads/GL8.png",
+      "/assets/getemLeads/GL9.png",
+    ],
+    relatedExperienceSlug: "flexiwork",
+  },
+  {
+    slug: "moberly-consulting-website",
+    title: "Moberly Consulting",
+    category: "CMS",
+    overview:
+      "A professional consulting website designed for clarity, trust, and easy navigation.",
+    businessProblem:
+      "The client needed a clean web presence that would support client engagement and make it easy for prospects to understand services and reach out.",
+    role: "WordPress Developer",
+    contributions: [
+      "Built the consulting website layout and page structure in WordPress.",
+      "Applied responsive design for consistent experience across devices.",
+      "Structured content hierarchy to support trust signals and inquiry pathways.",
+    ],
+    challenges: [
+      "Making a consulting site feel credible and approachable without visual clutter.",
+      "Structuring information for prospects at different stages of evaluation.",
+    ],
+    solutions: [
+      "Used clean layout patterns and consistent spacing to communicate professionalism.",
+      "Placed inquiry pathways at natural decision points throughout the content.",
+    ],
+    outcomes: [
+      "Delivered a professional consulting website with clear navigation and inquiry flow.",
+      "Responsive build that presents services with clarity and credibility.",
+    ],
+    stack: ["WordPress"],
+    demoUrl: "https://moberlyconsulting.com/",
+    liveLabel: "View Live Site",
+    screenshots: [
+      "/assets/moberlyConsulting/Moberly1.png",
+      "/assets/moberlyConsulting/Moberly2.png",
+      "/assets/moberlyConsulting/Moberly3.png",
+      "/assets/moberlyConsulting/Moberly4.png",
+    ],
+    relatedExperienceSlug: "flexiwork",
+  },
+  {
+    slug: "pickle-n-par-website",
+    title: "Pickle N Par",
+    category: "CMS",
+    overview:
+      "A customer-facing website with a focus on usability, responsiveness, and clear service presentation.",
+    businessProblem:
+      "The client needed a site that made their services easy to find, understand, and act on across all devices.",
+    role: "Wordpress Developer",
+    contributions: [
+      "Built the site layout and service content structure in Wix.",
+      "Optimized mobile layout and responsive behavior.",
+      "Organized content to reduce friction between visitor intent and available services.",
+    ],
+    challenges: [
+      "Making service information scannable without overwhelming visitors.",
+      "Maintaining consistent layout quality within Wix's platform constraints.",
+    ],
+    solutions: [
+      "Prioritized content sections around the most common visitor needs.",
+      "Used consistent spacing and grouping to make information easy to navigate.",
+    ],
+    outcomes: [
+      "Delivered a customer-facing website that makes services easy to find and act on.",
+      "Mobile-optimized and responsive across device types.",
+    ],
+    stack: ["WordPress"],
+    demoUrl: "https://nnaphljt.elementor.cloud/",
+    liveLabel: "View Live Site",
+    screenshots: [
+      "/assets/pickleNPar/pnp1.jpeg",
+      "/assets/pickleNPar/pnp2.jpeg",
+      "/assets/pickleNPar/pnp3.jpeg",
+      "/assets/pickleNPar/pnp4.jpeg",
+      "/assets/pickleNPar/pnp5.jpeg",
+      "/assets/pickleNPar/pnp6.jpeg",
+    ],
+    relatedExperienceSlug: "flexiwork",
+  },
+  {
+    slug: "strat-e-marketing-website",
+    title: "StratE Marketing",
+    category: "CMS",
+    overview:
+      "A marketing website focused on presenting services clearly and supporting lead conversion.",
+    businessProblem:
+      "The client needed a website that communicated their marketing services with clarity and supported campaign visibility through form and tracking integrations.",
+    role: "WordPress Developer",
+    contributions: [
+      "Built the site layout and service page structure in WordPress.",
+      "Implemented responsive behavior across mobile and desktop.",
+      "Integrated lead capture forms and tracking tools for campaign visibility.",
+    ],
+    challenges: [
+      "Presenting multiple services without diluting the primary conversion message.",
+      "Ensuring tracking integrations worked reliably across page types.",
+    ],
+    solutions: [
+      "Structured pages around clear service categories with consistent calls-to-action.",
+      "Validated form and tracking integrations across device types before delivery.",
+    ],
+    outcomes: [
+      "Delivered a marketing website with functional forms, tracking, and clear service presentation.",
+      "Responsive build ready to support inbound lead campaigns.",
+    ],
+    stack: ["WordPress"],
+    demoUrl: "https://www.strategicemarketing.com/",
+    liveLabel: "View Live Site",
+    screenshots: ["/assets/stratEMarketing/sem1.jpeg"],
+    relatedExperienceSlug: "flexiwork",
   },
   {
     slug: "arnis-scoreboard",
@@ -817,7 +1185,11 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Created a practical event tool rather than a demo-only project.",
     ],
     stack: ["Vue", "Vuetify"],
-    screenshots: ["/assets/arnis/arnis1.png", "/assets/arnis/arnis2.png", "/assets/arnis/arnis3.png"],
+    screenshots: [
+      "/assets/arnis/arnis1.png",
+      "/assets/arnis/arnis2.png",
+      "/assets/arnis/arnis3.png",
+    ],
     relatedExperienceSlug: "college",
   },
   {
@@ -849,7 +1221,14 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Replaced manual job board browsing entirely — only genuinely strong opportunities trigger action.",
       "Reduced job search time and decision fatigue while improving application quality by concentrating effort on pre-qualified matches.",
     ],
-    stack: ["n8n (self-hosted)", "OpenAI API", "Google Sheets", "Oracle Cloud VM", "JavaScript", "Cron"],
+    stack: [
+      "n8n (self-hosted)",
+      "OpenAI API",
+      "Google Sheets",
+      "Oracle Cloud VM",
+      "JavaScript",
+      "Cron",
+    ],
     screenshots: [],
     relatedExperienceSlug: "automation",
     featured: true,
@@ -883,7 +1262,15 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Improved message consistency across the client roster and reduced weekly preparation time without reducing personalization quality.",
     ],
     stack: ["n8n", "OpenAI API", "JavaScript"],
-    screenshots: [],
+    screenshots: [
+      "/assets/autoFit/autoFit1.png",
+      "/assets/autoFit/autoFit2.png",
+      "/assets/autoFit/autoFit3.png",
+      "/assets/autoFit/autoFit4.png",
+      "/assets/autoFit/autoFit5.png",
+      "/assets/autoFit/autoFit6.png",
+      "/assets/autoFit/autoFit7.png",
+    ],
     relatedExperienceSlug: "automation",
     featured: true,
   },
@@ -946,8 +1333,19 @@ export const experiencePhases: ExperiencePhase[] = [
       "Fast execution and clear communication matter as much as technical skill in agency work.",
       "Different industries require different content hierarchy and trust signals.",
     ],
-    technologies: ["WordPress", "Wix", "Elementor", "HTML", "Tailwind CSS", "Stripe", "Figma"],
-    relatedProjectSlugs: ["pacific-west-diagnostic-imaging", "czechvibes-travel-site"],
+    technologies: [
+      "WordPress",
+      "Wix",
+      "Elementor",
+      "HTML",
+      "Tailwind CSS",
+      "Stripe",
+      "Figma",
+    ],
+    relatedProjectSlugs: [
+      "pacific-west-diagnostic-imaging",
+      "czechvibes-travel-site",
+    ],
   },
   {
     slug: "ardexa",
@@ -969,8 +1367,19 @@ export const experiencePhases: ExperiencePhase[] = [
       "How to move from problem to decision to build without heavy process support.",
       "Product viability and founder reliability both matter equally in startup environments.",
     ],
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Shadcn UI", "DaisyUI", "Supabase", "Vercel"],
-    relatedProjectSlugs: ["rentwise-qualification-platform", "lexadraft-contract-builder"],
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Shadcn UI",
+      "DaisyUI",
+      "Supabase",
+      "Vercel",
+    ],
+    relatedProjectSlugs: [
+      "rentwise-qualification-platform",
+      "lexadraft-contract-builder",
+    ],
   },
   {
     slug: "alphaus",
@@ -995,7 +1404,20 @@ export const experiencePhases: ExperiencePhase[] = [
       "Leadership often means stepping into the missing role before someone asks.",
       "Product context makes frontend decisions faster and more defensible.",
     ],
-    technologies: ["Vue", "Vuetify", "TypeScript", "Pinia", "ECharts", "GridStack", "i18n", "Mixpanel", "Make", "n8n", "Cypress", "Figma"],
+    technologies: [
+      "Vue",
+      "Vuetify",
+      "TypeScript",
+      "Pinia",
+      "ECharts",
+      "GridStack",
+      "i18n",
+      "Mixpanel",
+      "Make",
+      "n8n",
+      "Cypress",
+      "Figma",
+    ],
     relatedProjectSlugs: [
       "octo",
       "octo-dashboard-cost-report-builder",
@@ -1024,8 +1446,22 @@ export const experiencePhases: ExperiencePhase[] = [
       "The strongest automation fits existing team habits rather than forcing new ones.",
       "Technical limitations are often business limitations — knowing when to escalate matters.",
     ],
-    technologies: ["n8n", "Make", "Zapier", "OpenAI API", "Slack API", "ClickUp API", "Google Sheets API", "Webhooks"],
-    relatedProjectSlugs: ["olj-job-matching-automation", "autofit-ai-coaching", "slack-clickup-bug-automation", "zoom-youtube-upload-pipeline"],
+    technologies: [
+      "n8n",
+      "Make",
+      "Zapier",
+      "OpenAI API",
+      "Slack API",
+      "ClickUp API",
+      "Google Sheets API",
+      "Webhooks",
+    ],
+    relatedProjectSlugs: [
+      "olj-job-matching-automation",
+      "autofit-ai-coaching",
+      "slack-clickup-bug-automation",
+      "zoom-youtube-upload-pipeline",
+    ],
   },
   {
     slug: "freelance",
@@ -1047,7 +1483,10 @@ export const experiencePhases: ExperiencePhase[] = [
       "Industry context shapes content hierarchy and trust signal placement.",
     ],
     technologies: ["Wix", "WordPress", "HTML", "CSS", "Tailwind CSS", "Stripe"],
-    relatedProjectSlugs: ["pacific-west-diagnostic-imaging", "czechvibes-travel-site"],
+    relatedProjectSlugs: [
+      "pacific-west-diagnostic-imaging",
+      "czechvibes-travel-site",
+    ],
   },
   {
     slug: "renthive",
@@ -1101,7 +1540,8 @@ export const credentials: Credential[] = [
     title: "FinOps Certified Practitioner",
     issuer: "FinOps Foundation",
     type: "Badge",
-    verificationUrl: "https://www.credly.com/badges/daf53222-223e-49b5-9aff-af074dc73802/public_url",
+    verificationUrl:
+      "https://www.credly.com/badges/daf53222-223e-49b5-9aff-af074dc73802/public_url",
     context:
       "Supports my cloud cost management SaaS work by grounding product and UI decisions in FinOps concepts.",
     image: "/assets/badges/finOpsPrac.png",

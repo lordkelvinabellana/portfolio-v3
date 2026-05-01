@@ -139,6 +139,26 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
           </header>
         </FadeIn>
 
+        {/* Live link */}
+        {project.demoUrl && project.liveLabel && (
+          <FadeIn delay={50}>
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focusable inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-accent hover:text-accent-foreground"
+              >
+                <ExternalLink className="h-4 w-4" />
+                {project.liveLabel}
+              </a>
+              {project.liveLabel === "View MVP" && (
+                <span className="text-xs font-medium text-muted-foreground">MVP / early-stage build</span>
+              )}
+            </div>
+          </FadeIn>
+        )}
+
         {/* TL;DR */}
         <FadeIn delay={60}>
           <TLDRBlock project={project} />
@@ -299,7 +319,7 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
                             rel="noopener noreferrer"
                             className="focusable inline-flex min-h-10 items-center gap-2 rounded-md border border-border bg-secondary px-3 py-2 text-sm font-semibold text-primary transition-colors hover:bg-accent hover:text-accent-foreground"
                           >
-                            Live preview{" "}
+                            {project.liveLabel ?? "Live preview"}{" "}
                             <ExternalLink className="h-3.5 w-3.5" />
                           </a>
                         )}
