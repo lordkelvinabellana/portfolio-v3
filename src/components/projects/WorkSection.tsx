@@ -32,7 +32,7 @@ function FeaturedProjectCard({ project, basePath }: { project: ProjectCaseStudy;
       className="panel panel-hover focusable flex h-full flex-col overflow-hidden rounded-xl no-underline"
     >
       {project.screenshots.length > 0 ? (
-        <ImageCarousel images={project.screenshots} title={project.title} />
+        <ImageGallery images={project.screenshots} title={project.title} variant="card" />
       ) : (
         <div className="flex aspect-video w-full items-center justify-center bg-secondary">
           <span className="muted-text text-[11px] font-bold uppercase tracking-widest">

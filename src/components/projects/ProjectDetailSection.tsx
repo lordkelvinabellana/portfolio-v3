@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, Code2, ExternalLink } from "lucide-react";
 import { projectCaseStudies, type ProjectCaseStudy } from "@/data/portfolio";
 import { FadeIn } from "@/components/ui/FadeIn";
-import { ImageCarousel } from "./ImageCarousel";
+import { ImageGallery } from "./ImageGallery";
 
 /* ── Adjacent project navigation ── */
 
@@ -147,9 +147,7 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
         {/* Screenshots */}
         {project.screenshots.length > 0 && (
           <FadeIn delay={80} spring>
-            <div className="panel overflow-hidden rounded-2xl">
-              <ImageCarousel images={project.screenshots} title={project.title} />
-            </div>
+            <ImageGallery images={project.screenshots} title={project.title} variant="full" />
           </FadeIn>
         )}
 
