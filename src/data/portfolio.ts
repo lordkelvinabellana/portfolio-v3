@@ -966,7 +966,9 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "JavaScript",
       "Webhooks",
     ],
-    screenshots: [],
+    screenshots: [
+      "/assets/slackAutomation/slack1.PNG",
+    ],
     relatedExperienceSlug: "automation",
   },
   {
@@ -1003,7 +1005,10 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Wasabi",
       "Cron",
     ],
-    screenshots: [],
+    screenshots: [
+      "/assets/zoomAutomation/zoom1.PNG",
+      "/assets/zoomAutomation/zoom2.PNG",
+    ],
     relatedExperienceSlug: "automation",
   },
   {
