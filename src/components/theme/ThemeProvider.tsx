@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-type Theme = "light" | "dark" | "system";
+type Theme = "light" | "dark" | "system" | "time";
 
 interface ThemeContextValue {
   theme: Theme;
@@ -14,8 +14,30 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 const STORAGE_KEY = "theme";
 
+function getTimeBasedTheme(): "light" | "dark" {
+  const hour = new Date().getHours();
+  return hour >= 6 && hour < 18 ? "light" : "dark";
+}
+
+function msUntilNextTransition(): number {
+  const now = new Date();
+  const next = new Date(now);
+  const h = now.getHours();
+  if (h < 6) {
+    next.setHours(6, 0, 0, 0);
+  } else if (h < 18) {
+    next.setHours(18, 0, 0, 0);
+  } else {
+    next.setDate(next.getDate() + 1);
+    next.setHours(6, 0, 0, 0);
+  }
+  return next.getTime() - now.getTime();
+}
+
 function resolveTheme(theme: Theme): "light" | "dark" {
-  if (theme !== "system") return theme;
+  if (theme === "light") return "light";
+  if (theme === "dark") return "dark";
+  if (theme === "time") return getTimeBasedTheme();
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
@@ -27,11 +49,11 @@ function applyTheme(resolved: "light" | "dark") {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("system");
+  const [theme, setThemeState] = useState<Theme>("time");
   const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">("dark");
 
   useEffect(() => {
-    const stored = (localStorage.getItem(STORAGE_KEY) as Theme | null) ?? "system";
+    const stored = (localStorage.getItem(STORAGE_KEY) as Theme | null) ?? "time";
     setThemeState(stored);
     const resolved = resolveTheme(stored);
     setResolvedTheme(resolved);
@@ -48,6 +70,22 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       return () => mq.removeEventListener("change", handler);
     }
   }, []);
+
+  // Schedule auto-switch at 6am and 6pm when in "time" mode
+  useEffect(() => {
+    if (theme !== "time") return;
+    let timeoutId: ReturnType<typeof setTimeout>;
+    const schedule = () => {
+      timeoutId = setTimeout(() => {
+        const resolved = getTimeBasedTheme();
+        setResolvedTheme(resolved);
+        applyTheme(resolved);
+        schedule();
+      }, msUntilNextTransition());
+    };
+    schedule();
+    return () => clearTimeout(timeoutId);
+  }, [theme]);
 
   function setTheme(next: Theme) {
     setThemeState(next);

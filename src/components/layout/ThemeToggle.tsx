@@ -1,23 +1,36 @@
 "use client";
 
 import { useTheme } from "@/components/theme/ThemeProvider";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+const CYCLE = ["time", "dark", "light"] as const;
+
 export function ThemeToggle() {
-  const { resolvedTheme, setTheme } = useTheme();
-  const isDark = resolvedTheme !== "light";
+  const { theme, setTheme } = useTheme();
+
+  const next = CYCLE[(CYCLE.indexOf(theme as typeof CYCLE[number]) + 1) % CYCLE.length] ?? "time";
+
+  const icon =
+    theme === "time" ? <Clock className="h-4 w-4" /> :
+    theme === "dark"  ? <Sun className="h-4 w-4" /> :
+                        <Moon className="h-4 w-4" />;
+
+  const label =
+    theme === "time" ? "Auto (time-based) — click to override" :
+    theme === "dark"  ? "Switch to light mode" :
+                        "Switch to auto (time-based)";
 
   return (
     <Button
       variant="ghost"
       size="icon"
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={() => setTheme(next)}
       className="h-11 w-11 text-muted-foreground hover:text-foreground"
-      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+      aria-label={label}
       suppressHydrationWarning
     >
-      {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      {icon}
     </Button>
   );
 }
