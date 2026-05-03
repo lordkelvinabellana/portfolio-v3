@@ -431,7 +431,7 @@ export function ContactPageView() {
             <a
               href="/assets/CV%20-%20Abellana%2C%20Lord%20Kelvin.pdf"
               download="CV - Abellana, Lord Kelvin.pdf"
-              className="focusable inline-flex min-h-9 items-center gap-1.5 rounded-md border border-border bg-secondary px-3 py-1.5 text-sm font-medium text-secondary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="focusable inline-flex min-h-11 items-center gap-1.5 rounded-md border border-border bg-secondary px-3 py-1.5 text-sm font-medium text-secondary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
             >
               <Download className="h-3.5 w-3.5" strokeWidth={2} /> Download CV
             </a>

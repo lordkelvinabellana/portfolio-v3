@@ -135,7 +135,7 @@ export function Sidebar({ onNavClick }: { onNavClick?: () => void }) {
               aria-current={isActive ? "page" : undefined}
             >
               <Icon
-                className="h-3.5 w-3.5 shrink-0"
+                className={cn("h-3.5 w-3.5 shrink-0", isActive && "text-primary")}
                 strokeWidth={isActive ? 2 : 1.5}
               />
               {label}

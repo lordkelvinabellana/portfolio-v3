@@ -26,6 +26,16 @@ const countByFilter = (value: string) =>
 
 const GROUP_ORDER = ["Automation", "Product", "Client Work"] as const;
 
+function categoryColor(category: string): string {
+  switch (category) {
+    case "Product": return "var(--violet-fg)";
+    case "Automation": return "var(--status)";
+    case "Startup": return "var(--amber-fg)";
+    case "Client Work": return "var(--primary)";
+    default: return "var(--text-tertiary)";
+  }
+}
+
 /* ── Cards ── */
 
 function FeaturedProjectCard({ project, basePath }: { project: ProjectCaseStudy; basePath: string }) {
@@ -45,7 +55,10 @@ function FeaturedProjectCard({ project, basePath }: { project: ProjectCaseStudy;
       )}
       <div className="flex flex-1 flex-col gap-4 p-5">
         <div>
-          <p className="muted-text text-[11px] font-bold uppercase tracking-widest">
+          <p
+            className="text-[11px] font-bold uppercase tracking-widest"
+            style={{ color: categoryColor(project.category) }}
+          >
             {project.category}
           </p>
           <h2 className="mt-1.5 text-lg font-bold leading-tight">{project.title}</h2>
@@ -72,15 +85,13 @@ function FeaturedProjectCard({ project, basePath }: { project: ProjectCaseStudy;
             Read case study <ArrowRight className="h-3.5 w-3.5" />
           </span>
           {project.demoUrl && project.liveLabel && (
-            <a
-              href={project.demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
+            <button
+              type="button"
+              onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(project.demoUrl, "_blank", "noopener,noreferrer"); }}
               className="focusable inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
             >
               {project.liveLabel} <ExternalLink className="h-3 w-3" />
-            </a>
+            </button>
           )}
         </div>
         {project.liveLabel === "View MVP" && (
@@ -98,7 +109,10 @@ function CompactProjectCard({ project, basePath }: { project: ProjectCaseStudy; 
       className="panel panel-hover focusable flex h-full flex-col gap-4 rounded-xl p-5 no-underline"
     >
       <div>
-        <p className="muted-text text-[11px] font-bold uppercase tracking-widest">
+        <p
+          className="text-[11px] font-bold uppercase tracking-widest"
+          style={{ color: categoryColor(project.category) }}
+        >
           {project.category}
         </p>
         <h2 className="mt-1.5 font-bold leading-snug">{project.title}</h2>
@@ -124,15 +138,13 @@ function CompactProjectCard({ project, basePath }: { project: ProjectCaseStudy; 
           Read case study <ArrowRight className="h-3 w-3" />
         </span>
         {project.demoUrl && project.liveLabel && (
-          <a
-            href={project.demoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
+          <button
+            type="button"
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(project.demoUrl, "_blank", "noopener,noreferrer"); }}
             className="focusable inline-flex items-center gap-1 rounded-full border border-border bg-secondary px-2.5 py-0.5 text-[10px] font-semibold text-secondary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
           >
             {project.liveLabel} <ExternalLink className="h-2.5 w-2.5" />
-          </a>
+          </button>
         )}
       </div>
       {project.liveLabel === "View MVP" && (
@@ -164,6 +176,7 @@ export function WorkSection({ basePath = "/work", showBreadcrumb = true }: WorkS
     activeFilter === "All"
       ? GROUP_ORDER.map((group) => ({
           label: group === "Product" ? "Product / SaaS" : group,
+          category: group as string,
           projects: rest.filter((p) => p.category === group),
         })).filter((g) => g.projects.length > 0)
       : null;
@@ -247,7 +260,10 @@ export function WorkSection({ basePath = "/work", showBreadcrumb = true }: WorkS
               {grouped.map((group) => (
                 <div key={group.label}>
                   <FadeIn>
-                    <p className="mb-4 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                    <p
+                      className="mb-4 text-xs font-bold uppercase tracking-widest"
+                      style={{ color: categoryColor(group.category) }}
+                    >
                       {group.label}
                     </p>
                   </FadeIn>

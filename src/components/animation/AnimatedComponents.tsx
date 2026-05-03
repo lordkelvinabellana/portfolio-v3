@@ -1,13 +1,9 @@
 "use client";
 
-import { ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { EASINGS, DURATIONS } from "@/components/animation/AnimatedElements";
 
-/**
- * AnimatedCard - Card with entrance animation and hover effects
- * Emil's principle: Cards should feel responsive and inviting on hover
- */
 export function AnimatedCard({
   children,
   className,
@@ -21,22 +17,13 @@ export function AnimatedCard({
 }) {
   return (
     <div
-      className={cn("group", className)}
+      className={cn(
+        "group",
+        hoverScale && "transition-transform duration-150 hover:-translate-y-0.5",
+        className,
+      )}
       style={{
         animation: `slide-up ${DURATIONS.base}ms ${EASINGS.gentle} ${delay}ms both`,
-        transition: hoverScale
-          ? `transform ${DURATIONS.micro}ms ${EASINGS.snappy}`
-          : undefined,
-      }}
-      onMouseEnter={(e) => {
-        if (hoverScale) {
-          (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
-        }
-      }}
-      onMouseLeave={(e) => {
-        if (hoverScale) {
-          (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-        }
       }}
     >
       {children}
@@ -44,10 +31,25 @@ export function AnimatedCard({
   );
 }
 
-/**
- * AnimatedBadge - Badge with pulse animation
- * Emil's principle: Important elements should draw attention subtly
- */
+const badgeStyles: Record<string, CSSProperties> = {
+  default: {
+    background: "color-mix(in oklch, var(--primary), transparent 88%)",
+    color: "var(--primary)",
+  },
+  success: {
+    background: "color-mix(in oklch, var(--status), transparent 88%)",
+    color: "var(--status)",
+  },
+  warning: {
+    background: "color-mix(in oklch, var(--amber-fg), transparent 88%)",
+    color: "var(--amber-fg)",
+  },
+  error: {
+    background: "color-mix(in oklch, var(--destructive), transparent 88%)",
+    color: "var(--destructive)",
+  },
+};
+
 export function AnimatedBadge({
   children,
   variant = "default",
@@ -62,13 +64,8 @@ export function AnimatedBadge({
       className={cn(
         "inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-all",
         animate && "animate-pulse-gentle",
-        {
-          default: "bg-primary/10 text-primary",
-          success: "bg-green-500/10 text-green-600",
-          warning: "bg-amber-500/10 text-amber-600",
-          error: "bg-red-500/10 text-red-600",
-        }[variant],
       )}
+      style={badgeStyles[variant]}
     >
       {animate && (
         <span className="inline-block h-2 w-2 rounded-full animate-pulse-gentle" />
@@ -78,10 +75,6 @@ export function AnimatedBadge({
   );
 }
 
-/**
- * AnimatedButton - Button with smooth state transitions
- * Emil's principle: Interactive elements should feel responsive
- */
 export function AnimatedButton({
   children,
   onClick,
@@ -95,18 +88,12 @@ export function AnimatedButton({
     <button
       onClick={onClick}
       className={cn(
-        "group relative inline-flex items-center gap-2 rounded-lg px-4 py-2.5 font-medium transition-all duration-150",
-        "bg-primary text-primary-foreground hover:bg-primary/90",
+        "group relative inline-flex items-center gap-2 rounded-lg px-4 py-2.5 font-medium",
+        "bg-primary text-primary-foreground hover:bg-primary/90 hover:-translate-y-px",
         className,
       )}
       style={{
-        transition: `all ${DURATIONS.micro}ms ${EASINGS.snappy}`,
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)";
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+        transition: `background-color ${DURATIONS.micro}ms ${EASINGS.snappy}, transform ${DURATIONS.micro}ms ${EASINGS.snappy}`,
       }}
     >
       {children}
@@ -114,10 +101,6 @@ export function AnimatedButton({
   );
 }
 
-/**
- * AnimatedText - Text with staggered character reveal
- * Emil's principle: Choreography of text creates engagement without distraction
- */
 export function AnimatedText({
   text,
   className,
@@ -137,7 +120,7 @@ export function AnimatedText({
             animation: `fade-in ${DURATIONS.fast}ms ${EASINGS.smooth} ${i * staggerDelay}ms both`,
           }}
         >
-          {char === " " ? "\u00A0" : char}
+          {char === " " ? " " : char}
         </span>
       ))}
     </span>

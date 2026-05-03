@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { techGroups } from "@/data/portfolio";
 import { FadeIn } from "@/components/ui/FadeIn";
 
@@ -36,14 +37,14 @@ export function TechStackSection() {
                       key={tech.name}
                       className="flex cursor-default items-center gap-2 rounded-lg border border-border bg-secondary px-3 py-2"
                     >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
+                      <Image
                         src={tech.logo}
-                        alt={tech.name}
+                        alt=""
+                        aria-hidden="true"
                         width={18}
                         height={18}
                         className="shrink-0 object-contain"
-                        style={{ width: 18, height: 18 }}
+                        unoptimized
                       />
                       <span className="text-[13px] font-medium">
                         {tech.name}

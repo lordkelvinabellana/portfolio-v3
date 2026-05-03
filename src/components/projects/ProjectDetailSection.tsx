@@ -223,7 +223,7 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
                         <p className="quiet-text mb-3 text-sm leading-6">{challenge}</p>
                         {project.solutions[i] && (
                           <>
-                            <p className="mb-1.5 text-[11px] font-bold uppercase tracking-widest text-primary">
+                            <p className="eyebrow mb-1.5">
                               Approach
                             </p>
                             <p className="quiet-text text-sm leading-6">
@@ -251,7 +251,7 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
               >
                 <div className="mb-5">
                   <div className="flex items-center gap-3">
-                    <p className="shrink-0 text-[11px] font-bold uppercase tracking-widest" style={{ color: "var(--primary)" }}>
+                    <p className="eyebrow shrink-0">
                       Impact
                     </p>
                     <div className="h-px flex-1" style={{ background: "color-mix(in oklch, var(--primary), transparent 70%)" }} />

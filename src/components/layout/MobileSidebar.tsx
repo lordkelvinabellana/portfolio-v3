@@ -24,7 +24,7 @@ export function MobileSidebar() {
         <span className="text-sm font-semibold">
           Lord Kelvin
         </span>
-        <span className="status-dot" title="Open to opportunities" />
+        <span className="status-dot" title="Open to opportunities" aria-label="Open to opportunities" />
       </div>
 
       <Sheet open={open} onOpenChange={setOpen}>

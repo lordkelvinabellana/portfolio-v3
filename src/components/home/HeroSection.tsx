@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Download } from "lucide-react";
+import { ArrowRight, Download, Eye } from "lucide-react";
 import {
   getProjectCaseStudy,
   experiencePhases,
@@ -94,12 +94,31 @@ export function HeroSection() {
                   View my work <ArrowRight className="h-4 w-4" />
                 </Link>
                 <a
-                  href="/assets/resume.pdf"
-                  download
+                  href="/assets/Abellana%2C%20Lord%20Kelvin%20-%20Resume.pdf"
+                  download="Abellana, Lord Kelvin - Resume.pdf"
                   className="focusable inline-flex min-h-11 items-center gap-2 rounded-md border border-border bg-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
                 >
                   <Download className="h-4 w-4" strokeWidth={2} />
                   Download resume
+                </a>
+                <a
+                  href="/assets/Abellana%2C%20Lord%20Kelvin%20-%20Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="focusable inline-flex min-h-11 items-center gap-2 rounded-md border border-border bg-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                >
+                  <Eye className="h-4 w-4" strokeWidth={2} />
+                  View resume
+                </a>
+              </div>
+              <div className="mt-4 flex items-center gap-3">
+                <p className="muted-text text-sm">Need more detail?</p>
+                <a
+                  href="/assets/CV%20-%20Abellana%2C%20Lord%20Kelvin.pdf"
+                  download="CV - Abellana, Lord Kelvin.pdf"
+                  className="focusable inline-flex min-h-11 items-center gap-1.5 rounded-md border border-border bg-secondary px-3 py-1.5 text-sm font-medium text-secondary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                >
+                  <Download className="h-3.5 w-3.5" strokeWidth={2} /> Download CV
                 </a>
               </div>
             </div>
@@ -206,14 +225,13 @@ export function HeroSection() {
                             className="flex items-center gap-1.5 rounded-lg border border-border bg-secondary px-2.5 py-1.5"
                           >
                             {tech && (
-                              // eslint-disable-next-line @next/next/no-img-element
-                              <img
+                              <Image
                                 src={tech.logo}
-                                alt={name}
+                                alt=""
+                                aria-hidden="true"
                                 width={14}
                                 height={14}
                                 className="shrink-0 object-contain"
-                                style={{ width: 14, height: 14 }}
                               />
                             )}
                             <span className="text-xs font-semibold">{name}</span>

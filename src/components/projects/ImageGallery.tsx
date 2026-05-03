@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { Images, X, ChevronLeft, ChevronRight } from "lucide-react";
@@ -23,10 +23,23 @@ export function ImageGallery({
   const [mounted, setMounted] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [spotlightIndex, setSpotlightIndex] = useState<number | null>(null);
+  const spotlightCloseRef = useRef<HTMLButtonElement>(null);
+  const modalCloseRef = useRef<HTMLButtonElement>(null);
+  const spotlightRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const FOCUSABLE =
+    'button:not([disabled]), [href]:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"]):not([disabled])';
+
+  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    if (spotlightIndex !== null) spotlightCloseRef.current?.focus();
+  }, [spotlightIndex]);
+
+  useEffect(() => {
+    if (showModal) modalCloseRef.current?.focus();
+  }, [showModal]);
 
   /* Keyboard nav & body scroll lock */
   useEffect(() => {
@@ -40,6 +53,7 @@ export function ImageGallery({
         if (spotlightIndex !== null) setSpotlightIndex(null);
         else setShowModal(false);
       }
+
       if (spotlightIndex !== null) {
         if (e.key === "ArrowRight")
           setSpotlightIndex((i) => ((i ?? 0) + 1) % images.length);
@@ -47,6 +61,22 @@ export function ImageGallery({
           setSpotlightIndex(
             (i) => ((i ?? 0) - 1 + images.length) % images.length,
           );
+      }
+
+      if (e.key === "Tab") {
+        const container = spotlightIndex !== null ? spotlightRef.current : modalRef.current;
+        if (!container) return;
+        const focusable = Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE));
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     };
 
@@ -126,7 +156,13 @@ export function ImageGallery({
       {mounted &&
         showModal &&
         createPortal(
-          <div className="fixed inset-0 z-50 flex flex-col bg-background/95 backdrop-blur-sm">
+          <div
+            ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${title} — all screenshots`}
+            className="fixed inset-0 z-50 flex flex-col bg-background/95 backdrop-blur-sm"
+          >
             {/* Header */}
             <div className="flex shrink-0 items-center justify-between border-b border-border px-6 py-4">
               <div>
@@ -136,8 +172,9 @@ export function ImageGallery({
                 <p className="mt-0.5 font-semibold">{title}</p>
               </div>
               <button
+                ref={modalCloseRef}
                 onClick={() => setShowModal(false)}
-                className="focusable flex h-9 w-9 items-center justify-center rounded-md border border-border bg-secondary text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                className="focusable flex h-11 w-11 items-center justify-center rounded-md border border-border bg-secondary text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                 aria-label="Close gallery"
               >
                 <X className="h-4 w-4" />
@@ -175,6 +212,10 @@ export function ImageGallery({
         spotlightIndex !== null &&
         createPortal(
           <div
+            ref={spotlightRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${title} screenshot ${(spotlightIndex ?? 0) + 1} of ${images.length}`}
             className="fixed inset-0 z-[60] flex items-center justify-center bg-background/98 backdrop-blur-md"
             onClick={(e) => {
               if (e.target === e.currentTarget) setSpotlightIndex(null);
@@ -182,8 +223,9 @@ export function ImageGallery({
           >
             {/* Close */}
             <button
+              ref={spotlightCloseRef}
               onClick={() => setSpotlightIndex(null)}
-              className="focusable absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-md border border-border bg-secondary text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+              className="focusable absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-md border border-border bg-secondary text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
               aria-label="Close spotlight"
             >
               <X className="h-5 w-5" />
@@ -215,7 +257,7 @@ export function ImageGallery({
                       (spotlightIndex - 1 + images.length) % images.length,
                     )
                   }
-                  className="focusable absolute left-4 flex h-10 w-10 items-center justify-center rounded-md border border-border bg-secondary text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                  className="focusable absolute left-4 flex h-11 w-11 items-center justify-center rounded-md border border-border bg-secondary text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                   aria-label="Previous image"
                 >
                   <ChevronLeft className="h-5 w-5" />
@@ -224,7 +266,7 @@ export function ImageGallery({
                   onClick={() =>
                     setSpotlightIndex((spotlightIndex + 1) % images.length)
                   }
-                  className="focusable absolute right-4 flex h-10 w-10 items-center justify-center rounded-md border border-border bg-secondary text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                  className="focusable absolute right-4 flex h-11 w-11 items-center justify-center rounded-md border border-border bg-secondary text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                   aria-label="Next image"
                 >
                   <ChevronRight className="h-5 w-5" />

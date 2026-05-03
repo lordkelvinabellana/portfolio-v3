@@ -150,7 +150,7 @@ export function ExperienceDetailSection({ phase }: { phase: ExperiencePhase }) {
                     className="h-4 w-4 shrink-0 text-primary"
                     aria-hidden="true"
                   />
-                  <p className="text-[11px] font-bold uppercase tracking-widest text-primary">
+                  <p className="eyebrow">
                     Achievements
                   </p>
                 </div>

@@ -2,8 +2,8 @@ import { Experience } from "@/data/portfolio";
 import { ExternalLink } from "lucide-react";
 
 const roleStyles: Record<string, { bg: string; text: string; dot: string; label: string }> = {
-  violet: { bg: "color-mix(in oklch, var(--primary), transparent 84%)", text: "var(--primary)", dot: "var(--primary)", label: "Product" },
-  purple: { bg: "color-mix(in oklch, var(--primary), transparent 84%)", text: "var(--primary)", dot: "var(--primary)", label: "Product" },
+  violet: { bg: "color-mix(in oklch, var(--violet-fg), transparent 86%)", text: "var(--violet-fg)", dot: "var(--violet-fg)", label: "Product" },
+  purple: { bg: "color-mix(in oklch, var(--violet-fg), transparent 86%)", text: "var(--violet-fg)", dot: "var(--violet-fg)", label: "Product" },
   blue: { bg: "color-mix(in oklch, var(--primary), transparent 88%)", text: "var(--primary)", dot: "var(--primary)", label: "Dev" },
   sky: { bg: "color-mix(in oklch, var(--primary), transparent 88%)", text: "var(--primary)", dot: "var(--primary)", label: "Dev" },
   green: { bg: "color-mix(in oklch, var(--status), transparent 84%)", text: "var(--status)", dot: "var(--status)", label: "Automation" },
