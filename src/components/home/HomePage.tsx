@@ -22,7 +22,7 @@ const PERSONAL = pick(["bouquet-cipher", "arnis-scoreboard"]);
 const VSL = getProjectCaseStudy("clipt-vsl");
 const PULSE = getWorkflow("weekly-pulse");
 const ADS = getProjectCaseStudy("clipt-short-form-ads-testimonials");
-const HOME_PHASES = ["penguin-ops", "stakra", "clipt", "retail-group", "flexiwork", "ardexa", "alphaus"]
+const HOME_PHASES = ["penguin-ops", "stakra", "clipt", "retail-group", "flexiwork", "ardexa", "clix", "alphaus"]
   .map((slug) => experiencePhases.find((p) => p.slug === slug))
   .filter((p): p is (typeof experiencePhases)[number] => Boolean(p));
 

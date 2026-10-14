@@ -2028,6 +2028,27 @@ export const experiencePhases: ExperiencePhase[] = [
     ],
   },
   {
+    slug: "clix",
+    title: "Clix: Automation Engineer",
+    period: "Dec 2025 – Mar 2026",
+    summary:
+      "Freelance, remote for a company based in Israel: built and improved automation systems that cut manual work, designing n8n pipelines with APIs and AI workflows for reliability, clarity and real business use.",
+    responsibilities: [
+      "Built end-to-end workflows for data processing, reporting and task automation.",
+      "Integrated multiple systems using APIs, webhooks and structured logic flows.",
+      "Applied AI workflows to analyse data and produce structured outputs for decision-making.",
+    ],
+    achievements: [
+      "Designed automations with validation, logging and error handling to keep them reliable.",
+      "Simplified existing workflows by removing unnecessary steps and logic.",
+    ],
+    learnings: [
+      "Build automations teams actually use, not workflows that look good but create noise.",
+    ],
+    technologies: ["n8n", "REST APIs", "Webhooks", "AI workflows"],
+    relatedProjectSlugs: [],
+  },
+  {
     slug: "alphaus",
     title: "Alphaus: Junior FE → Lead FE → Product Owner",
     period: "Jul 2023 – Dec 2025",
