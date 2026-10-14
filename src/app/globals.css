@@ -85,6 +85,8 @@
   /* Semantic accent tokens */
   --violet-fg: oklch(0.46 0.18 290);
   --amber-fg: oklch(0.44 0.14 75);
+  --coral-fg: oklch(0.52 0.15 32);
+  --teal-fg: oklch(0.5 0.09 195);
 }
 
 .dark {
@@ -128,6 +130,8 @@
   /* Semantic accent tokens */
   --violet-fg: oklch(0.76 0.14 290);
   --amber-fg: oklch(0.82 0.12 75);
+  --coral-fg: oklch(0.76 0.12 32);
+  --teal-fg: oklch(0.8 0.09 195);
 }
 
 @layer base {
@@ -137,6 +141,7 @@
 
   html {
     @apply font-sans;
+    scroll-padding-top: 5rem;
   }
 
   body {
@@ -221,6 +226,21 @@
   }
 }
 
+@keyframes reveal-fallback {
+  to {
+    visibility: visible;
+  }
+}
+
+@keyframes spark-spin {
+  from {
+    transform: rotateX(14deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(14deg) rotateY(360deg);
+  }
+}
+
 @keyframes pulse {
   0%,
   100% {
@@ -243,7 +263,43 @@
     width: 100%;
     max-width: 72rem;
     margin-inline: auto;
-    padding: clamp(3.5rem, 7vw, 6rem) clamp(1.5rem, 4vw, 3.5rem);
+    padding: clamp(2.5rem, 6vw, 5rem) clamp(1.25rem, 4vw, 3.5rem);
+  }
+
+  .site-header {
+    background: color-mix(in oklch, var(--background), transparent 12%);
+    backdrop-filter: blur(14px) saturate(1.2);
+  }
+
+  .skip-link {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 50;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    font-size: 0.875rem;
+    font-weight: 600;
+    transform: translateY(-200%);
+  }
+
+  .skip-link:focus-visible {
+    transform: none;
+  }
+
+  .display-heading.hero-heading {
+    font-size: clamp(2.6rem, 6vw, 4.75rem);
+  }
+
+  /* Section headings on the home page: condensed display, sentence case. */
+  .home-heading {
+    font-family: var(--font-barlow-condensed), var(--font-geist), sans-serif;
+    font-size: clamp(2rem, 4.2vw, 3.25rem);
+    font-weight: 600;
+    line-height: 0.98;
+    text-transform: uppercase;
   }
 
   .display-heading {
@@ -317,6 +373,696 @@
     border-radius: 999px;
     background: var(--status);
     box-shadow: 0 0 0 3px color-mix(in oklch, var(--status), transparent 84%);
+  }
+
+  /* GSAP reveals. Hidden only when motion is on (class set in layout <head>),
+     then released by GSAP's autoAlpha. The fallback shows them if scripts fail. */
+  .motion [data-reveal] {
+    visibility: hidden;
+    animation: reveal-fallback 0s linear 3s forwards;
+  }
+
+  .orbit-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: -0.55rem 0 0 0.35rem;
+    padding-left: 0.7rem;
+    color: var(--text-tertiary);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    line-height: 1.1rem;
+    white-space: nowrap;
+    text-shadow:
+      0 0 2px var(--background),
+      0 0 6px var(--background),
+      0 0 10px var(--background);
+    will-change: transform, opacity;
+  }
+
+  @media (max-width: 639px) {
+    .orbit-label {
+      display: none;
+    }
+  }
+
+  .orbit-label::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0.4rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.7;
+  }
+
+  /* Flow diagrams (FlowDiagram.tsx): stacked by default, a row from md when responsive. */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .flow-step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.5rem minmax(0, 1fr);
+    column-gap: 0.75rem;
+    align-items: start;
+    padding-bottom: 0.85rem;
+  }
+
+  .flow-step:last-child {
+    padding-bottom: 0;
+  }
+
+  .flow-marker {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface-elevated);
+    color: var(--text-tertiary);
+    font-size: 0.6875rem;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    transition:
+      color 300ms var(--ease-standard),
+      border-color 300ms var(--ease-standard),
+      background-color 300ms var(--ease-standard);
+  }
+
+  .flow-marker.is-lit,
+  :root:not(.motion) .flow-marker {
+    border-color: color-mix(in oklch, var(--primary), transparent 45%);
+    background: color-mix(in oklch, var(--surface-elevated), var(--primary) 10%);
+    color: var(--primary);
+  }
+
+  .flow-label {
+    padding-top: 0.2rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.15rem;
+  }
+
+  .flow-link {
+    position: absolute;
+    top: 1.75rem;
+    bottom: 0.25rem;
+    left: calc(0.75rem - 0.5px);
+    width: 1px;
+    background: var(--border);
+  }
+
+  .flow-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--primary);
+    opacity: 0.6;
+    transform: scaleY(var(--fill, 1));
+    transform-origin: top;
+  }
+
+  .flow-packet {
+    position: absolute;
+    top: calc(var(--p, 0) * 100%);
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    border-radius: 999px;
+    background: var(--primary);
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--primary), transparent 78%);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .flow-responsive {
+      flex-direction: row;
+    }
+
+    .flow-responsive .flow-step {
+      display: flex;
+      flex: 1 1 0;
+      flex-direction: column;
+      gap: 0.65rem;
+      padding: 0 0.75rem 0 0;
+    }
+
+    .flow-responsive .flow-label {
+      padding-top: 0;
+    }
+
+    .flow-responsive .flow-link {
+      top: calc(0.75rem - 0.5px);
+      right: 0.4rem;
+      bottom: auto;
+      left: calc(1.5rem + 0.4rem);
+      width: auto;
+      height: 1px;
+    }
+
+    .flow-responsive .flow-fill {
+      transform: scaleX(var(--fill, 1));
+      transform-origin: left;
+    }
+
+    .flow-responsive .flow-packet {
+      top: 50%;
+      left: calc(var(--p, 0) * 100%);
+    }
+  }
+
+  /* n8n-style workflow canvas (WorkflowCanvas.tsx) */
+  .workflow-canvas {
+    background: var(--surface-1);
+  }
+
+  .workflow-dot {
+    fill: color-mix(in oklch, var(--foreground), transparent 88%);
+  }
+
+  .workflow-edge {
+    fill: none;
+    stroke: color-mix(in oklch, var(--foreground), transparent 74%);
+    stroke-width: 1.6;
+    transition: stroke 300ms var(--ease-standard);
+  }
+
+  .workflow-edge[data-state="success"] {
+    stroke: color-mix(in oklch, var(--status), transparent 15%);
+  }
+
+  .workflow-edge[data-state="skipped"] {
+    opacity: 0.45;
+    stroke-dasharray: 4 4;
+  }
+
+  .workflow-packet {
+    fill: var(--status);
+    filter: drop-shadow(0 0 4px color-mix(in oklch, var(--status), transparent 40%));
+  }
+
+  .workflow-node-box {
+    fill: var(--surface-elevated);
+    stroke: color-mix(in oklch, var(--foreground), transparent 78%);
+    stroke-width: 1.5;
+    transition:
+      stroke 250ms var(--ease-standard),
+      fill 250ms var(--ease-standard);
+  }
+
+  .workflow-node[data-state="running"] .workflow-node-box {
+    fill: color-mix(in oklch, var(--surface-elevated), var(--primary) 10%);
+    stroke: var(--primary);
+    stroke-width: 2;
+  }
+
+  .workflow-node[data-state="success"] .workflow-node-box {
+    stroke: var(--status);
+  }
+
+  .workflow-node[data-state="skipped"] {
+    opacity: 0.42;
+  }
+
+  .workflow-check {
+    opacity: 0;
+    transition: opacity 200ms var(--ease-standard);
+  }
+
+  .workflow-check circle {
+    fill: var(--status);
+  }
+
+  .workflow-check path {
+    fill: none;
+    stroke: var(--background);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.7;
+  }
+
+  .workflow-node[data-state="success"] .workflow-check {
+    opacity: 1;
+  }
+
+  .workflow-label {
+    fill: var(--text-secondary);
+    font-family: var(--font-geist), sans-serif;
+    font-weight: 500;
+  }
+
+  /* 3D edit timeline (EditTimeline.tsx) */
+  .edit-scene {
+    --name-w: 4.6rem;
+    position: relative;
+    aspect-ratio: 16 / 11;
+    width: 100%;
+    perspective: 1100px;
+    perspective-origin: 50% 30%;
+    user-select: none;
+  }
+
+  .edit-hud {
+    position: absolute;
+    top: 0.25rem;
+    left: 0.25rem;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    background: var(--surface-elevated);
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+  }
+
+  .edit-hud-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 999px;
+    background: var(--destructive);
+  }
+
+  .edit-stage {
+    position: absolute;
+    inset: 16% 4% 6% 6%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    transform: rotateX(50deg) rotateZ(-12deg);
+    transform-style: preserve-3d;
+  }
+
+  .edit-ruler {
+    position: relative;
+    height: 0.9rem;
+    margin-left: var(--name-w);
+  }
+
+  .edit-rail {
+    position: absolute;
+    inset: 0;
+  }
+
+  .edit-ruler span {
+    position: absolute;
+    bottom: 0;
+    width: 1px;
+    height: 0.5rem;
+    background: color-mix(in oklch, var(--foreground), transparent 70%);
+  }
+
+  .edit-track {
+    display: flex;
+    align-items: stretch;
+    height: 2.1rem;
+    transform-style: preserve-3d;
+  }
+
+  .edit-track-name {
+    display: flex;
+    align-items: center;
+    flex: 0 0 var(--name-w);
+    padding-right: 0.5rem;
+    color: var(--text-tertiary);
+    font-size: 0.625rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .edit-lane {
+    position: relative;
+    flex: 1;
+    border-radius: 0.4rem;
+    background: color-mix(in oklch, var(--surface-2), transparent 10%);
+    box-shadow: inset 0 0 0 1px var(--border);
+    transform-style: preserve-3d;
+  }
+
+  .edit-clip {
+    position: absolute;
+    top: 0.22rem;
+    bottom: 0.22rem;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 0 0.4rem;
+    border-radius: 0.35rem;
+    background: color-mix(in oklch, var(--tone), transparent 62%);
+    box-shadow:
+      inset 0 0 0 1px color-mix(in oklch, var(--tone), transparent 35%),
+      0 6px 10px -6px color-mix(in oklch, var(--tone), transparent 40%);
+    color: var(--foreground);
+    font-size: 0.625rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition:
+      background-color 200ms var(--ease-standard),
+      box-shadow 200ms var(--ease-standard);
+  }
+
+  .edit-clip.is-live {
+    background: color-mix(in oklch, var(--tone), transparent 35%);
+  }
+
+  .edit-clip-filler {
+    background-image: repeating-linear-gradient(135deg, transparent 0 4px, color-mix(in oklch, var(--tone), transparent 60%) 4px 6px);
+  }
+
+  .edit-clip-wave {
+    gap: 2px;
+    padding: 0 0.3rem;
+  }
+
+  .edit-clip-wave i {
+    flex: 1;
+    min-width: 1px;
+    border-radius: 1px;
+    background: color-mix(in oklch, var(--tone), transparent 25%);
+  }
+
+  .edit-key {
+    position: absolute;
+    top: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin: -0.25rem 0 0 -0.25rem;
+    background: var(--amber-fg);
+    transform: rotate(45deg);
+  }
+
+  .edit-blade {
+    position: absolute;
+    top: -0.3rem;
+    bottom: -0.3rem;
+    width: 2px;
+    margin-left: -1px;
+    background: var(--foreground);
+    opacity: 0;
+    transform-origin: top;
+  }
+
+  .edit-gap {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    margin-left: -1.5px;
+    background: var(--surface-2);
+    opacity: 0;
+  }
+
+  .edit-playhead-rail {
+    top: 0;
+    bottom: 0;
+    left: var(--name-w);
+    transform: translateZ(12px);
+    pointer-events: none;
+  }
+
+  .edit-playhead {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    margin-left: -1px;
+    background: var(--destructive);
+    box-shadow: 0 0 12px color-mix(in oklch, var(--destructive), transparent 45%);
+  }
+
+  .edit-playhead::before {
+    content: "";
+    position: absolute;
+    top: -0.35rem;
+    left: 50%;
+    width: 0.7rem;
+    height: 0.7rem;
+    margin-left: -0.35rem;
+    border-radius: 0.15rem 0.15rem 0.35rem 0.35rem;
+    background: var(--destructive);
+  }
+
+  /* Service pictures and the 3D spark (ServiceArt.tsx) */
+  .service-art {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 5.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .art-flow {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .art-node {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1.5px solid color-mix(in oklch, var(--foreground), transparent 78%);
+    border-radius: 0.65rem;
+    background: var(--surface-elevated);
+    transition: border-color 250ms var(--ease-standard);
+  }
+
+  .art-node[data-kind="trigger"] {
+    border-radius: 1.25rem 0.65rem 0.65rem 1.25rem;
+  }
+
+  .art-node[data-state="success"] {
+    border-color: var(--status);
+  }
+
+  .art-node > i {
+    width: 0.85rem;
+    height: 0.85rem;
+    border-radius: 0.25rem;
+    background: var(--art-tone, var(--primary));
+    opacity: 0.85;
+  }
+
+  .art-node[data-kind="trigger"] { --art-tone: var(--coral-fg); }
+  .art-node[data-kind="code"] { --art-tone: var(--amber-fg); }
+  .art-node[data-kind="slack"] { --art-tone: var(--violet-fg); }
+
+  .art-link {
+    position: relative;
+    flex: 1;
+    height: 1.5px;
+    margin: 0 0.3rem;
+    background: color-mix(in oklch, var(--foreground), transparent 74%);
+  }
+
+  .art-packet {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    margin: -3.5px 0 0 -3.5px;
+    border-radius: 999px;
+    background: var(--status);
+    box-shadow: 0 0 8px color-mix(in oklch, var(--status), transparent 40%);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .ai-spark {
+    display: inline-block;
+    width: var(--spark);
+    height: var(--spark);
+    perspective: 220px;
+  }
+
+  .ai-spark-body {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation: spark-spin 7s linear infinite;
+  }
+
+  .ai-spark-body i {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 24%;
+    height: 100%;
+    margin-left: -12%;
+    background: linear-gradient(180deg, var(--violet-fg), var(--primary));
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+    opacity: 0.92;
+  }
+
+  .art-timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+    transform: perspective(520px) rotateX(30deg);
+    transform-origin: 50% 100%;
+  }
+
+  .art-track {
+    position: relative;
+    height: 1rem;
+    border-radius: 0.3rem;
+    background: var(--surface-2);
+  }
+
+  .art-clip {
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    border-radius: 0.25rem;
+    background: color-mix(in oklch, var(--primary), transparent 45%);
+  }
+
+  .art-track-gfx .art-clip {
+    background: color-mix(in oklch, var(--coral-fg), transparent 40%);
+  }
+
+  .art-filler {
+    background: color-mix(in oklch, var(--destructive), transparent 35%);
+  }
+
+  .art-key {
+    position: absolute;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    background: var(--amber-fg);
+    transform: rotate(45deg);
+  }
+
+  .art-track-audio {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    height: 1.15rem;
+    padding: 0 3px;
+    background: transparent;
+  }
+
+  .art-track-audio i {
+    flex: 1;
+    border-radius: 1px;
+    background: color-mix(in oklch, var(--teal-fg), transparent 30%);
+  }
+
+  .art-playhead {
+    position: absolute;
+    top: -4px;
+    bottom: -4px;
+    left: 0;
+    width: 2px;
+    background: var(--destructive);
+    box-shadow: 0 0 8px color-mix(in oklch, var(--destructive), transparent 50%);
+  }
+
+  .art-window {
+    position: relative;
+    width: 80%;
+    height: 5.1rem;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 0.6rem;
+    background: var(--surface-elevated);
+  }
+
+  .art-bar {
+    display: flex;
+    gap: 3px;
+    padding: 5px 7px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .art-bar i {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: color-mix(in oklch, var(--foreground), transparent 75%);
+  }
+
+  .art-body {
+    display: flex;
+    height: calc(100% - 17px);
+  }
+
+  .art-side {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 22%;
+    padding: 6px;
+    border-right: 1px solid var(--border);
+  }
+
+  .art-side i {
+    height: 4px;
+    border-radius: 2px;
+    background: color-mix(in oklch, var(--foreground), transparent 82%);
+  }
+
+  .art-main {
+    display: grid;
+    flex: 1;
+    grid-template-columns: repeat(3, 1fr);
+    align-content: start;
+    gap: 5px;
+    padding: 6px;
+  }
+
+  .art-card {
+    height: 1.1rem;
+    border-radius: 0.3rem;
+    background: color-mix(in oklch, var(--violet-fg), transparent 72%);
+  }
+
+  .art-line {
+    grid-column: 1 / -1;
+    width: 100%;
+    height: 1.5rem;
+  }
+
+  .art-line path {
+    fill: none;
+    stroke: var(--primary);
+    stroke-linecap: round;
+    stroke-width: 2;
+  }
+
+  .art-cursor {
+    position: absolute;
+    top: 58%;
+    left: 42%;
+    width: 11px;
+    height: 15px;
+    background: var(--foreground);
+    clip-path: polygon(0 0, 100% 68%, 58% 70%, 78% 100%, 62% 100%, 42% 74%, 0 100%);
   }
 
   /* Animation utility classes */

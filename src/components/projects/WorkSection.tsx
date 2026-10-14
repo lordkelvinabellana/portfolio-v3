@@ -1,305 +1,112 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 import { projectCaseStudies, type ProjectCaseStudy } from "@/data/portfolio";
+import { serviceFilters, serviceOf, type ServiceFilter } from "@/data/services";
 import { FadeIn } from "@/components/ui/FadeIn";
-import { ImageGallery } from "./ImageGallery";
-import { Breadcrumb } from "@/components/navigation/Breadcrumb";
+import { CaseStudyCard } from "./CaseStudyCard";
 import { cn } from "@/lib/utils";
 
-/* ── Data ── */
+const SECTIONS = serviceFilters.filter((f) => f.key !== "all");
 
-const FILTERS = [
-  { label: "All", value: "All" },
-  { label: "Product", value: "Product" },
-  { label: "Automation", value: "Automation" },
-  { label: "Client Work", value: "Client Work" },
-  { label: "Startup", value: "Startup" },
-] as const;
+const byService = (key: ServiceFilter) =>
+  projectCaseStudies
+    .filter((p) => key === "all" || serviceOf(p) === key)
+    // Featured case studies lead each group; the rest keep their order.
+    .sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
 
-type FilterValue = (typeof FILTERS)[number]["value"];
+const isFilter = (value: string | null): value is ServiceFilter =>
+  serviceFilters.some((f) => f.key === value);
 
-const countByFilter = (value: string) =>
-  projectCaseStudies.filter((p) => p.category === value).length;
-
-const GROUP_ORDER = ["Automation", "Product", "Client Work"] as const;
-
-function categoryColor(category: string): string {
-  switch (category) {
-    case "Product": return "var(--violet-fg)";
-    case "Automation": return "var(--status)";
-    case "Startup": return "var(--amber-fg)";
-    case "Client Work": return "var(--primary)";
-    default: return "var(--text-tertiary)";
-  }
-}
-
-/* ── Cards ── */
-
-function FeaturedProjectCard({ project, basePath }: { project: ProjectCaseStudy; basePath: string }) {
+function Grid({ projects, basePath }: { projects: ProjectCaseStudy[]; basePath: string }) {
   return (
-    <Link
-      href={`${basePath}/${project.slug}`}
-      className="panel panel-hover focusable flex h-full flex-col overflow-hidden rounded-xl no-underline"
-    >
-      {project.screenshots.length > 0 ? (
-        <ImageGallery images={project.screenshots} title={project.title} variant="card" />
-      ) : (
-        <div className="flex aspect-video w-full items-center justify-center bg-secondary">
-          <span className="muted-text text-[11px] font-bold uppercase tracking-widest">
-            Case study
-          </span>
-        </div>
-      )}
-      <div className="flex flex-1 flex-col gap-4 p-5">
-        <div>
-          <p
-            className="text-[11px] font-bold uppercase tracking-widest"
-            style={{ color: categoryColor(project.category) }}
-          >
-            {project.category}
-          </p>
-          <h2 className="mt-1.5 text-lg font-bold leading-tight">{project.title}</h2>
-          <p className="muted-text mt-0.5 text-sm font-medium">{project.role}</p>
-        </div>
-        <p className="quiet-text flex-1 text-sm leading-6">{project.outcomes[0]}</p>
-        <div className="flex flex-wrap gap-1.5">
-          {project.stack.slice(0, 4).map((tech) => (
-            <span
-              key={tech}
-              className="rounded-full bg-accent px-2.5 py-0.5 text-xs font-semibold text-accent-foreground"
-            >
-              {tech}
-            </span>
-          ))}
-          {project.stack.length > 4 && (
-            <span className="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold text-muted-foreground">
-              +{project.stack.length - 4}
-            </span>
-          )}
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
-            Read case study <ArrowRight className="h-3.5 w-3.5" />
-          </span>
-          {project.demoUrl && project.liveLabel && (
-            <button
-              type="button"
-              onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(project.demoUrl, "_blank", "noopener,noreferrer"); }}
-              className="focusable inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-            >
-              {project.liveLabel} <ExternalLink className="h-3 w-3" />
-            </button>
-          )}
-        </div>
-        {project.liveLabel === "View MVP" && (
-          <p className="text-[10px] font-medium text-muted-foreground/60">MVP / early-stage build</p>
-        )}
-      </div>
-    </Link>
+    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {projects.map((project, i) => (
+        <FadeIn key={project.slug} delay={Math.min(i, 5) * 40} spring>
+          <CaseStudyCard project={project} basePath={basePath} />
+        </FadeIn>
+      ))}
+    </div>
   );
 }
 
-function CompactProjectCard({ project, basePath }: { project: ProjectCaseStudy; basePath: string }) {
-  return (
-    <Link
-      href={`${basePath}/${project.slug}`}
-      className="panel panel-hover focusable flex h-full flex-col gap-4 rounded-xl p-5 no-underline"
-    >
-      <div>
-        <p
-          className="text-[11px] font-bold uppercase tracking-widest"
-          style={{ color: categoryColor(project.category) }}
-        >
-          {project.category}
-        </p>
-        <h2 className="mt-1.5 font-bold leading-snug">{project.title}</h2>
-      </div>
-      <p className="quiet-text flex-1 text-sm leading-6">{project.outcomes[0]}</p>
-      <div className="flex flex-wrap gap-1.5">
-        {project.stack.slice(0, 3).map((tech) => (
-          <span
-            key={tech}
-            className="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold text-secondary-foreground"
-          >
-            {tech}
-          </span>
-        ))}
-        {project.stack.length > 3 && (
-          <span className="muted-text rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold">
-            +{project.stack.length - 3}
-          </span>
-        )}
-      </div>
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary/70">
-          Read case study <ArrowRight className="h-3 w-3" />
-        </span>
-        {project.demoUrl && project.liveLabel && (
-          <button
-            type="button"
-            onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(project.demoUrl, "_blank", "noopener,noreferrer"); }}
-            className="focusable inline-flex items-center gap-1 rounded-full border border-border bg-secondary px-2.5 py-0.5 text-[10px] font-semibold text-secondary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-          >
-            {project.liveLabel} <ExternalLink className="h-2.5 w-2.5" />
-          </button>
-        )}
-      </div>
-      {project.liveLabel === "View MVP" && (
-        <p className="text-[10px] font-medium text-muted-foreground/60">MVP / early-stage build</p>
-      )}
-    </Link>
-  );
-}
-
-/* ── Page ── */
-
-interface WorkSectionProps {
+export function WorkGrid({
+  active,
+  onChange,
+  basePath = "/work",
+}: {
+  active: ServiceFilter;
+  onChange?: (key: ServiceFilter) => void;
   basePath?: string;
-  showBreadcrumb?: boolean;
-}
-
-export function WorkSection({ basePath = "/work", showBreadcrumb = true }: WorkSectionProps) {
-  const [activeFilter, setActiveFilter] = useState<FilterValue>("All");
-
-  const filtered =
-    activeFilter === "All"
-      ? projectCaseStudies
-      : projectCaseStudies.filter((p) => p.category === activeFilter);
-
-  const featured = activeFilter === "All" ? filtered.filter((p) => p.featured) : [];
-  const rest = activeFilter === "All" ? filtered.filter((p) => !p.featured) : filtered;
-
-  const grouped =
-    activeFilter === "All"
-      ? GROUP_ORDER.map((group) => ({
-          label: group === "Product" ? "Product / SaaS" : group,
-          category: group as string,
-          projects: rest.filter((p) => p.category === group),
-        })).filter((g) => g.projects.length > 0)
-      : null;
-
+}) {
   return (
-    <section className="site-page">
-      <div className="site-container space-y-12">
-
-        {showBreadcrumb && (
-          <Breadcrumb
-            items={[
-              { label: "Work", href: "/work" },
-            ]}
-          />
-        )}
-
-        {/* Header */}
-        <FadeIn>
-          <header className="max-w-2xl">
-            <p className="eyebrow mb-3">Work</p>
-            <h1 className="section-heading">Projects &amp; case studies.</h1>
-            <p className="quiet-text mt-5 text-lg leading-8">
-              SaaS products, automation systems, and startup MVPs. Each case study shows the problem, the decisions behind it, and what changed.
-            </p>
-          </header>
-        </FadeIn>
-
-        {/* Filter */}
-        <FadeIn delay={60}>
-          <div className="flex flex-wrap gap-2" role="group" aria-label="Filter projects by category">
-            {FILTERS.map(({ label, value }) => (
-              <button
-                key={value}
-                onClick={() => setActiveFilter(value)}
-                className={cn(
-                  "focusable rounded-full px-3.5 py-1.5 text-sm font-semibold transition-colors",
-                  activeFilter === value
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-secondary text-secondary-foreground hover:bg-accent hover:text-accent-foreground",
-                )}
-              >
-                {label}
-                {value !== "All" && (
-                  <span
-                    className={cn(
-                      "ml-1.5 text-xs",
-                      activeFilter === value ? "opacity-70" : "text-muted-foreground",
-                    )}
-                  >
-                    {countByFilter(value)}
-                  </span>
-                )}
-              </button>
-            ))}
-          </div>
-        </FadeIn>
-
-        {/* Featured (All view only) */}
-        {featured.length > 0 && (
-          <section aria-label="Featured projects">
-            <FadeIn>
-              <p className="eyebrow mb-5">Case studies</p>
-            </FadeIn>
-            <div className="grid gap-5 md:grid-cols-2">
-              {featured.map((project, i) => (
-                <FadeIn key={project.slug} delay={i * 60} spring>
-                  <FeaturedProjectCard project={project} basePath={basePath} />
-                </FadeIn>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* All view — grouped */}
-        {grouped && grouped.length > 0 && (
-          <section aria-label="All projects">
-            <FadeIn>
-              <p className="eyebrow mb-5">All work</p>
-            </FadeIn>
-            <div className="space-y-10">
-              {grouped.map((group) => (
-                <div key={group.label}>
-                  <FadeIn>
-                    <p
-                      className="mb-4 text-xs font-bold uppercase tracking-widest"
-                      style={{ color: categoryColor(group.category) }}
-                    >
-                      {group.label}
-                    </p>
-                  </FadeIn>
-                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {group.projects.map((project, i) => (
-                      <FadeIn key={project.slug} delay={i * 40}>
-                        <CompactProjectCard project={project} basePath={basePath} />
-                      </FadeIn>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Filtered view — flat */}
-        {!grouped && rest.length > 0 && (
-          <section aria-label={`${activeFilter} projects`}>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {rest.map((project, i) => (
-                <FadeIn key={project.slug} delay={i * 40}>
-                  <CompactProjectCard project={project} basePath={basePath} />
-                </FadeIn>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {filtered.length === 0 && (
-          <p className="muted-text py-12 text-center text-sm">
-            No projects in this category yet.
+    <section className="site-container space-y-12">
+      <FadeIn>
+        <header className="max-w-2xl">
+          <h1 className="section-heading">Work</h1>
+          <p className="quiet-text mt-5 text-lg leading-8">
+            Operations systems, video editing and product work. Each case study covers the problem, what I built and what changed. Clients are kept anonymous.
           </p>
-        )}
+        </header>
+      </FadeIn>
 
+      <div className="flex flex-wrap gap-2" role="group" aria-label="Filter work by service">
+        {serviceFilters.map(({ key, label }) => (
+          <button
+            key={key}
+            type="button"
+            aria-pressed={active === key}
+            onClick={() => onChange?.(key)}
+            className={cn(
+              "focusable inline-flex min-h-10 items-center rounded-full px-4 text-sm font-semibold transition-colors",
+              active === key
+                ? "bg-primary text-primary-foreground"
+                : "bg-secondary text-secondary-foreground hover:bg-accent hover:text-accent-foreground",
+            )}
+          >
+            {label}
+            <span className={cn("ml-2 text-xs", active === key ? "opacity-75" : "text-muted-foreground")}>
+              {byService(key).length}
+            </span>
+          </button>
+        ))}
       </div>
+
+      {active === "all" ? (
+        <div className="space-y-16">
+          {SECTIONS.map(({ key, label }) => {
+            const projects = byService(key);
+            if (projects.length === 0) return null;
+            return (
+              <section key={key} aria-label={label}>
+                <FadeIn>
+                  <h2 className="home-heading mb-6 !text-[clamp(1.6rem,3vw,2.25rem)]">{label}</h2>
+                </FadeIn>
+                <Grid projects={projects} basePath={basePath} />
+              </section>
+            );
+          })}
+        </div>
+      ) : (
+        <Grid projects={byService(active)} basePath={basePath} />
+      )}
     </section>
   );
+}
+
+/* Reads ?service= so links from the home page open the right tab. */
+export function WorkSection({ basePath = "/work" }: { basePath?: string }) {
+  const params = useSearchParams();
+  const fromUrl = params.get("service");
+  const [picked, setPicked] = useState<ServiceFilter | null>(null);
+  const active: ServiceFilter = picked ?? (isFilter(fromUrl) ? fromUrl : "all");
+
+  const change = (key: ServiceFilter) => {
+    setPicked(key);
+    const url = key === "all" ? window.location.pathname : `${window.location.pathname}?service=${key}`;
+    window.history.replaceState(window.history.state, "", url);
+  };
+
+  return <WorkGrid active={active} onChange={change} basePath={basePath} />;
 }

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Barlow_Condensed, Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
-import { Sidebar } from "@/components/layout/Sidebar";
-import { MobileSidebar } from "@/components/layout/MobileSidebar";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import "./globals.css";
 
 const geist = Geist({
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: "%s - Lord Kelvin Abellana",
   },
   description:
-    "Frontend Developer & Automation Builder. Building clean interfaces and streamlining workflows.",
+    "Operations systems, automation and video editing for agencies and growing brands: client portals, scorecards, onboarding automation, VSLs and short-form ads.",
 };
 
 export default function RootLayout({
@@ -47,24 +47,17 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme')||'time';var r;if(t==='light')r='light';else if(t==='dark')r='dark';else if(t==='time'){var h=new Date().getHours();r=(h>=6&&h<18)?'light':'dark';}else r=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.classList.add(r);document.documentElement.style.colorScheme=r;}catch(e){}})()`,
+            __html: `(function(){try{var t=localStorage.getItem('theme')||'time';var r;if(t==='light')r='light';else if(t==='dark')r='dark';else if(t==='time'){var h=new Date().getHours();r=(h>=6&&h<18)?'light':'dark';}else r=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.classList.add(r);document.documentElement.style.colorScheme=r;if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('motion');}catch(e){}})()`,
           }}
         />
       </head>
       <body className="bg-background text-foreground antialiased">
         <ThemeProvider>
-          <div className="flex h-screen overflow-hidden">
-            <aside className="hidden md:flex w-60 shrink-0 flex-col fixed inset-y-0 left-0 z-30">
-              <Sidebar />
-            </aside>
-
-            <div className="flex flex-col flex-1 md:ml-60 overflow-y-auto min-h-screen">
-              <MobileSidebar />
-              <main className="flex-1">
-                {children}
-              </main>
-            </div>
-          </div>
+          <SiteHeader />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <SiteFooter />
         </ThemeProvider>
       </body>
     </html>

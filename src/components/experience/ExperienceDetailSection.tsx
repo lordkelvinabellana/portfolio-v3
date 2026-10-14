@@ -230,7 +230,7 @@ export function ExperienceDetailSection({ phase }: { phase: ExperiencePhase }) {
               aria-label="Experience navigation"
             >
               <p className="eyebrow mb-5">More experience</p>
-              <div className="grid gap-3 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {prev ? (
                   <Link
                     href={`/experience/${prev.slug}`}

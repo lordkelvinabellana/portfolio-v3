@@ -48,10 +48,10 @@ export const experiences: Experience[] = [
   {
     position: "Web Designer & Developer",
     company: "Flexiwork",
-    duration: "Mar 2026 – Present",
+    duration: "Mar 2026 – Oct 2026",
     color: "violet",
     description:
-      "Agency web work across WordPress, Wix, Elementor, and HTML/Tailwind builds. Delivered client websites with fast turnaround across healthcare, travel, and service industries. Recognized for consistently delivering ahead of deadline — including a full site build in under an hour against a same-day brief.",
+      "Agency web work across WordPress, Wix, Elementor, and HTML/Tailwind builds. Delivered client websites with fast turnaround across healthcare, travel, and service industries. Recognized for consistently delivering ahead of deadline, including a full site build in under an hour against a same-day brief.",
     cta: null,
   },
   {
@@ -60,12 +60,12 @@ export const experiences: Experience[] = [
     duration: "Oct 2025 – Apr 2026",
     color: "purple",
     description:
-      "Built three startup MVPs from scratch as the primary frontend and full-stack developer alongside two founders. Worked across architecture, product decisions, and implementation using Next.js, Supabase, and TypeScript — shipping RentWise, LexaDraft, and TicketDesk.",
+      "Built three startup MVPs from scratch as the primary frontend and full-stack developer alongside two founders. Worked across architecture, product decisions, and implementation using Next.js, Supabase, and TypeScript, shipping RentWise, LexaDraft, and TicketDesk.",
     cta: null,
   },
   {
     position: "Product Owner",
-    company: "Alphaus — Ripple, Flow, Wave & Wave Pro",
+    company: "Alphaus · Ripple, Flow, Wave & Wave Pro",
     duration: "Aug – Dec 2025",
     color: "blue",
     description:
@@ -75,17 +75,17 @@ export const experiences: Experience[] = [
   },
   {
     position: "Lead Frontend Developer",
-    company: "Alphaus — Octo",
+    company: "Alphaus · Octo",
     duration: "Oct 2024 – Aug 2025",
     color: "sky",
     description:
-      "Led frontend ownership for Octo — cloud cost dashboards, recommendation systems, budget management, and weekly production releases. Built Slack-to-ClickUp bug automation adopted company-wide. Introduced PR templates that improved review consistency. Mentored junior developers and backend engineers on Vue and frontend architecture.",
+      "Led frontend ownership for Octo: cloud cost dashboards, recommendation systems, budget management, and weekly production releases. Built Slack-to-ClickUp bug automation adopted company-wide. Introduced PR templates that improved review consistency. Mentored junior developers and backend engineers on Vue and frontend architecture.",
     cta: "Learn About Octo",
     link: "https://www.alphaus.cloud/en/octo",
   },
   {
     position: "Junior Frontend Developer",
-    company: "Alphaus — Octo",
+    company: "Alphaus · Octo",
     duration: "Jul 2023 – Oct 2024",
     color: "green",
     description:
@@ -99,7 +99,7 @@ export const experiences: Experience[] = [
     duration: "2023 – Present",
     color: "slate",
     description:
-      "Built automation systems and client websites independently — AI job-matching pipelines, coaching delivery systems with approval workflows, Slack reporting automations, and WhatsApp bots. Handled 20+ web builds across WordPress, Wix, and HTML/Tailwind for clients in healthcare, travel, and services.",
+      "Built automation systems and client websites independently: AI job-matching pipelines, coaching delivery systems with approval workflows, Slack reporting automations, and WhatsApp bots. Handled 20+ web builds across WordPress, Wix, and HTML/Tailwind for clients in healthcare, travel, and services.",
     cta: null,
   },
 ];
@@ -344,7 +344,7 @@ export const automationProjects: Project[] = [
     title: "Slack → ClickUp – Bug Report Automation (Make)",
     role: "Automation Specialist – Internal Tools",
     description:
-      "Automated conversion of Slack bug report messages into structured ClickUp tasks. Extracts key details, downloads attachments, assigns to the correct list, and applies tags automatically — enabling faster triage and seamless QA handoff.",
+      "Automated conversion of Slack bug report messages into structured ClickUp tasks. Extracts key details, downloads attachments, assigns to the correct list, and applies tags automatically, enabling faster triage and seamless QA handoff.",
     stack: ["Make", "Slack API", "ClickUp API", "Webhooks"],
     images: [],
   },
@@ -470,6 +470,16 @@ export const techGroups: TechGroup[] = [
     ],
   },
   {
+    label: "Video & Motion",
+    items: [
+      { name: "VSL editing", logo: "/assets/logos/timeline.svg" },
+      { name: "Short-form ads", logo: "/assets/logos/timeline.svg" },
+      { name: "Motion graphics", logo: "/assets/logos/motion.svg" },
+      { name: "Colour grading", logo: "/assets/logos/grade.svg" },
+      { name: "CapCut", logo: "/assets/logos/timeline.svg" },
+    ],
+  },
+  {
     label: "Design & Collaboration Tools",
     items: [
       { name: "Figma", logo: "/assets/logos/figma.svg" },
@@ -513,6 +523,14 @@ export type ExperiencePhase = {
   relatedProjectSlugs: string[];
 };
 
+export type ProjectVideo = {
+  src: string;
+  poster: string;
+  title: string;
+  orientation: "portrait" | "landscape";
+  note?: string;
+};
+
 export type ProjectCaseStudy = {
   slug: string;
   title: string;
@@ -520,6 +538,8 @@ export type ProjectCaseStudy = {
     | "Product"
     | "Startup"
     | "Automation"
+    | "Operations"
+    | "Video & Motion"
     | "Personal"
     | "Client Work";
   overview: string;
@@ -531,6 +551,13 @@ export type ProjectCaseStudy = {
   outcomes: string[];
   stack: string[];
   screenshots: string[];
+  videos?: ProjectVideo[];
+  /** The system's main path, step by step (drawn as a flow diagram). */
+  flow?: string[];
+  /** n8n workflows to draw as canvases (ids from data/workflows.ts). */
+  workflows?: string[];
+  /** Where the work stands, e.g. "Live" or "In testing". */
+  status?: string;
   demoUrl?: string;
   liveLabel?: string;
   githubUrl?: string;
@@ -552,34 +579,538 @@ export type Credential = {
 
 export const projectCaseStudies: ProjectCaseStudy[] = [
   {
+    slug: "talent-agency-client-portal",
+    title: "Client Portal & KPI Dashboard for a Talent Agency",
+    category: "Operations",
+    status: "Live",
+    overview:
+      "A talent management agency's client approved creators, rates, concepts and drafts over email and chat, and the team re-keyed every answer into its Google Sheets. I built a private client portal where everything waiting on the client is one tap, written straight back to the sheets the team already runs on.",
+    businessProblem:
+      "Deals moved through several Google Sheets while approvals arrived scattered across messages. The team spent time chasing answers and copying them across, and the client had no single place to see where each creator stood. The team's Google Sheets had to stay the source of truth.",
+    role: "Ops & Automation Assistant · Penguin Ops · Lead builder on the portal and KPI dashboard",
+    contributions: [
+      "Built one-tap client decisions (approve a creator, agree a rate, pick a concept, review a draft) that write back to the right sheet row, with a 10-minute Undo.",
+      "Showed every deal's stage, contract status from PandaDoc with signed-PDF download, and live video performance from the YouTube API with a 30-day report.",
+      "Added daily jobs for Slack reminders and a sheet-structure check, plus a Monday digest email.",
+      "Gave staff a View as client mode, an audit log and a History page that shows whether each answer reached the sheet, with Retry.",
+      "Enforced access in the database with row-level security so each client only ever sees their own deals.",
+      "Built the first version of the agency's read-only KPI dashboard on the same master sheet: weekly to all-time stats, alerts, reports against target, collections and cash flow.",
+    ],
+    challenges: [
+      "The sheets had to stay the source of truth, so the portal could not own the data.",
+      "A client portal must never show one client another client's deals.",
+      "Google access usually means a stored key file, which is one more secret to leak.",
+    ],
+    solutions: [
+      "Read from the sheets and wrote answers back, with an Undo window and a visible delivery status on every answer.",
+      "Put access rules in Postgres rather than in page code, so a missed check in the UI cannot leak data.",
+      "Used Vercel's identity token for Google access, so no key file is stored anywhere.",
+    ],
+    outcomes: [
+      "Live on the agency's own domain since 2 October 2026.",
+      "Client decisions land in the team's sheet the moment they are made.",
+      "Staff can check any page exactly as the client sees it.",
+    ],
+    stack: [
+      "Next.js",
+      "Tailwind CSS v4",
+      "shadcn/ui",
+      "Supabase",
+      "Google Sheets API",
+      "PandaDoc",
+      "YouTube Data API",
+      "Resend",
+      "Slack",
+      "Vercel Cron",
+    ],
+    flow: [
+      "Google Sheets (source of truth)",
+      "Client portal",
+      "One-tap decision",
+      "Write-back with Undo",
+      "Slack reminders and Monday digest",
+    ],
+    screenshots: [
+      "/assets/work/portal-videos.jpg",
+      "/assets/work/portal-deal.jpg",
+    ],
+    relatedExperienceSlug: "penguin-ops",
+    featured: true,
+  },
+  {
+    slug: "ad-agency-scorecard",
+    title: "Weekly Scorecard for a Performance Ad Agency",
+    category: "Operations",
+    status: "Parallel run · cutover Oct 2026",
+    overview:
+      "A performance ad agency ran its weekly team targets from a Google Sheet that people typed into, and the script feeding it had quietly stopped recording results. I repaired the old system first, then replaced the sheet with a web app where every number is calculated from the source systems and nothing is typed.",
+    businessProblem:
+      "The weekly scorecard decided what the team worked on, but its numbers were partly hand-entered and the Apps Script scanner behind it had stopped recording verdicts in early September. Nobody could say which numbers were current, and every correction relied on whoever typed last.",
+    role: "Ops & Automation Assistant · Penguin Ops · Sole builder: data, app and cutover",
+    contributions: [
+      "Repaired the V1 scanner and restored 130 lost verdicts, 119 of them dated from version history.",
+      "Fed a Postgres database from Asana webhooks on every client board, an hourly read of each campaign vault, and a daily Meta spend pull.",
+      "Wrote the metric engine as tested pure functions: rows in, numerator, denominator and value out.",
+      "Shipped the scorecard, an admin Control Panel with dated targets, a Data health page that explains anything that could make a number wrong or late, and a How it works guide for the team.",
+      "Added a Monday Slack digest of last week's hits and misses with reasons, and a sheet mirror so the familiar view stays.",
+      "Deployed on the agency's own Google Cloud (Cloud Run, Cloud Scheduler, Secret Manager) behind Google sign-in, with a parallel run and cutover plan.",
+    ],
+    challenges: [
+      "People trust the sheet they know; the new numbers had to be proven before anyone switched.",
+      "Data arrives from four sources on different schedules, and any of them can be late or wrong.",
+    ],
+    solutions: [
+      "Ran a parity check against V1 and traced every difference to a known cause before cutover.",
+      "Made data problems visible on a Data health page and in the digest instead of letting them hide in a cell.",
+    ],
+    outcomes: [
+      "328 of 351 weekly values match the old sheet (93%), and all 23 differences trace to known V1 behaviour.",
+      "Derived events agree with V1 on all 12,785 events both systems hold.",
+      "130 lost verdicts recovered before the switch.",
+    ],
+    stack: [
+      "Next.js",
+      "Supabase (Postgres)",
+      "Google Cloud Run",
+      "Cloud Scheduler",
+      "Asana API",
+      "Meta Marketing API",
+      "Google Apps Script",
+      "Slack",
+    ],
+    flow: [
+      "Asana card moves (webhooks)",
+      "Vault verdicts and spend (hourly)",
+      "Meta spend (daily)",
+      "Metric engine",
+      "Scorecard and Monday digest",
+    ],
+    screenshots: [
+      "/assets/work/scorecard-weekly.jpg",
+      "/assets/work/scorecard-data-health.jpg",
+    ],
+    relatedExperienceSlug: "penguin-ops",
+    featured: true,
+  },
+  {
+    slug: "google-ads-agency-operations",
+    title: "Client Operations for a Google Ads Agency",
+    category: "Operations",
+    overview:
+      "A Google Ads agency serving nearly 80 e-commerce clients onboarded each one by hand across Typeform, ClickUp and Slack. I built its operations layer in n8n: 14 workflows that onboard clients and stores, assign media buyers, pull spend and revenue, and review every client channel each week.",
+    businessProblem:
+      "Every new client meant the same long checklist: the client and store in ClickUp, onboarding tasks, a checklist and client doc, internal and external Slack channels, an invite and a welcome message. Steps got missed, and with dozens of clients nobody had a weekly read on how each relationship was going.",
+    role: "Ops & Automation Assistant · Penguin Ops · Builder and operator of all 14 workflows",
+    contributions: [
+      "New client onboarding: one Typeform submission runs a 38-node workflow, from the ClickUp client, store and tasks to internal and external Slack channels, a Slack Connect invite and a pinned welcome message.",
+      "Store onboarding and buyer assignment flows that invite the media buyer and assign their stores.",
+      "A weekly Slack pulse: every Monday it reads each client's channels and has Claude review the week, so issues surface before the client raises them.",
+      "Spend, ROAS and fee tracking: Google Ads spend pulled through the manager account, converted to EUR at ECB rates and written into ClickUp.",
+      "Shopify store connection with a daily revenue pull, a 26-question funnel brief into ClickUp, broadcasts to client channels, and an alert when an onboarding fails.",
+      "Generated every workflow from Python scripts so they can be rebuilt and versioned, and wrote a client-facing Claude Console setup guide.",
+    ],
+    challenges: [
+      "Onboarding touches four tools, and a half-finished run is worse than none.",
+      "A weekly AI review across nearly 80 channels has to stay cheap and quiet.",
+    ],
+    solutions: [
+      "Added an onboarding error alert so a failed run is caught and finished by a person.",
+      "Gave the AI one bounded job per client per week, estimated at about $20 a month for the whole digest.",
+    ],
+    outcomes: [
+      "Client onboarding went from a manual checklist to one form submission.",
+      "14 workflows built on the agency's self-hosted n8n, reproducible from code.",
+      "Every client channel gets a weekly review without anyone reading them all.",
+    ],
+    stack: [
+      "n8n (self-hosted)",
+      "ClickUp API",
+      "Slack API",
+      "Typeform",
+      "Shopify Admin API",
+      "Google Ads API",
+      "Claude API",
+      "Python",
+    ],
+    workflows: ["client-onboarding", "weekly-pulse", "spend-roas"],
+    flow: [
+      "Typeform intake",
+      "n8n (38 nodes)",
+      "ClickUp client, store and tasks",
+      "Slack channels and invite",
+      "Pinned welcome message",
+    ],
+    screenshots: [
+      "/assets/work/ops-pulse-cover.jpg",
+    ],
+    relatedExperienceSlug: "penguin-ops",
+    featured: true,
+  },
+  {
+    slug: "retail-business-os",
+    title: "Business OS for a Three-Brand Retail Group",
+    category: "Operations",
+    status: "In testing",
+    overview:
+      "A haircare retail group with three businesses (online retail, a salon brand and wholesale) had a CEO dashboard and 47 n8n workflows, but no shared view of what to do next. I audited the stack, then rebuilt the dashboard and the agent layer as one Business OS: agents analyse and recommend, people approve and act, and results come back to be checked.",
+    businessProblem:
+      "Data lived in Shopify, Omnisend, Monday.com and dozens of automations. The dashboard reported numbers but did not say what needed attention, and it was hard to tell which automations were healthy.",
+    role: "Automation & Web Developer · Client engagement",
+    contributions: [
+      "Audited the existing system (369 commits, the Cloudflare setup and 47 n8n workflows) and wrote the go-live proposal.",
+      "Designed a closed loop: connectors bring data in, specialist agents analyse only their own area, recommendations enter an approval queue by risk and spend, approved work becomes Monday.com tasks, and results are compared with the original recommendation.",
+      "Rebuilt the CEO dashboard UI, with a sample-data preview build for review.",
+      "Kept the existing n8n ingestion and gave it one front door: n8n maps each vendor's data (ads, bookings, messaging, CRM, content) to a standard format and posts it to a single validated connector endpoint, up to 500 records a batch.",
+      "Wired the agents to run daily at 07:00 New York on real data only when they are switched on and their data is less than 45 days old, otherwise they wait instead of guessing.",
+      "Built a two-step purchase-order flow for low stock that opens a Monday.com task, email and SMS results pages and a UGC video agent, and started the Meta ads feed.",
+      "Wrote an n8n setup guide, including MCP access, so the team that maintains the workflows can work on them safely.",
+    ],
+    challenges: [
+      "Sixteen agents across three businesses is a lot of moving parts to trust at once.",
+      "Recommendations that spend money or change stock need a human decision.",
+    ],
+    solutions: [
+      "Brought agents online one at a time on a test site and tracked every run.",
+      "Routed every recommendation through an approval queue weighted by risk and spend.",
+    ],
+    outcomes: [
+      "4 of 16 agents running on the test site: the troubleshooting agent completed 164 of 165 runs cleanly and the daily briefing 21 of 21.",
+      "Go-live proposal and a progress update delivered.",
+    ],
+    stack: [
+      "React",
+      "Vite",
+      "Cloudflare Pages",
+      "Cloudflare Workers",
+      "Cloudflare D1",
+      "n8n",
+      "n8n MCP",
+      "Monday.com",
+      "Shopify",
+      "Omnisend",
+      "Claude",
+    ],
+    flow: [
+      "n8n ingestion (47 workflows)",
+      "Validated connector API",
+      "Specialist agents, daily 07:00",
+      "Approval queue",
+      "Monday.com tasks and results check",
+    ],
+    screenshots: [
+      "/assets/work/avh-overview.jpg",
+      "/assets/work/avh-automations.jpg",
+      "/assets/work/avh-decisions.jpg",
+      "/assets/work/avh-inventory.jpg",
+      "/assets/work/avh-briefing.jpg",
+    ],
+    relatedExperienceSlug: "retail-group",
+    featured: false,
+  },
+  {
+    slug: "governed-ai-media-buying",
+    title: "MBOS: Governed AI Media Buying System",
+    category: "Operations",
+    status: "Simulated · not live",
+    overview:
+      "An AI system that runs paid ads on Meta and Google, creative production and content for consumer brands, built so it cannot spend money on its own. Spend is off until switched on, campaigns are created paused, and releasing money needs two people.",
+    businessProblem:
+      "AI agents can draft campaigns and creative quickly, but an agent with a budget is a liability. The system had to keep the speed without the risk: every spend decision approved, logged and reversible, and one switch that stops everything.",
+    role: "Systems Implementation Associate · Stakra · MBOS builder",
+    contributions: [
+      "Built the template repository each brand instance is created from: kill switch, Google and Meta signal readers, the media-buyer agent, and an Airtable ledger for creative and experiments.",
+      "Wrote 79 contracts that define what each part may and may not do.",
+      "Built Watchtower, a read-only dashboard that shows whether every automation, agent and webhook is alive, and wired MBOS approval events into it.",
+      "Prepared the Phase 1 operator demo.",
+    ],
+    challenges: [
+      "Spend safety has to hold even when an agent or a person makes a mistake.",
+      "Automations fail silently; a dead webhook is usually found a week late.",
+    ],
+    solutions: [
+      "Made every money path fail closed and require two-person release.",
+      "Gave Watchtower five status states, a Needs attention list and monitoring of the monitor itself, so a silent failure becomes a visible one.",
+    ],
+    outcomes: [
+      "The full pipeline suite passes 9,998 tests with no failures in a simulated instance.",
+      "Watchtower v1 complete: all 17 planned chunks shipped, 19 connections monitored.",
+      "Not switched on yet; the first brand runs in simulation.",
+    ],
+    stack: [
+      "Node.js",
+      "GitHub Actions",
+      "Airtable",
+      "Google Ads API",
+      "Meta Marketing API",
+      "Next.js",
+      "Supabase",
+      "Healthchecks",
+    ],
+    flow: [
+      "Ad signals",
+      "Media-buyer agent",
+      "Two-person approval",
+      "Campaign created paused",
+      "Watchtower and kill switch",
+    ],
+    screenshots: [
+      "/assets/work/mbos-authority.jpg",
+    ],
+    relatedExperienceSlug: "stakra",
+    featured: false,
+  },
+  {
+    slug: "salon-operations-app",
+    title: "Salon OS: Operations App for Small Salons",
+    category: "Operations",
+    status: "In client review",
+    overview:
+      "A white-label operations app for small salons, built first for a salon in Metro Manila: point of sale with stylist commissions, a daily sales quota with a staff bonus, customers with follow-up reminders, inventory by supplier, expenses, attendance, payroll and payslips.",
+    businessProblem:
+      "Small salons run on notebooks and spreadsheets. Commissions are worked out by hand at month end, stock is reordered when it runs out, and regular customers drift away because nobody remembers to follow up.",
+    role: "Systems Implementation Associate · Stakra",
+    contributions: [
+      "Point of sale for services and retail with flexible pricing, and commission snapshots so a later rate change never rewrites past pay.",
+      "Daily sales quota with a staff bonus, attendance with late deductions, payroll runs and payslips.",
+      "Customer records with visit history and a 90-day follow-up list; inventory grouped by supplier with a restock list.",
+      "Reports with CSV export, a first-run setup wizard that brands the app for each salon, a daily Google Sheets mirror, and Admin and Receptionist roles.",
+    ],
+    challenges: [
+      "Pay and commission rules have edge cases that are rarely written down.",
+    ],
+    solutions: [
+      "Wrote the business rules as a spec with worked examples, logged every decision made where the spec was silent, and listed open questions for the owner to confirm.",
+    ],
+    outcomes: [
+      "Complete first version with 32 automated tests, ready for the owner's review.",
+      "White-label from the start: the next salon is a setup wizard away.",
+    ],
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Prisma",
+      "PostgreSQL (Neon)",
+      "shadcn/ui",
+      "Recharts",
+      "Vitest",
+      "Vercel",
+    ],
+    flow: [
+      "Point of sale",
+      "Commission snapshot",
+      "Daily quota and bonus",
+      "Payroll and payslips",
+      "Reports and Sheets mirror",
+    ],
+    screenshots: [
+      "/assets/work/salon-cover.jpg",
+      "/assets/work/salon-checkout.jpg",
+      "/assets/work/salon-home.jpg",
+    ],
+    relatedExperienceSlug: "stakra",
+    featured: false,
+  },
+  {
+    slug: "clipt-vsl",
+    title: "Clipt: Sales Video (VSL)",
+    category: "Video & Motion",
+    overview:
+      "A 35-minute sales video for Clipt, a mobile foot-care training company, cut from hours of 4K footage of its founder. Every section carries on-brand panels timed to what he says, full-screen statements for the big moments, and framing that follows the graphics, so a long video stays easy to watch from start to finish.",
+    businessProblem:
+      "A long sales video only works if people keep watching. Raw founder footage has retakes, long pauses and no visual structure, and generic templates make a brand look like everyone else. Clipt needed the full video plus a steady stream of shorter pieces, all looking like they came from the same company.",
+    role: "Video Editor & Motion Graphic Designer · Clipt",
+    contributions: [
+      "Cleaned the raw takes: retakes, fillers and mouth clicks removed, pauses tightened, repeated lines tracked across the whole script so nothing is said twice.",
+      "Designed frosted information panels in Clipt's brand style that appear in step with his speech, with framing that follows them: in close beside one panel, wide between two.",
+      "Built full-screen statements, title cards, a coverage map of the United States and Canada, and an animated Clipt logo from the brand's own vector files.",
+      "Built a cold open and a words-behind-the-speaker effect for the lines that need to land hardest.",
+      "Graded colour by measuring each location's footage, and mixed UI sound effects at levels that sit under his voice.",
+      "Built a brand-driven editing system around it: brand rules, reusable motion graphics and a checklist for every format, so each new piece comes out consistent and fast.",
+    ],
+    challenges: [
+      "Thirty-five minutes is a long time to hold attention with one speaker in one setting.",
+      "The graphics had to match the brand book exactly and stay calm: no harsh zooms, no fake shadows on the logo, and every element animating out instead of vanishing on a cut.",
+    ],
+    solutions: [
+      "Gave every section a visual job: a panel that builds point by point, a full-screen statement, or a wide two-panel comparison for offers and pricing.",
+      "Wrote the brand and motion rules down once and applied them to every section, so the last block looks like the first.",
+    ],
+    outcomes: [
+      "A complete 35-minute VSL delivered in 4K, with a consistent look across every section.",
+      "The same brand system now drives Clipt's ads, testimonials and title cards.",
+    ],
+    stack: ["VSL editing", "Motion graphics", "Brand system", "Colour grading", "Sound design", "4K delivery"],
+    screenshots: [
+      "/assets/clipt/stills/vsl-panel.jpg",
+      "/assets/clipt/stills/vsl-two-panels.jpg",
+      "/assets/clipt/stills/vsl-statement.jpg",
+      "/assets/clipt/stills/vsl-booking-panel.jpg",
+    ],
+    videos: [
+      {
+        src: "/assets/clipt/vsl-highlights.mp4",
+        poster: "/assets/clipt/vsl-highlights.jpg",
+        title: "VSL highlights",
+        orientation: "landscape",
+        note: "About a minute from the 35-minute sales video",
+      },
+      {
+        src: "/assets/clipt/vsl-text-behind.mp4",
+        poster: "/assets/clipt/vsl-text-behind.jpg",
+        title: "Words behind the speaker",
+        orientation: "landscape",
+      },
+      {
+        src: "/assets/clipt/vsl-3d-panels.mp4",
+        poster: "/assets/clipt/vsl-3d-panels.jpg",
+        title: "Panels timed to speech",
+        orientation: "landscape",
+      },
+      {
+        src: "/assets/clipt/logo-3d-intro.mp4",
+        poster: "/assets/clipt/logo-3d-intro.jpg",
+        title: "Animated logo intro",
+        orientation: "landscape",
+      },
+    ],
+    relatedExperienceSlug: "clipt",
+    featured: true,
+  },
+  {
+    slug: "clipt-short-form-ads-testimonials",
+    title: "Clipt: Short-Form Ads & Nurse Testimonials",
+    category: "Video & Motion",
+    overview:
+      "Vertical ads (most around 15 seconds) and nurse testimonials for social, built from the same brand system as the sales video. The headline is on screen from the first frame, zooms ease onto the stressed words, and branded cards appear exactly when the speaker says them.",
+    businessProblem:
+      "Short ads live or die in the first second, and testimonials shot on a phone rarely match the brand's look. Each piece had to start strong, stay on the speaker's face, and look like it came from the same company as the sales video.",
+    role: "Video Editor & Motion Graphic Designer · Clipt",
+    contributions: [
+      "Cut four vertical ads from the client's ad guide, finding each quoted line in the 4K camera originals and reframing to 9:16 on the face.",
+      "Added half-second eased zooms on stressed words with the face held in place, about one every 10 to 12 seconds, each with a soft whoosh.",
+      "Edited two nurse testimonials with a branded card under the chin timed to their words, the Clipt Verified badge, and each name with its credential.",
+      "Matched colour and loudness to the sales video, and left captions off the master so they can be styled last for each platform.",
+    ],
+    challenges: [
+      "Snap zooms read as harsh and frequent moves read as shaky; the right pace had to be found by testing.",
+      "Phone audio and lighting vary between testimonials.",
+    ],
+    solutions: [
+      "Settled on sparse, eased zooms (one per 10 to 12 seconds) after reviewing test cuts, and made that the standard for every ad.",
+      "Measured each clip's colour and levels against the sales video instead of grading by eye.",
+    ],
+    outcomes: [
+      "Four ads and two testimonials cut at 2K (1440 × 2560), consistent with the sales video's look.",
+      "New ads start from the same brand recipe, so the fifth ad follows the same standard as the first.",
+    ],
+    stack: ["Short-form ads", "Vertical video", "Motion graphics", "Colour grading", "Sound design", "CapCut"],
+    screenshots: [],
+    videos: [
+      {
+        src: "/assets/clipt/ad-keep-your-hospital-role.mp4",
+        poster: "/assets/clipt/ad-keep-your-hospital-role.jpg",
+        title: "Keep your hospital role",
+        orientation: "portrait",
+      },
+      {
+        src: "/assets/clipt/ad-where-do-you-start.mp4",
+        poster: "/assets/clipt/ad-where-do-you-start.jpg",
+        title: "Where do you start",
+        orientation: "portrait",
+      },
+      {
+        src: "/assets/clipt/ad-more-than-nail-trimming.mp4",
+        poster: "/assets/clipt/ad-more-than-nail-trimming.jpg",
+        title: "More than nail trimming",
+        orientation: "portrait",
+      },
+      {
+        src: "/assets/clipt/ad-manageable-caseload.mp4",
+        poster: "/assets/clipt/ad-manageable-caseload.jpg",
+        title: "Manageable caseload",
+        orientation: "portrait",
+      },
+      {
+        src: "/assets/clipt/testimonial-3d-cards.mp4",
+        poster: "/assets/clipt/testimonial-3d-cards.jpg",
+        title: "Nurse testimonial",
+        orientation: "portrait",
+      },
+    ],
+    relatedExperienceSlug: "clipt",
+    featured: true,
+  },
+  {
+    slug: "bouquet-cipher",
+    title: "Bouquet Cipher",
+    category: "Personal",
+    overview:
+      "Type a message and a hand-drawn bouquet grows with every keystroke. The flowers are the message: every word is a stem, vowels are flowers and consonants are leaves. Share it with a link or a QR gift tag, and the recipient's page unwraps the bouquet and reads it back into words.",
+    businessProblem:
+      "Digital messages all look the same. I wanted a way to send something that feels made by hand, where the gift itself carries the words and only the person holding the link can read them.",
+    role: "Solo Designer & Developer · Personal project",
+    contributions: [
+      "Designed a floral alphabet: six flowers for the vowels, leaf shapes in three tints for consonants, and their own buds, curls and berries for punctuation and numbers.",
+      "Gave every bouquet its own random key that shuffles the alphabet and picks the arrangement and palette, so two identical messages grow into different bouquets.",
+      "Built the recipient's journey: the wrapped bouquet, unwrapping, a wax-sealed envelope, and the letter written out as each flower lights up.",
+      "Added decoding by camera scan of the QR tag, image upload, or typed code, plus optional accounts with Sent, Received and Inbox and replies between senders.",
+    ],
+    challenges: [
+      "The bouquet you watch grow has to be exactly the one that is sent and decoded.",
+      "Shuffled alphabets must still look good: no withered leaves, no clashing palettes.",
+    ],
+    solutions: [
+      "The composer holds the draft's key, so the preview and the sent bouquet are generated from the same key.",
+      "Kept vowels as flowers and leaves in fresh greens whatever the key, and enforced it with tests.",
+    ],
+    outcomes: [
+      "A complete, shareable product: compose, wrap, send, scan and read, with optional accounts.",
+      "Tested with unit, property-based and end-to-end tests.",
+    ],
+    stack: ["Next.js", "TypeScript", "Supabase", "SVG", "Vitest", "Playwright"],
+    screenshots: ["/assets/bouquet/bouquet-cover.jpg", "/assets/bouquet/bouquet-gift-tag.jpg"],
+    videos: [
+      {
+        src: "/assets/bouquet/bouquet-grow.mp4",
+        poster: "/assets/bouquet/bouquet-grow.jpg",
+        title: "A message growing into a bouquet",
+        orientation: "portrait",
+      },
+    ],
+    demoUrl: "https://bouquet-cipher.vercel.app",
+    liveLabel: "Visit site",
+    relatedExperienceSlug: "personal",
+    featured: false,
+  },
+  {
     slug: "octo",
-    title: "Octo — Cloud Cost Management Platform",
+    title: "Octo: Cloud Cost Management Platform",
     category: "Product",
     overview:
-      "Octo's product was strong. The delivery system around it wasn't. PR reviews were inconsistent, bug reporting required switching tools, and weekly releases meant every friction point had a real cost. I owned frontend delivery — and the surrounding systems that kept the team moving.",
+      "Octo's product was strong. The delivery system around it wasn't. PR reviews were inconsistent, bug reporting required switching tools, and weekly releases meant every friction point had a real cost. I owned frontend delivery, and the surrounding systems that kept the team moving.",
     businessProblem:
-      "Octo's product was strong, but delivery friction was quietly compounding. PR reviews were inconsistent, onboarding had unnecessary steps, and bug reporting required switching between multiple tools. Weekly releases meant these problems had real cost — not from lack of effort, but because the system around the work was creating drag. Fixing the product meant fixing how the team moved.",
-    role: "Lead Frontend Developer — Octo by Alphaus",
+      "Octo's product was strong, but delivery friction was quietly compounding. PR reviews were inconsistent, onboarding had unnecessary steps, and bug reporting required switching between multiple tools. Weekly releases meant these problems had real cost, not from lack of effort, but because the system around the work was creating drag. Fixing the product meant fixing how the team moved.",
+    role: "Lead Frontend Developer · Octo by Alphaus",
     contributions: [
       "Built and maintained cloud cost dashboards, recommendation views, budget management, and reporting systems using Vue, Vuetify, and ECharts.",
-      "Introduced PR templates with structured sections (problem, scope, screenshots, release notes) — standardized reviews and made weekly deployments more predictable.",
-      "Built a Slack-to-ClickUp bug reporting automation in Make, then rebuilt it in n8n for stronger parsing — became the company-wide standard, recognized by leadership and noticed by the CEO.",
+      "Introduced PR templates with structured sections (problem, scope, screenshots, release notes), which standardized reviews and made weekly deployments more predictable.",
+      "Built a Slack-to-ClickUp bug reporting automation in Make, then rebuilt it in n8n for stronger parsing. It became the company-wide standard, recognized by leadership and noticed by the CEO.",
       "Simplified the user onboarding flow, removing friction points that slowed early product adoption.",
       "Integrated Mixpanel analytics and i18n localization across core product modules.",
       "Mentored junior developers and backend engineers on frontend architecture, codebase structure, and frontend-to-API workflows.",
     ],
     challenges: [
-      "Operational improvements — PR templates, workflow standards, automation — rarely feel urgent next to feature work, even when they protect long-term delivery speed.",
+      "Operational improvements (PR templates, workflow standards, automation) rarely feel urgent next to feature work, even when they protect long-term delivery speed.",
       "Financial data dashboards need to feel trustworthy, not just functional. Users make real spending decisions from these views.",
       "A new internal reporting tool only creates value if people adopt it. Building it inside the tool teams already used was the only way to make that work.",
     ],
     solutions: [
-      "Treated system improvements as delivery investments, not optional cleanup — PR templates and Git workflow standards reduced review friction and protected future velocity.",
+      "Treated system improvements as delivery investments, not optional cleanup: PR templates and Git workflow standards reduced review friction and protected future velocity.",
       "Focused dashboard and report design on data clarity and consistent formatting, not visual complexity.",
-      "Built the bug workflow inside Slack itself, reducing adoption friction to near zero — the tool was already open.",
+      "Built the bug workflow inside Slack itself, reducing adoption friction to near zero, since the tool was already open.",
     ],
     outcomes: [
-      "Bug reporting automation adopted company-wide — eliminated manual ticket triage and was recognized directly by the CEO.",
+      "Bug reporting automation adopted company-wide: it eliminated manual ticket triage and was recognized directly by the CEO.",
       "Faster, more consistent PR reviews and weekly releases across the product team.",
       "Improved frontend onboarding time for new developers and reduced dependency bottlenecks across the team.",
     ],
@@ -608,15 +1139,15 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
   },
   {
     slug: "rentwise-qualification-platform",
-    title: "RentWise — Rental Qualification Platform",
+    title: "RentWise: Rental Qualification Platform",
     category: "Product",
     overview:
       "Most rental platforms solve discovery.\nThey don't solve approval confidence.\n\nRenters apply to places they won't qualify for.\nLandlords review applicants who were never a good fit.",
     businessProblem:
-      "Most rental platforms solve visibility, not decision quality. Renters apply to properties they won't qualify for. Landlords receive applications that were never a good fit. Both sides waste time and energy on bad matches. The core problem wasn't finding listings — it was knowing which ones were actually worth pursuing. Qualification logic needed to come before the application, not after rejection.",
-    role: "Full Stack Developer — RentWise",
+      "Most rental platforms solve visibility, not decision quality. Renters apply to properties they won't qualify for. Landlords receive applications that were never a good fit. Both sides waste time and energy on bad matches. The core problem wasn't finding listings. It was knowing which ones were actually worth pursuing. Qualification logic needed to come before the application, not after rejection.",
+    role: "Full Stack Developer · RentWise",
     contributions: [
-      "Built the detailed renter onboarding flow capturing income, household size, guarantors, pets, vehicles, and rental history — mirroring what landlords actually evaluate.",
+      "Built the detailed renter onboarding flow capturing income, household size, guarantors, pets, vehicles, and rental history, mirroring what landlords actually evaluate.",
       "Implemented hard-requirement filtering that removes clearly mismatched listings before a renter considers applying.",
       "Developed a multi-factor scoring layer that ranks listings by fit strength, not just availability.",
       "Integrated third-party background check APIs for credit, criminal, and screening data.",
@@ -624,15 +1155,15 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Collaborated directly with founders on qualification logic, scoring weights, and product flow validation.",
     ],
     challenges: [
-      "Qualification filtering that's too aggressive breaks trust; too lenient removes the product's core value — the right calibration required real business judgment, not just technical rules.",
+      "Qualification filtering that's too aggressive breaks trust; too lenient removes the product's core value. The right calibration required real business judgment, not just technical rules.",
       "Handling sensitive personal data (SSN, background check inputs) responsibly without building internal screening infrastructure.",
     ],
     solutions: [
-      "Modeled qualification rules after real landlord criteria so filtering felt accurate and fair — users saw it as helpful, not restrictive.",
+      "Modeled qualification rules after real landlord criteria so filtering felt accurate and fair, so users saw it as helpful, not restrictive.",
       "Delegated screening data to third-party background check APIs, keeping sensitive information outside internal storage and reducing compliance exposure.",
     ],
     outcomes: [
-      "Transformed the product from a listing marketplace into a qualification engine — a genuine competitive differentiator that neither Zillow nor Apartments.com offered.",
+      "Transformed the product from a listing marketplace into a qualification engine: a genuine competitive differentiator that neither Zillow nor Apartments.com offered.",
       "Reduced wasted application effort for renters and improved applicant lead quality for landlords on both sides of the match.",
     ],
     stack: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS"],
@@ -653,15 +1184,15 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
   },
   {
     slug: "lexadraft-contract-builder",
-    title: "LexaDraft — Contract Template & Workflow System",
+    title: "LexaDraft: Contract Template & Workflow System",
     category: "Product",
     overview:
-      "The same contract, rewritten from scratch every time.\n\nIn one construction business, hours were spent rewriting documents that were structurally identical — only names, dates, and amounts changed.",
+      "The same contract, rewritten from scratch every time.\n\nIn one construction business, hours were spent rewriting documents that were structurally identical: only names, dates, and amounts changed.",
     businessProblem:
-      "A founder's construction company was manually rewriting contracts for every new job. The structure was nearly identical — company info, clauses, dates, signatures — but each contract still required manual editing, review, and rework. Operational friction like this is expensive because it accumulates quietly. Hundreds of manual contract cycles per year was the real cost, not any single contract.",
-    role: "Product Builder + Frontend Lead — LexaDraft (Ardexa)",
+      "A founder's construction company was manually rewriting contracts for every new job. The structure was nearly identical (company info, clauses, dates, signatures), but each contract still required manual editing, review, and rework. Operational friction like this is expensive because it accumulates quietly. Hundreds of manual contract cycles per year was the real cost, not any single contract.",
+    role: "Product Builder + Frontend Lead · LexaDraft (Ardexa)",
     contributions: [
-      "Built the template builder where contracts are written once with named variable fields — company, owner, dates, payment terms, signatures — making templates reusable assets rather than one-time files.",
+      "Built the template builder where contracts are written once with named variable fields (company, owner, dates, payment terms, signatures), making templates reusable assets rather than one-time files.",
       "Developed the document builder flow: select template → fill variable values → generate final contract, eliminating manual reformatting entirely.",
       "Implemented PDF export, Word export, and email delivery so the workflow completed through delivery, not just drafting.",
       "Architected the approval and signing workflow for future expansion toward full contract lifecycle management.",
@@ -669,14 +1200,14 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
     ],
     challenges: [
       "Templates too rigid push users back to manual editing. Templates too flexible lose the speed advantage. Finding that calibration required understanding the actual contract workflow, not just building an editor.",
-      "The visible product was a form interface. The real value was the workflow behind it — that required operational thinking more than frontend skill.",
+      "The visible product was a form interface. The real value was the workflow behind it, and that required operational thinking more than frontend skill.",
     ],
     solutions: [
-      "Made variables first-class template elements so the reuse story was clear from day one — users saw templates as assets, not just saved drafts.",
+      "Made variables first-class template elements so the reuse story was clear from day one: users saw templates as assets, not just saved drafts.",
       "Kept the document builder deliberately minimal (select, fill, generate) so the time savings were immediately obvious and the adoption case was self-evident.",
     ],
     outcomes: [
-      "Eliminated repetitive manual contract editing — preparation time dropped significantly, and formatting inconsistency was removed by design.",
+      "Eliminated repetitive manual contract editing: preparation time dropped significantly, and formatting inconsistency was removed by design.",
       "Transformed contract creation from isolated document work into a repeatable operational workflow: build once, reuse many times.",
     ],
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "Shadcn UI"],
@@ -805,7 +1336,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Kept alert configuration close to delivery-channel context.",
     ],
     outcomes: [
-      "Removed the friction between setting cost thresholds and actually getting notified — no engineering handoff needed.",
+      "Removed the friction between setting cost thresholds and actually getting notified, with no engineering handoff needed.",
       "Supported proactive budget and cost monitoring workflows.",
     ],
     stack: [
@@ -848,7 +1379,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Used simple responsive components to keep implementation fast and consistent.",
     ],
     outcomes: [
-      "Placed 2nd at Startup Weekend Bohol — built and validated a working product under tight time constraints.",
+      "Placed 2nd at Startup Weekend Bohol: built and validated a working product under tight time constraints.",
       "Produced a working MVP story for marketplace validation.",
     ],
     stack: ["HTML", "Tailwind CSS", "JavaScript"],
@@ -955,7 +1486,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Created confirmation paths so reporters can see task creation results.",
     ],
     outcomes: [
-      "Adopted across the company — removed the need to switch tools just to report bugs and became the default reporting workflow.",
+      "Adopted across the company. It removed the need to switch tools just to report bugs and became the default reporting workflow.",
       "Improved QA handoff consistency from Slack to ClickUp.",
     ],
     stack: [
@@ -1202,26 +1733,26 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
     overview:
       "Job boards don't have a discovery problem. They have a filtering problem. Every manual search session is mostly noise. This pipeline replaces that process with a decision engine: scraping, keyword filtering, AI scoring, and delivering only high-match opportunities as structured notifications.",
     businessProblem:
-      "Manual job searching is a volume problem disguised as a visibility problem. Refreshing boards, scanning duplicates, and trying to evaluate fit manually creates decision fatigue without improving decision quality. The real problem was filtering — separating strong opportunities from noise before spending attention on them. Without a system, quantity overwhelms quality and the best roles get buried.",
-    role: "Full System Owner — Architecture, Automation, AI Integration",
+      "Manual job searching is a volume problem disguised as a visibility problem. Refreshing boards, scanning duplicates, and trying to evaluate fit manually creates decision fatigue without improving decision quality. The real problem was filtering: separating strong opportunities from noise before spending attention on them. Without a system, quantity overwhelms quality and the best roles get buried.",
+    role: "Full System Owner: Architecture, Automation, AI Integration",
     contributions: [
       "Designed a 6-stage pipeline: scraping → deduplication → keyword filtering → AI scoring → threshold filtering → HTML email delivery.",
       "Built a cron-driven scraper polling every 5 minutes with Google Sheets-backed deduplication to prevent repeated alerts.",
-      "Created a two-pass keyword filter (strong-match and avoid-keywords) to remove obvious mismatches before reaching the AI layer — logic first, AI second.",
-      "Integrated OpenAI scoring that evaluates each listing against skills, salary, workload preferences, and stack fit — returning a match score, pros, cons, and a shouldApply recommendation.",
+      "Created a two-pass keyword filter (strong-match and avoid-keywords) to remove obvious mismatches before reaching the AI layer. Logic first, AI second.",
+      "Integrated OpenAI scoring that evaluates each listing against skills, salary, workload preferences, and stack fit, returning a match score, pros, cons, and a shouldApply recommendation.",
       "Set a strict threshold: only listings where score ≥ 75 and shouldApply = true continue to notification, protecting alert signal quality.",
-      "Generated structured HTML emails with full AI analysis, application reasoning, and a direct job link — turning a notification into an immediate action.",
+      "Generated structured HTML emails with full AI analysis, application reasoning, and a direct job link, turning a notification into an immediate action.",
     ],
     challenges: [
-      "Routing everything through AI would make the pipeline slow, expensive, and unreliable — filtering logic had to come before AI, not after.",
+      "Routing everything through AI would make the pipeline slow, expensive, and unreliable. Filtering logic had to come before AI, not after.",
       "Notification trust is fragile: one week of noise trains a user to ignore alerts entirely, breaking the system's core value.",
     ],
     solutions: [
-      "Built keyword filtering as a pre-AI gate — strong candidates are pre-qualified by logic before LLM evaluation, which cuts token cost and improves response quality.",
-      "Enforced a strict match threshold so the system says no far more often than yes — signal quality beats volume.",
+      "Built keyword filtering as a pre-AI gate: strong candidates are pre-qualified by logic before LLM evaluation, which cuts token cost and improves response quality.",
+      "Enforced a strict match threshold so the system says no far more often than yes. Signal quality beats volume.",
     ],
     outcomes: [
-      "Replaced manual job board browsing entirely — only genuinely strong opportunities trigger action.",
+      "Replaced manual job board browsing entirely: only genuinely strong opportunities trigger action.",
       "Reduced job search time and decision fatigue while improving application quality by concentrating effort on pre-qualified matches.",
     ],
     stack: [
@@ -1249,25 +1780,25 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
     overview:
       "The problem wasn't sending messages.\nIt was the time spent preparing them.",
     businessProblem:
-      "A fitness coaching business had a preparation problem, not a messaging problem. Every week, the coach manually reviewed each client's progress, compared it with prior weeks, and wrote personalized updates from scratch. As the client roster grew, this became the primary bottleneck. The coach's real value is judgment and relationships — not repetitive analysis that a system could handle. The goal was to remove the prep work without removing the human quality.",
+      "A fitness coaching business had a preparation problem, not a messaging problem. Every week, the coach manually reviewed each client's progress, compared it with prior weeks, and wrote personalized updates from scratch. As the client roster grew, this became the primary bottleneck. The coach's real value is judgment and relationships, not repetitive analysis that a system could handle. The goal was to remove the prep work without removing the human quality.",
     role: "Workflow Architect + Automation Builder",
     contributions: [
-      "Designed an immutable weekly snapshot system — each client's progress is preserved as a discrete record rather than overwritten, creating a reliable coaching history.",
+      "Designed an immutable weekly snapshot system: each client's progress is preserved as a discrete record rather than overwritten, creating a reliable coaching history.",
       "Built the AI analysis layer that compares previous and current progress data, then generates a draft coaching message with observations, recommendations, and motivational framing.",
-      "Implemented the coach approval gate — every generated message requires review before delivery, making human judgment the final authority.",
+      "Implemented the coach approval gate: every generated message requires review before delivery, making human judgment the final authority.",
       "Created a regeneration loop: if the coach requests edits, the system refines the draft using their feedback rather than starting from scratch.",
-      "Engineered prompts for tone consistency — messages needed to sound like the coach, not like an AI summary.",
+      "Engineered prompts for tone consistency: messages needed to sound like the coach, not like an AI summary.",
     ],
     challenges: [
-      "Trust-sensitive content fails at both extremes — messages that feel robotic destroy the coach-client relationship even if technically accurate.",
+      "Trust-sensitive content fails at both extremes: messages that feel robotic destroy the coach-client relationship even if technically accurate.",
       "Overwriting client progress state between weeks would break the AI's ability to reason about behavioral trends over time.",
     ],
     solutions: [
-      "Designed the approval gate as the core of the system architecture, not an optional add-on — automation becomes leverage only when the human remains in control.",
+      "Designed the approval gate as the core of the system architecture, not an optional add-on. Automation becomes leverage only when the human remains in control.",
       "Used immutable weekly snapshots so the AI always reasons from preserved observation history, not a destructively updated state.",
     ],
     outcomes: [
-      "Coach no longer starts every weekly message from zero — AI handles progress analysis and drafting, coach focuses on judgment, tone, and the final call.",
+      "Coach no longer starts every weekly message from zero. AI handles progress analysis and drafting, coach focuses on judgment, tone, and the final call.",
       "Improved message consistency across the client roster and reduced weekly preparation time without reducing personalization quality.",
     ],
     stack: [
@@ -1292,32 +1823,32 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
   },
   {
     slug: "ripple-product-ownership-archera",
-    title: "Ripple — Product Ownership & Strategic Alignment",
+    title: "Ripple: Product Ownership & Strategic Alignment",
     category: "Product",
     overview:
       "Owned product delivery across multiple SaaS tools and helped validate a strategic partnership that improved cloud cost decisions, not just reporting.",
     businessProblem:
-      "Ripple delivered cloud invoicing and financial visibility — but visibility alone doesn't prevent overspending. Customers still struggled with Reserved Instance and Savings Plan decisions that directly affected profitability. The question was whether a partnership with Archera could create a stronger combined product story (visibility + optimization) rather than building another internal feature from scratch.",
-    role: "Product Owner — Ripple, Flow, Wave & Wave Pro · Alphaus",
+      "Ripple delivered cloud invoicing and financial visibility, but visibility alone doesn't prevent overspending. Customers still struggled with Reserved Instance and Savings Plan decisions that directly affected profitability. The question was whether a partnership with Archera could create a stronger combined product story (visibility + optimization) rather than building another internal feature from scratch.",
+    role: "Product Owner · Ripple, Flow, Wave & Wave Pro · Alphaus",
     contributions: [
       "Led sprint planning, backlog refinement, and feature specs across five connected cloud billing products.",
       "Stepped into Figma UI/UX design ownership when design bandwidth was unavailable, unblocking engineering delivery.",
       "Supported the Ripple V2 migration from monolith to microfrontend architecture.",
-      "Tasked by the CEO to evaluate the Alphaus–Archera strategic partnership — studied Archera's commitment optimization product, mapped integration opportunities, and supported internal stakeholder alignment.",
+      "Tasked by the CEO to evaluate the Alphaus–Archera strategic partnership: studied Archera's commitment optimization product, mapped integration opportunities, and supported internal stakeholder alignment.",
       "Assessed architectural compatibility between Archera's reservation lifecycle tooling and Ripple's invoicing and cost visibility workflows.",
     ],
     challenges: [
-      "Separating interesting technology from actual strategic fit — many integrations look good on paper but few improve customer outcomes meaningfully.",
+      "Separating interesting technology from actual strategic fit. Many integrations look good on paper but few improve customer outcomes meaningfully.",
       "Evaluating a partner system without direct implementation ownership required stronger product judgment than coding.",
       "Balancing product ownership across five connected products while simultaneously leading strategic evaluation work.",
     ],
     solutions: [
       "Approached the partnership as a product fit problem: 'Can these systems create stronger outcomes together?' rather than 'Can we connect them?'",
-      "Mapped customer workflows where commitment optimization would complement existing visibility — identifying leverage points rather than feature overlap.",
+      "Mapped customer workflows where commitment optimization would complement existing visibility, identifying leverage points rather than feature overlap.",
       "Worked with leadership and product teams to align on what the partnership solved, where ownership boundaries existed, and what long-term product value looked like.",
     ],
     outcomes: [
-      "Partnership established as an active strategic initiative — strengthening product positioning from cost visibility alone to visibility plus optimization.",
+      "Partnership established as an active strategic initiative, strengthening product positioning from cost visibility alone to visibility plus optimization.",
       "Unblocked engineering delivery by owning UI/UX design when design bandwidth was unavailable.",
       "Improved sprint consistency and release coordination across five connected cloud billing products.",
     ],
@@ -1331,15 +1862,114 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
 
 export const experiencePhases: ExperiencePhase[] = [
   {
-    slug: "flexiwork",
-    title: "Flexiwork — Agency Web Development",
-    period: "Mar 2026 – Present",
+    slug: "penguin-ops",
+    title: "Penguin Ops: Ops & Automation Assistant",
+    period: "Aug 2026 – Present",
     summary:
-      "Agency web work across WordPress, Wix, Elementor, and custom HTML/Tailwind builds — delivering client websites with fast turnaround and direct client communication.",
+      "Hired as Ops & Automation Assistant in August 2026. In practice I am the agency's automation specialist, covering the technical and the operational side: I design, build and keep improving the workflows and systems Penguin Ops and its clients run on, from client portals and scorecards to n8n onboarding and reporting automation.",
     responsibilities: [
-      "Build websites from design to production using WordPress, Wix, Elementor, and HTML/Tailwind.",
-      "Translate Figma designs and client requirements into conversion-focused layouts.",
-      "Handle Stripe integrations, responsive design, and direct client revisions.",
+      "Own the technical side: architecture, builds, hosting and the automations themselves, on n8n, Next.js, Supabase and Google Cloud.",
+      "Own the operational side: audit how each client's team works, remove manual steps, and keep the workflows running and improving after launch.",
+      "Build web apps (Next.js, Supabase, Google Cloud) and n8n automations across ClickUp, Slack, Asana and Google Sheets.",
+      "Run parallel checks against the old process, write handover guides and support the team afterwards.",
+    ],
+    achievements: [
+      "Client portal for a talent agency, live on its own domain since October 2026.",
+      "Ad agency scorecard rebuilt from source data with 93% parity to the old sheet and every difference explained.",
+      "38-node client onboarding workflow for a Google Ads agency, triggered by one form.",
+    ],
+    learnings: [
+      "A system is finished when the team trusts its numbers more than the spreadsheet it replaced.",
+      "Keep the familiar view (a sheet mirror, a Slack digest) while the new system takes over.",
+    ],
+    technologies: ["Next.js", "Supabase", "Google Cloud Run", "n8n", "ClickUp", "Slack", "Asana", "Google Sheets"],
+    relatedProjectSlugs: [
+      "talent-agency-client-portal",
+      "ad-agency-scorecard",
+      "google-ads-agency-operations",
+    ],
+  },
+  {
+    slug: "stakra",
+    title: "Stakra: Systems Implementation Associate",
+    period: "Jun 2026 – Present",
+    summary:
+      "Automation and full-stack work for an operations consultancy serving small and growing businesses: client apps, governed automation systems, monitoring, and the technical side of Stakra's own service packages.",
+    responsibilities: [
+      "Build client systems end to end, from spec and business rules to tests, deployment and handover.",
+      "Design automations with a human approval step wherever money, customers or sensitive data are involved.",
+      "Give technical review on Stakra's service packages, including its data-safety standards for clients.",
+    ],
+    achievements: [
+      "Governed media-buying system whose pipeline suite passes 9,998 tests in simulation, fail-closed by default.",
+      "Watchtower monitoring dashboard: all 17 planned v1 chunks shipped, 19 connections monitored.",
+      "Salon operations app (point of sale, commissions, payroll, inventory) delivered as a complete first version for owner review.",
+      "Car pre-vetting tool (capstone build for a used-car dealer) with a deterministic pricing engine: 72 unit tests and 12 of 12 live end-to-end checks passing.",
+    ],
+    learnings: [
+      "Write the business rules down with worked examples before building; the edge cases live there.",
+      "Silent failures are the expensive ones, so every automation needs something watching it.",
+    ],
+    technologies: ["Next.js", "TypeScript", "Supabase", "Prisma", "n8n", "Airtable", "Shopify", "GitHub Actions", "Playwright"],
+    relatedProjectSlugs: [
+      "governed-ai-media-buying",
+      "salon-operations-app",
+    ],
+  },
+  {
+    slug: "clipt",
+    title: "Clipt (client): Video Editor & Motion Graphic Designer",
+    period: "Oct 2026 – Present",
+    summary:
+      "Client engagement as Clipt's video editor and motion graphic designer, and in practice its fractional video production lead: I designed and streamlined how its videos get made, from raw founder footage to delivery, set up the brand system behind them, and edit the sales video, ads and testimonials myself.",
+    responsibilities: [
+      "Map and streamline the video workflow end to end: footage intake, cleanup, cut, graphics, colour, sound and delivery.",
+      "Set up the brand system: brand rules, reusable motion graphics and a checklist for every format.",
+      "Edit and deliver the 35-minute VSL, vertical ads and nurse testimonials.",
+    ],
+    achievements: [
+      "Delivered the complete VSL in 4K, four vertical ads and two testimonials.",
+      "Turned approved edits into a repeatable system, so new pieces follow the same standard without re-briefing.",
+    ],
+    learnings: [
+      "Consistency comes from writing the brand rules down once and applying them everywhere.",
+      "Restraint keeps a long video watchable: sparse zooms, calm motion, every graphic with a reason.",
+    ],
+    technologies: ["VSL editing", "Motion graphics", "Colour grading", "Sound design", "CapCut"],
+    relatedProjectSlugs: ["clipt-vsl", "clipt-short-form-ads-testimonials"],
+  },
+  {
+    slug: "retail-group",
+    title: "Three-Brand Retail Group (client): Automation & Web Developer",
+    period: "Oct 2026 – Present",
+    summary:
+      "Client engagement for a haircare retail group with online retail, a salon brand and a wholesale business: I audited its automation stack, rebuilt the CEO dashboard and connected it to an approval-first agent system on top of its existing n8n workflows.",
+    responsibilities: [
+      "Audit and maintain the group's n8n workflows and the data they feed.",
+      "Build and update the web app: the CEO dashboard, store pages, approvals and results views.",
+      "Write the technical guides the client's team uses to run and extend the system.",
+    ],
+    achievements: [
+      "Audited 47 n8n workflows and delivered a go-live proposal.",
+      "4 of 16 agents running in testing, with every recommendation routed through an approval queue.",
+    ],
+    learnings: [
+      "Keep what already works (the n8n ingestion) and give it one clean front door.",
+      "An agent that spends money or changes stock should only ever propose, never act.",
+    ],
+    technologies: ["n8n", "React", "Vite", "Cloudflare Workers", "Cloudflare D1", "Monday.com", "Shopify", "Omnisend"],
+    relatedProjectSlugs: ["retail-business-os"],
+  },
+  {
+    slug: "flexiwork",
+    title: "Flexiwork: Agency Web Development",
+    period: "Mar 2026 – Oct 2026",
+    summary:
+      "Agency web work across WordPress, Wix, Elementor, and custom HTML/Tailwind builds, delivering client websites with fast turnaround and direct client communication.",
+    responsibilities: [
+      "Built websites from design to production using WordPress, Wix, Elementor, and HTML/Tailwind.",
+      "Translated Figma designs and client requirements into conversion-focused layouts.",
+      "Handled Stripe integrations, responsive design, and direct client revisions.",
     ],
     achievements: [
       "Delivered a full website build in under an hour against a same-day deadline.",
@@ -1365,10 +1995,10 @@ export const experiencePhases: ExperiencePhase[] = [
   },
   {
     slug: "ardexa",
-    title: "Ardexa.ai — Startup MVP Development",
+    title: "Ardexa.ai: Startup MVP Development",
     period: "Oct 2025 – Apr 2026",
     summary:
-      "Led frontend and full-stack development on three startup MVPs alongside two founders — RentWise, LexaDraft, and TicketDesk — working directly on architecture, product decisions, and implementation.",
+      "Led frontend and full-stack development on three startup MVPs alongside two founders (RentWise, LexaDraft, and TicketDesk), working directly on architecture, product decisions, and implementation.",
     responsibilities: [
       "Built MVP products using Next.js, TypeScript, Tailwind CSS, Shadcn UI, and Supabase.",
       "Served as primary frontend and full-stack developer in a 4-person team (2 founders + 1 backend dev).",
@@ -1376,7 +2006,7 @@ export const experiencePhases: ExperiencePhase[] = [
     ],
     achievements: [
       "Shipped three production-ready MVP systems across different business domains.",
-      "Built hard-requirement filtering and scoring logic for RentWise — transforming a listing platform into a qualification engine.",
+      "Built hard-requirement filtering and scoring logic for RentWise, transforming a listing platform into a qualification engine.",
       "Designed variable-based contract template system for LexaDraft, eliminating repetitive manual contract editing.",
     ],
     learnings: [
@@ -1399,10 +2029,10 @@ export const experiencePhases: ExperiencePhase[] = [
   },
   {
     slug: "alphaus",
-    title: "Alphaus — Junior FE → Lead FE → Product Owner",
+    title: "Alphaus: Junior FE → Lead FE → Product Owner",
     period: "Jul 2023 – Dec 2025",
     summary:
-      "Progressed from Junior Frontend Developer to Lead to Product Owner in under two years — owning frontend quality, release coordination, UI/UX design, and product delivery across Octo, Ripple, Flow, Wave, and Wave Pro.",
+      "Progressed from Junior Frontend Developer to Lead to Product Owner in under two years, owning frontend quality, release coordination, UI/UX design, and product delivery across Octo, Ripple, Flow, Wave, and Wave Pro.",
     responsibilities: [
       "Built SaaS interfaces using Vue, Vuetify, TypeScript, ECharts, and GridStack across cloud cost management modules.",
       "Led PR reviews, release coordination, Cypress testing, and frontend architecture as Lead Frontend Developer.",
@@ -1411,10 +2041,10 @@ export const experiencePhases: ExperiencePhase[] = [
       "Supported Ripple V2 migration (monolith → microfrontend) and led Alphaus–Archera product partnership alignment.",
     ],
     achievements: [
-      "Bug reporting automation adopted company-wide — eliminated manual triage, recognized by leadership.",
+      "Bug reporting automation adopted company-wide: eliminated manual triage, recognized by leadership.",
       "Stepped into UI/UX design ownership to unblock engineering when design bandwidth was unavailable.",
       "Introduced PR templates that improved review speed and weekly release consistency.",
-      "FinOps Certified Practitioner — grounding product and UI decisions in cloud financial management concepts.",
+      "FinOps Certified Practitioner, grounding product and UI decisions in cloud financial management concepts.",
     ],
     learnings: [
       "Leadership often means stepping into the missing role before someone asks.",
@@ -1447,7 +2077,7 @@ export const experiencePhases: ExperiencePhase[] = [
     title: "Automation & AI Systems",
     period: "2023 – Present",
     summary:
-      "Built automation systems that remove real operational friction — AI job-matching pipelines, coaching delivery with approval flows, Slack-to-ClickUp reporting, and WhatsApp bots.",
+      "Built automation systems that remove real operational friction: AI job-matching pipelines, coaching delivery with approval flows, Slack-to-ClickUp reporting, and WhatsApp bots.",
     responsibilities: [
       "Designed and built multi-stage automation pipelines using n8n, Make, and Zapier.",
       "Integrated OpenAI, Slack, ClickUp, Google Sheets, Zoom, YouTube, and WhatsApp APIs.",
@@ -1460,7 +2090,7 @@ export const experiencePhases: ExperiencePhase[] = [
     ],
     learnings: [
       "The strongest automation fits existing team habits rather than forcing new ones.",
-      "Technical limitations are often business limitations — knowing when to escalate matters.",
+      "Technical limitations are often business limitations. Knowing when to escalate matters.",
     ],
     technologies: [
       "n8n",
@@ -1484,7 +2114,7 @@ export const experiencePhases: ExperiencePhase[] = [
     title: "Freelance & Client Websites",
     period: "2023 – Present",
     summary:
-      "Client web work across healthcare, travel, and service industries — WordPress, Wix, HTML/Tailwind builds with Stripe integrations and conversion-focused layouts.",
+      "Client web work across healthcare, travel, and service industries: WordPress, Wix, HTML/Tailwind builds with Stripe integrations and conversion-focused layouts.",
     responsibilities: [
       "Built client websites using WordPress, Wix, HTML, CSS, and Tailwind.",
       "Handled client communication, content structure, and implementation details.",
@@ -1506,10 +2136,10 @@ export const experiencePhases: ExperiencePhase[] = [
   },
   {
     slug: "renthive",
-    title: "RentHive — Startup Weekend Bohol",
+    title: "RentHive: Startup Weekend Bohol",
     period: "2024",
     summary:
-      "Startup Weekend Bohol — peer-to-peer rental platform MVP built under competition pressure. Helped the team win 2nd place.",
+      "Startup Weekend Bohol: peer-to-peer rental platform MVP built under competition pressure. Helped the team win 2nd place.",
     responsibilities: [
       "Co-designed the MVP user flow and core interface screens.",
       "Built responsive Tailwind-based UI for listing, login, checkout, and cart flows.",
@@ -1528,10 +2158,10 @@ export const experiencePhases: ExperiencePhase[] = [
   },
   {
     slug: "college",
-    title: "Computer Engineering — Bohol Island State University",
+    title: "Computer Engineering, Bohol Island State University",
     period: "2019 – 2023",
     summary:
-      "Computer Engineering degree — embedded systems, thesis prototyping, and the technical foundation that preceded real-world product work.",
+      "Computer Engineering degree: embedded systems, thesis prototyping, and the technical foundation that preceded real-world product work.",
     responsibilities: [
       "Built academic and thesis projects across hardware and software contexts.",
       "Worked with embedded systems, microcontrollers, Flutter, Dart, C, and C++.",
@@ -1547,6 +2177,24 @@ export const experiencePhases: ExperiencePhase[] = [
     ],
     technologies: ["C", "C++", "Dart", "Flutter", "NodeMCU ESP8266", "LoRa"],
     relatedProjectSlugs: ["arnis-scoreboard"],
+  },
+  {
+    slug: "personal",
+    title: "Personal Projects",
+    period: "Ongoing",
+    summary:
+      "Things I build for myself, to try an idea properly or learn a technology end to end.",
+    responsibilities: [
+      "Design, build, test and ship each project on my own.",
+    ],
+    achievements: [
+      "Bouquet Cipher: messages written as hand-drawn bouquets, shareable by link or QR gift tag.",
+    ],
+    learnings: [
+      "Personal projects are where I try the techniques I later bring to client work.",
+    ],
+    technologies: ["Next.js", "TypeScript", "Supabase", "Playwright"],
+    relatedProjectSlugs: ["bouquet-cipher", "arnis-scoreboard"],
   },
 ];
 

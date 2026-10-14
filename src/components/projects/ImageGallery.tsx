@@ -97,7 +97,7 @@ export function ImageGallery({
           src={images[0]}
           alt={`${title} preview`}
           fill
-          className="object-cover blur-[1px] opacity-90"
+          className="object-cover object-top"
           sizes="(max-width: 768px) 100vw, 50vw"
         />
         {images.length > 1 && (
@@ -135,7 +135,7 @@ export function ImageGallery({
                 src={src}
                 alt={`${title} screenshot ${i + 1}`}
                 fill
-                className="object-cover blur-[2px] opacity-90"
+                className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
               />
             </button>
@@ -160,7 +160,7 @@ export function ImageGallery({
             ref={modalRef}
             role="dialog"
             aria-modal="true"
-            aria-label={`${title} — all screenshots`}
+            aria-label={`${title}: all screenshots`}
             className="fixed inset-0 z-50 flex flex-col bg-background/95 backdrop-blur-sm"
           >
             {/* Header */}
@@ -195,7 +195,7 @@ export function ImageGallery({
                       src={src}
                       alt={`${title} screenshot ${i + 1}`}
                       fill
-                      className="object-cover blur-[2px] opacity-90"
+                      className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       loading={i >= 6 ? "lazy" : undefined}
                     />

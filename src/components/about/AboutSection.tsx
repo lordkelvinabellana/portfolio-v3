@@ -5,22 +5,28 @@ import { FadeIn } from "@/components/ui/FadeIn";
 
 const chapters = [
   {
+    period: "2026 – Present",
+    label: "Operations systems and video",
+    description:
+      "As Ops & Automation Assistant at Penguin Ops and Systems Implementation Associate at Stakra, I build the systems agencies and small businesses run on: a client portal for a talent agency, a weekly scorecard rebuilt from source data, 38-node client onboarding from one form, and a salon operations app. Alongside that I edit VSLs, short-form ads and testimonials, with a brand system that keeps every piece consistent.",
+  },
+  {
     period: "Jul 2023 – Dec 2025",
     label: "From engineer to product owner",
     description:
-      "At Alphaus I progressed from Junior Frontend Developer to Lead to Product Owner in under two years. As Lead I owned frontend quality, release coordination, and PR standards for Octo. As Product Owner I ran sprint planning, backlog refinement, and UI/UX design for Ripple and four connected products — stepping into design ownership when delivery depended on it.",
+      "At Alphaus I progressed from Junior Frontend Developer to Lead to Product Owner in under two years. As Lead I owned frontend quality, release coordination, and PR standards for Octo. As Product Owner I ran sprint planning, backlog refinement, and UI/UX design for Ripple and four connected products, stepping into design ownership when delivery depended on it.",
   },
   {
     period: "Oct 2025 – Apr 2026",
     label: "Startup and full-stack work",
     description:
-      "At Ardexa I was the only frontend developer alongside two founders and one backend developer, building MVPs from scratch. I worked across frontend, backend, product decisions, and architecture planning — often in the same week. Products included RentWise (rental qualification with scoring logic), LexaDraft (contract template builder), and TicketDesk (centralized support triage).",
+      "At Ardexa I was the only frontend developer alongside two founders and one backend developer, building MVPs from scratch. I worked across frontend, backend, product decisions, and architecture planning, often in the same week. Products included RentWise (rental qualification with scoring logic), LexaDraft (contract template builder), and TicketDesk (centralized support triage).",
   },
   {
     period: "2023 – Present",
     label: "Automation and systems",
     description:
-      "I've built automation systems that remove real manual overhead — a Slack-to-ClickUp bug reporting workflow that became the company standard at Alphaus, an AI-powered weekly coaching delivery system with approval flows, and a job-matching pipeline with LLM scoring and smart email notifications. The goal is always the same: reduce the repetitive work.",
+      "I've built automation systems that remove real manual overhead: a Slack-to-ClickUp bug reporting workflow that became the company standard at Alphaus, an AI-powered weekly coaching delivery system with approval flows, and a job-matching pipeline with LLM scoring and smart email notifications. The goal is always the same: reduce the repetitive work.",
   },
 ];
 
@@ -66,23 +72,24 @@ export function AboutSection() {
             <div>
               <p className="eyebrow mb-3">About</p>
               <h1 className="section-heading mb-8">
-                I improve systems. Frontend is how I start — ownership is how I finish.
+                I build systems that teams run on, and videos that sell what they do.
               </h1>
               <div className="quiet-text max-w-[68ch] space-y-5 text-base leading-7">
                 <p>
-                  I&apos;m Lord Kelvin Abellana — frontend developer, automation builder,
-                  and former product owner. I work best where interfaces meet real
-                  operations: SaaS products with messy workflows, startups where decisions
-                  move fast, and systems where removing manual work creates actual value.
+                  I&apos;m Lord Kelvin Abellana: operations and automation builder, video
+                  editor, and former lead frontend developer and product owner. I work best
+                  where real operations meet software: agencies running on spreadsheets,
+                  brands that need every video to look like them, and teams where removing
+                  manual work creates actual value.
                 </p>
                 <p>
                   At Alphaus I grew from Junior Frontend Developer to Lead to Product
                   Owner across cloud cost management products. That progression taught me
-                  to think beyond code — into delivery ownership, product decisions, and
+                  to think beyond code, into delivery ownership, product decisions, and
                   the kind of internal tooling that quietly makes a team faster. The
                   Slack-to-ClickUp reporting system I built became the company standard.
                   Stepping into UI/UX design when our designer was blocked kept delivery
-                  moving. These weren&apos;t assigned responsibilities — they were gaps
+                  moving. These weren&apos;t assigned responsibilities. They were gaps
                   worth filling.
                 </p>
                 <p>
@@ -97,9 +104,9 @@ export function AboutSection() {
         {/* ── Three chapters ── */}
         <section>
           <FadeIn>
-            <p className="eyebrow mb-8">Career in three chapters</p>
+            <p className="eyebrow mb-8">Career in four chapters</p>
           </FadeIn>
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {chapters.map((chapter, i) => (
               <FadeIn key={chapter.label} delay={i * 80} spring>
                 <div className="panel flex h-full flex-col gap-3 rounded-xl p-6">

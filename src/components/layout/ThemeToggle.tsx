@@ -17,7 +17,7 @@ export function ThemeToggle() {
                         <Moon className="h-4 w-4" />;
 
   const label =
-    theme === "time" ? "Auto (time-based) — click to override" :
+    theme === "time" ? "Auto (time-based). Click to override" :
     theme === "dark"  ? "Switch to light mode" :
                         "Switch to auto (time-based)";
 

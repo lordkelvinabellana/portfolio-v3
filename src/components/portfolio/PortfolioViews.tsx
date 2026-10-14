@@ -394,7 +394,7 @@ export function ContactPageView() {
           <PageIntro
             eyebrow="Contact"
             title="Let’s talk about the work."
-            summary="For product, frontend, or automation work — happy to jump into a quick conversation."
+            summary="For product, frontend, or automation work. Happy to jump into a quick conversation."
           />
           <p className="quiet-text mt-3 text-sm">
             Open to full-time roles, freelance work, and product collaborations.

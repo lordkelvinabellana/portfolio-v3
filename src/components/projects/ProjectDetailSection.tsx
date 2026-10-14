@@ -3,6 +3,11 @@ import { ArrowLeft, ArrowRight, Code2, ExternalLink } from "lucide-react";
 import { projectCaseStudies, type ProjectCaseStudy } from "@/data/portfolio";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { ImageGallery } from "./ImageGallery";
+import { VideoShowcase } from "./VideoShowcase";
+import { FlowDiagram } from "./FlowDiagram";
+import { WorkflowCanvas } from "@/components/automation/WorkflowCanvas";
+import { getWorkflow } from "@/data/workflows";
+import { serviceColor, serviceLabel } from "@/data/services";
 
 /* ── Adjacent project navigation ── */
 
@@ -133,7 +138,14 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
         {/* Header */}
         <FadeIn delay={40}>
           <header className="max-w-3xl">
-            <p className="eyebrow mb-3">{project.category}</p>
+            <div className="mb-3 flex flex-wrap items-center gap-3">
+              <p className="eyebrow" style={{ color: serviceColor(project) }}>{serviceLabel(project)}</p>
+              {project.status && (
+                <span className="rounded-full border border-border bg-secondary px-2.5 py-0.5 text-xs font-semibold text-secondary-foreground">
+                  {project.status}
+                </span>
+              )}
+            </div>
             <h1 className="section-heading">{project.title}</h1>
             <p className="quiet-text mt-5 text-lg leading-8">{project.overview}</p>
           </header>
@@ -168,6 +180,45 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
         {project.screenshots.length > 0 && (
           <FadeIn delay={80} spring>
             <ImageGallery images={project.screenshots} title={project.title} variant="full" />
+          </FadeIn>
+        )}
+
+        {/* The real n8n workflows, drawn as canvases */}
+        {project.workflows && project.workflows.length > 0 && (
+          <section aria-label="n8n workflows" className="space-y-8">
+            {project.workflows.map((id) => {
+              const wf = getWorkflow(id);
+              if (!wf) return null;
+              return (
+                <FadeIn key={id}>
+                  <figure>
+                    <figcaption className="mb-3 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                      <span className="font-semibold">{wf.title}</span>
+                      <span className="muted-text text-xs">n8n, {wf.nodes.length} nodes</span>
+                    </figcaption>
+                    <WorkflowCanvas workflow={wf} />
+                    <p className="quiet-text mt-3 max-w-[70ch] text-sm leading-6">{wf.caption}</p>
+                  </figure>
+                </FadeIn>
+              );
+            })}
+          </section>
+        )}
+
+        {/* How it flows */}
+        {!project.workflows?.length && project.flow && project.flow.length > 1 && (
+          <FadeIn delay={70}>
+            <section aria-label="How the system flows" className="panel rounded-xl p-6">
+              <SectionLabel>How it flows</SectionLabel>
+              <FlowDiagram steps={project.flow} loop />
+            </section>
+          </FadeIn>
+        )}
+
+        {/* Videos */}
+        {project.videos && project.videos.length > 0 && (
+          <FadeIn delay={80} spring>
+            <VideoShowcase videos={project.videos} />
           </FadeIn>
         )}
 
@@ -351,7 +402,7 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
               aria-label="Project navigation"
             >
               <p className="eyebrow mb-5">More work</p>
-              <div className="grid gap-3 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {prev ? (
                   <Link
                     href={`${basePath}/${prev.slug}`}

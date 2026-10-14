@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { ContactPageView } from "@/components/portfolio/PortfolioViews";
+import { ContactSection } from "@/components/contact/ContactSection";
 
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Contact Lord Kelvin Abellana for frontend, product, automation, hiring, or freelance opportunities.",
+    "Hire Lord Kelvin Abellana for operations systems, automation, web apps, or VSL and ad editing, or get his résumé for a role.",
 };
 
 export default function ContactPage() {
-  return <ContactPageView />;
+  return <ContactSection />;
 }

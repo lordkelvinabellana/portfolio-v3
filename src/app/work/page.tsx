@@ -1,12 +1,17 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
-import { WorkSection } from "@/components/projects/WorkSection";
+import { WorkGrid, WorkSection } from "@/components/projects/WorkSection";
 
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Case studies and projects across SaaS product work, automation systems, startup MVPs, and freelance websites.",
+    "Case studies in operations systems and automation, VSL and ad editing, and product and web apps.",
 };
 
 export default function WorkPage() {
-  return <WorkSection basePath="/work" showBreadcrumb={false} />;
+  return (
+    <Suspense fallback={<WorkGrid active="all" />}>
+      <WorkSection basePath="/work" />
+    </Suspense>
+  );
 }
