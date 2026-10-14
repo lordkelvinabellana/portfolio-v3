@@ -24,13 +24,30 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL = "https://portfolio-v3-roan-omega.vercel.app";
+const SITE_DESCRIPTION =
+  "Operations systems, automation and video editing for agencies and growing brands: client portals, scorecards, onboarding automation, VSLs and short-form ads.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Lord Kelvin Abellana",
+    title: "Portfolio: operations systems, automation and video editing",
+    description:
+      "Case studies with real numbers, live n8n workflows, and VSL and ad work for agencies and growing brands.",
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Lord Kelvin Abellana: systems that run your business, videos that sell it" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og.jpg"],
+  },
   title: {
     default: "Lord Kelvin Abellana - Portfolio",
     template: "%s - Lord Kelvin Abellana",
   },
-  description:
-    "Operations systems, automation and video editing for agencies and growing brands: client portals, scorecards, onboarding automation, VSLs and short-form ads.",
+  description: SITE_DESCRIPTION,
 };
 
 export default function RootLayout({
