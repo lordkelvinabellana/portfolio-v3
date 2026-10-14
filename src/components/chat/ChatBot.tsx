@@ -331,10 +331,11 @@ export function ChatBot() {
   useLayoutEffect(() => {
     if (!open || !panelRef.current) return;
     if (!prefersReducedMotion()) {
+      // Opacity, not autoAlpha: a hidden panel can't take focus for the input.
       gsap.fromTo(
         panelRef.current,
-        { autoAlpha: 0, y: 18, scale: 0.95 },
-        { autoAlpha: 1, y: 0, scale: 1, duration: 0.34, ease: "power3.out" },
+        { opacity: 0, y: 18, scale: 0.95 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.34, ease: "power3.out" },
       );
     }
     inputRef.current?.focus();
@@ -367,6 +368,12 @@ export function ChatBot() {
     if (!panel || prefersReducedMotion()) return setOpen(false);
     gsap.to(panel, { autoAlpha: 0, y: 12, scale: 0.97, duration: 0.18, ease: "power2.in", onComplete: () => setOpen(false) });
   }, []);
+
+  // Other parts of the site (the contact page) can open the chat.
+  useEffect(() => {
+    window.addEventListener("chat:open", openChat);
+    return () => window.removeEventListener("chat:open", openChat);
+  }, [openChat]);
 
   const onNavigate = useCallback(() => {
     if (window.innerWidth < 640) setOpen(false);

@@ -387,41 +387,6 @@
     animation-delay: 7s;
   }
 
-  .orbit-label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: -0.55rem 0 0 0.35rem;
-    padding-left: 0.7rem;
-    color: var(--text-tertiary);
-    font-size: 0.6875rem;
-    font-weight: 500;
-    line-height: 1.1rem;
-    white-space: nowrap;
-    text-shadow:
-      0 0 2px var(--background),
-      0 0 6px var(--background),
-      0 0 10px var(--background);
-    will-change: transform, opacity;
-  }
-
-  @media (max-width: 639px) {
-    .orbit-label {
-      display: none;
-    }
-  }
-
-  .orbit-label::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 0.4rem;
-    height: 1px;
-    background: currentColor;
-    opacity: 0.7;
-  }
-
   /* Flow diagrams (FlowDiagram.tsx): stacked by default, a row from md when responsive. */
   .flow {
     display: flex;
@@ -1307,5 +1272,4 @@
   .show-kpi, .show-chart { background: var(--surface-elevated); border: 1px solid var(--border); }
   .show-bar { background: linear-gradient(180deg, var(--tone), color-mix(in oklch, var(--tone), transparent 55%)); }
 
-  .orbit-label.is-active { color: var(--foreground); }
 }

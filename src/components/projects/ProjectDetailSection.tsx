@@ -7,7 +7,8 @@ import { VideoShowcase } from "./VideoShowcase";
 import { FlowDiagram } from "./FlowDiagram";
 import { WorkflowCanvas } from "@/components/automation/WorkflowCanvas";
 import { getWorkflow } from "@/data/workflows";
-import { serviceColor, serviceLabel } from "@/data/services";
+import { serviceColor, serviceLabel, serviceOf } from "@/data/services";
+import { ServiceGlyph3D } from "@/components/three/Scenes";
 
 /* ── Adjacent project navigation ── */
 
@@ -37,23 +38,17 @@ function splitOutcome(text: string): [string, string] {
 /* ── Section primitives ── */
 
 function SectionCard({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="panel rounded-xl p-6">{children}</div>
-  );
+  return <div className="panel rounded-xl p-6">{children}</div>;
 }
 
 function SectionLabel({ children, oneLiner }: { children: React.ReactNode; oneLiner?: string }) {
   return (
     <div className="mb-5">
       <div className="flex items-center gap-3">
-        <p className="shrink-0 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
-          {children}
-        </p>
+        <p className="shrink-0 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">{children}</p>
         <div className="h-px flex-1 bg-border" />
       </div>
-      {oneLiner && (
-        <p className="mt-2 text-sm font-medium text-foreground/70 leading-snug">{oneLiner}</p>
-      )}
+      {oneLiner && <p className="mt-2 text-sm font-medium text-foreground/70 leading-snug">{oneLiner}</p>}
     </div>
   );
 }
@@ -62,7 +57,10 @@ function BodyText({ text }: { text: string }) {
   const sentences = text.match(/[^.!?—]+[.!?—]*["']?\s*/g) ?? [text];
   const paragraphs: string[] = [];
   for (let i = 0; i < sentences.length; i += 2) {
-    const chunk = sentences.slice(i, i + 2).join("").trim();
+    const chunk = sentences
+      .slice(i, i + 2)
+      .join("")
+      .trim();
     if (chunk) paragraphs.push(chunk);
   }
   return (
@@ -93,9 +91,7 @@ function TLDRBlock({ project }: { project: ProjectCaseStudy }) {
         border: "1px solid color-mix(in oklch, var(--border), transparent 30%)",
       }}
     >
-      <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
-        Summary
-      </p>
+      <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">Summary</p>
       <ul className="space-y-2">
         {bullets.map(({ label, text }) => (
           <li key={label} className="flex gap-2 text-sm leading-6">
@@ -123,7 +119,6 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
   return (
     <article className="site-page">
       <div className="site-container space-y-12">
-
         {/* Back */}
         <FadeIn>
           <Link
@@ -137,17 +132,22 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
 
         {/* Header */}
         <FadeIn delay={40}>
-          <header className="max-w-3xl">
-            <div className="mb-3 flex flex-wrap items-center gap-3">
-              <p className="eyebrow" style={{ color: serviceColor(project) }}>{serviceLabel(project)}</p>
-              {project.status && (
-                <span className="rounded-full border border-border bg-secondary px-2.5 py-0.5 text-xs font-semibold text-secondary-foreground">
-                  {project.status}
-                </span>
-              )}
+          <header className="grid items-center gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,18rem)] md:gap-10">
+            <div className="max-w-3xl">
+              <div className="mb-3 flex flex-wrap items-center gap-3">
+                <p className="eyebrow" style={{ color: serviceColor(project) }}>
+                  {serviceLabel(project)}
+                </p>
+                {project.status && (
+                  <span className="rounded-full border border-border bg-secondary px-2.5 py-0.5 text-xs font-semibold text-secondary-foreground">
+                    {project.status}
+                  </span>
+                )}
+              </div>
+              <h1 className="section-heading">{project.title}</h1>
+              <p className="quiet-text mt-5 text-lg leading-8">{project.overview}</p>
             </div>
-            <h1 className="section-heading">{project.title}</h1>
-            <p className="quiet-text mt-5 text-lg leading-8">{project.overview}</p>
+            <ServiceGlyph3D service={serviceOf(project)} className="h-40 md:h-52" />
           </header>
         </FadeIn>
 
@@ -224,10 +224,8 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
 
         {/* Content + sidebar */}
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_21rem]">
-
           {/* Main column */}
           <div className="space-y-5">
-
             {/* Business problem */}
             <FadeIn>
               <SectionCard>
@@ -239,17 +237,13 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
             {/* Contributions */}
             <FadeIn delay={40}>
               <SectionCard>
-                <SectionLabel oneLiner={`${project.contributions.length} key contributions that defined the build`}>What I Built</SectionLabel>
+                <SectionLabel oneLiner={`${project.contributions.length} key contributions that defined the build`}>
+                  What I Built
+                </SectionLabel>
                 <ul className="space-y-3.5">
                   {project.contributions.map((item) => (
-                    <li
-                      key={item}
-                      className="quiet-text flex items-start gap-3 text-sm leading-6"
-                    >
-                      <span
-                        className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
-                        aria-hidden="true"
-                      />
+                    <li key={item} className="quiet-text flex items-start gap-3 text-sm leading-6">
+                      <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-primary" aria-hidden="true" />
                       {item}
                     </li>
                   ))}
@@ -264,22 +258,13 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
                   <SectionLabel oneLiner="Tradeoffs and approaches that shaped the final outcome">Key Decisions</SectionLabel>
                   <div className="space-y-5">
                     {project.challenges.map((challenge, i) => (
-                      <div
-                        key={i}
-                        className="rounded-lg border border-border bg-secondary/30 p-4 last:mb-0"
-                      >
-                        <p className="mb-1.5 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
-                          Challenge
-                        </p>
+                      <div key={i} className="rounded-lg border border-border bg-secondary/30 p-4 last:mb-0">
+                        <p className="mb-1.5 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">Challenge</p>
                         <p className="quiet-text mb-3 text-sm leading-6">{challenge}</p>
                         {project.solutions[i] && (
                           <>
-                            <p className="eyebrow mb-1.5">
-                              Approach
-                            </p>
-                            <p className="quiet-text text-sm leading-6">
-                              {project.solutions[i]}
-                            </p>
+                            <p className="eyebrow mb-1.5">Approach</p>
+                            <p className="quiet-text text-sm leading-6">{project.solutions[i]}</p>
                           </>
                         )}
                       </div>
@@ -294,35 +279,23 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
               <section
                 className="rounded-xl p-6"
                 style={{
-                  background:
-                    "color-mix(in oklch, var(--primary), transparent 90%)",
-                  border:
-                    "1px solid color-mix(in oklch, var(--primary), transparent 76%)",
+                  background: "color-mix(in oklch, var(--primary), transparent 90%)",
+                  border: "1px solid color-mix(in oklch, var(--primary), transparent 76%)",
                 }}
               >
                 <div className="mb-5">
                   <div className="flex items-center gap-3">
-                    <p className="eyebrow shrink-0">
-                      Impact
-                    </p>
+                    <p className="eyebrow shrink-0">Impact</p>
                     <div className="h-px flex-1" style={{ background: "color-mix(in oklch, var(--primary), transparent 70%)" }} />
                   </div>
-                  <p className="mt-2 text-sm font-medium text-foreground/70 leading-snug">
-                    {firstSentence(project.outcomes[0])}
-                  </p>
+                  <p className="mt-2 text-sm font-medium text-foreground/70 leading-snug">{firstSentence(project.outcomes[0])}</p>
                 </div>
                 <ul className="space-y-4">
                   {project.outcomes.map((item) => {
                     const [lead, rest] = splitOutcome(item);
                     return (
-                      <li
-                        key={item}
-                        className="flex items-start gap-3 text-sm leading-6"
-                      >
-                        <ArrowRight
-                          className="mt-0.5 h-4 w-4 shrink-0 text-primary"
-                          aria-hidden="true"
-                        />
+                      <li key={item} className="flex items-start gap-3 text-sm leading-6">
+                        <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
                         <span>
                           <strong className="font-semibold text-foreground">{lead}</strong>
                           {rest && <span className="quiet-text">{rest}</span>}
@@ -348,10 +321,7 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
                   </div>
                   <div className="flex flex-wrap gap-1.5">
                     {project.stack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded-full bg-secondary px-2.5 py-1 text-xs font-semibold text-secondary-foreground"
-                      >
+                      <span key={tech} className="rounded-full bg-secondary px-2.5 py-1 text-xs font-semibold text-secondary-foreground">
                         {tech}
                       </span>
                     ))}
@@ -370,8 +340,7 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
                             rel="noopener noreferrer"
                             className="focusable inline-flex min-h-10 items-center gap-2 rounded-md border border-border bg-secondary px-3 py-2 text-sm font-semibold text-primary transition-colors hover:bg-accent hover:text-accent-foreground"
                           >
-                            {project.liveLabel ?? "Live preview"}{" "}
-                            <ExternalLink className="h-3.5 w-3.5" />
+                            {project.liveLabel ?? "Live preview"} <ExternalLink className="h-3.5 w-3.5" />
                           </a>
                         )}
                         {project.githubUrl && (
@@ -381,8 +350,7 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
                             rel="noopener noreferrer"
                             className="focusable inline-flex min-h-10 items-center gap-2 rounded-md border border-border bg-secondary px-3 py-2 text-sm font-semibold text-primary transition-colors hover:bg-accent hover:text-accent-foreground"
                           >
-                            View on GitHub{" "}
-                            <Code2 className="h-3.5 w-3.5" />
+                            View on GitHub <Code2 className="h-3.5 w-3.5" />
                           </a>
                         )}
                       </div>
@@ -397,10 +365,7 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
         {/* Prev / next navigation */}
         {(prev || next) && (
           <FadeIn>
-            <nav
-              className="border-t border-border pt-10"
-              aria-label="Project navigation"
-            >
+            <nav className="border-t border-border pt-10" aria-label="Project navigation">
               <p className="eyebrow mb-5">More work</p>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {prev ? (
@@ -433,7 +398,6 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
             </nav>
           </FadeIn>
         )}
-
       </div>
     </article>
   );

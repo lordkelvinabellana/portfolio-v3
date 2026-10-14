@@ -1,6 +1,7 @@
 import { ArrowRight, Download, Mail, MessageCircle } from "lucide-react";
 import { CV_FILENAME, CV_HREF, EMAIL, LinkedInIcon, RESUME_FILENAME, RESUME_HREF } from "@/components/layout/social";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { BotInvite } from "@/components/chat/BotInvite";
 
 const projectMail = `mailto:${EMAIL}?subject=${encodeURIComponent("Project enquiry")}`;
 const roleMail = `mailto:${EMAIL}?subject=${encodeURIComponent("Role opportunity")}`;
@@ -100,6 +101,15 @@ export function ContactSection() {
           </div>
         </FadeIn>
       </div>
+
+      {/* Only once the chat backend is configured. */}
+      {process.env.N8N_CHAT_URL ? (
+        <FadeIn spring delay={110}>
+          <div className="mt-5">
+            <BotInvite />
+          </div>
+        </FadeIn>
+      ) : null}
     </section>
   );
 }

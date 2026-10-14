@@ -6,6 +6,7 @@ import { projectCaseStudies, type ProjectCaseStudy } from "@/data/portfolio";
 import { serviceFilters, serviceOf, type ServiceFilter } from "@/data/services";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { CaseStudyCard } from "./CaseStudyCard";
+import { ServiceGlyph3D } from "@/components/three/Scenes";
 import { cn } from "@/lib/utils";
 
 const SECTIONS = serviceFilters.filter((f) => f.key !== "all");
@@ -43,11 +44,15 @@ export function WorkGrid({
   return (
     <section className="site-container space-y-12">
       <FadeIn>
-        <header className="max-w-2xl">
-          <h1 className="section-heading">Work</h1>
-          <p className="quiet-text mt-5 text-lg leading-8">
-            Operations systems, video editing and product work. Each case study covers the problem, what I built and what changed. Clients are kept anonymous.
-          </p>
+        <header className="grid items-center gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] md:gap-10">
+          <div className="max-w-2xl">
+            <h1 className="section-heading">Work</h1>
+            <p className="quiet-text mt-5 text-lg leading-8">
+              Operations systems, video editing and product work. Each case study covers the problem, what I built and what changed. Clients are kept anonymous.
+            </p>
+          </div>
+          {/* Follows the filter: a workflow, a video screen or a dashboard. */}
+          <ServiceGlyph3D service={active} className="h-44 md:h-60" />
         </header>
       </FadeIn>
 

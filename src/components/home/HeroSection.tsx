@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Download } from "lucide-react";
@@ -9,15 +8,13 @@ import { RESUME_FILENAME, RESUME_HREF } from "@/components/layout/social";
 import { gsap, SplitText, useGSAP, prefersReducedMotion } from "@/lib/gsap";
 import { afterIntro } from "@/lib/intro";
 import { HeroShowcase } from "./HeroShowcase";
+import { PortraitCloud } from "@/components/three/Scenes";
 
-/* WebGL only runs in the browser; the portrait renders on the server either way. */
-const OrbitScene = dynamic(() => import("./OrbitScene").then((m) => m.OrbitScene), { ssr: false });
 
-/* Headline lines rise out of their masks, the rest follows, the portrait settles. */
+/* Headline lines rise out of their masks and the rest follows; the portrait assembles on its own. */
 function enter(root: HTMLElement) {
   const title = root.querySelector<HTMLElement>("[data-hero-title]");
   const items = root.querySelectorAll<HTMLElement>("[data-hero-item]");
-  const photo = root.querySelector<HTMLElement>("[data-hero-photo]");
 
   if (title) {
     gsap.set(title, { autoAlpha: 1 });
@@ -37,17 +34,14 @@ function enter(root: HTMLElement) {
   }
 
   gsap.fromTo(items, { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: 0.07, delay: 0.5 });
-
-  if (photo) {
-    gsap.fromTo(photo, { autoAlpha: 0, scale: 0.86 }, { autoAlpha: 1, scale: 1, duration: 1.3, ease: "expo.out", delay: 0.05 });
-  }
 }
 
 export function HeroSection() {
   const heroRef = useRef<HTMLDivElement>(null);
+  const photoRef = useRef<HTMLDivElement>(null);
 
   /* One orchestrated entrance: headline lines rise out of their masks, the
-     rest follows, and the orbit draws itself in around the portrait. On a
+     rest follows, and the particles assemble into the portrait. On a
      first visit it waits for the chat bot's close-up to hand over. */
   useGSAP(
     (_context, contextSafe) => {
@@ -102,11 +96,11 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Portrait inside the service orbit. The canvas overhangs this box. */}
+          {/* The photo, with the particle portrait that turns into the work drawn over it. */}
           <div className="order-first mx-auto w-full max-w-[24rem] lg:order-none lg:max-w-none">
             <div className="relative aspect-[10/7] w-full">
-              <OrbitScene />
-              <div data-reveal data-hero-photo className="absolute left-1/2 top-1/2 w-[40%] -translate-x-1/2 -translate-y-1/2">
+              <PortraitCloud photoRef={photoRef} mode="hero" className="-inset-[18%]" />
+              <div ref={photoRef} data-reveal data-hero-photo className="absolute left-1/2 top-1/2 w-[40%] -translate-x-1/2 -translate-y-1/2">
                 <div className="panel aspect-square overflow-hidden rounded-full p-1.5">
                   <Image
                     src="/assets/profile.jpg"

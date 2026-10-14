@@ -7,6 +7,8 @@ import {
 } from "@/data/portfolio";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Breadcrumb } from "@/components/navigation/Breadcrumb";
+import { CareerPath3D } from "@/components/three/Scenes";
+import { careerIndex, careerRoles } from "./careerRoles";
 
 /* ── Adjacent phase navigation ── */
 
@@ -86,6 +88,11 @@ export function ExperienceDetailSection({ phase }: { phase: ExperiencePhase }) {
             <h1 className="section-heading mt-4">{phase.title}</h1>
             <p className="quiet-text mt-5 text-lg leading-8">{phase.summary}</p>
           </header>
+        </FadeIn>
+
+        {/* Where this role sits on the career path. */}
+        <FadeIn delay={60}>
+          <CareerPath3D key={phase.slug} roles={careerRoles} highlight={careerIndex(phase.slug)} className="h-36 sm:h-44" />
         </FadeIn>
 
         {/* Content grid */}

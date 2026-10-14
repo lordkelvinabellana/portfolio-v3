@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { AboutPortrait } from "./AboutPortrait";
 
 const chapters = [
   {
@@ -55,18 +55,9 @@ export function AboutSection() {
 
         {/* ── Narrative ── */}
         <FadeIn>
-          <div className="grid gap-12 md:grid-cols-[10rem_minmax(0,1fr)]">
-            <div className="hidden md:block">
-              <div className="panel overflow-hidden rounded-full p-1.5">
-                <Image
-                  src="/assets/profile.jpg"
-                  alt="Lord Kelvin Abellana"
-                  width={192}
-                  height={192}
-                  className="block rounded-full object-cover object-top"
-                  style={{ width: 192, height: 192 }}
-                />
-              </div>
+          <div className="grid gap-12 md:grid-cols-[13rem_minmax(0,1fr)]">
+            <div className="pt-2">
+              <AboutPortrait />
             </div>
 
             <div>

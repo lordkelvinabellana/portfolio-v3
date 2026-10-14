@@ -3,6 +3,8 @@ import { ArrowRight } from "lucide-react";
 import { experiencePhases } from "@/data/portfolio";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Breadcrumb } from "@/components/navigation/Breadcrumb";
+import { CareerPath3D } from "@/components/three/Scenes";
+import { careerRoles } from "./careerRoles";
 
 export function ExperienceIndexSection() {
   return (
@@ -25,6 +27,19 @@ export function ExperienceIndexSection() {
               startup builds, and automation. Each phase shaped how I approach the next one.
             </p>
           </header>
+        </FadeIn>
+
+        {/* The career as a path: oldest on the left, today on the right. */}
+        <FadeIn>
+          <figure>
+            <CareerPath3D roles={careerRoles} className="h-44 sm:h-56 md:h-64" />
+            <figcaption className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-xs text-muted-foreground">
+              <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-[var(--teal-fg)]" />Operations &amp; automation</span>
+              <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-[var(--coral-fg)]" />Video</span>
+              <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-[var(--violet-fg)]" />Product &amp; web</span>
+              <span>Glowing: current</span>
+            </figcaption>
+          </figure>
         </FadeIn>
 
         {/* Timeline */}
