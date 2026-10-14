@@ -23,7 +23,7 @@ export function LinkedInIcon({ className }: { className?: string }) {
 }
 
 export const socialLinks = [
-  { href: "https://linkedin.com/in/lordkelvinabellana", label: "LinkedIn", Icon: LinkedInIcon },
+  { href: "https://linkedin.com/in/lord-kelvin-abellana-46a15a320", label: "LinkedIn", Icon: LinkedInIcon },
   { href: "https://github.com/lordkelvinabellana", label: "GitHub", Icon: GitHubIcon },
   { href: `mailto:${EMAIL}`, label: "Email", Icon: Mail },
   { href: "https://wa.me/639285583697", label: "WhatsApp", Icon: MessageCircle },

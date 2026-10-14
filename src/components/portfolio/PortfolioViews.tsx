@@ -442,7 +442,7 @@ export function ContactPageView() {
             <p className="muted-text mb-3 text-xs font-semibold uppercase tracking-widest">Also reachable via</p>
             <div className="flex flex-wrap gap-2">
               <a
-                href="https://linkedin.com/in/lordkelvinabellana"
+                href="https://linkedin.com/in/lord-kelvin-abellana-46a15a320"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="focusable inline-flex min-h-10 items-center gap-2 rounded-md border border-border bg-secondary px-3.5 py-2 text-sm font-semibold text-secondary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"

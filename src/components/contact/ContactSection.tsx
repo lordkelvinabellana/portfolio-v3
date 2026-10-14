@@ -89,7 +89,7 @@ export function ContactSection() {
                 <Mail className="h-4 w-4" /> Email about a role
               </a>
               <a
-                href="https://linkedin.com/in/lordkelvinabellana"
+                href="https://linkedin.com/in/lord-kelvin-abellana-46a15a320"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="focusable inline-flex min-h-11 items-center gap-2 rounded-md px-3 text-sm font-semibold text-primary hover:text-foreground"
