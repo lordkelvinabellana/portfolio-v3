@@ -3,6 +3,7 @@ import { Barlow_Condensed, Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { ChatBot } from "@/components/chat/ChatBot";
 import "./globals.css";
 
 const geist = Geist({
@@ -75,6 +76,8 @@ export default function RootLayout({
             {children}
           </main>
           <SiteFooter />
+          {/* The bot only appears once the n8n backend is configured. */}
+          {process.env.N8N_CHAT_URL ? <ChatBot /> : null}
         </ThemeProvider>
       </body>
     </html>

@@ -17,6 +17,7 @@ import {
   WebGLRenderer,
 } from "three";
 import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
+import { readCssColor, type Rgb } from "@/lib/css-color";
 
 /*
  * The hero's "system orbit": the three services as lanes circling the portrait.
@@ -41,22 +42,6 @@ const TILT = 0.9; // radians the orbital plane leans back once settled
 const FOV = 20;
 const LABEL_ANGLES = [-0.42, -0.6, -0.76];
 const TAU = Math.PI * 2;
-
-type Rgb = [number, number, number];
-
-/* Resolves any CSS colour (the tokens are oklch) to sRGB bytes via a 1px canvas. */
-function readCssColor(variable: string, fallback: Rgb): Rgb {
-  const value = getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
-  if (!value) return fallback;
-  const canvas = document.createElement("canvas");
-  canvas.width = canvas.height = 1;
-  const ctx = canvas.getContext("2d", { willReadFrequently: true });
-  if (!ctx) return fallback;
-  ctx.fillStyle = value;
-  ctx.fillRect(0, 0, 1, 1);
-  const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
-  return [r / 255, g / 255, b / 255];
-}
 
 const laneVertex = /* glsl */ `
   varying float vAngle;
