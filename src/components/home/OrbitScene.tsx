@@ -18,6 +18,7 @@ import {
 } from "three";
 import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 import { readCssColor, type Rgb } from "@/lib/css-color";
+import { afterIntro } from "@/lib/intro";
 
 /*
  * The hero's "system orbit": the three services as lanes circling the portrait.
@@ -332,11 +333,34 @@ export function OrbitScene({ onReady }: { onReady?: () => void }) {
 
     /* ── Colours follow the theme tokens ── */
     function syncColors() {
-      const dark = document.documentElement.classList.contains("dark");
       colors.base.splice(0, 3, ...readCssColor("--foreground", [1, 1, 1]));
       colors.accent.splice(0, 3, ...readCssColor("--primary", [0.4, 0.55, 1]));
-      for (const lane of lanes) lane.material.uniforms.uOpacity.value = dark ? 0.3 : 0.34;
+      lanes.forEach((lane, i) => {
+        lane.material.uniforms.uOpacity.value = i === activeLane ? ACTIVE_OPACITY : laneOpacity();
+      });
       requestRender();
+    }
+
+    /* ── The hero showcase lights the lane of the card that's playing ── */
+    let activeLane = -1;
+    const ACTIVE_OPACITY = 0.9;
+    const laneOpacity = () => (document.documentElement.classList.contains("dark") ? 0.3 : 0.34);
+    function highlight(event: Event) {
+      const name = (event as CustomEvent<{ lane?: string }>).detail?.lane;
+      activeLane = lanes.findIndex((lane) => lane.label === name);
+      lanes.forEach((lane, i) => {
+        const on = i === activeLane;
+        gsap.to(lane.material.uniforms.uOpacity, {
+          value: on ? ACTIVE_OPACITY : laneOpacity(),
+          duration: 0.6,
+          ease: "power2.out",
+          onUpdate: () => {
+            needsRender = true;
+          },
+        });
+        gsap.to(lane.material.uniforms.uTrail, { value: on ? 0.7 : 0.32, duration: 0.6, ease: "power2.out" });
+        labelRefs.current[i]?.classList.toggle("is-active", on);
+      });
     }
 
     /* ── Sizing: keep 1 world unit = 1 portrait radius in CSS px ── */
@@ -413,6 +437,8 @@ export function OrbitScene({ onReady }: { onReady?: () => void }) {
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(wrap);
 
+    window.addEventListener("hero:service", highlight);
+
     const themeObserver = new MutationObserver(syncColors);
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
 
@@ -422,6 +448,7 @@ export function OrbitScene({ onReady }: { onReady?: () => void }) {
     io.observe(wrap);
 
     const ctx = gsap.context(() => {});
+    let cancelDrawIn = () => {};
     let onPointer: ((e: PointerEvent) => void) | null = null;
 
     if (reduced) {
@@ -429,7 +456,8 @@ export function OrbitScene({ onReady }: { onReady?: () => void }) {
       readyRef.current?.();
     } else {
       gsap.ticker.add(tick);
-      ctx.add(() => {
+      // The orbit draws itself in once the chat bot's intro (if any) lets go.
+      ctx.add("drawIn", () => {
         const intro = gsap.timeline({ defaults: { ease: "power2.inOut" }, onStart: () => readyRef.current?.() });
         lanes.forEach((lane, i) => {
           // Each lane starts drawing from a different point; trails stay on their items.
@@ -443,7 +471,10 @@ export function OrbitScene({ onReady }: { onReady?: () => void }) {
           .to(state, { flow: 1, duration: 1.8, ease: "power2.in" }, 1.45)
           .to(state, { labels: 1, duration: 0.8, ease: "power1.out" }, 2.1)
           .add(() => scheduleHandoff(0.2), 2.5);
+      });
+      cancelDrawIn = afterIntro(() => (ctx as unknown as { drawIn: () => void }).drawIn());
 
+      ctx.add(() => {
         ScrollTrigger.create({
           trigger: wrap,
           start: "top top",
@@ -470,6 +501,8 @@ export function OrbitScene({ onReady }: { onReady?: () => void }) {
     }
 
     return () => {
+      cancelDrawIn();
+      window.removeEventListener("hero:service", highlight);
       ctx.revert();
       handoffCall?.kill();
       gsap.ticker.remove(tick);

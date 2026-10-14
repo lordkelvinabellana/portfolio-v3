@@ -51,6 +51,14 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
 };
 
+const CHAT_ENABLED = Boolean(process.env.N8N_CHAT_URL);
+
+/* Runs before first paint: theme, motion, and whether the chat bot opens the
+   show (first page view of the session, motion allowed). */
+const HEAD_SCRIPT = `(function(){try{var d=document.documentElement;var t=localStorage.getItem('theme')||'time';var r;if(t==='light')r='light';else if(t==='dark')r='dark';else if(t==='time'){var h=new Date().getHours();r=(h>=6&&h<18)?'light':'dark';}else r=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';d.classList.add(r);d.style.colorScheme=r;if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('motion');${
+  CHAT_ENABLED ? "if(!sessionStorage.getItem('kelvin-bot-flown'))d.classList.add('bot-intro');" : ""
+}}}catch(e){}})()`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -63,11 +71,7 @@ export default function RootLayout({
       className={`${geist.variable} ${barlowCondensed.variable} ${geistMono.variable}`}
     >
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme')||'time';var r;if(t==='light')r='light';else if(t==='dark')r='dark';else if(t==='time'){var h=new Date().getHours();r=(h>=6&&h<18)?'light':'dark';}else r=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.classList.add(r);document.documentElement.style.colorScheme=r;if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('motion');}catch(e){}})()`,
-          }}
-        />
+        <script dangerouslySetInnerHTML={{ __html: HEAD_SCRIPT }} />
       </head>
       <body className="bg-background text-foreground antialiased">
         <ThemeProvider>
@@ -77,7 +81,7 @@ export default function RootLayout({
           </main>
           <SiteFooter />
           {/* The bot only appears once the n8n backend is configured. */}
-          {process.env.N8N_CHAT_URL ? <ChatBot /> : null}
+          {CHAT_ENABLED ? <ChatBot /> : null}
         </ThemeProvider>
       </body>
     </html>

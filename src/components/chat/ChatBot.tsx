@@ -4,6 +4,7 @@ import { Fragment, useCallback, useEffect, useLayoutEffect, useRef, useState, ty
 import Link from "next/link";
 import { ArrowUp, MessageCircle, X } from "lucide-react";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
+import { endIntro, introPlanned, releaseIntro, startIntro } from "@/lib/intro";
 import { cn } from "@/lib/utils";
 import type { BotScene } from "./botScene";
 
@@ -24,6 +25,39 @@ const SUGGESTIONS = [
   "Is Kelvin open to full-time roles?",
   "How do I start a project?",
 ];
+
+const PHI = (1 + Math.sqrt(5)) / 2;
+const SPIRAL_QUARTER_TURNS = 6;
+
+type Point = { x: number; y: number };
+
+/* Chooses a golden spiral from `start` that stays on screen: its pole sits 1/φ
+   of the way to the docked corner (closer in on small screens), turning
+   whichever way keeps the bot in view. */
+function goldenSpiral(start: Point, end: Point, W: number, H: number, bodyPx: number, kClose: number) {
+  type Spiral = { pole: Point; radius: number; angle: number; dir: number; overflow: number };
+  let best: Spiral | null = null;
+  for (const share of [1 / PHI, 0.5, 0.38]) {
+    const pole = { x: start.x + (end.x - start.x) * share, y: start.y + (end.y - start.y) * share };
+    const radius = Math.hypot(start.x - pole.x, start.y - pole.y);
+    const angle = Math.atan2(start.y - pole.y, start.x - pole.x);
+    for (const dir of [1, -1]) {
+      let overflow = 0;
+      for (let i = 1; i <= 60; i++) {
+        const u = (SPIRAL_QUARTER_TURNS * i) / 60;
+        const shrink = PHI ** -u;
+        const a = angle + dir * u * (Math.PI / 2);
+        const x = pole.x + radius * shrink * Math.cos(a);
+        const y = pole.y + radius * shrink * Math.sin(a);
+        const half = bodyPx * (1 + (kClose - 1) * shrink) * 0.4;
+        overflow = Math.max(overflow, half - x, x + half - W, half - y, y + half - H);
+      }
+      if (!best || overflow < best.overflow) best = { pole, radius, angle, dir, overflow };
+      if (overflow <= 0) return best;
+    }
+  }
+  return best!;
+}
 
 function newSessionId() {
   return typeof crypto !== "undefined" && "randomUUID" in crypto
@@ -51,6 +85,8 @@ export function ChatBot() {
 
   const launcherRef = useRef<HTMLButtonElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const stageRef = useRef<HTMLCanvasElement>(null);
+  const spotRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -69,117 +105,158 @@ export function ChatBot() {
     } catch {}
   }, [stored]);
 
-  /* ── Load the 3D bot once the page is idle, then fly it in ── */
+  /* ── Load the 3D bot. On a first visit it opens the show: a close-up on a
+        full-screen stage, then a golden-spiral flight down to the corner. ── */
   useEffect(() => {
     const el = launcherRef.current;
-    if (!el) return;
+    const stageCanvas = stageRef.current;
+    const spot = spotRef.current;
+    if (!el || !stageCanvas || !spot) return;
     const reduced = prefersReducedMotion();
+    const intro = introPlanned() && !reduced;
     let cancelled = false;
     let scene: BotScene | null = null;
+    let stage: BotScene | null = null;
     let startCall: gsap.core.Tween | null = null;
     let moodCall: gsap.core.Tween | null = null;
     let pointerFrame = 0;
 
     const show = () => gsap.set(el, { autoAlpha: 1 });
+    const letGo = () => {
+      endIntro();
+      releaseIntro();
+    };
 
-    function greet() {
-      scene?.setMood("happy");
-      scene?.pop();
-      scene?.wave();
+    function greet(bot: BotScene) {
+      bot.setMood("happy");
+      bot.pop();
+      bot.wave();
       setBubble(true);
-      moodCall = gsap.delayedCall(1.8, () => scene?.setMood("idle"));
+      moodCall = gsap.delayedCall(1.8, () => bot.setMood("idle"));
     }
 
-    function fly(bot: BotScene) {
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
+    // Any click, key, scroll or touch fast-forwards the intro.
+    function skip() {
+      releaseIntro();
+      flightRef.current?.timeScale(4);
+    }
+    const SKIP_EVENTS = ["pointerdown", "keydown", "wheel", "touchstart"] as const;
+    const listenForSkip = (on: boolean) =>
+      SKIP_EVENTS.forEach((type) =>
+        on ? window.addEventListener(type, skip, { passive: true }) : window.removeEventListener(type, skip),
+      );
+
+    function finishIntro(dock: BotScene) {
+      listenForSkip(false);
+      flightRef.current = null;
+      gsap.set([stageCanvas, spot], { autoAlpha: 0 });
+      stage?.dispose();
+      stage = null;
+      letGo();
+      show();
+      greet(dock);
+    }
+
+    function playIntro(dock: BotScene, star: BotScene) {
+      const W = window.innerWidth;
+      const H = window.innerHeight;
       const rect = el!.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const at = (x: number, y: number) => ({ x: x - cx, y: y - cy });
-      const small = vw < 640;
-      const loop = { x: vw * (small ? 0.5 : 0.6), y: vh * (small ? 0.4 : 0.36) };
-      const r = Math.min(vw, vh) * (small ? 0.16 : 0.13);
+      const end = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+      const bodyPx = rect.width * 0.7;
+      const kClose = Math.max(2.4, (0.42 * Math.min(W, H)) / bodyPx);
+      const start = { x: W / 2, y: H * 0.48 };
+      const spiral = goldenSpiral(start, end, W, H, bodyPx, kClose);
 
-      // In from the side, one loop-the-loop over the page, then down to the corner.
-      const start = small ? at(vw + 90, vh * 0.16) : at(-140, vh * 0.3);
-      const path = small
-        ? [at(vw * 0.62, vh * 0.12), at(loop.x - r, loop.y), at(loop.x, loop.y + r), at(loop.x + r, loop.y),
-           at(loop.x, loop.y - r), at(vw * 0.25, vh * 0.52), at(vw * 0.6, vh * 0.8), { x: 0, y: 0 }]
-        : [at(vw * 0.22, vh * 0.16), at(vw * 0.42, vh * 0.44), at(loop.x + r, loop.y), at(loop.x, loop.y - r),
-           at(loop.x - r, loop.y), at(loop.x, loop.y + r), at(loop.x + r * 1.8, loop.y + r * 0.5),
-           at(vw * 0.86, vh * 0.6), { x: 0, y: 0 }];
-
+      const pos = { x: start.x, y: start.y, k: 0.001 };
       let prev = { ...start };
-      gsap.set(el, { x: start.x, y: start.y, scale: small ? 1.1 : 1.3, autoAlpha: 1 });
-      bot.setMood("flying");
+      const apply = () => {
+        star.place(pos.x, pos.y, pos.k);
+        star.setVelocity((pos.x - prev.x) / 22, (pos.y - prev.y) / 22);
+        prev = { x: pos.x, y: pos.y };
+      };
+      const turn = { u: 0 };
+      const along = () => {
+        const shrink = PHI ** -turn.u;
+        const angle = spiral.angle + spiral.dir * turn.u * (Math.PI / 2);
+        pos.x = spiral.pole.x + spiral.radius * shrink * Math.cos(angle);
+        pos.y = spiral.pole.y + spiral.radius * shrink * Math.sin(angle);
+        pos.k = 1 + (kClose - 1) * shrink;
+        apply();
+      };
+
+      apply();
+      gsap.set(stageCanvas, { autoAlpha: 1 });
+      star.setMood("happy");
+      listenForSkip(true);
+
       flightRef.current = gsap
-        .timeline({
-          onComplete() {
-            flightRef.current = null;
-            bot.setVelocity(0, 0);
-            greet();
-          },
-        })
-        .to(el, {
-          duration: small ? 3.4 : 4.8,
-          ease: "sine.inOut",
-          motionPath: { path, curviness: 1.25 },
-          onUpdate() {
-            const x = gsap.getProperty(el, "x") as number;
-            const y = gsap.getProperty(el, "y") as number;
-            bot.setVelocity((x - prev.x) / 20, (y - prev.y) / 20);
-            prev = { x, y };
-          },
-        })
-        .to(el, { scale: 1, duration: 0.7, ease: "power2.out" }, "-=0.7");
+        .timeline({ onComplete: () => finishIntro(dock) })
+        .to(spot, { autoAlpha: 1, duration: 0.45, ease: "power1.out" }, 0)
+        // Up close: bursts out of the glow right in front of the visitor, spins, hops and waves.
+        .to(spot!.querySelector("[data-glow]"), { scale: 2.6, autoAlpha: 0, duration: 0.6, ease: "power2.out" }, 0.05)
+        .to(pos, { k: kClose, duration: 0.9, ease: "back.out(1.7)", onUpdate: apply }, 0.1)
+        .add(() => star.spin(), 0.2)
+        .add(() => star.hop(), 1.2)
+        .add(() => star.wave(), 1.65)
+        .add(() => star.setMood("flying"), 2.35)
+        .add(releaseIntro, 2.4)
+        .to(spot, { autoAlpha: 0, duration: 1, ease: "power1.inOut" }, 2.4)
+        // A golden spiral: each quarter turn is 1/φ the size of the one before.
+        .to(turn, { u: SPIRAL_QUARTER_TURNS, duration: 3, ease: "sine.inOut", onUpdate: along }, 2.45)
+        .to(pos, { x: end.x, y: end.y, k: 1, duration: 0.6, ease: "power2.inOut", onUpdate: apply })
+        .add(() => star.setVelocity(0, 0));
     }
 
     function arrive() {
-      if (cancelled || !scene) return;
-      let firstVisit = false;
-      try {
-        firstVisit = !sessionStorage.getItem(FLOWN_KEY);
-        sessionStorage.setItem(FLOWN_KEY, "1");
-      } catch {}
-      if (firstVisit && !reduced) {
-        fly(scene);
-      } else {
-        gsap.fromTo(el, { autoAlpha: 0, scale: 0.6 }, { autoAlpha: 1, scale: 1, duration: reduced ? 0 : 0.5, ease: "back.out(2)" });
-      }
+      gsap.fromTo(el, { autoAlpha: 0, scale: 0.6 }, { autoAlpha: 1, scale: 1, duration: reduced ? 0 : 0.5, ease: "back.out(2)" });
     }
 
-    function whenVisible() {
-      if (!document.hidden) return arrive();
-      const onVisible = () => {
-        document.removeEventListener("visibilitychange", onVisible);
-        arrive();
-      };
-      document.addEventListener("visibilitychange", onVisible);
+    function giveUp() {
+      setFallback(true);
+      letGo();
+      show();
     }
 
     function load() {
       import("./botScene")
-        .then(({ createBotScene }) => {
-          if (cancelled || !canvasRef.current) return;
-          scene = createBotScene(canvasRef.current, { reducedMotion: reduced });
-          if (!scene) {
-            setFallback(true);
-            return show();
-          }
+        .then(async ({ createBotScene, pxPerUnit }) => {
+          const dockCanvas = canvasRef.current;
+          if (cancelled || !dockCanvas) return;
+          scene = createBotScene(dockCanvas, { reducedMotion: reduced });
+          if (!scene) return giveUp();
           sceneRef.current = scene;
-          // Let the hero finish its entrance before the bot takes the stage.
-          startCall = gsap.delayedCall(Math.max(0, 2.4 - performance.now() / 1000), whenVisible);
+          if (intro) {
+            try {
+              sessionStorage.setItem(FLOWN_KEY, "1");
+            } catch {}
+            stage = createBotScene(stageCanvas!, { reducedMotion: false, stage: { dockPxPerUnit: pxPerUnit(dockCanvas.clientHeight) } });
+            if (stage) {
+              await Promise.all([scene.ready(), stage.ready()]);
+              if (cancelled) return;
+              if (startIntro()) return playIntro(scene, stage);
+              stage.dispose();
+              stage = null;
+            }
+            // Ready too late for the close-up (or no second WebGL canvas):
+            // let the page go and just pop in and say hi.
+            letGo();
+            const bot = scene;
+            startCall = gsap.delayedCall(0.4, () => {
+              arrive();
+              moodCall = gsap.delayedCall(0.5, () => greet(bot));
+            });
+            return;
+          }
+          startCall = gsap.delayedCall(1.2, arrive);
         })
         .catch(() => {
-          if (cancelled) return;
-          setFallback(true);
-          show();
+          if (!cancelled) giveUp();
         });
     }
 
-    const canIdle = typeof window.requestIdleCallback === "function";
-    const idle = canIdle ? window.requestIdleCallback(load, { timeout: 2000 }) : window.setTimeout(load, 800);
+    // The intro can't wait for idle time; a returning visitor's bot can.
+    const canIdle = !intro && typeof window.requestIdleCallback === "function";
+    const idle = canIdle ? window.requestIdleCallback(load, { timeout: 2000 }) : window.setTimeout(load, intro ? 0 : 800);
 
     function onPointer(e: PointerEvent) {
       if (!scene || openRef.current || flightRef.current) return;
@@ -194,7 +271,10 @@ export function ChatBot() {
     }
     window.addEventListener("pointermove", onPointer, { passive: true });
 
-    const themeObserver = new MutationObserver(() => scene?.refreshColors());
+    const themeObserver = new MutationObserver(() => {
+      scene?.refreshColors();
+      stage?.refreshColors();
+    });
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
 
     return () => {
@@ -205,9 +285,11 @@ export function ChatBot() {
       moodCall?.kill();
       flightRef.current?.kill();
       flightRef.current = null;
+      listenForSkip(false);
       cancelAnimationFrame(pointerFrame);
       window.removeEventListener("pointermove", onPointer);
       themeObserver.disconnect();
+      stage?.dispose();
       scene?.dispose();
       sceneRef.current = null;
     };
@@ -225,13 +307,25 @@ export function ChatBot() {
 
   useEffect(() => {
     if (!bubble) return;
-    const timer = window.setTimeout(() => setBubble(false), 7000);
-    return () => window.clearTimeout(timer);
+    // The greeting steps aside after ten seconds, or as soon as the visitor scrolls on.
+    const timer = window.setTimeout(() => setBubble(false), 10000);
+    const startY = window.scrollY;
+    const onScroll = () => {
+      if (Math.abs(window.scrollY - startY) > 120) setBubble(false);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, [bubble]);
 
   useLayoutEffect(() => {
     if (!bubble || !bubbleRef.current || prefersReducedMotion()) return;
-    gsap.from(bubbleRef.current, { autoAlpha: 0, x: 14, scale: 0.85, transformOrigin: "100% 50%", duration: 0.4, ease: "back.out(2)" });
+    gsap
+      .timeline()
+      .from(bubbleRef.current, { autoAlpha: 0, x: 24, scale: 0.3, rotation: -8, transformOrigin: "100% 70%", duration: 0.55, ease: "back.out(2.2)" })
+      .to(bubbleRef.current, { keyframes: { rotation: [0, -3, 2.5, -1, 0] }, duration: 0.6, ease: "sine.inOut" });
   }, [bubble]);
 
   useLayoutEffect(() => {
@@ -396,15 +490,21 @@ export function ChatBot() {
         </div>
       )}
 
+      {/* Intro stage: a spotlight and a full-screen canvas for the close-up. */}
+      <div ref={spotRef} aria-hidden className="bot-spotlight pointer-events-none invisible fixed inset-0 z-[78]">
+        <span data-glow className="bot-glow" />
+      </div>
+      <canvas ref={stageRef} aria-hidden className="pointer-events-none invisible fixed inset-0 z-[79] h-full w-full" />
+
       <div className="fixed right-3 bottom-3 z-[70] flex items-center gap-1 sm:right-5 sm:bottom-5">
         {bubble && !open && (
           <button
             ref={bubbleRef}
             type="button"
             onClick={openChat}
-            className="focusable rounded-2xl rounded-br-md border border-border bg-popover px-4 py-2.5 text-sm font-medium whitespace-nowrap text-popover-foreground shadow-[var(--shadow-soft)]"
+            className="bot-bubble focusable mr-2 rounded-2xl border border-border bg-popover px-4 py-2.5 text-sm font-semibold whitespace-nowrap text-popover-foreground shadow-[var(--shadow-soft)]"
           >
-            Hi! Ask me about Kelvin&apos;s work.
+            Hi! Ask me anything about Kelvin.
           </button>
         )}
         <button

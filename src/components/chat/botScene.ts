@@ -42,9 +42,25 @@ export type BotScene = {
   setMood(mood: BotMood): void;
   wave(): void;
   pop(): void;
+  spin(): void;
+  hop(): void;
+  /* Stage mode only: centre the bot on (x, y) CSS px at k times its docked size. */
+  place(x: number, y: number, k: number): void;
+  /* Resolves once every shader is compiled (off the main thread where the
+     browser allows), so the first animated frame doesn't stall. */
+  ready(): Promise<void>;
   refreshColors(): void;
   dispose(): void;
 };
+
+/* Stage mode renders the bot on a full-screen canvas for the intro. dockPxPerUnit
+   is the docked canvas's scale, so k = 1 matches the docked bot exactly. */
+export type StageOptions = { dockPxPerUnit: number };
+
+const CAMERA_DISTANCE = 8.4;
+const FOV = 30;
+export const pxPerUnit = (canvasHeight: number) =>
+  canvasHeight / (2 * CAMERA_DISTANCE * Math.tan(((FOV / 2) * Math.PI) / 180));
 
 const RING_RADIUS = 1.42;
 const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
@@ -66,7 +82,7 @@ function glowTexture() {
 
 export function createBotScene(
   canvas: HTMLCanvasElement,
-  { reducedMotion }: { reducedMotion: boolean },
+  { reducedMotion, stage }: { reducedMotion: boolean; stage?: StageOptions },
 ): BotScene | null {
   let renderer: WebGLRenderer;
   try {
@@ -74,7 +90,7 @@ export function createBotScene(
   } catch {
     return null;
   }
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, stage ? 1.5 : 2));
   renderer.toneMapping = ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.05;
   renderer.outputColorSpace = SRGBColorSpace;
@@ -84,8 +100,8 @@ export function createBotScene(
   const environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
   scene.environment = environment;
 
-  const camera = new PerspectiveCamera(30, 1, 0.1, 50);
-  camera.position.set(0, 0.15, 8.4);
+  const camera = new PerspectiveCamera(FOV, 1, 0.1, 50);
+  camera.position.set(0, 0.15, CAMERA_DISTANCE);
   camera.lookAt(0, 0, 0);
 
   scene.add(new HemisphereLight(0xffffff, 0x8090b0, 0.9));
@@ -96,15 +112,17 @@ export function createBotScene(
   rim.position.set(-3, 1, -3);
   scene.add(rim);
 
-  /* ── Rig: root (bob) → bank (velocity) → wave (gestures) → head (gaze) ── */
+  /* ── Rig: placer (stage size) → root (bob) → bank (velocity) → gesture → head (gaze) ── */
+  const placer = new Group();
   const root = new Group();
   const bank = new Group();
   const gesture = new Group();
   const head = new Group();
+  placer.add(root);
   root.add(bank);
   bank.add(gesture);
   gesture.add(head);
-  scene.add(root);
+  scene.add(placer);
 
   const shell = new MeshPhysicalMaterial({
     color: 0xeef1f7,
@@ -224,11 +242,23 @@ export function createBotScene(
     if (reducedMotion) render();
   }
 
+  const view = { x: 0, y: 0, k: 1 };
+  function applyView() {
+    if (!stage) return;
+    const width = canvas.clientWidth || 1;
+    const height = canvas.clientHeight || 1;
+    // Shift the projection centre onto the bot instead of moving the bot, so
+    // it is drawn exactly as the docked canvas draws it, wherever it is.
+    camera.setViewOffset(width * 2, height * 2, width - view.x, height - view.y, width, height);
+    placer.scale.setScalar((view.k * stage.dockPxPerUnit) / (pxPerUnit(height) * 2));
+  }
+
   function resize() {
     const width = canvas.clientWidth || 1;
     const height = canvas.clientHeight || 1;
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
+    applyView();
     camera.updateProjectionMatrix();
   }
 
@@ -239,7 +269,7 @@ export function createBotScene(
   function tick(now: number) {
     if (disposed) return;
     frame = requestAnimationFrame(tick);
-    if (document.hidden) {
+    if (!warm || document.hidden) {
       last = now;
       return;
     }
@@ -308,6 +338,18 @@ export function createBotScene(
       .to(gesture.rotation, { z: 0, duration: 0.4, ease: "elastic.out(1, 0.5)" });
   }
 
+  function spin() {
+    if (reducedMotion) return;
+    gsap.fromTo(gesture.rotation, { y: 0 }, { y: Math.PI * 2, duration: 1.1, ease: "power3.inOut" });
+  }
+
+  function hop() {
+    if (reducedMotion) return;
+    gsap.timeline()
+      .to(bank.position, { y: 0.45, duration: 0.24, ease: "power2.out" })
+      .to(bank.position, { y: 0, duration: 0.5, ease: "bounce.out" });
+  }
+
   function pop() {
     if (reducedMotion) return;
     gsap.fromTo(
@@ -325,8 +367,17 @@ export function createBotScene(
   });
   observer.observe(canvas);
 
+  // Shaders compile in the background; the loop only draws once they're done.
+  let warm = false;
+  const compiled = renderer
+    .compileAsync(scene, camera)
+    .catch(() => renderer.compile(scene, camera))
+    .then(() => {
+      warm = true;
+    });
+
   if (reducedMotion) {
-    render();
+    compiled.then(() => !disposed && render());
   } else {
     frame = requestAnimationFrame(tick);
     scheduleBlink();
@@ -349,12 +400,22 @@ export function createBotScene(
     setMood,
     wave,
     pop,
+    spin,
+    hop,
+    place(x, y, k) {
+      view.x = x;
+      view.y = y;
+      view.k = Math.max(0.0001, k);
+      applyView();
+      camera.updateProjectionMatrix();
+    },
+    ready: () => compiled,
     refreshColors,
     dispose() {
       disposed = true;
       cancelAnimationFrame(frame);
       blinkCall?.kill();
-      gsap.killTweensOf([eyes.scale, eyes.position, gesture.rotation, root.scale]);
+      gsap.killTweensOf([eyes.scale, eyes.position, gesture.rotation, root.scale, bank.position]);
       observer.disconnect();
       geometries.forEach((g) => g.dispose());
       [shell, glass, trim, eyeMaterial, beadMaterial, ringMaterial, thrusterMaterial, ...nodeMaterials].forEach((m) => m.dispose());

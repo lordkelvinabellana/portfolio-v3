@@ -290,7 +290,7 @@
   }
 
   .display-heading.hero-heading {
-    font-size: clamp(2.6rem, 6vw, 4.75rem);
+    font-size: clamp(2.6rem, 5.2vw, 4.1rem);
   }
 
   /* Section headings on the home page: condensed display, sentence case. */
@@ -380,6 +380,11 @@
   .motion [data-reveal] {
     visibility: hidden;
     animation: reveal-fallback 0s linear 3s forwards;
+  }
+
+  /* The chat bot's intro holds the hero back a little longer. */
+  .motion.bot-intro [data-reveal] {
+    animation-delay: 7s;
   }
 
   .orbit-label {
@@ -1133,6 +1138,45 @@
 
 /* ── Chat bot ── */
 @layer components {
+  .bot-spotlight {
+    background: radial-gradient(circle at 50% 48%, transparent 0, transparent 16vmin, oklch(0.1 0.02 258 / 0.7) 64vmin);
+  }
+
+  /* On a first visit the spotlight is up from the first paint, with a glow
+     the bot bursts out of once three.js has loaded. */
+  .bot-intro .bot-spotlight {
+    visibility: visible;
+  }
+
+  .bot-glow {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    width: 22vmin;
+    height: 22vmin;
+    margin: -11vmin 0 0 -11vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in oklch, var(--primary), transparent 35%), transparent 68%);
+    animation: bot-glow 1.1s ease-in-out infinite alternate;
+  }
+
+  .bot-bubble {
+    position: relative;
+  }
+
+  .bot-bubble::after {
+    content: "";
+    position: absolute;
+    right: -6px;
+    bottom: 14px;
+    width: 11px;
+    height: 11px;
+    background: var(--popover);
+    border-top: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    transform: rotate(45deg);
+  }
+
   .chat-launcher canvas {
     filter: drop-shadow(0 10px 14px oklch(0.2 0.03 258 / 0.22));
   }
@@ -1159,6 +1203,17 @@
   }
 }
 
+@keyframes bot-glow {
+  from {
+    transform: scale(0.7);
+    opacity: 0.55;
+  }
+  to {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
 @keyframes chat-dot {
   0%,
   80%,
@@ -1170,4 +1225,87 @@
     transform: translateY(-3px);
     opacity: 1;
   }
+}
+
+/* ── Hero showcase: one motion piece per service ── */
+@layer components {
+  .show-card {
+    background: var(--surface-elevated);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-subtle);
+    transition:
+      border-color 400ms var(--ease-standard),
+      box-shadow 400ms var(--ease-standard);
+  }
+
+  .show-card.is-active {
+    border-color: color-mix(in oklch, var(--tone), transparent 40%);
+    box-shadow: 0 18px 48px color-mix(in oklch, var(--tone), transparent 82%);
+  }
+
+  .show-dot { background: var(--tone); }
+  .show-stage { background: var(--surface-2); }
+
+  .show-grid-dots {
+    background-image: radial-gradient(color-mix(in oklch, var(--foreground), transparent 85%) 1px, transparent 1.3px);
+    background-size: 12px 12px;
+  }
+
+  .show-wire { stroke: color-mix(in oklch, var(--foreground), transparent 80%); stroke-width: 1.5; }
+  .show-wire-live { stroke: var(--tone); stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .show-packet { background: var(--tone); box-shadow: 0 0 10px 2px color-mix(in oklch, var(--tone), transparent 40%); }
+
+  .show-node {
+    background: var(--surface-elevated);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    box-shadow: var(--shadow-subtle);
+  }
+
+  .show-node-done {
+    border: 1.5px solid var(--tone);
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--tone), transparent 85%);
+  }
+
+  .show-ring { border: 1.5px solid var(--tone); }
+  .show-check, .show-toast-icon { background: var(--tone); color: var(--background); }
+
+  .show-chip {
+    background: color-mix(in oklch, var(--tone), transparent 84%);
+    border: 1px solid color-mix(in oklch, var(--tone), transparent 62%);
+    color: var(--tone);
+  }
+
+  .show-chip-media { background: oklch(0.12 0.015 258 / 0.72); color: oklch(0.97 0 0); }
+  .show-rec { background: oklch(0.66 0.22 25); }
+
+  .show-toast {
+    background: var(--surface-elevated);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .show-timeline { background: oklch(0.12 0.015 258 / 0.8); backdrop-filter: blur(6px); }
+  .show-clip { background: color-mix(in oklch, var(--tone), transparent 20%); }
+
+  .show-clip-filler {
+    background: repeating-linear-gradient(135deg, oklch(1 0 0 / 0.35) 0 3px, transparent 3px 6px);
+    outline: 1px dashed oklch(1 0 0 / 0.5);
+    outline-offset: -1px;
+  }
+
+  .show-wave-bar { fill: oklch(0.85 0.06 195 / 0.75); }
+  .show-playhead { background: oklch(1 0 0 / 0.95); box-shadow: 0 0 6px oklch(1 0 0 / 0.6); }
+  .show-blade { background: var(--tone); color: oklch(0.99 0 0); box-shadow: 0 4px 10px oklch(0 0 0 / 0.3); }
+
+  .show-chrome { background: var(--surface-3); color: var(--foreground); border-bottom: 1px solid var(--border); }
+  .show-url { background: var(--surface-1); }
+  .show-live { background: color-mix(in oklch, var(--status), transparent 80%); color: var(--status); }
+  .show-live-dot { background: var(--status); }
+  .show-sidebar { background: var(--surface-1); border-right: 1px solid var(--border); }
+  .show-skel { background: color-mix(in oklch, var(--foreground), transparent 85%); }
+  .show-kpi, .show-chart { background: var(--surface-elevated); border: 1px solid var(--border); }
+  .show-bar { background: linear-gradient(180deg, var(--tone), color-mix(in oklch, var(--tone), transparent 55%)); }
+
+  .orbit-label.is-active { color: var(--foreground); }
 }
