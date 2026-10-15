@@ -13,6 +13,7 @@ import { writeFileSync, mkdirSync } from "node:fs";
 import { experiencePhases, projectCaseStudies, credentials } from "../src/data/portfolio.ts";
 import { services, serviceLabel } from "../src/data/services.ts";
 import { AUTOMATION_GROUPS, automations } from "../src/data/automations.ts";
+import { automationStories } from "../src/data/automationStories.ts";
 
 const SITE = "https://portfolio-v3-roan-omega.vercel.app";
 
@@ -83,13 +84,28 @@ for (const c of projectCaseStudies) {
   ]);
 }
 
-// The n8n workflows on the Automations page, one chunk per group.
+/* The automation write-ups are in Kelvin's voice; the bot talks about him. */
+const third = (text: string) =>
+  text.replace(/\bI send\b/g, "Kelvin sends").replace(/\bwithout me\b/g, "without Kelvin").replace(/\bMyself\b/g, "Kelvin himself").replace(/\bmy\b/g, "Kelvin's");
+
+// The n8n workflows on the Automations page: a list per group, then one chunk per workflow
+// with the problem it solves, so a question about one of them finds its own page.
 for (const group of AUTOMATION_GROUPS) {
   section(`n8n automations: ${group}`, `${SITE}/automations`, [
-    `Workflows Kelvin built in n8n (${group.toLowerCase()}), shown node by node on the Automations page:`,
+    `Workflows Kelvin built in n8n, group "${group}". Each one has its own page, linked from the Automations page (${SITE}/automations):`,
     ...automations
       .filter((a) => a.group === group)
-      .map((a) => `- ${a.title}${a.live ? " (running)" : ""}: ${a.caption} ${a.count} nodes; starts on ${a.trigger}; uses ${a.tools.join(", ") || "n8n core nodes"}.`),
+      .map((a) => `- ${a.title}${a.live ? " (running)" : ""}: ${third(automationStories[a.id]?.short ?? a.caption)} Page: ${SITE}/automations/${a.id}`),
+  ]);
+}
+for (const a of automations) {
+  const story = automationStories[a.id];
+  section(`n8n automation: ${a.title}`, `${SITE}/automations/${a.id}`, [
+    `An n8n workflow Kelvin built, in the group "${a.group}".${story?.builtFor ? ` Built for: ${third(story.builtFor)}.` : ""}${a.live ? " It is running in production." : ""}`,
+    ...(story
+      ? [`- Problem: ${story.problem}`, `- What it does now: ${story.fix}`, `- How it runs: ${story.steps.join(" ")}`, `- What keeps it reliable: ${story.safeguards.join(" ")}`].map(third)
+      : [`- ${a.caption}`]),
+    `- ${a.count} nodes; starts on ${a.trigger}; uses ${a.tools.join(", ") || "n8n core nodes"}.`,
   ]);
 }
 

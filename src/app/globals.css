@@ -603,6 +603,66 @@
     font-weight: 500;
   }
 
+  /* Automations gallery (AutomationsGallery.tsx, WorkflowThumb.tsx) */
+  .automation-thumb {
+    background-color: var(--surface-1);
+    background-image: radial-gradient(color-mix(in oklch, var(--foreground), transparent 88%) 1px, transparent 1px);
+    background-size: 14px 14px;
+  }
+
+  .thumb-edge {
+    fill: none;
+    stroke: color-mix(in oklch, var(--foreground), transparent 72%);
+    stroke-width: 0.09;
+    transition: stroke 240ms var(--ease-standard);
+  }
+
+  .thumb-attach {
+    stroke-dasharray: 0.18 0.2;
+  }
+
+  .thumb-node {
+    fill: color-mix(in oklch, var(--k), var(--surface-1) 80%);
+    stroke: color-mix(in oklch, var(--k), transparent 25%);
+    stroke-width: 0.1;
+    transition:
+      fill 240ms var(--ease-standard),
+      stroke 240ms var(--ease-standard);
+  }
+
+  .thumb-node[data-skip] {
+    opacity: 0.4;
+  }
+
+  /* Hover runs the workflow: nodes turn green column by column. */
+  .automation-card:is(:hover, :focus-visible) .thumb-node {
+    fill: color-mix(in oklch, var(--status), var(--surface-1) 72%);
+    stroke: var(--status);
+    transition-delay: calc(var(--i) * 45ms);
+  }
+
+  .automation-card:is(:hover, :focus-visible) .thumb-edge {
+    stroke: color-mix(in oklch, var(--status), transparent 25%);
+    transition-delay: calc(var(--i) * 45ms + 20ms);
+  }
+
+  .automation-grid > li {
+    animation: automation-in 420ms var(--ease-standard) both;
+    animation-delay: calc(var(--n) * 28ms);
+  }
+
+  @keyframes automation-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px) scale(0.985);
+    }
+  }
+
+  .automation-callout {
+    background: color-mix(in oklch, var(--tone), transparent 91%);
+    border: 1px solid color-mix(in oklch, var(--tone), transparent 72%);
+  }
+
   /* 3D edit timeline (EditTimeline.tsx) */
   .edit-scene {
     --name-w: 4.6rem;
@@ -1109,6 +1169,13 @@
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 1ms !important;
+  }
+
+  .automation-grid > li,
+  .automation-card .thumb-node,
+  .automation-card .thumb-edge {
+    animation-delay: 0ms !important;
+    transition-delay: 0ms !important;
   }
 }
 

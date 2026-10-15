@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Workflow, WorkflowNode, WorkflowNodeKind } from "@/data/workflows";
+import { KIND_COLOR, KIND_LABEL } from "./kinds";
 import { gsap, ScrollTrigger, useGSAP, prefersReducedMotion } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 
@@ -10,36 +11,6 @@ import { cn } from "@/lib/utils";
  * connectors, and an execution that runs node by node and turns each one green.
  * The canvas wraps into a snake so every node stays on screen at any width.
  */
-
-const KIND_COLOR: Record<WorkflowNodeKind, string> = {
-  trigger: "var(--coral-fg)",
-  code: "var(--amber-fg)",
-  http: "var(--primary)",
-  if: "var(--teal-fg)",
-  slack: "var(--violet-fg)",
-  ai: "var(--violet-fg)",
-  noop: "var(--text-tertiary)",
-  ads: "var(--status)",
-  form: "var(--primary)",
-  data: "var(--teal-fg)",
-  mail: "var(--coral-fg)",
-  chat: "var(--violet-fg)",
-};
-
-const KIND_LABEL: Record<WorkflowNodeKind, string> = {
-  trigger: "Trigger",
-  code: "Code",
-  http: "HTTP request",
-  if: "If",
-  slack: "Slack",
-  ai: "AI",
-  noop: "No operation",
-  ads: "Google Ads",
-  form: "Form",
-  data: "Data",
-  mail: "Email",
-  chat: "Chat",
-};
 
 function Glyph({ kind, color }: { kind: WorkflowNodeKind; color: string }) {
   const common = { fill: "none", stroke: color, strokeWidth: 1.7, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
