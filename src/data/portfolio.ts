@@ -57,7 +57,7 @@ export const experiences: Experience[] = [
   {
     position: "Lead Frontend Developer",
     company: "Ardexa.ai",
-    duration: "Oct 2025 – Apr 2026",
+    duration: "Oct 2025 – May 2026",
     color: "purple",
     description:
       "Built three startup MVPs from scratch as the primary frontend and full-stack developer alongside two founders. Worked across architecture, product decisions, and implementation using Next.js, Supabase, and TypeScript, shipping RentWise, LexaDraft, and TicketDesk.",
@@ -1996,7 +1996,7 @@ export const experiencePhases: ExperiencePhase[] = [
   {
     slug: "ardexa",
     title: "Ardexa.ai: Startup MVP Development",
-    period: "Oct 2025 – Apr 2026",
+    period: "Oct 2025 – May 2026",
     summary:
       "Led frontend and full-stack development on three startup MVPs alongside two founders (RentWise, LexaDraft, and TicketDesk), working directly on architecture, product decisions, and implementation.",
     responsibilities: [

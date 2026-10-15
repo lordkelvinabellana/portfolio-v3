@@ -319,7 +319,7 @@ That mindset continues to shape how I work today.
 
 Remote
 
-Oct 2025 – Apr 2026
+Oct 2025 – May 2026
 
 ## Lead Frontend Developer
 

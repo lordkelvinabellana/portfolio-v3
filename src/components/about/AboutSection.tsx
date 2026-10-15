@@ -17,7 +17,7 @@ const chapters = [
       "At Alphaus I progressed from Junior Frontend Developer to Lead to Product Owner in under two years. As Lead I owned frontend quality, release coordination, and PR standards for Octo. As Product Owner I ran sprint planning, backlog refinement, and UI/UX design for Ripple and four connected products, stepping into design ownership when delivery depended on it.",
   },
   {
-    period: "Oct 2025 – Apr 2026",
+    period: "Oct 2025 – May 2026",
     label: "Startup and full-stack work",
     description:
       "At Ardexa I was the only frontend developer alongside two founders and one backend developer, building MVPs from scratch. I worked across frontend, backend, product decisions, and architecture planning, often in the same week. Products included RentWise (rental qualification with scoring logic), LexaDraft (contract template builder), and TicketDesk (centralized support triage).",

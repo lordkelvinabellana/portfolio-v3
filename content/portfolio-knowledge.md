@@ -105,7 +105,7 @@ Agency web work across WordPress, Wix, Elementor, and custom HTML/Tailwind build
 - Achievement: Recognized by clients for consistent early delivery across 20+ projects.
 - Tools: WordPress, Wix, Elementor, HTML, Tailwind CSS, Stripe, Figma
 
-## Experience: Ardexa.ai: Startup MVP Development (Oct 2025 – Apr 2026)
+## Experience: Ardexa.ai: Startup MVP Development (Oct 2025 – May 2026)
 
 Led frontend and full-stack development on three startup MVPs alongside two founders (RentWise, LexaDraft, and TicketDesk), working directly on architecture, product decisions, and implementation.
 
