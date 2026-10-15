@@ -1,17 +1,16 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Download } from "lucide-react";
 import { RESUME_FILENAME, RESUME_HREF } from "@/components/layout/social";
 import { gsap, SplitText, useGSAP, prefersReducedMotion } from "@/lib/gsap";
 import { afterIntro } from "@/lib/intro";
 import { HeroShowcase } from "./HeroShowcase";
-import { PortraitCloud } from "@/components/three/Scenes";
+import { PortraitPop } from "./PortraitPop";
 
 
-/* Headline lines rise out of their masks and the rest follows; the portrait assembles on its own. */
+/* Headline lines rise out of their masks and the rest follows; the portrait runs its own entrance. */
 function enter(root: HTMLElement) {
   const title = root.querySelector<HTMLElement>("[data-hero-title]");
   const items = root.querySelectorAll<HTMLElement>("[data-hero-item]");
@@ -38,10 +37,9 @@ function enter(root: HTMLElement) {
 
 export function HeroSection() {
   const heroRef = useRef<HTMLDivElement>(null);
-  const photoRef = useRef<HTMLDivElement>(null);
 
   /* One orchestrated entrance: headline lines rise out of their masks, the
-     rest follows, and the particles assemble into the portrait. On a
+     rest follows, and the portrait rises into place. On a
      first visit it waits for the chat bot's close-up to hand over. */
   useGSAP(
     (_context, contextSafe) => {
@@ -96,23 +94,10 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* The photo, with the particle portrait that turns into the work drawn over it. */}
-          <div className="order-first mx-auto w-full max-w-[24rem] lg:order-none lg:max-w-none">
-            <div className="relative aspect-[10/7] w-full">
-              <PortraitCloud photoRef={photoRef} mode="hero" className="-inset-[18%]" />
-              <div ref={photoRef} data-reveal data-hero-photo className="absolute left-1/2 top-1/2 w-[40%] -translate-x-1/2 -translate-y-1/2">
-                <div className="panel aspect-square overflow-hidden rounded-full p-1.5">
-                  <Image
-                    src="/assets/profile.jpg"
-                    alt="Lord Kelvin Abellana"
-                    width={352}
-                    height={352}
-                    priority
-                    className="h-full w-full rounded-full object-cover object-top"
-                  />
-                </div>
-              </div>
-            </div>
+          {/* Kelvin, cut out, with his tools flying out from behind him on hover. Sized so the
+              tiles (which reach about 75% past the portrait's edges) never clip or cover the text. */}
+          <div className="order-first mx-auto w-full max-w-[13.5rem] sm:max-w-[18rem] lg:order-none lg:max-w-[19rem] xl:max-w-[21rem]">
+            <PortraitPop priority />
           </div>
         </div>
 

@@ -1273,3 +1273,13 @@
   .show-bar { background: linear-gradient(180deg, var(--tone), color-mix(in oklch, var(--tone), transparent 55%)); }
 
 }
+
+/* ── Hero portrait: the round backdrop Kelvin stands in front of ── */
+@layer components {
+  .portrait-backdrop {
+    background:
+      radial-gradient(circle at 50% 30%, color-mix(in oklch, var(--primary), transparent 50%), transparent 70%),
+      color-mix(in oklch, var(--primary), var(--background) 82%);
+    border: 1px solid color-mix(in oklch, var(--primary), transparent 65%);
+  }
+}

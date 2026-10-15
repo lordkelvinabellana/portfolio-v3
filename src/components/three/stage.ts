@@ -1,5 +1,6 @@
 import {
   ACESFilmicToneMapping,
+  NeutralToneMapping,
   DirectionalLight,
   Group,
   HemisphereLight,
@@ -41,7 +42,24 @@ export type Stage = {
 
 export function createStage(
   canvas: HTMLCanvasElement,
-  { reducedMotion, fov = 30, distance = 8, lights = true }: { reducedMotion: boolean; fov?: number; distance?: number; lights?: boolean },
+  {
+    reducedMotion,
+    fov = 30,
+    distance = 8,
+    lights = true,
+    neutral = false,
+    exposure = 1,
+    light = 1,
+  }: {
+    reducedMotion: boolean;
+    fov?: number;
+    distance?: number;
+    lights?: boolean;
+    neutral?: boolean;
+    exposure?: number;
+    /* Scales every light and the environment; lower keeps saturated colours from washing out. */
+    light?: number;
+  },
 ): Stage | null {
   let renderer: WebGLRenderer;
   try {
@@ -51,7 +69,9 @@ export function createStage(
   }
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.setClearColor(0x000000, 0);
-  renderer.toneMapping = ACESFilmicToneMapping;
+  // Neutral keeps brand colours true; ACES gives the glossy look elsewhere.
+  renderer.toneMapping = neutral ? NeutralToneMapping : ACESFilmicToneMapping;
+  renderer.toneMappingExposure = exposure;
   renderer.outputColorSpace = SRGBColorSpace;
 
   const scene = new Scene();
@@ -64,11 +84,12 @@ export function createStage(
   if (lights) {
     pmrem = new PMREMGenerator(renderer);
     scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-    scene.add(new HemisphereLight(0xffffff, 0x8090b0, 0.9));
-    const key = new DirectionalLight(0xffffff, 1.5);
+    scene.environmentIntensity = light;
+    scene.add(new HemisphereLight(0xffffff, 0x8090b0, 0.9 * light));
+    const key = new DirectionalLight(0xffffff, 1.5 * light);
     key.position.set(2.5, 3.5, 4);
     scene.add(key);
-    const rim = new DirectionalLight(0xb8ccff, 1.1);
+    const rim = new DirectionalLight(0xb8ccff, 1.1 * light);
     rim.position.set(-3, 1, -3);
     scene.add(rim);
   }

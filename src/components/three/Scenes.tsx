@@ -1,12 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState, type RefObject } from "react";
-import { gsap, prefersReducedMotion } from "@/lib/gsap";
-import { afterIntro } from "@/lib/intro";
+import { useEffect, useRef, useState } from "react";
+import { prefersReducedMotion } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 import type { GlyphService, ServiceGlyphScene } from "./serviceGlyph";
 import type { CareerKind, CareerPathScene } from "./careerPath";
-import type { PortraitScene, PortraitShape } from "./portraitParticles";
 
 /*
  * React wrappers for the three.js pieces. three.js loads only in the browser,
@@ -75,77 +73,6 @@ export function CareerPath3D({
   );
   return (
     <div className={cn("pointer-events-none relative", className)} aria-hidden="true">
-      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
-    </div>
-  );
-}
-
-const LANE_SHAPES: Record<string, PortraitShape> = { Operations: "operations", Video: "video", Product: "product" };
-
-/*
- * The particle portrait, drawn over the photo in `photoRef`. In the hero it
- * assembles once the page is released and turns into the work in step with
- * the showcase cards (one card per cycle, so the face stays the main view).
- */
-export function PortraitCloud({
-  photoRef,
-  mode,
-  className,
-}: {
-  photoRef: RefObject<HTMLElement | null>;
-  mode: "hero" | "about";
-  className?: string;
-}) {
-  const { canvasRef, scene } = useScene<PortraitScene>(async (canvas, reducedMotion) => {
-    const photo = photoRef.current;
-    if (!photo) return null;
-    try {
-      const image = new Image();
-      image.src = "/assets/profile-256.jpg";
-      await image.decode();
-      const made = (await import("./portraitParticles")).createPortrait(canvas, { reducedMotion, image, photo });
-      if (!made) gsap.set(photo, { autoAlpha: 1 });
-      return made;
-    } catch {
-      gsap.set(photo, { autoAlpha: 1 });
-      return null;
-    }
-  });
-
-  useEffect(() => {
-    if (!scene) return;
-    let cancelHero = () => {};
-    let io: IntersectionObserver | null = null;
-    if (mode === "hero") {
-      cancelHero = afterIntro(() => scene.assemble());
-    } else {
-      io = new IntersectionObserver(([entry]) => {
-        if (!entry.isIntersecting) return;
-        scene.assemble();
-        io?.disconnect();
-      });
-      if (canvasRef.current) io.observe(canvasRef.current);
-    }
-
-    let played = 0;
-    const onService = (event: Event) => {
-      const shape = LANE_SHAPES[(event as CustomEvent<{ lane?: string }>).detail?.lane ?? ""];
-      const card = played % 3;
-      const cycle = Math.floor(played / 3);
-      played++;
-      if (shape && cycle % 3 === card) scene.morph(shape);
-    };
-    if (mode === "hero") window.addEventListener("hero:service", onService);
-
-    return () => {
-      cancelHero();
-      io?.disconnect();
-      window.removeEventListener("hero:service", onService);
-    };
-  }, [scene, mode, canvasRef]);
-
-  return (
-    <div className={cn("pointer-events-none absolute", className)} aria-hidden="true">
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
     </div>
   );
