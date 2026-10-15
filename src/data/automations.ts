@@ -200,7 +200,7 @@ export const automations: Automation[] = [
       },
       {
         "id": "n21",
-        "name": "TODO: Attach Service Agreement",
+        "name": "Service Agreement (planned)",
         "kind": "noop",
         "col": 19,
         "lane": 0,

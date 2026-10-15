@@ -216,6 +216,7 @@ const ENTRIES: Entry[] = [
     id: "client-onboarding", group: GROUP_OPS, tools: ["Typeform", "ClickUp", "Slack"], title: "New client onboarding",
     caption: "One form submission runs every step: ClickUp client, store and onboarding tasks, a checklist and client doc, two Slack channels, a Slack Connect invite and a pinned welcome.",
     raw: () => fromExport("oak-new-client-onboarding.json"),
+    renames: { "TODO: Attach Service Agreement": "Service Agreement (planned)" },
   },
   {
     id: "weekly-pulse", group: GROUP_OPS, tools: ["ClickUp", "Slack", "Claude"], title: "Weekly client pulse",
