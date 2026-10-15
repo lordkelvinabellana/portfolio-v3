@@ -12,6 +12,7 @@
 import { writeFileSync, mkdirSync } from "node:fs";
 import { experiencePhases, projectCaseStudies, credentials } from "../src/data/portfolio.ts";
 import { services, serviceLabel } from "../src/data/services.ts";
+import { AUTOMATION_GROUPS, automations } from "../src/data/automations.ts";
 
 const SITE = "https://portfolio-v3-roan-omega.vercel.app";
 
@@ -79,6 +80,16 @@ for (const c of projectCaseStudies) {
     `- Stack: ${c.stack.join(", ")}`,
     ...(c.demoUrl && c.liveLabel ? [`- Live link: ${c.demoUrl}`] : []),
     `- Case study page: ${SITE}/work/${c.slug}`,
+  ]);
+}
+
+// The n8n workflows on the Automations page, one chunk per group.
+for (const group of AUTOMATION_GROUPS) {
+  section(`n8n automations: ${group}`, `${SITE}/automations`, [
+    `Workflows Kelvin built in n8n (${group.toLowerCase()}), shown node by node on the Automations page:`,
+    ...automations
+      .filter((a) => a.group === group)
+      .map((a) => `- ${a.title}${a.live ? " (running)" : ""}: ${a.caption} ${a.count} nodes; starts on ${a.trigger}; uses ${a.tools.join(", ") || "n8n core nodes"}.`),
   ]);
 }
 

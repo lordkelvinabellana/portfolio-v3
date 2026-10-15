@@ -687,6 +687,38 @@ Problem: Ripple delivered cloud invoicing and financial visibility, but visibili
 - Stack: Figma, FinOps, Cloud Cost Management, Product Strategy
 - Case study page: https://portfolio-v3-roan-omega.vercel.app/work/ripple-product-ownership-archera
 
+## n8n automations: Client operations for a Google Ads agency
+
+Workflows Kelvin built in n8n (client operations for a google ads agency), shown node by node on the Automations page:
+- New client onboarding: One form submission runs every step: ClickUp client, store and onboarding tasks, a checklist and client doc, two Slack channels, a Slack Connect invite and a pinned welcome. 38 nodes; starts on Typeform: Onboarding General; uses Typeform, ClickUp, Slack.
+- Weekly client pulse: Every Monday it reads each client channel, has Claude review the week, and posts one digest with the clients at risk first. 18 nodes; starts on Every Monday 07:00; uses ClickUp, Slack, Claude.
+- Daily spend, ROAS and fee: Google Ads spend through the manager account, converted to EUR at ECB rates and written into ClickUp. Problems go to the ops channel. 19 nodes; starts on Every Day 07:00; uses Google Ads, Shopify, ClickUp, Slack.
+- New store onboarding: A new-store form finds the client, skips stores that already exist, creates the store and onboarding tasks with a checklist, adds the store to the client doc, invites the media buyer to both Slack channels and announces it. 32 nodes; starts on Typeform: New Store; uses Typeform, ClickUp, Slack.
+- Media buyer assignment: When an onboarding task's assignee changes in ClickUp, the new media buyer is matched, invited to the client's Slack channels and assigned to each of the client's stores. 14 nodes; starts on ClickUp: Onboarding Assignee Changed; uses ClickUp, Slack.
+- Funnel brief to ClickUp: A funnel brief from Typeform becomes a ClickUp task for the right buyer and store, with its fields filled, a checklist of build steps, and a comment on any field that failed to set. 14 nodes; starts on Typeform: Funnel Brief; uses Typeform, ClickUp.
+- Daily Shopify revenue: Every morning it pulls each connected store's orders, saves the day's revenue, notes any store that failed, and posts a summary to the ops channel. A form backfills past days. 14 nodes; starts on Every Day 06:00; uses Shopify, Slack.
+- Connect a Shopify store: A form and an OAuth flow connect a client's Shopify store: the install link, the redirect back, the saved token, and a Slack note once it's connected. 16 nodes; starts on Add Store App Form; uses Shopify, Slack.
+- Broadcast to client channels: One message to many client Slack channels: pick the channels in a form, preview, send one post per channel, then log what went out. 10 nodes; starts on Broadcast Form; uses Slack.
+- Onboarding error alert: If an onboarding run fails, the failed execution is fetched and a formatted alert lands in Slack. 4 nodes; starts on Error Trigger; uses Slack.
+
+## n8n automations: AI agents and assistants
+
+Workflows Kelvin built in n8n (ai agents and assistants), shown node by node on the Automations page:
+- The chatbot on this site (running): The bot in the corner of this page. The site's API calls a webhook; an AI agent with per-visitor memory searches the portfolio in Pinecone and replies, with a separate error reply. 8 nodes; starts on Website chat; uses Pinecone, OpenAI.
+- Executive assistant on Telegram (running): Voice notes are transcribed, then an executive agent hands work to calendar, email and contact agents that create and update events, draft Gmail replies in my writing style and report progress back on Telegram. 26 nodes; starts on Telegram Trigger; uses Airtable, Gmail, Telegram, Google Calendar, Pinecone, OpenAI.
+- AI support triage: Support emails are de-duplicated, classified through an API, saved to Airtable and given a tone-aware AI draft in Gmail. Anything that needs a person is flagged in Slack and logged. 20 nodes; starts on Gmail Trigger; uses Slack, Airtable, Gmail, OpenAI.
+- Hotel booking agent: A Telegram agent answers guests from the FAQ and room sheets, confirms a booking, parses it into a row in Google Sheets and sends the confirmation. 15 nodes; starts on Telegram Trigger; uses Telegram, Google Sheets, Gemini.
+- Email RAG assistant (running): Chat with an inbox: an agent searches past emails stored in Pinecone, remembers the conversation, and can call a separate workflow to send an email. 9 nodes; starts on Chat message; uses Pinecone, OpenAI.
+
+## n8n automations: Pipelines, intake and alerts
+
+Workflows Kelvin built in n8n (pipelines, intake and alerts), shown node by node on the Automations page:
+- AI job matching pipeline (running): On a schedule it scrapes job listings, cleans and parses them, de-duplicates against the sheet, classifies and filters them, fetches full descriptions, then an AI agent scores each one against my CV in Pinecone and posts matches to Slack. 39 nodes; starts on Schedule; uses Slack, Google Sheets, Pinecone, OpenAI.
+- Lead diagnostic intake (running): Partial and complete Typeform diagnostics are validated and written to Notion lead and response records; completed ones get a results email assembled from Notion content and sent through Gmail. 44 nodes; starts on Typeform response; uses Notion, Gmail.
+- Hourly job post alerts (running): Every hour it searches two job feeds, extracts the links, keeps only posts it hasn't seen and alerts Slack. Its own error trigger posts any failure. 11 nodes; starts on Every Hour; uses Slack.
+- Error alerts to Slack (running): The error workflow for the whole instance: any failed run builds a message and posts it to Slack, with the details in a thread. 4 nodes; starts on Error Trigger; uses Slack.
+- Delete on a ❌ reaction (running): React with ❌ to a bot message in Slack and it deletes the message, or the whole thread it started. 7 nodes; starts on Reaction Trigger; uses Slack.
+
 ## Credentials and certificates
 
 - FinOps Certified Practitioner, FinOps Foundation

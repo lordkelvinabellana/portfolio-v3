@@ -11,6 +11,7 @@ import { ProcessSteps } from "./ProcessSteps";
 import { ServiceArt } from "./ServiceArt";
 import { EditTimeline } from "@/components/video/EditTimeline";
 import { WorkflowCanvas } from "@/components/automation/WorkflowCanvas";
+import { automations } from "@/data/automations";
 import { getWorkflow } from "@/data/workflows";
 import Image from "next/image";
 
@@ -199,7 +200,12 @@ export function HomePage() {
                     <span className="font-semibold">A real n8n workflow: {PULSE.title.toLowerCase()}.</span>{" "}
                     <span className="quiet-text">{PULSE.caption}</span>
                   </span>
-                  <span className="muted-text text-xs">{PULSE.nodes.length} nodes, runs every Monday</span>
+                  <span className="flex items-center gap-4">
+                    <span className="muted-text text-xs">{PULSE.nodes.length} nodes, runs every Monday</span>
+                    <Link href="/automations" className="focusable inline-flex items-center gap-1 text-xs font-semibold text-primary hover:text-foreground">
+                      See all {automations.length} n8n workflows <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </span>
                 </figcaption>
               </figure>
             </FadeIn>

@@ -532,6 +532,17 @@
     stroke: color-mix(in oklch, var(--status), transparent 15%);
   }
 
+  .workflow-attach {
+    fill: none;
+    stroke: color-mix(in oklch, var(--foreground), transparent 70%);
+    stroke-width: 1.4;
+    stroke-dasharray: 3 4;
+  }
+
+  .workflow-attach[data-state="success"] {
+    stroke: color-mix(in oklch, var(--status), transparent 30%);
+  }
+
   .workflow-edge[data-state="skipped"] {
     opacity: 0.45;
     stroke-dasharray: 4 4;

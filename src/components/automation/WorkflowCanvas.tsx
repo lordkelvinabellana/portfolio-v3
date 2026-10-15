@@ -21,6 +21,9 @@ const KIND_COLOR: Record<WorkflowNodeKind, string> = {
   noop: "var(--text-tertiary)",
   ads: "var(--status)",
   form: "var(--primary)",
+  data: "var(--teal-fg)",
+  mail: "var(--coral-fg)",
+  chat: "var(--violet-fg)",
 };
 
 const KIND_LABEL: Record<WorkflowNodeKind, string> = {
@@ -33,6 +36,9 @@ const KIND_LABEL: Record<WorkflowNodeKind, string> = {
   noop: "No operation",
   ads: "Google Ads",
   form: "Form",
+  data: "Data",
+  mail: "Email",
+  chat: "Chat",
 };
 
 function Glyph({ kind, color }: { kind: WorkflowNodeKind; color: string }) {
@@ -64,6 +70,22 @@ function Glyph({ kind, color }: { kind: WorkflowNodeKind; color: string }) {
       );
     case "noop":
       return <path d="M6 12h12" {...common} strokeDasharray="2 3" />;
+    case "data":
+      return (
+        <g {...common}>
+          <ellipse cx="12" cy="6.5" rx="6.5" ry="2.5" />
+          <path d="M5.5 6.5v11c0 1.4 2.9 2.5 6.5 2.5s6.5-1.1 6.5-2.5v-11M5.5 12c0 1.4 2.9 2.5 6.5 2.5s6.5-1.1 6.5-2.5" />
+        </g>
+      );
+    case "mail":
+      return (
+        <g {...common}>
+          <rect x="4" y="6" width="16" height="12" rx="2" />
+          <path d="m5 7.5 7 5.5 7-5.5" />
+        </g>
+      );
+    case "chat":
+      return <path d="M5 5.5h14a1 1 0 0 1 1 1v8.5a1 1 0 0 1-1 1h-8l-4 3.5V16H5a1 1 0 0 1-1-1V6.5a1 1 0 0 1 1-1Z" {...common} />;
     case "ai":
       // A four-point spark; it spins on its vertical axis while the node runs.
       return (
@@ -179,6 +201,21 @@ export function WorkflowCanvas({
     [workflow, byId, S, layout.dx],
   );
 
+  /* Sub-nodes hang off their agent on a dashed line, from below its label. */
+  const attachments = useMemo(
+    () =>
+      layout.placed
+        .filter((n) => n.attach && byId.get(n.attach)?.row === n.row)
+        .map((n) => {
+          const p = byId.get(n.attach!)!;
+          const fromY = p.y + S / 2 + LABEL - 4;
+          const toY = n.y - S / 2;
+          const mid = (fromY + toY) / 2;
+          return { id: n.id, parent: p.id, d: `M${p.x},${fromY} C${p.x},${mid} ${n.x},${mid} ${n.x},${toY}` };
+        }),
+    [layout, byId, S, LABEL],
+  );
+
   /* Execution: nodes run in canvas order; each incoming connector carries a
      packet first. Loops while on screen. */
   useGSAP(
@@ -197,6 +234,7 @@ export function WorkflowCanvas({
       if (prefersReducedMotion()) {
         layout.placed.forEach((n) => setState(n.id, n.skip ? "skipped" : "success"));
         edges.forEach((e) => !e.skip && edgeEls.get(e.id)?.setAttribute("data-state", "success"));
+        svg.querySelectorAll("[data-attach]").forEach((el) => el.setAttribute("data-state", "success"));
         return;
       }
 
@@ -205,9 +243,11 @@ export function WorkflowCanvas({
       tl.call(() => {
         layout.placed.forEach((n) => setState(n.id, n.skip ? "skipped" : "idle"));
         edges.forEach((e) => edgeEls.get(e.id)?.setAttribute("data-state", "idle"));
+        svg.querySelectorAll("[data-attach]").forEach((el) => el.setAttribute("data-state", "idle"));
       });
+      const attachedTo = (id: string) => layout.placed.filter((c) => c.attach === id && !c.skip);
       for (const n of order) {
-        if (n.skip) continue;
+        if (n.skip || n.attach) continue;
         const incoming = edges.filter((e) => e.to === n.id && !e.skip);
         const at = tl.duration();
         incoming.forEach((e) => {
@@ -232,13 +272,20 @@ export function WorkflowCanvas({
         });
         const start = tl.duration();
         tl.call(() => setState(n.id, "running"), undefined, start);
+        const done = start + (n.kind === "ai" ? 0.9 : 0.12);
         if (n.kind === "ai") {
           const spark = nodeEls.get(n.id)?.querySelector("[data-spark]");
           if (spark) tl.fromTo(spark, { scaleX: 1, transformOrigin: "50% 50%" }, { scaleX: -1, duration: 0.45, ease: "power2.inOut", yoyo: true, repeat: 1 }, start);
-          tl.call(() => setState(n.id, "success"), undefined, start + 0.9);
-        } else {
-          tl.call(() => setState(n.id, "success"), undefined, start + 0.12);
         }
+        // An agent's model, memory and tools work while it runs.
+        attachedTo(n.id).forEach((c, k) => {
+          tl.call(() => setState(c.id, "running"), undefined, start + 0.1 + k * 0.12);
+          tl.call(() => {
+            setState(c.id, "success");
+            svg.querySelector(`[data-attach="${c.id}"]`)?.setAttribute("data-state", "success");
+          }, undefined, done - 0.05);
+        });
+        tl.call(() => setState(n.id, "success"), undefined, done);
       }
 
       ScrollTrigger.create({
@@ -248,7 +295,7 @@ export function WorkflowCanvas({
         onToggle: (self) => (self.isActive ? tl.play() : tl.pause()),
       });
     },
-    { scope: wrapRef, dependencies: [layout, edges], revertOnUpdate: true },
+    { scope: wrapRef, dependencies: [layout, edges, attachments], revertOnUpdate: true },
   );
 
   const fontSize = compact ? 10 : 11;
@@ -274,6 +321,9 @@ export function WorkflowCanvas({
 
         {edges.map((e) => (
           <path key={e.id} data-edge={e.id} d={e.d} className="workflow-edge" data-state={e.skip ? "skipped" : "idle"} />
+        ))}
+        {attachments.map((a) => (
+          <path key={`a-${a.id}`} data-attach={a.id} d={a.d} className="workflow-attach" data-state="idle" />
         ))}
         {edges.map((e) => (
           <circle key={`p-${e.id}`} data-packet={e.id} r={3.6} className="workflow-packet" style={{ opacity: 0, visibility: "hidden" }} />

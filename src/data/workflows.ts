@@ -1,7 +1,7 @@
 /* n8n workflows from the Google Ads agency build, generated from the workflow
    exports. Node names are as built; client details are not included. */
 
-export type WorkflowNodeKind = "trigger" | "code" | "http" | "if" | "slack" | "ai" | "noop" | "ads" | "form";
+export type WorkflowNodeKind = "trigger" | "code" | "http" | "if" | "slack" | "ai" | "noop" | "ads" | "form" | "data" | "mail" | "chat";
 
 export type WorkflowNode = {
   id: string;
@@ -13,6 +13,8 @@ export type WorkflowNode = {
   lane: number;
   /** Not reached on the happy path (e.g. the duplicate-client alert). */
   skip: boolean;
+  /** A sub-node (model, memory, tool) hanging off this agent node, as n8n draws them. */
+  attach?: string;
 };
 
 export type Workflow = {
