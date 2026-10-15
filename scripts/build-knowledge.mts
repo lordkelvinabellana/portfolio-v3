@@ -35,6 +35,12 @@ section("About Lord Kelvin Abellana", SITE, [
   "- Case study text written as \"I\" is Kelvin describing the work.",
 ]);
 
+// One compact chunk with every role and its dates, so "when did Kelvin work at X?" finds it.
+section("Career timeline: every role with its dates", `${SITE}/experience`, [
+  "Kelvin's roles, newest first, with start and end dates:",
+  ...experiencePhases.map((p) => `- ${p.title}: ${p.period}`),
+]);
+
 for (const s of services) {
   section(`Service: ${s.title}`, `${SITE}/work?service=${s.key}`, [
     s.summary,

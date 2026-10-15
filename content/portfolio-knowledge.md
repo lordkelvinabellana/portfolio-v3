@@ -12,6 +12,23 @@ Lord Kelvin Abellana (Kelvin) builds the systems that run a business and edits t
 - The résumé and full CV can be downloaded from the portfolio (https://portfolio-v3-roan-omega.vercel.app).
 - Case study text written as "I" is Kelvin describing the work.
 
+## Career timeline: every role with its dates
+
+Kelvin's roles, newest first, with start and end dates:
+- Penguin Ops: Ops & Automation Assistant: Aug 2026 – Present
+- Stakra: Systems Implementation Associate: Jun 2026 – Present
+- Clipt (client): Video Editor & Motion Graphic Designer: Oct 2026 – Present
+- Three-Brand Retail Group (client): Automation & Web Developer: Oct 2026 – Present
+- Flexiwork: Agency Web Development: Mar 2026 – Oct 2026
+- Ardexa.ai: Startup MVP Development: Oct 2025 – May 2026
+- Clix: Automation Engineer: Dec 2025 – Mar 2026
+- Alphaus: Junior FE → Lead FE → Product Owner: Jul 2023 – Dec 2025
+- Automation & AI Systems: 2023 – Present
+- Freelance & Client Websites: 2023 – Present
+- RentHive: Startup Weekend Bohol: 2024
+- Computer Engineering, Bohol Island State University: 2019 – 2023
+- Personal Projects: Ongoing
+
 ## Service: Operations & automation
 
 Client portals, scorecards and onboarding automation that replace manual checklists and spreadsheets your team has outgrown.
