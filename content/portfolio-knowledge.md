@@ -213,6 +213,24 @@ Things I build for myself, to try an idea properly or learn a technology end to 
 - Achievement: Bouquet Cipher: messages written as hand-drawn bouquets, shareable by link or QR gift tag.
 - Tools: Next.js, TypeScript, Supabase, Playwright
 
+## Case study: Hatstand: One Computer, Several Claude Accounts
+
+Service: Product & web apps. Status: Open-source preview. Kelvin's role: Solo builder: product, design, Electron app and native macOS helper.
+
+A free, open-source Windows and macOS app that keeps each client's Claude Desktop account in its own profile. Consultants and agencies run several accounts side by side and switch in a keystroke, instead of signing out and back in.
+
+Problem: Claude Desktop holds one signed-in account at a time. Freelancers and agencies who work inside each client's own Claude account sign out, sign back in, and hope they're typing into the right one. Users have asked for multiple accounts many times, and Claude still doesn't have it.
+- Built: Profiles that start the official Claude app with its own data folder each, so every client keeps its own sign-in, chats and settings. Hatstand never sees a password.
+- Built: Windows: tray menu, taskbar jump list, per-client desktop shortcuts and hotkeys, a startup group, and launching a client by name from a script.
+- Built: macOS: menu bar and Dock actions, start at login, and a native Swift helper that brings the right Claude window forward.
+- Built: Menu-bar pixel pets, one per account, that show when a Claude Code session is working, needs input or is done. Hover a pet to see its sessions and task progress; click to open that account.
+- Built: Careful data handling: removing a profile keeps its data, cleanup goes to the Recycle Bin or Trash, and export carries names and colours only.
+- Outcome: Used every day to run four Claude accounts side by side on one Mac.
+- Outcome: Open source under the MIT licence, with no telemetry and no sign-up. Tested on Windows 11 and Apple silicon.
+- Stack: Electron, TypeScript, Swift, Node.js, Electron Forge, Biome, GitHub Pages
+- Live link: https://lordkelvinabellana.github.io/hatstand/
+- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/hatstand
+
 ## Case study: Client Portal & KPI Dashboard for a Talent Agency
 
 Service: Operations & automation. Status: Live. Kelvin's role: Ops & Automation Assistant · Penguin Ops · Lead builder on the portal and KPI dashboard.

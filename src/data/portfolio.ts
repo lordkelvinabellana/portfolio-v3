@@ -579,6 +579,55 @@ export type Credential = {
 
 export const projectCaseStudies: ProjectCaseStudy[] = [
   {
+    slug: "hatstand",
+    title: "Hatstand: One Computer, Several Claude Accounts",
+    category: "Product",
+    status: "Open-source preview",
+    overview:
+      "A free, open-source Windows and macOS app that keeps each client's Claude Desktop account in its own profile. Consultants and agencies run several accounts side by side and switch in a keystroke, instead of signing out and back in.",
+    businessProblem:
+      "Claude Desktop holds one signed-in account at a time. Freelancers and agencies who work inside each client's own Claude account sign out, sign back in, and hope they're typing into the right one. Users have asked for multiple accounts many times, and Claude still doesn't have it.",
+    role: "Solo builder: product, design, Electron app and native macOS helper",
+    contributions: [
+      "Profiles that start the official Claude app with its own data folder each, so every client keeps its own sign-in, chats and settings. Hatstand never sees a password.",
+      "Windows: tray menu, taskbar jump list, per-client desktop shortcuts and hotkeys, a startup group, and launching a client by name from a script.",
+      "macOS: menu bar and Dock actions, start at login, and a native Swift helper that brings the right Claude window forward.",
+      "Menu-bar pixel pets, one per account, that show when a Claude Code session is working, needs input or is done. Hover a pet to see its sessions and task progress; click to open that account.",
+      "Careful data handling: removing a profile keeps its data, cleanup goes to the Recycle Bin or Trash, and export carries names and colours only.",
+    ],
+    challenges: [
+      "Claude has no supported way to run two accounts, and the setting Hatstand relies on is undocumented, so any Claude update could change it.",
+      "A launcher like this is easy to over-promise: a running process doesn't mean an account is signed in or a task is finished.",
+    ],
+    solutions: [
+      "A compatibility page, in the app and in the repo, that records only what was observed and on which Claude version, and warns when the installed Claude hasn't been tested yet.",
+      "Status shows only what Hatstand knows for sure, whether that profile's Claude is running. Pet states come from Claude Code's own hooks, not guesses.",
+    ],
+    outcomes: [
+      "Used every day to run four Claude accounts side by side on one Mac.",
+      "Open source under the MIT licence, with no telemetry and no sign-up. Tested on Windows 11 and Apple silicon.",
+    ],
+    stack: ["Electron", "TypeScript", "Swift", "Node.js", "Electron Forge", "Biome", "GitHub Pages"],
+    flow: [
+      "Add a client profile",
+      "Launch the official Claude",
+      "Sign in once, inside Claude",
+      "Switch by hotkey, tray or pet",
+      "Pets flag work that needs you",
+    ],
+    screenshots: [
+      "/assets/work/hatstand-profiles.png",
+      "/assets/work/hatstand-panel.png",
+      "/assets/work/hatstand-pets.png",
+      "/assets/work/hatstand-dark.png",
+    ],
+    demoUrl: "https://lordkelvinabellana.github.io/hatstand/",
+    liveLabel: "Visit site",
+    githubUrl: "https://github.com/lordkelvinabellana/hatstand",
+    relatedExperienceSlug: "personal",
+    featured: true,
+  },
+  {
     slug: "talent-agency-client-portal",
     title: "Client Portal & KPI Dashboard for a Talent Agency",
     category: "Operations",
@@ -2223,7 +2272,7 @@ export const experiencePhases: ExperiencePhase[] = [
       "Personal projects are where I try the techniques I later bring to client work.",
     ],
     technologies: ["Next.js", "TypeScript", "Supabase", "Playwright"],
-    relatedProjectSlugs: ["bouquet-cipher", "arnis-scoreboard"],
+    relatedProjectSlugs: ["hatstand", "bouquet-cipher", "arnis-scoreboard"],
   },
 ];
 
