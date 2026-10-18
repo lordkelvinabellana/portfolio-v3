@@ -351,6 +351,7 @@ Problem: Short ads live or die in the first second, and testimonials shot on a p
 - Built: Added half-second eased zooms on stressed words with the face held in place, about one every 10 to 12 seconds, each with a soft whoosh.
 - Built: Edited two nurse testimonials with a branded card under the chin timed to their words, the Clipt Verified badge, and each name with its credential.
 - Built: Matched colour and loudness to the sales video, and left captions off the master so they can be styled last for each platform.
+- Built: Designed a 16-effect motion graphics kit in Clipt's brand for the ads to draw from: kinetic hooks, giant captions, a gravity drop, an editing timeline, a grade slider, reel and comment mockups, and comment calls to action, all joined by one continuous camera move.
 - Outcome: Four ads and two testimonials cut at 2K (1440 × 2560), consistent with the sales video's look.
 - Outcome: New ads start from the same brand recipe, so the fifth ad follows the same standard as the first.
 - Stack: Short-form ads, Vertical video, Motion graphics, Colour grading, Sound design, CapCut

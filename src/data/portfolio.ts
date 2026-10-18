@@ -990,6 +990,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Added half-second eased zooms on stressed words with the face held in place, about one every 10 to 12 seconds, each with a soft whoosh.",
       "Edited two nurse testimonials with a branded card under the chin timed to their words, the Clipt Verified badge, and each name with its credential.",
       "Matched colour and loudness to the sales video, and left captions off the master so they can be styled last for each platform.",
+      "Designed a 16-effect motion graphics kit in Clipt's brand for the ads to draw from: kinetic hooks, giant captions, a gravity drop, an editing timeline, a grade slider, reel and comment mockups, and comment calls to action, all joined by one continuous camera move.",
     ],
     challenges: [
       "Snap zooms read as harsh and frequent moves read as shaky; the right pace had to be found by testing.",
@@ -1035,6 +1036,13 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
         poster: "/assets/clipt/testimonial-3d-cards.jpg",
         title: "Nurse testimonial",
         orientation: "portrait",
+      },
+      {
+        src: "/assets/clipt/motion-kit.mp4",
+        poster: "/assets/clipt/motion-kit.jpg",
+        title: "Motion graphics kit",
+        orientation: "portrait",
+        note: "16 effects in 40 seconds, pure motion graphics",
       },
     ],
     relatedExperienceSlug: "clipt",
