@@ -231,6 +231,22 @@ Problem: Claude Desktop holds one signed-in account at a time. Freelancers and a
 - Live link: https://lordkelvinabellana.github.io/hatstand/
 - Case study page: https://portfolio-v3-roan-omega.vercel.app/work/hatstand
 
+## Case study: Concept Redesigns for Local Businesses
+
+Service: Product & web apps. Status: Sent to owners. Kelvin's role: Solo: lead research, design direction, build, review and outreach.
+
+Three unsolicited redesigns for small local businesses with weak websites, each built in its own visual world instead of a shared template: a salon lobby directory, a med spa consultation chart, and an IV clinic menu printed on IV bag labels. The businesses stay unnamed here until their owners say otherwise.
+
+Problem: Small service businesses lose bookings to sites that bury the one thing a visitor came for: who to call, what a treatment does, what's in the drip. A generic template fixes the look but not the problem, and an owner can tell when a pitch was made for everyone.
+- Built: A salon-suites building of fifteen independent pros, redesigned as the lobby's tenant directory: a felt letterboard in a brushed-brass frame. Tap a specialty and the matching pros light up; tap a name and their card opens with one-tap text, call or book.
+- Built: A nurse-practitioner-led med spa, redesigned as a consultation face chart on clinical grid paper. Tap a zone of the face to see the treatments for it. One marker pink is reserved for what you chose, and booking sits on the chart's signature line.
+- Built: An in-office IV therapy clinic, redesigned as IV bag labels. Tap how you feel and the matching bag fills to its volume, its printed label listing what's inside. Drips hang on a rail, shots sit as vials, add-ons as syringes, and the basics read like a folded package insert.
+- Built: On phones, each page keeps its world and adds a sticky bar that always ends at the next step: text the pro, book the consult, call the clinic.
+- Outcome: Three concepts designed, built, reviewed and deployed from one scraped batch of 226 local businesses, 115 of them qualified.
+- Outcome: The first two went to their owners by cold email in October 2026.
+- Stack: HTML, CSS, JavaScript, GSAP, SVG, Python, Apify, Scrapling, Vercel
+- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/concept-redesigns
+
 ## Case study: Client Portal & KPI Dashboard for a Talent Agency
 
 Service: Operations & automation. Status: Live. Kelvin's role: Ops & Automation Assistant · Penguin Ops · Lead builder on the portal and KPI dashboard.

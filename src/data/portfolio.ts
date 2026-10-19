@@ -628,6 +628,55 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
     featured: true,
   },
   {
+    slug: "concept-redesigns",
+    title: "Concept Redesigns for Local Businesses",
+    category: "Product",
+    status: "Sent to owners",
+    overview:
+      "Three unsolicited redesigns for small local businesses with weak websites, each built in its own visual world instead of a shared template: a salon lobby directory, a med spa consultation chart, and an IV clinic menu printed on IV bag labels. The businesses stay unnamed here until their owners say otherwise.",
+    businessProblem:
+      "Small service businesses lose bookings to sites that bury the one thing a visitor came for: who to call, what a treatment does, what's in the drip. A generic template fixes the look but not the problem, and an owner can tell when a pitch was made for everyone.",
+    role: "Solo: lead research, design direction, build, review and outreach",
+    contributions: [
+      "A salon-suites building of fifteen independent pros, redesigned as the lobby's tenant directory: a felt letterboard in a brushed-brass frame. Tap a specialty and the matching pros light up; tap a name and their card opens with one-tap text, call or book.",
+      "A nurse-practitioner-led med spa, redesigned as a consultation face chart on clinical grid paper. Tap a zone of the face to see the treatments for it. One marker pink is reserved for what you chose, and booking sits on the chart's signature line.",
+      "An in-office IV therapy clinic, redesigned as IV bag labels. Tap how you feel and the matching bag fills to its volume, its printed label listing what's inside. Drips hang on a rail, shots sit as vials, add-ons as syringes, and the basics read like a folded package insert.",
+      "On phones, each page keeps its world and adds a sticky bar that always ends at the next step: text the pro, book the consult, call the clinic.",
+    ],
+    challenges: [
+      "Finding businesses worth the effort without hand-checking hundreds of sites.",
+      "The first versions shared one layout with different colours, and read as templated.",
+      "A concept is a cold pitch, so it has to work on the owner's phone on the first open, and it can't be mistaken for their live site.",
+    ],
+    solutions: [
+      "A lead pipeline: an Apify Google Maps scrape per niche and city, then a Python script with Scrapling that grades each site (mobile, https, booking path, speed) and keeps only leads with a real, sendable email. The weakest few sites make the shortlist.",
+      "Each business gets a written brief on who its clients are and what they need from the page, then a design direction drawn from the business itself: the lobby letterboard, the chart a nurse marks up, the label on the bag. Type and layout follow the direction, never a shared grid.",
+      "Every build gets an independent design review against its own direction before it ships, then a round of fixes. Motion is one authored moment per page, with reduced motion respected; 3D is used only where it fits, and none of these three needed it.",
+      "Each concept is a single HTML file deployed to Vercel with noindex and a footer that says it's a concept, then sent with a short, personal email.",
+    ],
+    outcomes: [
+      "Three concepts designed, built, reviewed and deployed from one scraped batch of 226 local businesses, 115 of them qualified.",
+      "The first two went to their owners by cold email in October 2026.",
+    ],
+    stack: ["HTML", "CSS", "JavaScript", "GSAP", "SVG", "Python", "Apify", "Scrapling", "Vercel"],
+    flow: [
+      "Scrape local businesses",
+      "Grade every site",
+      "Shortlist the weakest",
+      "Pick a world per business",
+      "Build, review, fix",
+      "Deploy and email the owner",
+    ],
+    screenshots: [
+      "/assets/work/concept-salon.jpg",
+      "/assets/work/concept-medspa.jpg",
+      "/assets/work/concept-iv.jpg",
+      "/assets/work/concept-phones.jpg",
+      "/assets/work/concept-iv-rail.jpg",
+    ],
+    relatedExperienceSlug: "personal",
+  },
+  {
     slug: "talent-agency-client-portal",
     title: "Client Portal & KPI Dashboard for a Talent Agency",
     category: "Operations",
@@ -2272,7 +2321,7 @@ export const experiencePhases: ExperiencePhase[] = [
       "Personal projects are where I try the techniques I later bring to client work.",
     ],
     technologies: ["Next.js", "TypeScript", "Supabase", "Playwright"],
-    relatedProjectSlugs: ["hatstand", "bouquet-cipher", "arnis-scoreboard"],
+    relatedProjectSlugs: ["hatstand", "concept-redesigns", "bouquet-cipher", "arnis-scoreboard"],
   },
 ];
 

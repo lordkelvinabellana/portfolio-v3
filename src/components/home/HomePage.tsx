@@ -19,7 +19,7 @@ const pick = (slugs: string[]) =>
   slugs.map((slug) => getProjectCaseStudy(slug)).filter((p): p is ProjectCaseStudy => Boolean(p));
 
 const SYSTEMS = pick(["talent-agency-client-portal", "ad-agency-scorecard", "google-ads-agency-operations"]);
-const PERSONAL = pick(["hatstand", "bouquet-cipher", "arnis-scoreboard"]);
+const PERSONAL = pick(["hatstand", "concept-redesigns", "bouquet-cipher"]);
 const VSL = getProjectCaseStudy("clipt-vsl");
 const PULSE = getWorkflow("weekly-pulse");
 const ADS = getProjectCaseStudy("clipt-short-form-ads-testimonials");
