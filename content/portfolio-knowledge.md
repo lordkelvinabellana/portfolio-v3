@@ -247,6 +247,23 @@ Problem: Small service businesses lose bookings to sites that bury the one thing
 - Stack: HTML, CSS, JavaScript, GSAP, SVG, Python, Apify, Scrapling, Vercel
 - Case study page: https://portfolio-v3-roan-omega.vercel.app/work/concept-redesigns
 
+## Case study: Portably: A PSP Emulator in the Browser
+
+Service: Product & web apps. Status: Live, local mode. Kelvin's role: Solo builder: product, architecture, emulator integration and the app.
+
+A desktop web app that plays the PSP games you own in the browser, with nothing to install. Add a game file and it's identified, cached and ready to play, with keyboard, gamepad or on-screen controls, per-game settings and saves that stay put. A cloud library with synced saves is built and switched off for now.
+
+Problem: Playing old handheld games on a computer means installing an emulator, hunting for settings and keeping save files in sync by hand. I wanted to open a tab, pick a game I own and carry on where I left off, on any desktop.
+- Built: Add-game pipeline that hashes the file off the main thread, reads the disc or homebrew metadata (ISO, CSO, PBP and zipped homebrew folders) to name the game, and caches it in the browser's private file system.
+- Built: Player built on the PPSSPP emulator: keyboard map, gamepad remapping, an on-screen PSP pad for touch screens, fullscreen and per-game settings for resolution, CPU mode, frame skip and filtering.
+- Built: Cloud mode: private library with resumable uploads and a storage quota, versioned save sync with a conflict picker, nine save-state slots plus auto-resume, and sign-in. Built and tested, switched off while the cloud plan is paused.
+- Built: Installable web app with friendly error states, accessibility work, and terms, privacy and licence pages. It runs only the games you own and never hosts or shares game files.
+- Outcome: Live with no sign-up: add a game you own and play it in a desktop browser.
+- Outcome: Six build phases shipped, from a feasibility spike to the cloud library, save sync, save states and polish.
+- Stack: React, TypeScript, Vite, Tailwind CSS, PPSSPP, EmulatorJS, WebAssembly, Supabase, Vercel
+- Live link: https://portably-seven.vercel.app
+- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/portably
+
 ## Case study: Client Portal & KPI Dashboard for a Talent Agency
 
 Service: Operations & automation. Status: Live. Kelvin's role: Ops & Automation Assistant · Penguin Ops · Lead builder on the portal and KPI dashboard.

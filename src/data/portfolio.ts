@@ -677,6 +677,55 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
     relatedExperienceSlug: "personal",
   },
   {
+    slug: "portably",
+    title: "Portably: A PSP Emulator in the Browser",
+    category: "Product",
+    status: "Live, local mode",
+    overview:
+      "A desktop web app that plays the PSP games you own in the browser, with nothing to install. Add a game file and it's identified, cached and ready to play, with keyboard, gamepad or on-screen controls, per-game settings and saves that stay put. A cloud library with synced saves is built and switched off for now.",
+    businessProblem:
+      "Playing old handheld games on a computer means installing an emulator, hunting for settings and keeping save files in sync by hand. I wanted to open a tab, pick a game I own and carry on where I left off, on any desktop.",
+    role: "Solo builder: product, architecture, emulator integration and the app",
+    contributions: [
+      "Add-game pipeline that hashes the file off the main thread, reads the disc or homebrew metadata (ISO, CSO, PBP and zipped homebrew folders) to name the game, and caches it in the browser's private file system.",
+      "Player built on the PPSSPP emulator: keyboard map, gamepad remapping, an on-screen PSP pad for touch screens, fullscreen and per-game settings for resolution, CPU mode, frame skip and filtering.",
+      "Cloud mode: private library with resumable uploads and a storage quota, versioned save sync with a conflict picker, nine save-state slots plus auto-resume, and sign-in. Built and tested, switched off while the cloud plan is paused.",
+      "Installable web app with friendly error states, accessibility work, and terms, privacy and licence pages. It runs only the games you own and never hosts or shares game files.",
+    ],
+    challenges: [
+      "The emulator needs threads, and browser threads need the page to be cross-origin isolated, which breaks pop-up sign-in.",
+      "Heavy 3D games ran at about 20 to 24 FPS on the emulator build the app started with.",
+      "The emulator keeps global state, stops in hidden tabs, and early builds hit Chrome's limit on WebGL contexts per page.",
+    ],
+    solutions: [
+      "Isolation headers on every response, and sign-in by redirect instead of pop-up.",
+      "Measured the same game side by side on two emulator builds and planned the swap to the faster WebAssembly port behind a per-game switch, with saves and states mapped across.",
+      "A fresh page for each game, saves synced when the tab hides or the player exits, and boot held until the screen has a size.",
+    ],
+    outcomes: [
+      "Live with no sign-up: add a game you own and play it in a desktop browser.",
+      "Six build phases shipped, from a feasibility spike to the cloud library, save sync, save states and polish.",
+    ],
+    stack: ["React", "TypeScript", "Vite", "Tailwind CSS", "PPSSPP", "EmulatorJS", "WebAssembly", "Supabase", "Vercel"],
+    flow: [
+      "Add a game you own",
+      "Hash and identify it",
+      "Cache it in the browser",
+      "Play with keys, pad or touch",
+      "Saves stay in the browser",
+    ],
+    screenshots: [
+      "/assets/work/portably-pad.jpg",
+      "/assets/work/portably-library.jpg",
+      "/assets/work/portably-player.jpg",
+      "/assets/work/portably-settings.jpg",
+    ],
+    demoUrl: "https://portably-seven.vercel.app",
+    liveLabel: "Try it",
+    githubUrl: "https://github.com/lordkelvinabellana/portably",
+    relatedExperienceSlug: "personal",
+  },
+  {
     slug: "talent-agency-client-portal",
     title: "Client Portal & KPI Dashboard for a Talent Agency",
     category: "Operations",
@@ -2321,7 +2370,7 @@ export const experiencePhases: ExperiencePhase[] = [
       "Personal projects are where I try the techniques I later bring to client work.",
     ],
     technologies: ["Next.js", "TypeScript", "Supabase", "Playwright"],
-    relatedProjectSlugs: ["hatstand", "concept-redesigns", "bouquet-cipher", "arnis-scoreboard"],
+    relatedProjectSlugs: ["hatstand", "portably", "concept-redesigns", "bouquet-cipher", "arnis-scoreboard"],
   },
 ];
 
