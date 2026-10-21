@@ -16,7 +16,7 @@ export function SiteFooter() {
         <div className="max-w-sm space-y-3">
           <p className="font-semibold">Lord Kelvin Abellana</p>
           <p className="quiet-text text-sm leading-6">
-            Operations systems, automation and video editing for agencies and growing brands. Based in the Philippines, working remotely.
+            Operations systems, automation and AI video editing for agencies and growing brands. Based in the Philippines, working remotely.
           </p>
           <a href={`mailto:${EMAIL}`} className="focusable inline-block rounded-sm text-sm font-semibold text-primary hover:text-foreground">
             {EMAIL}

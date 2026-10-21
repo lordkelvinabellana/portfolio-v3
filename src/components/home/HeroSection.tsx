@@ -2,13 +2,10 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import { ArrowRight, Download } from "lucide-react";
-import { RESUME_FILENAME, RESUME_HREF } from "@/components/layout/social";
+import { ArrowRight } from "lucide-react";
 import { gsap, SplitText, useGSAP, prefersReducedMotion } from "@/lib/gsap";
 import { afterIntro } from "@/lib/intro";
-import { HeroShowcase } from "./HeroShowcase";
 import { PortraitPop } from "./PortraitPop";
-
 
 /* Headline lines rise out of their masks and the rest follows; the portrait runs its own entrance. */
 function enter(root: HTMLElement) {
@@ -35,7 +32,7 @@ function enter(root: HTMLElement) {
   gsap.fromTo(items, { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: 0.07, delay: 0.5 });
 }
 
-export function HeroSection() {
+export function HeroSection({ workflowCount }: { workflowCount: number }) {
   const heroRef = useRef<HTMLDivElement>(null);
 
   /* One orchestrated entrance: headline lines rise out of their masks, the
@@ -67,8 +64,8 @@ export function HeroSection() {
             </h1>
 
             <p data-reveal data-hero-item className="quiet-text mt-5 max-w-[58ch] text-lg leading-8">
-              I build client portals, scorecards and onboarding automation for agencies and growing brands, and I edit VSLs and short-form
-              ads that stay on-brand from the first frame to the last.
+              I build client portals, scorecards and onboarding automation for agencies and growing brands, and I edit VSLs and <span className="whitespace-nowrap">short-form</span>{" "}
+              ads with AI, on-brand from the first frame to the last.
             </p>
 
             <div data-reveal data-hero-item className="mt-7 flex flex-wrap items-center gap-3">
@@ -84,14 +81,20 @@ export function HeroSection() {
               >
                 See my work
               </Link>
-              <a
-                href={RESUME_HREF}
-                download={RESUME_FILENAME}
-                className="focusable inline-flex min-h-11 items-center gap-1.5 rounded-md px-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                <Download className="h-3.5 w-3.5" /> Recruiting? Get my résumé
-              </a>
             </div>
+
+            {/* Proof as one line of text, not stat tiles. Every number is backed by a case study. */}
+            <ul data-reveal data-hero-item className="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-t border-border pt-5 text-sm">
+              {[
+                ["3+ years", "shipping software"],
+                [String(workflowCount), "n8n workflows built"],
+                ["35-minute", "VSL for Clipt"],
+              ].map(([figure, label]) => (
+                <li key={label}>
+                  <span className="font-semibold tabular-nums text-foreground">{figure}</span> <span className="quiet-text">{label}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Kelvin, cut out, with his tools flying out from behind him on hover. Sized so the
@@ -100,15 +103,6 @@ export function HeroSection() {
             <PortraitPop priority />
           </div>
         </div>
-
-        <div className="mt-8">
-          <HeroShowcase />
-        </div>
-
-        <p data-reveal data-hero-item className="muted-text mt-6 max-w-[72ch] text-sm leading-6">
-          Ops &amp; Automation Assistant at Penguin Ops, building its systems and automations. Systems Implementation Associate at Stakra.
-          Video editor and motion graphic designer for Clipt. Previously Lead Frontend Developer, then Product Owner, at Alphaus.
-        </p>
       </div>
     </section>
   );

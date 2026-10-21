@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { projectCaseStudies, type ProjectCaseStudy } from "@/data/portfolio";
 import { serviceFilters, serviceOf, type ServiceFilter } from "@/data/services";
@@ -48,7 +47,7 @@ export function WorkGrid({
           <div className="max-w-2xl">
             <h1 className="section-heading">Work</h1>
             <p className="quiet-text mt-5 text-lg leading-8">
-              Operations systems, video editing and product work. Each case study covers the problem, what I built and what changed. Clients are kept anonymous.
+              Operations systems, AI video editing and product work. Each case study covers the problem, what I built and what changed. Clients are kept anonymous.
             </p>
           </div>
           {/* Follows the filter: a workflow, a video screen or a dashboard. */}
@@ -104,11 +103,10 @@ export function WorkGrid({
 export function WorkSection({ basePath = "/work" }: { basePath?: string }) {
   const params = useSearchParams();
   const fromUrl = params.get("service");
-  const [picked, setPicked] = useState<ServiceFilter | null>(null);
-  const active: ServiceFilter = picked ?? (isFilter(fromUrl) ? fromUrl : "all");
+  // The URL is the only source, so links from the header menu switch tabs too.
+  const active: ServiceFilter = isFilter(fromUrl) ? fromUrl : "all";
 
   const change = (key: ServiceFilter) => {
-    setPicked(key);
     const url = key === "all" ? window.location.pathname : `${window.location.pathname}?service=${key}`;
     window.history.replaceState(window.history.state, "", url);
   };

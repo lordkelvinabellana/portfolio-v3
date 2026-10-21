@@ -36,7 +36,9 @@ export function OutputReel({ videos, href }: { videos: ProjectVideo[]; href: str
   return (
     <div
       ref={rowRef}
-      className="-mx-1 flex snap-x snap-mandatory gap-3 overflow-x-auto px-1 py-2 lg:grid lg:snap-none lg:grid-cols-5 lg:overflow-visible lg:py-8"
+      // One column per video, so the row never leaves a tile alone on a second line
+      style={{ ["--reel-count" as string]: videos.length }}
+      className="-mx-1 flex snap-x snap-mandatory gap-3 overflow-x-auto px-1 py-2 lg:grid lg:snap-none lg:grid-cols-[repeat(var(--reel-count),minmax(0,1fr))] lg:overflow-visible lg:py-8"
     >
       {videos.map((video) => (
         <Link

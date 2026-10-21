@@ -28,7 +28,7 @@ function section(title: string, url: string, lines: string[]) {
 }
 
 section("About Lord Kelvin Abellana", SITE, [
-  "Lord Kelvin Abellana (Kelvin) builds the systems that run a business and edits the videos that sell it. Kelvin builds client portals, scorecards, KPI dashboards and onboarding automation (n8n, Make, Next.js, Supabase) for agencies and growing brands, and edits VSLs, short-form ads and testimonials with on-brand motion graphics. Before that, Kelvin grew from Junior Frontend Developer to Lead Frontend Developer to Product Owner at Alphaus, a cloud cost SaaS company, and built startup MVPs with founders at Ardexa.",
+  "Lord Kelvin Abellana (Kelvin) builds the systems that run a business and edits the videos that sell it. Kelvin builds client portals, scorecards, KPI dashboards and onboarding automation (n8n, Make, Next.js, Supabase) for agencies and growing brands, and works as an AI video editor: he edits VSLs, short-form ads and testimonials with on-brand motion graphics, using an AI editing workflow he built, and plans each piece and checks every cut himself. Before that, Kelvin grew from Junior Frontend Developer to Lead Frontend Developer to Product Owner at Alphaus, a cloud cost SaaS company, and built startup MVPs with founders at Ardexa.",
   "",
   "- Based in Bohol, Philippines, working remotely.",
   "- Open to client projects and to full-time or contract roles in operations, automation, product and frontend.",

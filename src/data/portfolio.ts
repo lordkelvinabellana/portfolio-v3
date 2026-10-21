@@ -1065,14 +1065,14 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "A 35-minute sales video for Clipt, a mobile foot-care training company, cut from hours of 4K footage of its founder. Every section carries on-brand panels timed to what he says, full-screen statements for the big moments, and framing that follows the graphics, so a long video stays easy to watch from start to finish.",
     businessProblem:
       "A long sales video only works if people keep watching. Raw founder footage has retakes, long pauses and no visual structure, and generic templates make a brand look like everyone else. Clipt needed the full video plus a steady stream of shorter pieces, all looking like they came from the same company.",
-    role: "Video Editor & Motion Graphic Designer · Clipt",
+    role: "AI Video Editor & Motion Graphic Designer · Clipt",
     contributions: [
-      "Cleaned the raw takes: retakes, fillers and mouth clicks removed, pauses tightened, repeated lines tracked across the whole script so nothing is said twice.",
+      "Cleaned the raw takes with an AI pass over the transcript: retakes, fillers and mouth clicks removed, pauses tightened, repeated lines tracked across the whole script so nothing is said twice.",
       "Designed frosted information panels in Clipt's brand style that appear in step with his speech, with framing that follows them: in close beside one panel, wide between two.",
       "Built full-screen statements, title cards, a coverage map of the United States and Canada, and an animated Clipt logo from the brand's own vector files.",
       "Built a cold open and a words-behind-the-speaker effect for the lines that need to land hardest.",
       "Graded colour by measuring each location's footage, and mixed UI sound effects at levels that sit under his voice.",
-      "Built a brand-driven editing system around it: brand rules, reusable motion graphics and a checklist for every format, so each new piece comes out consistent and fast.",
+      "Built the AI editing workflow behind it: brand rules, a recipe for every format and reusable motion graphics that the AI follows, with me planning each piece and checking every cut, so each new piece comes out consistent and fast.",
     ],
     challenges: [
       "Thirty-five minutes is a long time to hold attention with one speaker in one setting.",
@@ -1086,7 +1086,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "A complete 35-minute VSL delivered in 4K, with a consistent look across every section.",
       "The same brand system now drives Clipt's ads, testimonials and title cards.",
     ],
-    stack: ["VSL editing", "Motion graphics", "Brand system", "Colour grading", "Sound design", "4K delivery"],
+    stack: ["AI-assisted editing", "VSL editing", "Motion graphics", "Brand system", "Colour grading", "Sound design", "4K delivery"],
     screenshots: [
       "/assets/clipt/stills/vsl-panel.jpg",
       "/assets/clipt/stills/vsl-two-panels.jpg",
@@ -1131,13 +1131,13 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Vertical ads (most around 15 seconds) and nurse testimonials for social, built from the same brand system as the sales video. The headline is on screen from the first frame, zooms ease onto the stressed words, and branded cards appear exactly when the speaker says them.",
     businessProblem:
       "Short ads live or die in the first second, and testimonials shot on a phone rarely match the brand's look. Each piece had to start strong, stay on the speaker's face, and look like it came from the same company as the sales video.",
-    role: "Video Editor & Motion Graphic Designer · Clipt",
+    role: "AI Video Editor & Motion Graphic Designer · Clipt",
     contributions: [
       "Cut four vertical ads from the client's ad guide, finding each quoted line in the 4K camera originals and reframing to 9:16 on the face.",
       "Added half-second eased zooms on stressed words with the face held in place, about one every 10 to 12 seconds, each with a soft whoosh.",
       "Edited two nurse testimonials with a branded card under the chin timed to their words, the Clipt Verified badge, and each name with its credential.",
       "Matched colour and loudness to the sales video, and left captions off the master so they can be styled last for each platform.",
-      "Designed a 16-effect motion graphics kit in Clipt's brand for the ads to draw from: kinetic hooks, giant captions, a gravity drop, an editing timeline, a grade slider, reel and comment mockups, and comment calls to action, all joined by one continuous camera move.",
+      "Designed a 16-effect motion graphics kit in Clipt's brand for the ads to draw from: kinetic hooks, giant captions, a gravity drop, an editing timeline, a grade slider, reel and comment mockups, and comment calls to action, all joined by one continuous camera move and built in code with AI.",
     ],
     challenges: [
       "Snap zooms read as harsh and frequent moves read as shaky; the right pace had to be found by testing.",
@@ -1151,7 +1151,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
       "Four ads and two testimonials cut at 2K (1440 × 2560), consistent with the sales video's look.",
       "New ads start from the same brand recipe, so the fifth ad follows the same standard as the first.",
     ],
-    stack: ["Short-form ads", "Vertical video", "Motion graphics", "Colour grading", "Sound design", "CapCut"],
+    stack: ["AI-assisted editing", "Short-form ads", "Vertical video", "Motion graphics", "Colour grading", "Sound design", "CapCut"],
     screenshots: [],
     videos: [
       {
@@ -2073,12 +2073,12 @@ export const experiencePhases: ExperiencePhase[] = [
   },
   {
     slug: "clipt",
-    title: "Clipt (client): Video Editor & Motion Graphic Designer",
+    title: "Clipt (client): AI Video Editor & Motion Graphic Designer",
     period: "Oct 2026 – Present",
     summary:
-      "Client engagement as Clipt's video editor and motion graphic designer, and in practice its fractional video production lead: I designed and streamlined how its videos get made, from raw founder footage to delivery, set up the brand system behind them, and edit the sales video, ads and testimonials myself.",
+      "Client engagement as Clipt's AI video editor and motion graphic designer, and in practice its fractional video production lead: I built the AI editing workflow its videos are made with, from raw founder footage to delivery, set up the brand system behind it, and direct and check every edit of the sales video, ads and testimonials myself.",
     responsibilities: [
-      "Map and streamline the video workflow end to end: footage intake, cleanup, cut, graphics, colour, sound and delivery.",
+      "Build and run an AI editing workflow end to end: footage intake, cleanup, cut, graphics, colour, sound and delivery, with my review at every step.",
       "Set up the brand system: brand rules, reusable motion graphics and a checklist for every format.",
       "Edit and deliver the 35-minute VSL, vertical ads and nurse testimonials.",
     ],
@@ -2090,7 +2090,7 @@ export const experiencePhases: ExperiencePhase[] = [
       "Consistency comes from writing the brand rules down once and applying them everywhere.",
       "Restraint keeps a long video watchable: sparse zooms, calm motion, every graphic with a reason.",
     ],
-    technologies: ["VSL editing", "Motion graphics", "Colour grading", "Sound design", "CapCut"],
+    technologies: ["AI-assisted editing", "VSL editing", "Motion graphics", "Colour grading", "Sound design", "CapCut"],
     relatedProjectSlugs: ["clipt-vsl", "clipt-short-form-ads-testimonials"],
   },
   {

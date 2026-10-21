@@ -1,19 +1,18 @@
 "use client";
 
-import { useRef, type CSSProperties, type ReactNode } from "react";
+import { useRef, type CSSProperties } from "react";
 import Image from "next/image";
-import { Check, FileText, Hash, ListChecks, Scissors, Send } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Check, FileText, Hash, ListChecks, Scissors, Send } from "lucide-react";
 import { gsap, useGSAP, prefersReducedMotion } from "@/lib/gsap";
-import { afterIntro } from "@/lib/intro";
+import { services, type ServiceKey } from "@/data/services";
+import { FadeIn } from "@/components/ui/FadeIn";
 
 /*
- * Three small motion pieces under the hero, one per service, so the page says
- * what Kelvin does before anyone reads a word: a workflow runs and onboards a
- * client, an edit gets cut and changes shot, a dashboard builds itself. They
- * play one after another; the playing card lights its lane in the orbit above.
+ * The services, each topped by a small motion piece that shows the work before
+ * anyone reads a word: a workflow runs and onboards a client, an edit gets cut
+ * and changes shot, a dashboard builds itself. They play one after another.
  */
-
-const LANES = ["Operations", "Video", "Product"] as const;
 
 const FLOW_NODES = [
   { icon: FileText, label: "Form" },
@@ -44,38 +43,6 @@ const KPIS = [
 const BARS = [38, 52, 46, 64, 58, 76, 88];
 // Rounded so the server and every browser print identical markup.
 const WAVE = Array.from({ length: 40 }, (_, i) => Math.round((2 + Math.abs(Math.sin(i * 1.7) * Math.cos(i * 0.6)) * 8) * 100) / 100);
-
-function Card({
-  tone,
-  label,
-  caption,
-  children,
-}: {
-  tone: string;
-  label: string;
-  caption: string;
-  children: ReactNode;
-}) {
-  return (
-    <article
-      data-show-card
-      data-reveal
-      className="show-card w-[82vw] max-w-[24rem] shrink-0 snap-center overflow-hidden rounded-2xl md:w-auto md:max-w-none"
-      style={{ "--tone": tone } as CSSProperties}
-    >
-      <div data-show-stage className="show-stage relative aspect-video overflow-hidden" aria-hidden="true">
-        {children}
-      </div>
-      <div className="flex items-start gap-3 border-t border-border px-4 py-3">
-        <span className="show-dot mt-1.5 size-2 shrink-0 rounded-full" aria-hidden="true" />
-        <div>
-          <p className="text-sm font-semibold">{label}</p>
-          <p className="text-xs leading-5 text-muted-foreground">{caption}</p>
-        </div>
-      </div>
-    </article>
-  );
-}
 
 function FlowStage() {
   return (
@@ -281,7 +248,13 @@ function appTimeline(stage: HTMLElement) {
   return tl;
 }
 
-export function HeroShowcase() {
+const STAGES: Record<ServiceKey, { tone: string; Stage: () => React.JSX.Element; story: (stage: HTMLElement) => gsap.core.Timeline }> = {
+  operations: { tone: "var(--teal-fg)", Stage: FlowStage, story: flowTimeline },
+  video: { tone: "var(--coral-fg)", Stage: EditStage, story: editTimeline },
+  product: { tone: "var(--violet-fg)", Stage: AppStage, story: appTimeline },
+};
+
+export function ServiceShowcase() {
   const rootRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -290,26 +263,17 @@ export function HeroShowcase() {
       if (!root || !contextSafe) return;
       const cards = gsap.utils.toArray<HTMLElement>("[data-show-card]", root);
       const stages = cards.map((card) => card.querySelector<HTMLElement>("[data-show-stage]")!);
-      const stories = [flowTimeline(stages[0]), editTimeline(stages[1]), appTimeline(stages[2])];
+      const stories = services.map((service, i) => STAGES[service.key].story(stages[i]));
       // Every card starts on its finished frame; it replays its story when its turn comes.
       stories.forEach((story) => story.progress(1));
       if (prefersReducedMotion()) return;
 
       let active = -1;
       let next: gsap.core.Tween | null = null;
-      let visible = true;
-      let touchedAt = 0;
 
       const play = contextSafe((index: number) => {
         active = index;
         cards.forEach((card, i) => card.classList.toggle("is-active", i === index));
-        window.dispatchEvent(new CustomEvent("hero:service", { detail: { lane: LANES[index] } }));
-
-        // On phones the cards scroll sideways; bring the playing one into view
-        // unless the visitor has been swiping them.
-        if (root.scrollWidth > root.clientWidth + 4 && Date.now() - touchedAt > 8000) {
-          root.scrollTo({ left: cards[index].offsetLeft - root.offsetLeft - 16, behavior: "smooth" });
-        }
 
         gsap.timeline()
           .to(cards[index], { scale: 1.025, duration: 0.35, ease: "back.out(2)" })
@@ -323,56 +287,63 @@ export function HeroShowcase() {
         next = gsap.delayedCall(stories[index].duration() + 0.6, () => play((index + 1) % cards.length));
       });
 
-      const start = contextSafe(() => {
-        gsap.fromTo(
-          cards,
-          { autoAlpha: 0, y: 34, scale: 0.9 },
-          { autoAlpha: 1, y: 0, scale: 1, duration: 0.75, ease: "back.out(1.5)", stagger: 0.12, delay: 0.55 },
-        );
-        next = gsap.delayedCall(1.4, () => play(0));
-      });
-      const cancel = afterIntro(start);
-
-      // Pause the loop while the hero is off screen.
-      const io = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting === visible) return;
-        visible = entry.isIntersecting;
-        if (active >= 0) stories[active][visible ? "resume" : "pause"]();
-        next?.[visible ? "resume" : "pause"]();
-      });
+      // Start the loop the first time the services come into view; pause it while they're off screen.
+      const io = new IntersectionObserver(
+        ([entry]) => {
+          if (active < 0) {
+            if (entry.isIntersecting) play(0);
+            return;
+          }
+          const method = entry.isIntersecting ? "resume" : "pause";
+          stories[active][method]();
+          next?.[method]();
+        },
+        { threshold: 0.25 },
+      );
       io.observe(root);
 
-      const touched = () => {
-        touchedAt = Date.now();
-      };
-      root.addEventListener("pointerdown", touched, { passive: true });
-      root.addEventListener("wheel", touched, { passive: true });
-
       return () => {
-        cancel();
         next?.kill();
         io.disconnect();
-        root.removeEventListener("pointerdown", touched);
-        root.removeEventListener("wheel", touched);
       };
     },
     { scope: rootRef },
   );
 
   return (
-    <div
-      ref={rootRef}
-      className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pt-2 pb-4 [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0"
-    >
-      <Card tone="var(--teal-fg)" label="Operations & automation" caption="One form runs a 38-step client onboarding across ClickUp and Slack.">
-        <FlowStage />
-      </Card>
-      <Card tone="var(--coral-fg)" label="Video editing" caption="VSLs, ads and testimonials, cut tight and on-brand from frame one.">
-        <EditStage />
-      </Card>
-      <Card tone="var(--violet-fg)" label="Product & web apps" caption="Client portals and KPI dashboards, from spec to live.">
-        <AppStage />
-      </Card>
+    <div ref={rootRef} className="grid gap-14 lg:grid-cols-3 lg:gap-8">
+      {services.map((service, i) => {
+        const { tone, Stage } = STAGES[service.key];
+        return (
+          <FadeIn key={service.key} delay={i * 70}>
+            <div className="flex h-full max-w-xl flex-col gap-4 lg:max-w-none">
+              <div data-show-card className="show-card mb-2 overflow-hidden rounded-2xl" style={{ "--tone": tone } as CSSProperties}>
+                <div data-show-stage className="show-stage relative aspect-video overflow-hidden" aria-hidden="true">
+                  <Stage />
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold">{service.title}</h3>
+              <p className="quiet-text text-sm leading-6">{service.summary}</p>
+              <ul className="space-y-2 text-sm">
+                {service.deliverables.map((d) => (
+                  <li key={d} className="flex gap-2.5">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: tone }} aria-hidden="true" />
+                    <span>{d}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-auto pt-2 text-sm font-medium leading-6 text-foreground/80">{service.proof}</p>
+              <Link
+                href={`/work?service=${service.key}`}
+                className="focusable inline-flex items-center gap-1.5 rounded-sm text-sm font-semibold text-primary hover:text-foreground"
+              >
+                {/* Lowercase the first letter only, so "AI" keeps its capitals */}
+                See {service.title.replace(/^[A-Z](?=[a-z])/, (c) => c.toLowerCase())} work <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </FadeIn>
+        );
+      })}
     </div>
   );
 }

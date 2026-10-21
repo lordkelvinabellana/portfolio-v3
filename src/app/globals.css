@@ -142,12 +142,26 @@
   html {
     @apply font-sans;
     scroll-padding-top: 5rem;
+    scrollbar-color: var(--border) transparent;
   }
 
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "kern" 1;
   }
+
+  /* No lone last words in running text */
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: color-mix(in oklch, var(--primary), transparent 60%);
+    color: var(--foreground);
+  }
+
 }
 
 /* Emil Design Eng - Purposeful animations */
@@ -300,6 +314,7 @@
     font-weight: 600;
     line-height: 0.98;
     text-transform: uppercase;
+    text-wrap: balance;
   }
 
   .display-heading {
@@ -318,6 +333,7 @@
     line-height: 0.95;
     letter-spacing: 0;
     text-transform: uppercase;
+    text-wrap: balance;
   }
 
   .eyebrow {
@@ -859,253 +875,6 @@
     background: var(--destructive);
   }
 
-  /* Service pictures and the 3D spark (ServiceArt.tsx) */
-  .service-art {
-    position: relative;
-    display: flex;
-    align-items: center;
-    height: 5.5rem;
-    margin-bottom: 0.25rem;
-  }
-
-  .art-flow {
-    display: flex;
-    align-items: center;
-    width: 100%;
-  }
-
-  .art-node {
-    display: grid;
-    flex: none;
-    place-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    border: 1.5px solid color-mix(in oklch, var(--foreground), transparent 78%);
-    border-radius: 0.65rem;
-    background: var(--surface-elevated);
-    transition: border-color 250ms var(--ease-standard);
-  }
-
-  .art-node[data-kind="trigger"] {
-    border-radius: 1.25rem 0.65rem 0.65rem 1.25rem;
-  }
-
-  .art-node[data-state="success"] {
-    border-color: var(--status);
-  }
-
-  .art-node > i {
-    width: 0.85rem;
-    height: 0.85rem;
-    border-radius: 0.25rem;
-    background: var(--art-tone, var(--primary));
-    opacity: 0.85;
-  }
-
-  .art-node[data-kind="trigger"] { --art-tone: var(--coral-fg); }
-  .art-node[data-kind="code"] { --art-tone: var(--amber-fg); }
-  .art-node[data-kind="slack"] { --art-tone: var(--violet-fg); }
-
-  .art-link {
-    position: relative;
-    flex: 1;
-    height: 1.5px;
-    margin: 0 0.3rem;
-    background: color-mix(in oklch, var(--foreground), transparent 74%);
-  }
-
-  .art-packet {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 7px;
-    height: 7px;
-    margin: -3.5px 0 0 -3.5px;
-    border-radius: 999px;
-    background: var(--status);
-    box-shadow: 0 0 8px color-mix(in oklch, var(--status), transparent 40%);
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  .ai-spark {
-    display: inline-block;
-    width: var(--spark);
-    height: var(--spark);
-    perspective: 220px;
-  }
-
-  .ai-spark-body {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    animation: spark-spin 7s linear infinite;
-  }
-
-  .ai-spark-body i {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 24%;
-    height: 100%;
-    margin-left: -12%;
-    background: linear-gradient(180deg, var(--violet-fg), var(--primary));
-    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
-    opacity: 0.92;
-  }
-
-  .art-timeline {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    width: 100%;
-    transform: perspective(520px) rotateX(30deg);
-    transform-origin: 50% 100%;
-  }
-
-  .art-track {
-    position: relative;
-    height: 1rem;
-    border-radius: 0.3rem;
-    background: var(--surface-2);
-  }
-
-  .art-clip {
-    position: absolute;
-    top: 2px;
-    bottom: 2px;
-    border-radius: 0.25rem;
-    background: color-mix(in oklch, var(--primary), transparent 45%);
-  }
-
-  .art-track-gfx .art-clip {
-    background: color-mix(in oklch, var(--coral-fg), transparent 40%);
-  }
-
-  .art-filler {
-    background: color-mix(in oklch, var(--destructive), transparent 35%);
-  }
-
-  .art-key {
-    position: absolute;
-    top: 50%;
-    width: 6px;
-    height: 6px;
-    margin: -3px 0 0 -3px;
-    background: var(--amber-fg);
-    transform: rotate(45deg);
-  }
-
-  .art-track-audio {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    height: 1.15rem;
-    padding: 0 3px;
-    background: transparent;
-  }
-
-  .art-track-audio i {
-    flex: 1;
-    border-radius: 1px;
-    background: color-mix(in oklch, var(--teal-fg), transparent 30%);
-  }
-
-  .art-playhead {
-    position: absolute;
-    top: -4px;
-    bottom: -4px;
-    left: 0;
-    width: 2px;
-    background: var(--destructive);
-    box-shadow: 0 0 8px color-mix(in oklch, var(--destructive), transparent 50%);
-  }
-
-  .art-window {
-    position: relative;
-    width: 80%;
-    height: 5.1rem;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    border-radius: 0.6rem;
-    background: var(--surface-elevated);
-  }
-
-  .art-bar {
-    display: flex;
-    gap: 3px;
-    padding: 5px 7px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .art-bar i {
-    width: 6px;
-    height: 6px;
-    border-radius: 999px;
-    background: color-mix(in oklch, var(--foreground), transparent 75%);
-  }
-
-  .art-body {
-    display: flex;
-    height: calc(100% - 17px);
-  }
-
-  .art-side {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    width: 22%;
-    padding: 6px;
-    border-right: 1px solid var(--border);
-  }
-
-  .art-side i {
-    height: 4px;
-    border-radius: 2px;
-    background: color-mix(in oklch, var(--foreground), transparent 82%);
-  }
-
-  .art-main {
-    display: grid;
-    flex: 1;
-    grid-template-columns: repeat(3, 1fr);
-    align-content: start;
-    gap: 5px;
-    padding: 6px;
-  }
-
-  .art-card {
-    height: 1.1rem;
-    border-radius: 0.3rem;
-    background: color-mix(in oklch, var(--violet-fg), transparent 72%);
-  }
-
-  .art-line {
-    grid-column: 1 / -1;
-    width: 100%;
-    height: 1.5rem;
-  }
-
-  .art-line path {
-    fill: none;
-    stroke: var(--primary);
-    stroke-linecap: round;
-    stroke-width: 2;
-  }
-
-  .art-cursor {
-    position: absolute;
-    top: 58%;
-    left: 42%;
-    width: 11px;
-    height: 15px;
-    background: var(--foreground);
-    clip-path: polygon(0 0, 100% 68%, 58% 70%, 78% 100%, 62% 100%, 42% 74%, 0 100%);
-  }
-
   /* Animation utility classes */
   .animate-fade-in {
     animation: fade-in 500ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -1270,7 +1039,7 @@
   }
 }
 
-/* ── Hero showcase: one motion piece per service ── */
+/* ── Service showcase: one motion piece per service ── */
 @layer components {
   .show-card {
     background: var(--surface-elevated);

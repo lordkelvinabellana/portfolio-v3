@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { ArrowRight, Download, Mail, MessageCircle } from "lucide-react";
 import { experiencePhases, getProjectCaseStudy, type ProjectCaseStudy } from "@/data/portfolio";
-import { services } from "@/data/services";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { CaseStudyCard } from "@/components/projects/CaseStudyCard";
 import { CV_FILENAME, CV_HREF, EMAIL, RESUME_FILENAME, RESUME_HREF } from "@/components/layout/social";
 import { HeroSection } from "./HeroSection";
 import { OutputReel } from "./OutputReel";
 import { ProcessSteps } from "./ProcessSteps";
-import { ServiceArt } from "./ServiceArt";
+import { ServiceShowcase } from "./ServiceShowcase";
 import { EditTimeline } from "@/components/video/EditTimeline";
 import { WorkflowCanvas } from "@/components/automation/WorkflowCanvas";
 import { automations } from "@/data/automations";
@@ -61,7 +60,7 @@ export function HomePage() {
 
   return (
     <>
-      <HeroSection />
+      <HeroSection workflowCount={automations.length} />
 
       {/* ── Services ── */}
       <section id="services" className="border-y border-border bg-[var(--surface-1)]">
@@ -70,32 +69,7 @@ export function HomePage() {
             title="What I can do for you"
             intro="Three ways I work with clients. Most projects start with one and grow into another."
           />
-          <div className="grid gap-10 lg:grid-cols-3 lg:gap-0">
-            {services.map((service, i) => (
-              <FadeIn key={service.key} delay={i * 70}>
-                <div className="flex h-full flex-col gap-4 lg:border-l lg:border-border lg:px-8 lg:first:border-l-0 lg:first:pl-0">
-                  <ServiceArt kind={service.key} />
-                  <h3 className="text-xl font-semibold">{service.title}</h3>
-                  <p className="quiet-text text-sm leading-6">{service.summary}</p>
-                  <ul className="space-y-2 text-sm">
-                    {service.deliverables.map((d) => (
-                      <li key={d} className="flex gap-2.5">
-                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" aria-hidden="true" />
-                        <span>{d}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-auto pt-2 text-sm font-medium leading-6 text-foreground/80">{service.proof}</p>
-                  <Link
-                    href={`/work?service=${service.key}`}
-                    className="focusable inline-flex items-center gap-1.5 rounded-sm text-sm font-semibold text-primary hover:text-foreground"
-                  >
-                    See {service.title.toLowerCase()} work <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
+          <ServiceShowcase />
         </div>
       </section>
 
@@ -106,16 +80,18 @@ export function HomePage() {
             <div className="mb-12 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
               <FadeIn>
                 <div className="max-w-xl">
-                  <h2 className="home-heading">VSLs and ads that stay on-brand</h2>
+                  <h2 className="home-heading">
+                    <span className="whitespace-nowrap">AI-edited</span> VSLs and ads that stay <span className="whitespace-nowrap">on-brand</span>
+                  </h2>
                   <p className="quiet-text mt-4 text-base leading-7">
-                    Edited for Clipt, a mobile foot-care training company: the full 35-minute sales video, vertical ads and nurse testimonials, all built from one brand system so every piece looks like the same company.
+                    Edited for Clipt, a mobile foot-care training company: the full <span className="whitespace-nowrap">35-minute</span> sales video, vertical ads and nurse testimonials. AI does the heavy lifting in a workflow I built. I plan each piece, set the brand rules and check every cut before it ships.
                   </p>
                   <ul className="mt-6 space-y-3 text-sm leading-6">
                     {[
-                      "Retakes, fillers and long pauses cleaned out, with repeated lines tracked across the whole script",
-                      "Brand-style panels and statements timed to what the speaker says",
-                      "Framing that follows the graphics, colour measured per location, sound mixed under the voice",
-                      "A brand system set up once, so the next VSL or ad is consistent from day one",
+                      "AI cleanup from the transcript: retakes, fillers and long pauses out, repeated lines tracked across the whole script",
+                      "Motion graphics built in code with AI, in Clipt's brand and timed to what the speaker says",
+                      "Colour and loudness measured, not guessed, with sound mixed under the voice",
+                      "Every cut reviewed by me against brand rules written down once, so the next VSL or ad matches the last",
                     ].map((line) => (
                       <li key={line} className="flex gap-2.5">
                         <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--coral-fg)]" aria-hidden="true" />

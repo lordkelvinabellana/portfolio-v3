@@ -27,9 +27,9 @@ export const services: Service[] = [
   },
   {
     key: "video",
-    title: "Video editing",
+    title: "AI video editing",
     summary:
-      "VSLs, short-form ads and testimonials built from your brand context, so every piece looks and sounds like the same company.",
+      "VSLs, short-form ads and testimonials made with an AI editing workflow I built. AI does the heavy lifting; I direct the edit and check every cut against your brand.",
     deliverables: [
       "Long-form VSLs with on-brand motion graphics",
       "Vertical ads with the hook on screen from the first frame",
