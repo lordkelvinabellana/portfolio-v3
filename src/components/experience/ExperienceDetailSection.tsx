@@ -38,7 +38,7 @@ function RelatedProjectTeaser({
       className="panel panel-hover focusable group flex items-start justify-between gap-4 rounded-xl p-4 no-underline"
     >
       <div className="min-w-0">
-        <p className="muted-text text-[11px] font-bold uppercase tracking-widest">
+        <p className="muted-text text-xs font-bold uppercase tracking-widest">
           {category}
         </p>
         <p className="mt-0.5 font-semibold leading-snug">{title}</p>
@@ -82,7 +82,7 @@ export function ExperienceDetailSection({ phase }: { phase: ExperiencePhase }) {
         {/* Header */}
         <FadeIn delay={40}>
           <header className="max-w-3xl">
-            <span className="rounded-full bg-secondary px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
+            <span className="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
               {phase.period}
             </span>
             <h1 className="section-heading mt-4">{phase.title}</h1>

@@ -45,7 +45,7 @@ function SectionLabel({ children, oneLiner }: { children: React.ReactNode; oneLi
   return (
     <div className="mb-5">
       <div className="flex items-center gap-3">
-        <p className="shrink-0 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">{children}</p>
+        <p className="shrink-0 text-xs font-bold uppercase tracking-widest text-muted-foreground">{children}</p>
         <div className="h-px flex-1 bg-border" />
       </div>
       {oneLiner && <p className="mt-2 text-sm font-medium text-foreground/70 leading-snug">{oneLiner}</p>}
@@ -91,7 +91,7 @@ function TLDRBlock({ project }: { project: ProjectCaseStudy }) {
         border: "1px solid color-mix(in oklch, var(--border), transparent 30%)",
       }}
     >
-      <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">Summary</p>
+      <p className="mb-3 text-xs font-bold uppercase tracking-widest text-muted-foreground">Summary</p>
       <ul className="space-y-2">
         {bullets.map(({ label, text }) => (
           <li key={label} className="flex gap-2 text-sm leading-6">
@@ -159,7 +159,7 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
                 href={project.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="focusable inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-accent hover:text-accent-foreground"
+                className="focusable inline-flex min-h-11 items-center gap-2 rounded-lg border border-border bg-secondary px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-accent hover:text-accent-foreground"
               >
                 <ExternalLink className="h-4 w-4" />
                 {project.liveLabel}
@@ -259,7 +259,7 @@ export function ProjectDetailSection({ project, backHref = "/work", basePath = "
                   <div className="space-y-5">
                     {project.challenges.map((challenge, i) => (
                       <div key={i} className="rounded-lg border border-border bg-secondary/30 p-4 last:mb-0">
-                        <p className="mb-1.5 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">Challenge</p>
+                        <p className="mb-1.5 text-xs font-bold uppercase tracking-widest text-muted-foreground">Challenge</p>
                         <p className="quiet-text mb-3 text-sm leading-6">{challenge}</p>
                         {project.solutions[i] && (
                           <>

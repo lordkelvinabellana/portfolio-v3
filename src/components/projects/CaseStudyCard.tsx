@@ -62,7 +62,7 @@ export function CaseStudyCard({
             {serviceLabel(project)}
           </span>
           {project.status && (
-            <span className="rounded-full bg-secondary px-2 py-px text-[11px] font-medium text-muted-foreground">
+            <span className="rounded-full bg-secondary px-2 py-px text-xs font-medium text-muted-foreground">
               {project.status}
             </span>
           )}

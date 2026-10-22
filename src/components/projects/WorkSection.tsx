@@ -108,7 +108,8 @@ export function WorkSection({ basePath = "/work" }: { basePath?: string }) {
 
   const change = (key: ServiceFilter) => {
     const url = key === "all" ? window.location.pathname : `${window.location.pathname}?service=${key}`;
-    window.history.replaceState(window.history.state, "", url);
+    // null, not history.state: Next skips syncing useSearchParams when the state carries its own marker
+    window.history.replaceState(null, "", url);
   };
 
   return <WorkGrid active={active} onChange={change} basePath={basePath} />;

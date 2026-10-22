@@ -68,7 +68,7 @@ export function ExperienceIndexSection() {
                   >
                     <div className="flex-1 space-y-2 min-w-0">
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="rounded-full bg-secondary px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
+                        <span className="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
                           {phase.period}
                         </span>
                       </div>

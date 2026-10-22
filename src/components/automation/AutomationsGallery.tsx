@@ -42,7 +42,7 @@ export function AutomationsGallery() {
               aria-pressed={group === f.key}
               onClick={() => setGroup(f.key)}
               className={cn(
-                "focusable inline-flex min-h-9 items-center gap-2 rounded-full border px-3.5 text-sm font-semibold transition-colors",
+                "focusable inline-flex min-h-10 items-center gap-2 rounded-full border px-3.5 text-sm font-semibold transition-colors",
                 group === f.key
                   ? "border-foreground bg-foreground text-background"
                   : "border-border bg-[var(--surface-elevated)] text-foreground hover:bg-accent",
@@ -81,7 +81,7 @@ export function AutomationsGallery() {
                 <div className="automation-thumb relative w-28 shrink-0 border-r border-border p-2 sm:aspect-[2/1] sm:w-auto sm:border-r-0 sm:border-b sm:px-3 sm:py-2">
                   <WorkflowThumb workflow={a} />
                   {a.live && (
-                    <span className="absolute right-1.5 top-1.5 inline-flex items-center gap-1.5 rounded-full border border-border bg-[var(--surface-elevated)] p-1 text-[11px] font-semibold text-[var(--status)] sm:right-2 sm:top-2 sm:px-2 sm:py-0.5">
+                    <span className="absolute right-1.5 top-1.5 inline-flex items-center gap-1.5 rounded-full border border-border bg-[var(--surface-elevated)] p-1 text-xs font-semibold text-[var(--status)] sm:right-2 sm:top-2 sm:px-2 sm:py-0.5">
                       <span className="status-dot" aria-hidden="true" /> <span className="max-sm:sr-only">Running</span>
                     </span>
                   )}

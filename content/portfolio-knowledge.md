@@ -215,7 +215,7 @@ Things I build for myself, to try an idea properly or learn a technology end to 
 
 ## Case study: Hatstand: One Computer, Several Claude Accounts
 
-Service: Product & web apps. Status: Open-source preview. Kelvin's role: Solo builder: product, design, Electron app and native macOS helper.
+Service: Personal. Status: Open-source preview. Kelvin's role: Solo builder: product, design, Electron app and native macOS helper.
 
 A free, open-source Windows and macOS app that keeps each client's Claude Desktop account in its own profile. Consultants and agencies run several accounts side by side and switch in a keystroke, instead of signing out and back in.
 
@@ -233,7 +233,7 @@ Problem: Claude Desktop holds one signed-in account at a time. Freelancers and a
 
 ## Case study: Concept Redesigns for Local Businesses
 
-Service: Product & web apps. Status: Sent to owners. Kelvin's role: Solo: lead research, design direction, build, review and outreach.
+Service: Personal. Status: Sent to owners. Kelvin's role: Solo: lead research, design direction, build, review and outreach.
 
 Three unsolicited redesigns for small local businesses with weak websites, each built in its own visual world instead of a shared template: a salon lobby directory, a med spa consultation chart, and an IV clinic menu printed on IV bag labels. The businesses stay unnamed here until their owners say otherwise.
 
@@ -249,7 +249,7 @@ Problem: Small service businesses lose bookings to sites that bury the one thing
 
 ## Case study: Portably: A PSP Emulator in the Browser
 
-Service: Product & web apps. Status: Live, local mode. Kelvin's role: Solo builder: product, architecture, emulator integration and the app.
+Service: Personal. Status: Live, local mode. Kelvin's role: Solo builder: product, architecture, emulator integration and the app.
 
 A desktop web app that plays the PSP games you own in the browser, with nothing to install. Add a game file and it's identified, cached and ready to play, with keyboard, gamepad or on-screen controls, per-game settings and saves that stay put. A cloud library with synced saves is built and switched off for now.
 

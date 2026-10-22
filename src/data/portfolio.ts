@@ -581,7 +581,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
   {
     slug: "hatstand",
     title: "Hatstand: One Computer, Several Claude Accounts",
-    category: "Product",
+    category: "Personal",
     status: "Open-source preview",
     overview:
       "A free, open-source Windows and macOS app that keeps each client's Claude Desktop account in its own profile. Consultants and agencies run several accounts side by side and switch in a keystroke, instead of signing out and back in.",
@@ -630,7 +630,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
   {
     slug: "concept-redesigns",
     title: "Concept Redesigns for Local Businesses",
-    category: "Product",
+    category: "Personal",
     status: "Sent to owners",
     overview:
       "Three unsolicited redesigns for small local businesses with weak websites, each built in its own visual world instead of a shared template: a salon lobby directory, a med spa consultation chart, and an IV clinic menu printed on IV bag labels. The businesses stay unnamed here until their owners say otherwise.",
@@ -679,7 +679,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
   {
     slug: "portably",
     title: "Portably: A PSP Emulator in the Browser",
-    category: "Product",
+    category: "Personal",
     status: "Live, local mode",
     overview:
       "A desktop web app that plays the PSP games you own in the browser, with nothing to install. Add a game file and it's identified, cached and ready to play, with keyboard, gamepad or on-screen controls, per-game settings and saves that stay put. A cloud library with synced saves is built and switched off for now.",
@@ -1844,7 +1844,7 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
     stack: ["WordPress"],
     demoUrl: "https://www.strategicemarketing.com/",
     liveLabel: "View Live Site",
-    screenshots: ["/assets/stratEMarketing/sem1.jpeg"],
+    screenshots: ["/assets/stratEmarketing/sem1.jpeg"],
     relatedExperienceSlug: "flexiwork",
   },
   {

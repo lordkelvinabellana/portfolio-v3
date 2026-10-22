@@ -23,9 +23,9 @@ export function SiteFooter() {
           </a>
         </div>
 
-        <nav aria-label="Footer" className="grid grid-cols-2 gap-x-8 gap-y-2 text-sm md:grid-cols-1">
+        <nav aria-label="Footer" className="grid grid-cols-2 gap-x-8 text-sm md:grid-cols-1 md:gap-y-2">
           {links.map(({ href, label }) => (
-            <Link key={href} href={href} className="focusable rounded-sm text-muted-foreground hover:text-foreground">
+            <Link key={href} href={href} className="focusable flex min-h-11 items-center rounded-sm text-muted-foreground hover:text-foreground md:min-h-0">
               {label}
             </Link>
           ))}
@@ -46,11 +46,11 @@ export function SiteFooter() {
               </a>
             ))}
           </div>
-          <div className="flex flex-col gap-1.5">
-            <a href={RESUME_HREF} download={RESUME_FILENAME} className="focusable rounded-sm text-muted-foreground hover:text-foreground">
+          <div className="flex flex-col md:gap-1.5">
+            <a href={RESUME_HREF} download={RESUME_FILENAME} className="focusable flex min-h-11 items-center rounded-sm text-muted-foreground hover:text-foreground md:min-h-0">
               Download résumé (PDF)
             </a>
-            <a href={CV_HREF} download={CV_FILENAME} className="focusable rounded-sm text-muted-foreground hover:text-foreground">
+            <a href={CV_HREF} download={CV_FILENAME} className="focusable flex min-h-11 items-center rounded-sm text-muted-foreground hover:text-foreground md:min-h-0">
               Download full CV (PDF)
             </a>
           </div>

@@ -145,7 +145,7 @@ export function ImageGallery({
         {images.length > DEFAULT_VISIBLE && (
           <button
             onClick={() => setShowModal(true)}
-            className="focusable rounded-md border border-border bg-secondary px-3.5 py-2 text-sm font-semibold text-secondary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+            className="focusable min-h-11 rounded-md border border-border bg-secondary px-3.5 py-2 text-sm font-semibold text-secondary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
           >
             Show all {images.length} images
           </button>
@@ -166,7 +166,7 @@ export function ImageGallery({
             {/* Header */}
             <div className="flex shrink-0 items-center justify-between border-b border-border px-6 py-4">
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
+                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
                   All screenshots
                 </p>
                 <p className="mt-0.5 font-semibold">{title}</p>

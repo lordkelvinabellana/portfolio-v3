@@ -11,7 +11,7 @@ export function ProjectCard({ project }: { project: Project }) {
         <ImageCarousel images={project.images} title={project.title} />
       ) : (
         <div className="flex aspect-video w-full items-center justify-center bg-secondary">
-          <span className="muted-text text-[11px] font-semibold uppercase tracking-[0.08em]">
+          <span className="muted-text text-xs font-semibold uppercase tracking-[0.08em]">
             No preview
           </span>
         </div>
