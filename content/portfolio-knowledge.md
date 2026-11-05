@@ -408,6 +408,25 @@ Problem: Short ads live or die in the first second, and testimonials shot on a p
 - Stack: AI-assisted editing, Short-form ads, Vertical video, Motion graphics, Colour grading, Sound design, CapCut
 - Case study page: https://portfolio-v3-roan-omega.vercel.app/work/clipt-short-form-ads-testimonials
 
+## Case study: In This Skin: Animated Shorts From a Claude Skill I Built
+
+Service: AI video editing. Status: Live on YouTube. Kelvin's role: Creator: built the skill, direct every part, and sign off the words, the look and the final cut.
+
+My own animated shorts channel, In This Skin. Every part is drawn in code, in flat 2D or in 3D, and narrated in my cloned voice. Behind it is a Claude skill I built from scratch: my whole method written down, from sourced research to the last loudness check, so Claude turns out a polished part in the same style every time.
+
+Problem: AI can draw a frame, but it doesn't know what makes a short worth watching. Left to itself it invents facts, draws a character differently in every scene, flickers, and starts from zero on every video. I wanted shorts that look hand-made and stay consistent, at a pace one person can keep up.
+- Built: Built the Claude skill from scratch, with no template: eight stages (research, script, characters, voice, timing, scenes, sound, assembly), a guide for each, and the reason behind every rule.
+- Built: Taught it my standards one correction at a time. "The arms are too long", "remove the 8-bit sound", "the blood looks like water": each note became a rule in the skill once, so the same mistake never comes back.
+- Built: Every fact on screen has a source in the script. A number the sources disagree on stays off the screen.
+- Built: One rig per character, drawn in code, so a character looks the same from every angle and in every part. Worlds and characters go into a shared library, so the next series starts half built.
+- Built: Narration in my own cloned voice, every line checked against the script by speech-to-text. The world's sound and the music are made in code and mixed under the voice.
+- Built: Two looks from the same method: flat 2D, like the peso and red blood cell stories, and 3D sets with real light, like the cicada, monarch and raindrop series.
+- Outcome: 18 shorts live on In This Skin across five series, with a sixth, the red blood cell, starting on 9 November. Each part is just over a minute, vertical at 2K, with captions burned in.
+- Outcome: A new series starts from the skill instead of from a blank page, and comes out in the same polished style.
+- Stack: Claude skill built from scratch, 2D and 3D animation in code, Voice cloning, Sound design, Research and sourcing, YouTube Shorts
+- Live link: https://www.youtube.com/@inthiskin
+- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/in-this-skin-animation-skill
+
 ## Case study: Bouquet Cipher
 
 Service: Personal. Kelvin's role: Solo Designer & Developer · Personal project.

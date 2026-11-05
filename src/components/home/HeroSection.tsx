@@ -32,7 +32,7 @@ function enter(root: HTMLElement) {
   gsap.fromTo(items, { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: 0.07, delay: 0.5 });
 }
 
-export function HeroSection({ workflowCount }: { workflowCount: number }) {
+export function HeroSection({ workflowCount, visitorCount }: { workflowCount: number; visitorCount: number | null }) {
   const heroRef = useRef<HTMLDivElement>(null);
 
   /* One orchestrated entrance: headline lines rise out of their masks, the
@@ -89,6 +89,7 @@ export function HeroSection({ workflowCount }: { workflowCount: number }) {
                 ["3+ years", "shipping software"],
                 [String(workflowCount), "n8n workflows built"],
                 ["35-minute", "VSL for Clipt"],
+                ...(!visitorCount ? [] : [[visitorCount.toLocaleString("en-US"), visitorCount === 1 ? "visitor so far" : "visitors so far"]]),
               ].map(([figure, label]) => (
                 <li key={label}>
                   <span className="font-semibold tabular-nums text-foreground">{figure}</span> <span className="quiet-text">{label}</span>

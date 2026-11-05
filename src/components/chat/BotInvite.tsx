@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { MessageCircle } from "lucide-react";
+import posthog from "posthog-js";
 import { prefersReducedMotion } from "@/lib/gsap";
 import type { BotScene } from "./botScene";
 
@@ -48,6 +49,7 @@ export function BotInvite() {
 
   const ask = () => {
     sceneRef.current?.pop();
+    posthog.capture("chat_invite_clicked");
     window.dispatchEvent(new Event("chat:open"));
   };
 

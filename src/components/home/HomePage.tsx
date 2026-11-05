@@ -22,6 +22,7 @@ const PERSONAL = pick(["hatstand", "portably", "concept-redesigns"]);
 const VSL = getProjectCaseStudy("clipt-vsl");
 const PULSE = getWorkflow("weekly-pulse");
 const ADS = getProjectCaseStudy("clipt-short-form-ads-testimonials");
+const SHORTS = getProjectCaseStudy("in-this-skin-animation-skill");
 const HOME_PHASES = ["penguin-ops", "stakra", "clipt", "retail-group", "flexiwork", "ardexa", "clix", "alphaus"]
   .map((slug) => experiencePhases.find((p) => p.slug === slug))
   .filter((p): p is (typeof experiencePhases)[number] => Boolean(p));
@@ -55,12 +56,12 @@ function SectionHeader({
   );
 }
 
-export function HomePage() {
+export function HomePage({ visitorCount }: { visitorCount: number | null }) {
   const vslVideo = VSL?.videos?.[0];
 
   return (
     <>
-      <HeroSection workflowCount={automations.length} />
+      <HeroSection workflowCount={automations.length} visitorCount={visitorCount} />
 
       {/* ── Services ── */}
       <section id="services" className="border-y border-border bg-[var(--surface-1)]">
@@ -155,6 +156,30 @@ export function HomePage() {
                 <OutputReel videos={ADS.videos ?? []} href={`/work/${ADS.slug}`} />
               </FadeIn>
             </div>
+
+            {SHORTS && (
+              <div className="mt-16 grid grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:gap-12">
+                <FadeIn>
+                  <div className="max-w-xl">
+                    <h3 className="text-lg font-semibold">
+                      Animated shorts from a Claude skill I <span className="whitespace-nowrap text-primary">built from scratch</span>
+                    </h3>
+                    <p className="quiet-text mt-3 text-base leading-7">
+                      My own channel, In This Skin. I wrote my whole method into a Claude skill, from sourced research to the final loudness check, and every note I gave it became a rule. Each part now comes out polished and in the same style, in flat 2D or in 3D.
+                    </p>
+                    <Link
+                      href={`/work/${SHORTS.slug}`}
+                      className="focusable mt-5 inline-flex items-center gap-1.5 rounded-sm text-sm font-semibold text-primary hover:text-foreground"
+                    >
+                      See how the skill works <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </div>
+                </FadeIn>
+                <FadeIn>
+                  <OutputReel videos={SHORTS.videos?.slice(0, 3) ?? []} href={`/work/${SHORTS.slug}`} />
+                </FadeIn>
+              </div>
+            )}
           </div>
         </section>
       )}

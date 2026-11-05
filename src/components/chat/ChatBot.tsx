@@ -3,6 +3,7 @@
 import { Fragment, useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { ArrowUp, MessageCircle, X } from "lucide-react";
+import posthog from "posthog-js";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { endIntro, introPlanned, releaseIntro, startIntro } from "@/lib/intro";
 import { cn } from "@/lib/utils";
@@ -360,6 +361,7 @@ export function ChatBot() {
     setBubble(false);
     setOpen(true);
     sceneRef.current?.pop();
+    posthog.capture("chat_opened");
   }, []);
 
   const closeChat = useCallback(() => {
@@ -379,9 +381,10 @@ export function ChatBot() {
     if (window.innerWidth < 640) setOpen(false);
   }, []);
 
-  async function send(text: string) {
+  async function send(text: string, questionSource: "suggestion" | "typed") {
     const question = text.trim();
     if (!question || pending) return;
+    posthog.capture("chat_question_submitted", { question_source: questionSource });
     setInput("");
     setStored((s) => ({ ...s, messages: [...s.messages, { role: "user", text: question }] }));
     setPending(true);
@@ -391,7 +394,7 @@ export function ChatBot() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ message: question, sessionId: stored.sessionId }),
+        body: JSON.stringify({ message: question, sessionId: stored.sessionId, distinctId: posthog.get_distinct_id() }),
       });
       const data = (await res.json().catch(() => ({}))) as { reply?: string; error?: string };
       reply = res.ok && data.reply
@@ -400,6 +403,7 @@ export function ChatBot() {
     } catch {
       reply = { role: "bot", text: "I couldn't reach the assistant. Check your connection and try again.", error: true };
     }
+    posthog.capture(reply.error ? "chat_response_failed" : "chat_response_received", { question_source: questionSource });
     setStored((s) => ({ ...s, messages: [...s.messages, reply].slice(-40) }));
     setPending(false);
     if (!reply.error) sceneRef.current?.pop();
@@ -449,7 +453,7 @@ export function ChatBot() {
                   <button
                     key={s}
                     type="button"
-                    onClick={() => send(s)}
+                    onClick={() => send(s, "suggestion")}
                     className="focusable rounded-full border border-border px-3 py-1.5 text-left text-sm transition-colors hover:bg-accent hover:text-accent-foreground"
                   >
                     {s}
@@ -462,7 +466,7 @@ export function ChatBot() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              send(input);
+              send(input, "typed");
             }}
             className="flex items-end gap-2 border-t border-border p-3"
           >
@@ -479,7 +483,7 @@ export function ChatBot() {
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
                   e.preventDefault();
-                  send(input);
+                  send(input, "typed");
                 }
               }}
               placeholder="Ask a question"
