@@ -955,109 +955,6 @@ export const projectCaseStudies: ProjectCaseStudy[] = [
     featured: false,
   },
   {
-    slug: "governed-ai-media-buying",
-    title: "MBOS: Governed AI Media Buying System",
-    category: "Operations",
-    status: "Simulated · not live",
-    overview:
-      "An AI system that runs paid ads on Meta and Google, creative production and content for consumer brands, built so it cannot spend money on its own. Spend is off until switched on, campaigns are created paused, and releasing money needs two people.",
-    businessProblem:
-      "AI agents can draft campaigns and creative quickly, but an agent with a budget is a liability. The system had to keep the speed without the risk: every spend decision approved, logged and reversible, and one switch that stops everything.",
-    role: "Systems Implementation Associate · Stakra · MBOS builder",
-    contributions: [
-      "Built the template repository each brand instance is created from: kill switch, Google and Meta signal readers, the media-buyer agent, and an Airtable ledger for creative and experiments.",
-      "Wrote 79 contracts that define what each part may and may not do.",
-      "Built Watchtower, a read-only dashboard that shows whether every automation, agent and webhook is alive, and wired MBOS approval events into it.",
-      "Prepared the Phase 1 operator demo.",
-    ],
-    challenges: [
-      "Spend safety has to hold even when an agent or a person makes a mistake.",
-      "Automations fail silently; a dead webhook is usually found a week late.",
-    ],
-    solutions: [
-      "Made every money path fail closed and require two-person release.",
-      "Gave Watchtower five status states, a Needs attention list and monitoring of the monitor itself, so a silent failure becomes a visible one.",
-    ],
-    outcomes: [
-      "The full pipeline suite passes 9,998 tests with no failures in a simulated instance.",
-      "Watchtower v1 complete: all 17 planned chunks shipped, 19 connections monitored.",
-      "Not switched on yet; the first brand runs in simulation.",
-    ],
-    stack: [
-      "Node.js",
-      "GitHub Actions",
-      "Airtable",
-      "Google Ads API",
-      "Meta Marketing API",
-      "Next.js",
-      "Supabase",
-      "Healthchecks",
-    ],
-    flow: [
-      "Ad signals",
-      "Media-buyer agent",
-      "Two-person approval",
-      "Campaign created paused",
-      "Watchtower and kill switch",
-    ],
-    screenshots: [
-      "/assets/work/mbos-authority.jpg",
-    ],
-    relatedExperienceSlug: "stakra",
-    featured: false,
-  },
-  {
-    slug: "salon-operations-app",
-    title: "Salon OS: Operations App for Small Salons",
-    category: "Operations",
-    status: "In client review",
-    overview:
-      "A white-label operations app for small salons, built first for a salon in Metro Manila: point of sale with stylist commissions, a daily sales quota with a staff bonus, customers with follow-up reminders, inventory by supplier, expenses, attendance, payroll and payslips.",
-    businessProblem:
-      "Small salons run on notebooks and spreadsheets. Commissions are worked out by hand at month end, stock is reordered when it runs out, and regular customers drift away because nobody remembers to follow up.",
-    role: "Systems Implementation Associate · Stakra",
-    contributions: [
-      "Point of sale for services and retail with flexible pricing, and commission snapshots so a later rate change never rewrites past pay.",
-      "Daily sales quota with a staff bonus, attendance with late deductions, payroll runs and payslips.",
-      "Customer records with visit history and a 90-day follow-up list; inventory grouped by supplier with a restock list.",
-      "Reports with CSV export, a first-run setup wizard that brands the app for each salon, a daily Google Sheets mirror, and Admin and Receptionist roles.",
-    ],
-    challenges: [
-      "Pay and commission rules have edge cases that are rarely written down.",
-    ],
-    solutions: [
-      "Wrote the business rules as a spec with worked examples, logged every decision made where the spec was silent, and listed open questions for the owner to confirm.",
-    ],
-    outcomes: [
-      "Complete first version with 32 automated tests, ready for the owner's review.",
-      "White-label from the start: the next salon is a setup wizard away.",
-    ],
-    stack: [
-      "Next.js",
-      "TypeScript",
-      "Prisma",
-      "PostgreSQL (Neon)",
-      "shadcn/ui",
-      "Recharts",
-      "Vitest",
-      "Vercel",
-    ],
-    flow: [
-      "Point of sale",
-      "Commission snapshot",
-      "Daily quota and bonus",
-      "Payroll and payslips",
-      "Reports and Sheets mirror",
-    ],
-    screenshots: [
-      "/assets/work/salon-cover.jpg",
-      "/assets/work/salon-checkout.jpg",
-      "/assets/work/salon-home.jpg",
-    ],
-    relatedExperienceSlug: "stakra",
-    featured: false,
-  },
-  {
     slug: "clipt-vsl",
     title: "Clipt: Sales Video (VSL)",
     category: "Video & Motion",
@@ -2131,9 +2028,7 @@ export const experiencePhases: ExperiencePhase[] = [
       "Give technical review on Stakra's service packages, including its data-safety standards for clients.",
     ],
     achievements: [
-      "Governed media-buying system whose pipeline suite passes 9,998 tests in simulation, fail-closed by default.",
       "Watchtower monitoring dashboard: all 17 planned v1 chunks shipped, 19 connections monitored.",
-      "Salon operations app (point of sale, commissions, payroll, inventory) delivered as a complete first version for owner review.",
       "Car pre-vetting tool (capstone build for a used-car dealer) with a deterministic pricing engine: 72 unit tests and 12 of 12 live end-to-end checks passing.",
     ],
     learnings: [
@@ -2141,10 +2036,7 @@ export const experiencePhases: ExperiencePhase[] = [
       "Silent failures are the expensive ones, so every automation needs something watching it.",
     ],
     technologies: ["Next.js", "TypeScript", "Supabase", "Prisma", "n8n", "Airtable", "Shopify", "GitHub Actions", "Playwright"],
-    relatedProjectSlugs: [
-      "governed-ai-media-buying",
-      "salon-operations-app",
-    ],
+    relatedProjectSlugs: [],
   },
   {
     slug: "clipt",

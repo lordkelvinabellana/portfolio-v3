@@ -15,7 +15,7 @@ import { services, serviceLabel } from "../src/data/services.ts";
 import { AUTOMATION_GROUPS, automations } from "../src/data/automations.ts";
 import { automationStories } from "../src/data/automationStories.ts";
 
-const SITE = "https://portfolio-v3-roan-omega.vercel.app";
+const SITE = "https://kelvinabellana.vercel.app";
 
 type Section = { title: string; url: string; text: string };
 const sections: Section[] = [];

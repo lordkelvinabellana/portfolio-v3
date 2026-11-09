@@ -8,8 +8,8 @@ Lord Kelvin Abellana (Kelvin) builds the systems that run a business and edits t
 
 - Based in Bohol, Philippines, working remotely.
 - Open to client projects and to full-time or contract roles in operations, automation, product and frontend.
-- Contact: email lordkelvinabellana@gmail.com, WhatsApp +63 928 558 3697, LinkedIn https://www.linkedin.com/in/lord-kelvin-abellana-46a15a320, contact page https://portfolio-v3-roan-omega.vercel.app/contact.
-- The résumé and full CV can be downloaded from the portfolio (https://portfolio-v3-roan-omega.vercel.app).
+- Contact: email lordkelvinabellana@gmail.com, WhatsApp +63 928 558 3697, LinkedIn https://www.linkedin.com/in/lord-kelvin-abellana-46a15a320, contact page https://kelvinabellana.vercel.app/contact.
+- The résumé and full CV can be downloaded from the portfolio (https://kelvinabellana.vercel.app).
 - Case study text written as "I" is Kelvin describing the work.
 
 ## Career timeline: every role with its dates
@@ -83,9 +83,7 @@ Automation and full-stack work for an operations consultancy serving small and g
 - Build client systems end to end, from spec and business rules to tests, deployment and handover.
 - Design automations with a human approval step wherever money, customers or sensitive data are involved.
 - Give technical review on Stakra's service packages, including its data-safety standards for clients.
-- Achievement: Governed media-buying system whose pipeline suite passes 9,998 tests in simulation, fail-closed by default.
 - Achievement: Watchtower monitoring dashboard: all 17 planned v1 chunks shipped, 19 connections monitored.
-- Achievement: Salon operations app (point of sale, commissions, payroll, inventory) delivered as a complete first version for owner review.
 - Achievement: Car pre-vetting tool (capstone build for a used-car dealer) with a deterministic pricing engine: 72 unit tests and 12 of 12 live end-to-end checks passing.
 - Tools: Next.js, TypeScript, Supabase, Prisma, n8n, Airtable, Shopify, GitHub Actions, Playwright
 
@@ -229,7 +227,7 @@ Problem: Claude Desktop holds one signed-in account at a time. Freelancers and a
 - Outcome: Open source under the MIT licence, with no telemetry and no sign-up. Tested on Windows 11 and Apple silicon.
 - Stack: Electron, TypeScript, Swift, Node.js, Electron Forge, Biome, GitHub Pages
 - Live link: https://lordkelvinabellana.github.io/hatstand/
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/hatstand
+- Case study page: https://kelvinabellana.vercel.app/work/hatstand
 
 ## Case study: Concept Redesigns for Local Businesses
 
@@ -245,7 +243,7 @@ Problem: Small service businesses lose bookings to sites that bury the one thing
 - Outcome: Three concepts designed, built, reviewed and deployed from one scraped batch of 226 local businesses, 115 of them qualified.
 - Outcome: The first two went to their owners by cold email in October 2026.
 - Stack: HTML, CSS, JavaScript, GSAP, SVG, Python, Apify, Scrapling, Vercel
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/concept-redesigns
+- Case study page: https://kelvinabellana.vercel.app/work/concept-redesigns
 
 ## Case study: Portably: A PSP Emulator in the Browser
 
@@ -262,7 +260,7 @@ Problem: Playing old handheld games on a computer means installing an emulator, 
 - Outcome: Six build phases shipped, from a feasibility spike to the cloud library, save sync, save states and polish.
 - Stack: React, TypeScript, Vite, Tailwind CSS, PPSSPP, EmulatorJS, WebAssembly, Supabase, Vercel
 - Live link: https://portably-seven.vercel.app
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/portably
+- Case study page: https://kelvinabellana.vercel.app/work/portably
 
 ## Case study: Client Portal & KPI Dashboard for a Talent Agency
 
@@ -281,7 +279,7 @@ Problem: Deals moved through several Google Sheets while approvals arrived scatt
 - Outcome: Client decisions land in the team's sheet the moment they are made.
 - Outcome: Staff can check any page exactly as the client sees it.
 - Stack: Next.js, Tailwind CSS v4, shadcn/ui, Supabase, Google Sheets API, PandaDoc, YouTube Data API, Resend, Slack, Vercel Cron
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/talent-agency-client-portal
+- Case study page: https://kelvinabellana.vercel.app/work/talent-agency-client-portal
 
 ## Case study: Weekly Scorecard for a Performance Ad Agency
 
@@ -300,7 +298,7 @@ Problem: The weekly scorecard decided what the team worked on, but its numbers w
 - Outcome: Derived events agree with V1 on all 12,785 events both systems hold.
 - Outcome: 130 lost verdicts recovered before the switch.
 - Stack: Next.js, Supabase (Postgres), Google Cloud Run, Cloud Scheduler, Asana API, Meta Marketing API, Google Apps Script, Slack
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/ad-agency-scorecard
+- Case study page: https://kelvinabellana.vercel.app/work/ad-agency-scorecard
 
 ## Case study: Client Operations for a Google Ads Agency
 
@@ -319,7 +317,7 @@ Problem: Every new client meant the same long checklist: the client and store in
 - Outcome: 14 workflows built on the agency's self-hosted n8n, reproducible from code.
 - Outcome: Every client channel gets a weekly review without anyone reading them all.
 - Stack: n8n (self-hosted), ClickUp API, Slack API, Typeform, Shopify Admin API, Google Ads API, Claude API, Python
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/google-ads-agency-operations
+- Case study page: https://kelvinabellana.vercel.app/work/google-ads-agency-operations
 
 ## Case study: Business OS for a Three-Brand Retail Group
 
@@ -338,40 +336,7 @@ Problem: Data lived in Shopify, Omnisend, Monday.com and dozens of automations. 
 - Outcome: 4 of 16 agents running on the test site: the troubleshooting agent completed 164 of 165 runs cleanly and the daily briefing 21 of 21.
 - Outcome: Go-live proposal and a progress update delivered.
 - Stack: React, Vite, Cloudflare Pages, Cloudflare Workers, Cloudflare D1, n8n, n8n MCP, Monday.com, Shopify, Omnisend, Claude
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/retail-business-os
-
-## Case study: MBOS: Governed AI Media Buying System
-
-Service: Operations & automation. Status: Simulated · not live. Kelvin's role: Systems Implementation Associate · Stakra · MBOS builder.
-
-An AI system that runs paid ads on Meta and Google, creative production and content for consumer brands, built so it cannot spend money on its own. Spend is off until switched on, campaigns are created paused, and releasing money needs two people.
-
-Problem: AI agents can draft campaigns and creative quickly, but an agent with a budget is a liability. The system had to keep the speed without the risk: every spend decision approved, logged and reversible, and one switch that stops everything.
-- Built: Built the template repository each brand instance is created from: kill switch, Google and Meta signal readers, the media-buyer agent, and an Airtable ledger for creative and experiments.
-- Built: Wrote 79 contracts that define what each part may and may not do.
-- Built: Built Watchtower, a read-only dashboard that shows whether every automation, agent and webhook is alive, and wired MBOS approval events into it.
-- Built: Prepared the Phase 1 operator demo.
-- Outcome: The full pipeline suite passes 9,998 tests with no failures in a simulated instance.
-- Outcome: Watchtower v1 complete: all 17 planned chunks shipped, 19 connections monitored.
-- Outcome: Not switched on yet; the first brand runs in simulation.
-- Stack: Node.js, GitHub Actions, Airtable, Google Ads API, Meta Marketing API, Next.js, Supabase, Healthchecks
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/governed-ai-media-buying
-
-## Case study: Salon OS: Operations App for Small Salons
-
-Service: Operations & automation. Status: In client review. Kelvin's role: Systems Implementation Associate · Stakra.
-
-A white-label operations app for small salons, built first for a salon in Metro Manila: point of sale with stylist commissions, a daily sales quota with a staff bonus, customers with follow-up reminders, inventory by supplier, expenses, attendance, payroll and payslips.
-
-Problem: Small salons run on notebooks and spreadsheets. Commissions are worked out by hand at month end, stock is reordered when it runs out, and regular customers drift away because nobody remembers to follow up.
-- Built: Point of sale for services and retail with flexible pricing, and commission snapshots so a later rate change never rewrites past pay.
-- Built: Daily sales quota with a staff bonus, attendance with late deductions, payroll runs and payslips.
-- Built: Customer records with visit history and a 90-day follow-up list; inventory grouped by supplier with a restock list.
-- Built: Reports with CSV export, a first-run setup wizard that brands the app for each salon, a daily Google Sheets mirror, and Admin and Receptionist roles.
-- Outcome: Complete first version with 32 automated tests, ready for the owner's review.
-- Outcome: White-label from the start: the next salon is a setup wizard away.
-- Stack: Next.js, TypeScript, Prisma, PostgreSQL (Neon), shadcn/ui, Recharts, Vitest, Vercel
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/salon-operations-app
+- Case study page: https://kelvinabellana.vercel.app/work/retail-business-os
 
 ## Case study: Clipt: Sales Video (VSL)
 
@@ -389,7 +354,7 @@ Problem: A long sales video only works if people keep watching. Raw founder foot
 - Outcome: A complete 35-minute VSL delivered in 4K, with a consistent look across every section.
 - Outcome: The same brand system now drives Clipt's ads, testimonials and title cards.
 - Stack: AI-assisted editing, VSL editing, Motion graphics, Brand system, Colour grading, Sound design, 4K delivery
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/clipt-vsl
+- Case study page: https://kelvinabellana.vercel.app/work/clipt-vsl
 
 ## Case study: Clipt: Short-Form Ads & Nurse Testimonials
 
@@ -406,7 +371,7 @@ Problem: Short ads live or die in the first second, and testimonials shot on a p
 - Outcome: Four ads and two testimonials cut at 2K (1440 × 2560), consistent with the sales video's look.
 - Outcome: New ads start from the same brand recipe, so the fifth ad follows the same standard as the first.
 - Stack: AI-assisted editing, Short-form ads, Vertical video, Motion graphics, Colour grading, Sound design, CapCut
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/clipt-short-form-ads-testimonials
+- Case study page: https://kelvinabellana.vercel.app/work/clipt-short-form-ads-testimonials
 
 ## Case study: In This Skin: Animated Shorts From a Claude Skill I Built
 
@@ -425,7 +390,7 @@ Problem: AI can draw a frame, but it doesn't know what makes a short worth watch
 - Outcome: A new series starts from the skill instead of from a blank page, and comes out in the same polished style.
 - Stack: Claude skill built from scratch, 2D and 3D animation in code, Voice cloning, Sound design, Research and sourcing, YouTube Shorts
 - Live link: https://www.youtube.com/@inthiskin
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/in-this-skin-animation-skill
+- Case study page: https://kelvinabellana.vercel.app/work/in-this-skin-animation-skill
 
 ## Case study: Bouquet Cipher
 
@@ -442,7 +407,7 @@ Problem: Digital messages all look the same. I wanted a way to send something th
 - Outcome: Tested with unit, property-based and end-to-end tests.
 - Stack: Next.js, TypeScript, Supabase, SVG, Vitest, Playwright
 - Live link: https://bouquet-cipher.vercel.app
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/bouquet-cipher
+- Case study page: https://kelvinabellana.vercel.app/work/bouquet-cipher
 
 ## Case study: Octo: Cloud Cost Management Platform
 
@@ -461,7 +426,7 @@ Problem: Octo's product was strong, but delivery friction was quietly compoundin
 - Outcome: Faster, more consistent PR reviews and weekly releases across the product team.
 - Outcome: Improved frontend onboarding time for new developers and reduced dependency bottlenecks across the team.
 - Stack: Vue, TypeScript, Vuetify, ECharts, GridStack, Pinia, Mixpanel, i18n, Make, n8n, Cypress
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/octo
+- Case study page: https://kelvinabellana.vercel.app/work/octo
 
 ## Case study: RentWise: Rental Qualification Platform
 
@@ -484,7 +449,7 @@ Problem: Most rental platforms solve visibility, not decision quality. Renters a
 - Outcome: Reduced wasted application effort for renters and improved applicant lead quality for landlords on both sides of the match.
 - Stack: Next.js, TypeScript, Supabase, Tailwind CSS
 - Live link: https://cocoon-tau.vercel.app/
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/rentwise-qualification-platform
+- Case study page: https://kelvinabellana.vercel.app/work/rentwise-qualification-platform
 
 ## Case study: LexaDraft: Contract Template & Workflow System
 
@@ -503,7 +468,7 @@ Problem: A founder's construction company was manually rewriting contracts for e
 - Outcome: Eliminated repetitive manual contract editing: preparation time dropped significantly, and formatting inconsistency was removed by design.
 - Outcome: Transformed contract creation from isolated document work into a repeatable operational workflow: build once, reuse many times.
 - Stack: Next.js, TypeScript, Tailwind CSS, Shadcn UI
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/lexadraft-contract-builder
+- Case study page: https://kelvinabellana.vercel.app/work/lexadraft-contract-builder
 
 ## Case study: Dashboard & Cost Report Builder
 
@@ -518,7 +483,7 @@ Problem: Cloud cost users needed clearer ways to inspect spend, build reusable r
 - Outcome: Let cloud cost teams build and export their own reports without needing engineering support.
 - Outcome: Reduced friction around cost report creation and dashboard customization.
 - Stack: Vue, Vuetify, ECharts, GridStack, TypeScript, i18n, Pinia, REST API
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/octo-dashboard-cost-report-builder
+- Case study page: https://kelvinabellana.vercel.app/work/octo-dashboard-cost-report-builder
 
 ## Case study: Recommendations UI & History
 
@@ -533,7 +498,7 @@ Problem: Users needed to understand optimization opportunities, inspect recommen
 - Outcome: Gave cloud cost users clear visibility into which optimizations mattered, their impact, and whether they were actually executed.
 - Outcome: Improved visibility into implemented recommendations and their impact.
 - Stack: Vue, Vuetify, ECharts, TypeScript, Pinia, Day.js, i18n, REST API
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/octo-recommendations-history
+- Case study page: https://kelvinabellana.vercel.app/work/octo-recommendations-history
 
 ## Case study: Alert & Channel Management
 
@@ -548,7 +513,7 @@ Problem: Teams needed timely spend alerts and reliable notification routing so b
 - Outcome: Removed the friction between setting cost thresholds and actually getting notified, with no engineering handoff needed.
 - Outcome: Supported proactive budget and cost monitoring workflows.
 - Stack: Vue, Vuetify, Pinia, TypeScript, REST API, Day.js, i18n
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/octo-alert-channel-management
+- Case study page: https://kelvinabellana.vercel.app/work/octo-alert-channel-management
 
 ## Case study: RentHive MVP UI
 
@@ -563,7 +528,7 @@ Problem: The team needed to quickly validate a rental marketplace concept with e
 - Outcome: Placed 2nd at Startup Weekend Bohol: built and validated a working product under tight time constraints.
 - Outcome: Produced a working MVP story for marketplace validation.
 - Stack: HTML, Tailwind CSS, JavaScript
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/renthive-mvp-ui
+- Case study page: https://kelvinabellana.vercel.app/work/renthive-mvp-ui
 
 ## Case study: Pacific West Diagnostic Imaging
 
@@ -578,7 +543,7 @@ Problem: The client needed a professional healthcare web presence that could exp
 - Outcome: Delivered a more complete patient-facing website.
 - Outcome: Supported online service and payment workflows.
 - Stack: Wix, Custom CSS, Stripe
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/pacific-west-diagnostic-imaging
+- Case study page: https://kelvinabellana.vercel.app/work/pacific-west-diagnostic-imaging
 
 ## Case study: CzechVibes Travel Site
 
@@ -593,7 +558,7 @@ Problem: The project needed a clean frontend that could support travel content a
 - Outcome: Delivered a cleaner travel content frontend.
 - Outcome: Improved cross-device browsing quality.
 - Stack: HTML, Tailwind CSS
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/czechvibes-travel-site
+- Case study page: https://kelvinabellana.vercel.app/work/czechvibes-travel-site
 
 ## Case study: Slack to ClickUp Bug Report Automation
 
@@ -608,7 +573,7 @@ Problem: Bug reports in Slack were easy to miss or hard to triage consistently w
 - Outcome: Adopted across the company. It removed the need to switch tools just to report bugs and became the default reporting workflow.
 - Outcome: Improved QA handoff consistency from Slack to ClickUp.
 - Stack: Make, n8n, Slack API, ClickUp API, JavaScript, Webhooks
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/slack-clickup-bug-automation
+- Case study page: https://kelvinabellana.vercel.app/work/slack-clickup-bug-automation
 
 ## Case study: Zoom to YouTube Upload Pipeline
 
@@ -623,7 +588,7 @@ Problem: Manual handling of recurring Zoom recordings created operational drag a
 - Outcome: Reduced repetitive media operations work.
 - Outcome: Created a more traceable recording-to-upload workflow.
 - Stack: n8n, Zoom API, YouTube Data API v3, Google Sheets API, Wasabi, Cron
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/zoom-youtube-upload-pipeline
+- Case study page: https://kelvinabellana.vercel.app/work/zoom-youtube-upload-pipeline
 
 ## Case study: GetemLeads
 
@@ -639,7 +604,7 @@ Problem: The client needed a website that could communicate their offer clearly 
 - Outcome: Fast-loading, responsive build ready for client use.
 - Stack: WordPress
 - Live link: https://lightcyan-pelican-889360.hostingersite.com/
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/getemleads-website
+- Case study page: https://kelvinabellana.vercel.app/work/getemleads-website
 
 ## Case study: Moberly Consulting
 
@@ -655,7 +620,7 @@ Problem: The client needed a clean web presence that would support client engage
 - Outcome: Responsive build that presents services with clarity and credibility.
 - Stack: WordPress
 - Live link: https://moberlyconsulting.com/
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/moberly-consulting-website
+- Case study page: https://kelvinabellana.vercel.app/work/moberly-consulting-website
 
 ## Case study: Pickle N Par
 
@@ -671,7 +636,7 @@ Problem: The client needed a site that made their services easy to find, underst
 - Outcome: Mobile-optimized and responsive across device types.
 - Stack: WordPress
 - Live link: https://nnaphljt.elementor.cloud/
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/pickle-n-par-website
+- Case study page: https://kelvinabellana.vercel.app/work/pickle-n-par-website
 
 ## Case study: StratE Marketing
 
@@ -687,7 +652,7 @@ Problem: The client needed a website that communicated their marketing services 
 - Outcome: Responsive build ready to support inbound lead campaigns.
 - Stack: WordPress
 - Live link: https://www.strategicemarketing.com/
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/strat-e-marketing-website
+- Case study page: https://kelvinabellana.vercel.app/work/strat-e-marketing-website
 
 ## Case study: Arnis Scoreboard
 
@@ -702,7 +667,7 @@ Problem: Tournament scoring needed to be simple, fast, and readable in a live co
 - Outcome: Supported real-time scoring during an Arnis tournament.
 - Outcome: Created a practical event tool rather than a demo-only project.
 - Stack: Vue, Vuetify
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/arnis-scoreboard
+- Case study page: https://kelvinabellana.vercel.app/work/arnis-scoreboard
 
 ## Case study: AI Job Matching Workflow
 
@@ -720,7 +685,7 @@ Problem: Manual job searching is a volume problem disguised as a visibility prob
 - Outcome: Replaced manual job board browsing entirely: only genuinely strong opportunities trigger action.
 - Outcome: Reduced job search time and decision fatigue while improving application quality by concentrating effort on pre-qualified matches.
 - Stack: n8n (self-hosted), OpenAI API, Google Sheets, Oracle Cloud VM, JavaScript, Cron
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/olj-job-matching-automation
+- Case study page: https://kelvinabellana.vercel.app/work/olj-job-matching-automation
 
 ## Case study: AutoFit AI Coaching System
 
@@ -738,7 +703,7 @@ Problem: A fitness coaching business had a preparation problem, not a messaging 
 - Outcome: Coach no longer starts every weekly message from zero. AI handles progress analysis and drafting, coach focuses on judgment, tone, and the final call.
 - Outcome: Improved message consistency across the client roster and reduced weekly preparation time without reducing personalization quality.
 - Stack: n8n, OpenAI API, Anthropic API, JavaScript, GreenAPI, Custom API
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/autofit-ai-coaching
+- Case study page: https://kelvinabellana.vercel.app/work/autofit-ai-coaching
 
 ## Case study: Ripple: Product Ownership & Strategic Alignment
 
@@ -756,39 +721,39 @@ Problem: Ripple delivered cloud invoicing and financial visibility, but visibili
 - Outcome: Unblocked engineering delivery by owning UI/UX design when design bandwidth was unavailable.
 - Outcome: Improved sprint consistency and release coordination across five connected cloud billing products.
 - Stack: Figma, FinOps, Cloud Cost Management, Product Strategy
-- Case study page: https://portfolio-v3-roan-omega.vercel.app/work/ripple-product-ownership-archera
+- Case study page: https://kelvinabellana.vercel.app/work/ripple-product-ownership-archera
 
 ## n8n automations: Client operations for a Google Ads agency
 
-Workflows Kelvin built in n8n, group "Client operations for a Google Ads agency". Each one has its own page, linked from the Automations page (https://portfolio-v3-roan-omega.vercel.app/automations):
-- New client onboarding: One form sets up a new client across ClickUp and Slack. Page: https://portfolio-v3-roan-omega.vercel.app/automations/client-onboarding
-- Weekly client pulse: A Monday digest of every client's week in Slack, at-risk clients first. Page: https://portfolio-v3-roan-omega.vercel.app/automations/weekly-pulse
-- Daily spend, ROAS and fee: Daily Google Ads spend, ROAS and fees in EUR, written into ClickUp. Page: https://portfolio-v3-roan-omega.vercel.app/automations/spend-roas
-- New store onboarding: Adds a new store to an existing client, without duplicates. Page: https://portfolio-v3-roan-omega.vercel.app/automations/store-onboarding
-- Media buyer assignment: Assign a media buyer in ClickUp and they get every channel and store. Page: https://portfolio-v3-roan-omega.vercel.app/automations/buyer-assigned
-- Funnel brief to ClickUp: A funnel brief from Typeform becomes a ready-to-build ClickUp task. Page: https://portfolio-v3-roan-omega.vercel.app/automations/funnel-brief
-- Daily Shopify revenue: Each store's daily Shopify revenue, saved every morning. Page: https://portfolio-v3-roan-omega.vercel.app/automations/shopify-daily
-- Connect a Shopify store: Connects a client's Shopify store without anyone handling the token. Page: https://portfolio-v3-roan-omega.vercel.app/automations/shopify-connect
-- Broadcast to client channels: One message to every client's Slack channel, with a preview first. Page: https://portfolio-v3-roan-omega.vercel.app/automations/broadcast
-- Onboarding error alert: Tells the team which client's onboarding stopped, and where. Page: https://portfolio-v3-roan-omega.vercel.app/automations/onboarding-error
+Workflows Kelvin built in n8n, group "Client operations for a Google Ads agency". Each one has its own page, linked from the Automations page (https://kelvinabellana.vercel.app/automations):
+- New client onboarding: One form sets up a new client across ClickUp and Slack. Page: https://kelvinabellana.vercel.app/automations/client-onboarding
+- Weekly client pulse: A Monday digest of every client's week in Slack, at-risk clients first. Page: https://kelvinabellana.vercel.app/automations/weekly-pulse
+- Daily spend, ROAS and fee: Daily Google Ads spend, ROAS and fees in EUR, written into ClickUp. Page: https://kelvinabellana.vercel.app/automations/spend-roas
+- New store onboarding: Adds a new store to an existing client, without duplicates. Page: https://kelvinabellana.vercel.app/automations/store-onboarding
+- Media buyer assignment: Assign a media buyer in ClickUp and they get every channel and store. Page: https://kelvinabellana.vercel.app/automations/buyer-assigned
+- Funnel brief to ClickUp: A funnel brief from Typeform becomes a ready-to-build ClickUp task. Page: https://kelvinabellana.vercel.app/automations/funnel-brief
+- Daily Shopify revenue: Each store's daily Shopify revenue, saved every morning. Page: https://kelvinabellana.vercel.app/automations/shopify-daily
+- Connect a Shopify store: Connects a client's Shopify store without anyone handling the token. Page: https://kelvinabellana.vercel.app/automations/shopify-connect
+- Broadcast to client channels: One message to every client's Slack channel, with a preview first. Page: https://kelvinabellana.vercel.app/automations/broadcast
+- Onboarding error alert: Tells the team which client's onboarding stopped, and where. Page: https://kelvinabellana.vercel.app/automations/onboarding-error
 
 ## n8n automations: AI agents and assistants
 
-Workflows Kelvin built in n8n, group "AI agents and assistants". Each one has its own page, linked from the Automations page (https://portfolio-v3-roan-omega.vercel.app/automations):
-- The chatbot on this site (running): The bot on this site, answering from Kelvin's portfolio. Page: https://portfolio-v3-roan-omega.vercel.app/automations/portfolio-chatbot
-- Executive assistant on Telegram (running): A Telegram assistant that runs Kelvin's calendar and inbox from voice notes. Page: https://portfolio-v3-roan-omega.vercel.app/automations/executive-assistant
-- AI support triage: Sorts support emails and drafts replies, flagging what needs a person. Page: https://portfolio-v3-roan-omega.vercel.app/automations/support-triage
-- Hotel booking agent: A Telegram agent that answers guests and records bookings. Page: https://portfolio-v3-roan-omega.vercel.app/automations/hotel-booking
-- Email RAG assistant (running): Chat with an inbox: find past emails by meaning and send new ones. Page: https://portfolio-v3-roan-omega.vercel.app/automations/email-rag
+Workflows Kelvin built in n8n, group "AI agents and assistants". Each one has its own page, linked from the Automations page (https://kelvinabellana.vercel.app/automations):
+- The chatbot on this site (running): The bot on this site, answering from Kelvin's portfolio. Page: https://kelvinabellana.vercel.app/automations/portfolio-chatbot
+- Executive assistant on Telegram (running): A Telegram assistant that runs Kelvin's calendar and inbox from voice notes. Page: https://kelvinabellana.vercel.app/automations/executive-assistant
+- AI support triage: Sorts support emails and drafts replies, flagging what needs a person. Page: https://kelvinabellana.vercel.app/automations/support-triage
+- Hotel booking agent: A Telegram agent that answers guests and records bookings. Page: https://kelvinabellana.vercel.app/automations/hotel-booking
+- Email RAG assistant (running): Chat with an inbox: find past emails by meaning and send new ones. Page: https://kelvinabellana.vercel.app/automations/email-rag
 
 ## n8n automations: Pipelines, intake and alerts
 
-Workflows Kelvin built in n8n, group "Pipelines, intake and alerts". Each one has its own page, linked from the Automations page (https://portfolio-v3-roan-omega.vercel.app/automations):
-- AI job matching pipeline (running): Scrapes job boards and sends only the jobs that fit Kelvin's CV. Page: https://portfolio-v3-roan-omega.vercel.app/automations/job-matching
-- Lead diagnostic intake (running): Typeform diagnostics into Notion, with a results email for every lead. Page: https://portfolio-v3-roan-omega.vercel.app/automations/lead-diagnostic
-- Hourly job post alerts (running): Hourly alerts for new job posts, never the same post twice. Page: https://portfolio-v3-roan-omega.vercel.app/automations/job-alerts
-- Error alerts to Slack (running): Any failed workflow posts to Slack, with the details in a thread. Page: https://portfolio-v3-roan-omega.vercel.app/automations/error-alerts
-- Delete on a ❌ reaction (running): React with ❌ to delete a bot's message or its whole thread. Page: https://portfolio-v3-roan-omega.vercel.app/automations/slack-cleanup
+Workflows Kelvin built in n8n, group "Pipelines, intake and alerts". Each one has its own page, linked from the Automations page (https://kelvinabellana.vercel.app/automations):
+- AI job matching pipeline (running): Scrapes job boards and sends only the jobs that fit Kelvin's CV. Page: https://kelvinabellana.vercel.app/automations/job-matching
+- Lead diagnostic intake (running): Typeform diagnostics into Notion, with a results email for every lead. Page: https://kelvinabellana.vercel.app/automations/lead-diagnostic
+- Hourly job post alerts (running): Hourly alerts for new job posts, never the same post twice. Page: https://kelvinabellana.vercel.app/automations/job-alerts
+- Error alerts to Slack (running): Any failed workflow posts to Slack, with the details in a thread. Page: https://kelvinabellana.vercel.app/automations/error-alerts
+- Delete on a ❌ reaction (running): React with ❌ to delete a bot's message or its whole thread. Page: https://kelvinabellana.vercel.app/automations/slack-cleanup
 
 ## n8n automation: New client onboarding
 

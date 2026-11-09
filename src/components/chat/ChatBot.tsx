@@ -14,7 +14,7 @@ type Stored = { sessionId: string; messages: Message[] };
 
 const STORE_KEY = "kelvin-chat";
 const FLOWN_KEY = "kelvin-bot-flown";
-const SITE = "https://portfolio-v3-roan-omega.vercel.app";
+const SITE = "https://kelvinabellana.vercel.app";
 
 const GREETING: Message = {
   role: "bot",

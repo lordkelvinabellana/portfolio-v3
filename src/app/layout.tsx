@@ -25,7 +25,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const SITE_URL = "https://portfolio-v3-roan-omega.vercel.app";
+const SITE_URL = "https://kelvinabellana.vercel.app";
 const SITE_DESCRIPTION =
   "Operations systems, automation and AI video editing for agencies and growing brands: client portals, scorecards, onboarding automation, VSLs and short-form ads.";
 
