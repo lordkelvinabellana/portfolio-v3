@@ -8,7 +8,7 @@ Lord Kelvin Abellana (Kelvin) builds the systems that run a business and edits t
 
 - Based in Bohol, Philippines, working remotely.
 - Open to client projects and to full-time or contract roles in operations, automation, product and frontend.
-- Contact: email lordkelvinabellana@gmail.com, WhatsApp +63 928 558 3697, LinkedIn https://www.linkedin.com/in/lord-kelvin-abellana-46a15a320, contact page https://kelvinabellana.vercel.app/contact.
+- Contact: email lordkelvinabellana@gmail.com, WhatsApp +63 906 180 2026, LinkedIn https://www.linkedin.com/in/lord-kelvin-abellana-46a15a320, contact page https://kelvinabellana.vercel.app/contact.
 - The résumé and full CV can be downloaded from the portfolio (https://kelvinabellana.vercel.app).
 - Case study text written as "I" is Kelvin describing the work.
 

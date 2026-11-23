@@ -315,7 +315,7 @@ export function HomePage({ visitorCount }: { visitorCount: number | null }) {
                   <Mail className="h-4 w-4" /> Email me
                 </a>
                 <a
-                  href="https://wa.me/639285583697"
+                  href="https://wa.me/639061802026"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="focusable inline-flex min-h-11 items-center gap-2 rounded-md border border-border bg-secondary px-5 py-2.5 text-sm font-semibold text-secondary-foreground transition-colors hover:bg-accent"

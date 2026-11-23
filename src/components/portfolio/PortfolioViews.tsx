@@ -458,7 +458,7 @@ export function ContactPageView() {
                 <GitHubIcon className="h-3.5 w-3.5" /> GitHub
               </a>
               <a
-                href="https://wa.me/639285583697"
+                href="https://wa.me/639061802026"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="focusable inline-flex min-h-10 items-center gap-2 rounded-md border border-border bg-secondary px-3.5 py-2 text-sm font-semibold text-secondary-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
